@@ -1,0 +1,71 @@
+@(message: String)
+
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6 lt8"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7 lt8"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8 lt8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="UTF-8" />
+    <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">  -->
+    <title>Telestroke Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Login" />
+
+    <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/demo.css")" />
+    <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/style3.css")" />
+    <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/animate-custom.css")" />
+    <!-- Required scripts -->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/form/form.js")"></script>
+</head>
+<body>
+<div class="container">
+
+    <!--<header>
+        &lt;!&ndash;   <h1>Telestroke</h1>&ndash;&gt;
+
+    </header>-->
+    <section>
+        <div id="container_demo" >
+           <!-- <a class="hiddenanchor" id="toregister"></a>
+            <a class="hiddenanchor" id="tologin"></a>-->
+            <div id="wrapper">
+                <div id="login" class="animate form" style="margin-top: 20%;">
+                    <form id="loginForm" method="post" action="@controllers.routes.AuthenticationController.handleLogin()" data-uri="@controllers.review.routes.ReviewController.getPatientsToReview()">
+                        <h1>Telestroke</h1>
+                        <div class="box error">
+                            <div class="content">
+                                <p style="color: red;"></p>
+                            </div>
+                        </div>
+                        <p>
+                            <label for="userName" class="uname" data-icon="u" > Your email or username </label>
+                            <input id="userName" name="userName" required="required" type="email" placeholder="mymail@@mail.com">
+                        </p>
+                        <p>
+                            <label for="password" class="youpasswd" data-icon="p"> Your password </label>
+                            <input id="password" name="password" required="required" type="password" placeholder="eg. X8df!90EO" >
+                        </p>
+                        <!--<p class="keeplogin">
+                            <input type="checkbox" name="loginkeeping" id="loginkeeping" value="loginkeeping" />
+                            <label for="loginkeeping">Keep me logged in</label>
+                        </p>-->
+                        <p class="login button">
+                            <button class="button" name="submit" id="submit" value="Login">Login</button>
+
+                        </p>
+                        <p class="change_link">
+                            Copyright 2014. All Rights Reserved | <a href="http://www.appliedcloudcomputing.com/">Developed by Applied Cloud Computing</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+</html>
