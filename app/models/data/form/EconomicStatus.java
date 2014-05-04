@@ -29,7 +29,7 @@ public class EconomicStatus {
     private DataCollectionForm1 dataCollectionForm1;
 
     @ManyToOne
-    private DataCollectionForm3 dataCollectionForm3;
+    private DataCollectionForm6 dataCollectionForm6;
 
     @Formats.DateTime(pattern = "MM/dd/yy")
     private Timestamp created = new Timestamp(DateTime.now().toDate().getTime());
@@ -37,10 +37,10 @@ public class EconomicStatus {
     public EconomicStatus() {
     }
 
-    public EconomicStatus(String name, DataCollectionForm1 dataCollectionForm1, DataCollectionForm3 dataCollectionForm3) {
+    public EconomicStatus(String name, DataCollectionForm1 dataCollectionForm1, DataCollectionForm6 dataCollectionForm6) {
         this.name = name;
         this.dataCollectionForm1 = dataCollectionForm1;
-        this.dataCollectionForm3 = dataCollectionForm3;
+        this.dataCollectionForm6 = dataCollectionForm6;
     }
 
     public Long getId() {
@@ -67,12 +67,12 @@ public class EconomicStatus {
         this.dataCollectionForm1 = dataCollectionForm1;
     }
 
-    public DataCollectionForm3 getDataCollectionForm3() {
-        return dataCollectionForm3;
+    public DataCollectionForm6 getDataCollectionForm6() {
+        return dataCollectionForm6;
     }
 
-    public void setDataCollectionForm3(DataCollectionForm3 dataCollectionForm3) {
-        this.dataCollectionForm3 = dataCollectionForm3;
+    public void setDataCollectionForm6(DataCollectionForm6 dataCollectionForm6) {
+        this.dataCollectionForm6 = dataCollectionForm6;
     }
 
     public Timestamp getCreated() {
