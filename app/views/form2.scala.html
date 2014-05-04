@@ -1,0 +1,278 @@
+
+@import tags._
+@main("User") {
+<div id="wrapper" class="container_12 clearfix">
+    <!-- Text Logo -->
+
+
+    <div class="container">
+        <header>
+            <h1><!--<span>ADMIN</span>--> Genetic basis of stroke in an Indian population (www.brainsgenetics.com)</h1>
+
+        </header>
+        <div class="form" style="width:100%;background: #f1f1f1;border-radius: 10px;">
+            <form id="userForm" method="post" style="padding-top: 2%;" action="@controllers.user.routes.UserController.handleSave()" data-uri="@controllers.user.routes.UserController.save(0)">
+                <div class="box message" ><!--style="display:none;padding-top: 2%;padding-left: 1%;padding-bottom: 2%;color: red;"-->
+                    <div class="content-m">
+
+                    </div>
+                </div>
+                <table cellspacing="5" cellpadding="5" style="clear: both;float: left;"/>
+                <tr>
+                    <td colspan="2">Data Collection Form (DCF)</td>
+
+                    <td>Patient’s ID Number</td>
+                    <td><input type="text" id="patient_id" name="patient_id" value=""/></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <h2>(3)	PATIENT’S DIAGNOSIS AND MEDICAL HISTORY</h2>
+                    </td>
+                    <td colspan="2"></td>
+                </tr>
+                <tr>
+                    <td colspan="1">
+                        Diagnosis:(one of those must apply)</td>
+                    <td colspan="3">
+                        <table>
+                            <tr>
+                                <td>
+                                    Ischaemic Stroke
+                                    <select name="ischaemic_stroke" id="ischaemic_stroke">
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="checkbox" name="taci" id="taci"/>Taci
+                                    <input type="checkbox" name="paci" id="paci"/>Paci
+                                </td>
+                                <td>
+                                    <input type="checkbox" name="laci" id="laci"/>Laci
+                                    <input type="checkbox" name="poci" id="poci"/>Poci
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">Patient’s PAST history</td>
+                    <td>Tick, if new diagnosis at this admission</td>
+                </tr>
+                <tr>
+                    <td>Hypertension</td>
+                    <td colspan="2">
+                        <input type="radio" name="hypertension" value="Yes">Yes
+                        <input type="radio" name="hypertension" value="No">No
+                        <input type="radio" name="hypertension" value="DontKnow">Don't Know
+                    </td>
+                    <td><input type="checkbox" name="hypertension">New</td>
+                </tr>
+                <tr>
+                    <td>Diabetes Mellitus</td>
+                    <td colspan="2">
+                        <input type="radio" name="diabetesMellitus" value="Yes">Yes
+                        <input type="radio" name="diabetesMellitus" value="No">No
+                        <input type="radio" name="diabetesMellitus" value="DontKnow">Don't Know
+                    </td>
+                    <td><input type="checkbox" name="hypertension">New</td>
+                </tr>
+                <tr>
+                    <td>IHD/Angina</td>
+                    <td colspan="2">
+                        <input type="radio" name="ihd" value="Yes">Yes
+                        <input type="radio" name="ihd" value="No">No
+                        <input type="radio" name="ihd" value="DontKnow">Don't Know
+                    </td>
+                    <td><input type="checkbox" name="ihd">New</td>
+                </tr>
+                <tr>
+                    <td>Hypercholesterolemia</td>
+                    <td colspan="2">
+                        <input type="radio" name="hypercholesterolemia" value="Yes">Yes
+                        <input type="radio" name="hypercholesterolemia" value="No">No
+                        <input type="radio" name="hypercholesterolemia" value="DontKnow">Don't Know
+                    </td>
+                    <td><input type="checkbox" name="hypercholesterolemia">New</td>
+                </tr>
+                <tr>
+                    <td>Atrial Fibrillation</td>
+                    <td colspan="2">
+                        <input type="radio" name="atrialFibrillation" value="Yes">Yes
+                        <input type="radio" name="atrialFibrillation" value="No">No
+                        <input type="radio" name="atrialFibrillation" value="DontKnow">Don't Know
+                    </td>
+                    <td><input type="checkbox" name="atrialFibrillation">New</td>
+                </tr>
+                <tr>
+                    <td>PVD</td>
+                    <td colspan="2">
+                        <input type="radio" name="pvd" value="Yes">Yes
+                        <input type="radio" name="pvd" value="No">No
+                        <input type="radio" name="pvd" value="DontKnow">Don't Know
+                    </td>
+                    <td><input type="checkbox" name="pvd">New</td>
+                </tr>
+                <tr>
+                    <td>MI</td>
+                    <td colspan="2">
+                        <input type="radio" name="mi" value="Yes">Yes
+                        <input type="radio" name="mi" value="No">No
+                        <input type="radio" name="mi" value="DontKnow">Don't Know
+                    </td>
+                    <td><input type="checkbox" name="mi">New</td>
+                </tr>
+                <tr>
+                    <td>Migraine with aura</td>
+                    <td colspan="2">
+                        <input type="radio" name="MigraineWithAura" value="Yes">Yes
+                        <input type="radio" name="MigraineWithAura" value="No">No
+                        <input type="radio" name="MigraineWithAura" value="DontKnow">Don't Know
+                    </td>
+                    <td><input type="checkbox" name="MigraineWithAura">New</td>
+                </tr>
+                <tr>
+                    <td>Migraine without aura</td>
+                    <td colspan="2">
+                        <input type="radio" name="MigraineWithoutAura" value="Yes">Yes
+                        <input type="radio" name="MigraineWithoutAura" value="No">No
+                        <input type="radio" name="MigraineWithoutAura" value="DontKnow">Don't Know
+                    </td>
+                    <td><input type="checkbox" name="MigraineWithoutAura">New</td>
+                </tr>
+
+                <tr>
+                    <td rowspan="3">Patient’s previous
+                        Strokes
+                    </td>
+                    <td>
+                        Ischaemic Stroke
+                    </td>
+                    <td >
+                        <input type="radio" name="ischaemicStroke" value="Yes">Yes
+                        <input type="radio" name="ischaemicStroke" value="No">No
+                    </td>
+                    <td rowspan="3">When <input type="text" name="patientPreviousStroke" id="patientPreviousStroke" style="width: 80px;"/>(year)</td>
+                </tr>
+                 <tr>
+                     <td>
+                         Hoemorrhagic Stroke
+                     </td>
+                     <td >
+                         <input type="radio" name="hoemorrhagicStroke" value="Yes">Yes
+                         <input type="radio" name="hoemorrhagicStroke" value="No">No
+                     </td>
+                 </tr>
+                <tr>
+                    <td>
+                        TIA
+                    </td>
+                    <td >
+                        <input type="radio" name="tia" value="Yes">Yes
+                        <input type="radio" name="tia" value="No">No
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Stroke associated with</td>
+                    <td>Dissection
+                        <input type="radio" name="dissection" value="Yes">Yes
+                        <input type="radio" name="dissection" value="No">No
+                    </td>
+                    <td>PFO
+                        <input type="radio" name="pfo" value="Yes">Yes
+                        <input type="radio" name="pfo" value="No">No
+                    </td>
+                    <td> MI
+                        <input type="radio" name="mi" value="Yes">Yes
+                        <input type="radio" name="mi" value="No">No
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="7">Patient’s
+                        Family
+                        History:
+                    </td>
+                    <td>Stroke</td>
+                    <td colspan="2">
+                        <input type="radio" name="stroke" value="Yes">Yes
+                        <input type="radio" name="stroke" value="No">No
+                        <input type="radio" name="stroke" value="DontKnow">Don't Know
+                    </td>
+                </tr>
+                <tr>
+                    <td>IHD/Angina  </td>
+                    <td colspan="2">
+                        <input type="radio" name="ihd" value="Yes">Yes
+                        <input type="radio" name="ihd" value="No">No
+                        <input type="radio" name="ihd" value="DontKnow">Don't Know
+                    </td>
+                </tr>
+                <tr>
+                    <td>Diabetes Mellitus </td>
+                    <td colspan="2">
+                        <input type="radio" name="diabetesMellitus" value="Yes">Yes
+                        <input type="radio" name="diabetesMellitus" value="No">No
+                        <input type="radio" name="diabetesMellitus" value="DontKnow">Don't Know
+                    </td>
+                </tr>
+                <tr>
+                    <td>MI</td>
+                    <td colspan="2">
+                        <input type="radio" name="mi" value="Yes">Yes
+                        <input type="radio" name="mi" value="No">No
+                        <input type="radio" name="mi" value="DontKnow">Don't Know
+                    </td>
+                </tr>
+                <tr>
+                    <td>PVD</td>
+                    <td colspan="2">
+                        <input type="radio" name="pvd" value="Yes">Yes
+                        <input type="radio" name="pvd" value="No">No
+                        <input type="radio" name="pvd" value="DontKnow">Don't Know
+                    </td>
+                </tr>
+                <tr>
+                    <td>Hypertension</td>
+                    <td colspan="2">
+                        <input type="radio" name="hypertension" value="Yes">Yes
+                        <input type="radio" name="hypertension" value="No">No
+                        <input type="radio" name="hypertension" value="DontKnow">Don't Know
+                    </td>
+                </tr>
+                <tr>
+                    <td>None of above</td>
+                    <td colspan="2">
+                        <input type="radio" name="noneOfAbove" value="Yes">Yes
+                        <input type="radio" name="noneOfAbove" value="No">No
+                        <input type="radio" name="noneOfAbove" value="DontKnow">Don't Know
+                    </td>
+                </tr>
+
+                <tr>
+                    <td rowspan="2">Cigarettes</td>
+                    <td>Current Smoker <input type="checkbox" name="smoker" id="smoker"/></td>
+                    <td>Cig/day <input type="text" name="cigPerDay" id="cigPerDay" style="width: 80px;"/></td>
+                    <td>Hip:<input type="text" name="hip" id="hip" style="width: 80px;"/>cm</td>
+                </tr>
+                <tr>
+                    <td>Ex-smoker <input type="checkbox" name="exSmoker" id="exSmoker"/></td>
+                    <td>Never <input type="checkbox" name="never" id="never"/></td>
+                    <td>Waist:<input type="text" name="waist" id="waist" style="width: 80px;"/>cm</td>
+                </tr>
+                <tr>
+                    <td colspan="4"> <button id="save" name="save" type="submit">Next</button> </td>
+                </tr>
+
+                </table>
+            </form>
+
+        </div>
+    </div>
+    <!-- <div class="hr grid_12 clearfix">&nbsp;</div>-->
+    <!-- Footer -->
+    @footer()
+</div>
+} {
+<script type="text/javascript" src="@routes.Assets.at("javascripts/user/events.js")"></script>
+}

@@ -1,0 +1,333 @@
+
+@import tags._
+@main("User") {
+<div id="wrapper" class="container_12 clearfix">
+<!-- Text Logo -->
+
+
+<div class="container">
+<header>
+    <h1><!--<span>ADMIN</span>--> Genetic basis of stroke in an Indian population (www.brainsgenetics.com)</h1>
+
+</header>
+<div class="form" style="width:100%;background: #f1f1f1;border-radius: 10px;">
+<form id="userForm" method="post" style="padding-top: 2%;" action="@controllers.user.routes.UserController.handleSave()" data-uri="@controllers.user.routes.UserController.save(0)">
+<div class="box message" ><!--style="display:none;padding-top: 2%;padding-left: 1%;padding-bottom: 2%;color: red;"-->
+    <div class="content-m">
+
+    </div>
+</div>
+<table cellspacing="5" cellpadding="5" style="clear: both;float: left;"/>
+<tr>
+    <td colspan="2">Data Collection Form (DCF)</td>
+
+    <td>Patient’s ID Number</td>
+    <td><input type="text" id="patient_id" name="patient_id" value=""/></td>
+</tr>
+<tr>
+    <td>
+        Intracranial stenosis:
+    </td>
+    <td colspan="3"> Yes <input type="radio" name="intracranialStenosis"  id="intracranialStenosisYes">
+        <input type="text" id="intracranialStenosisPercent" name="intracranialStenosisPercent" /> %
+      No <input type="radio" name="intracranialStenosis" id="intracranialStenosisNo" >
+    </td>
+</tr>
+<tr>
+    <td colspan="2">
+        <table>
+            <tr>
+                <td colspan="2"><h2>Extracranial Vessel Imaging:</h2></td>
+            </tr>
+            <tr>
+                <td>Dopplers  </td>
+                <td>Done<input type="radio" name="dopplers" id="dopplersDone" >
+                Not Done <input type="radio" name="dopplers" id="dopplersNotDone" >
+                </td>
+            </tr>
+            <tr>
+                <td>
+                   MRA
+                </td>
+                <td>Done<input type="radio" name="mra" id="mraDone"/>
+                    Not Done <input type="radio" name="mra" id="mraNotDone"/>
+                </td>
+            </tr>
+            <tr>
+                <td>CTA</td>
+                <td>Done<input type="radio" name="cta" id="ctaDone" >
+                    Not Done <input type="radio" name="cta" id="ctaNotDone" >
+                </td>
+            </tr>
+        </table>
+    </td>
+    <td colspan="2">
+        <table>
+            <tr>
+                <td>CT</td>
+                <td>Done<input type="radio" name="ct" id="ctDone" >
+                    Not Done <input type="radio" name="ct" id="ctNotDone" >
+                </td>
+            </tr>
+            <tr>
+                <td>MRI</td>
+                <td>Done<input type="radio" name="mri" id="mriDone" >
+                    Not Done <input type="radio" name="mri" id="mriNotDone" >
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2"><h2>Lesion location</h2></td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox" name="anterior" id="anterior" />Anterior
+                    <input type="checkbox" name="right" id="right">Right
+                </td>
+                <td>
+                    <input type="checkbox" name="left" id="left">Left
+                    <input type="checkbox" name="bilateral" id="bilateral"> Bilateral
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox" name="posterior" id="posterior">Posterior
+                    <input type="checkbox" name="anterioposterior" id="anterioposterior">Anterioposterior
+                </td>
+                <td></td>
+            </tr>
+        </table>
+    </td>
+</tr>
+ <tr>
+     <td colspan="2">
+         <table>
+             <tr>
+                 <td>
+                     RICA  stenosis</td><td><input type="text" name="rica" id="rica"> %
+                 </td>
+             </tr>
+             <tr>
+                 <td>
+                     LICA  stenosis</td><td> <input type="text" name="lica" id="lica"> %
+                 </td>
+             </tr>
+
+             <tr>
+                 <td>
+                     RCCA  stenosis</td><td> <input type="text" name="rcca" id="rcca"> %
+                 </td>
+             </tr>
+
+             <tr>
+                 <td>
+                     LCCA  stenosis </td><td><input type="text" name="lcca" id="lcca"> %
+                 </td>
+             </tr>
+
+             <tr>
+                 <td>
+                     R vertebral stenosis</td><td> <input type="text" name="rVertebral" id="rVertebral"> %
+                 </td>
+             </tr>
+
+             <tr>
+                 <td>
+                     L vertebral stenosis </td><td><input type="text" name="lVertebral" id="lVertebral"> %
+                 </td>
+             </tr>
+             <tr>
+                 <td>
+                     Basilar stenosis </td><td><input type="text" name="basilar" id="basilar"> %
+                 </td>
+             </tr>
+         </table>
+     </td>
+     <td colspan="2">
+         <table>
+             <tr>
+                 <td colspan="2">
+                   <h2>  TO  A S T  CLASSIFICATION</h2>
+                 </td>
+             </tr>
+             <tr>
+                 <td>(1) LVD (large artery atherosclerosis)</td>
+                 <td><input type="checkbox" name="lvd" id="lvd"></td>
+             </tr>
+             <tr>
+                 <td>(2) SVD (small vessel occlusion)</td>
+                 <td><input type="checkbox" name="svd" id="svd"></td>
+             </tr>
+             <tr>
+                 <td>(3) Cardioembolism</td>
+                 <td><input type="checkbox" name="cardioembolism" id="cardioembolism"></td>
+             </tr>
+             <tr>
+                 <td>(4) Combined (2 or more causes identified)</td>
+                 <td><input type="checkbox" name="combined" id="combined"></td>
+             </tr>
+             <tr>
+                 <td>((5) Stroke of other determined etiology</td>
+                 <td><input type="checkbox" name="etiology" id="etiology"></td>
+             </tr>
+             <tr>
+                 <td>(6) Negative evaluation (no cause found) </td>
+                 <td><input type="checkbox" name="negativeEvaluation" id="negativeEvaluation"></td>
+             </tr>
+
+         </table>
+     </td>
+ </tr>
+ <tr>
+     <td>ECG</td>
+     <td>
+         Done<input type="radio" name="ecg" id="ecgDone">
+         Not Done<input type="radio" name="ecg" id="ecgNotDone">
+     </td>
+     <td>ECHO</td>
+     <td>
+         Done<input type="radio" name="echo" id="echoDone">
+         Not Done<input type="radio" name="echo" id="echoNotDone">
+     </td>
+ </tr>
+    <tr>
+        <td colspan="2">
+            <table>
+                <tr>
+                    <td>Result:   Normal</td>
+                    <td><input type="checkbox" name="normal" id="normal"></td>
+                </tr>
+                <tr>
+                    <td>LVH</td>
+                    <td><input type="checkbox" name="lvf" id="lvf"></td>
+                </tr>
+                <tr>
+                    <td>AF</td>
+                    <td><input type="checkbox" name="af" id="af"></td>
+                </tr>
+                <tr>
+                    <td>Ventricular ectopics</td>
+                    <td><input type="checkbox" name="ventricularEctopics" id="ventricularEctopics"></td>
+                </tr>
+                <tr>
+                    <td>Atrial ectopics</td>
+                    <td><input type="checkbox" name="artialEctopics" id="artialEctopics"></td>
+                </tr>
+                <tr>
+                    <td>None of above</td>
+                    <td><input type="checkbox" name="noneOfAbove" id="noneOfAbove"></td>
+                </tr>
+                <tr>
+                    <td>Don’t know</td>
+                    <td><input type="checkbox" name="dontKnow" id="dontKnow"></td>
+                </tr>
+            </table>
+        </td>
+        <td colspan="2">
+            <table>
+                <tr>
+                    <td>Result:   Normal</td>
+                    <td><input type="checkbox" name="normal2" id="normal2"></td>
+                </tr>
+                <tr>
+                    <td>LVH</td>
+                    <td><input type="checkbox" name="lvh2" id="lvh2"></td>
+                </tr>
+                <tr>
+                    <td>PFO</td>
+                    <td><input type="checkbox" name="pfo2" id="pfo2"></td>
+                </tr>
+                <tr>
+                    <td>Thrombus</td>
+                    <td><input type="checkbox" name="thrombus" id="thrombus"></td>
+                </tr>
+                <tr>
+                    <td>None of above</td>
+                    <td><input type="checkbox" name="noneOfAbove2" id="noneOfAbove2"></td>
+                </tr>
+                <tr>
+                    <td>Don’t know</td>
+                    <td><input type="checkbox" name="dontKnow2" id="dontKnow2"></td>
+                </tr>
+
+            </table>
+        </td>
+    </tr>
+<tr>
+    <td>
+        NIHSS:
+    </td>
+    <td colspan="3">
+        <table>
+            <tr>
+                <td>On admission </td>
+                <td><input type="text" name="nihssAdmission" id="nihssAdmission"/></td>
+                <td>On discharge </td>
+                <td><input type="text" name="nihsDischarge" id="nihsDischarge"></td>
+            </tr>
+        </table>
+    </td>
+</tr>
+<tr>
+    <td>
+        Barthel:
+    </td>
+    <td colspan="3">
+        <table>
+            <tr>
+                <td>On admission </td>
+                <td><input type="text" name="barthelAdmission" id="barthelAdmission"/></td>
+                <td>On discharge </td>
+                <td><input type="text" name="barthelDischarge" id="barthelDischarge"></td>
+            </tr>
+        </table>
+    </td>
+</tr>
+<tr>
+    <td>
+        Discharge:
+    </td>
+    <td colspan="3">
+        <table>
+            <tr>
+                <td>Home</td>
+                <td><input type="checkbox" name="home" id="home"/></td>
+                <td>Nursing Home </td>
+                <td><input type="checkbox" name="nursingHome" id="nursingHome"></td>
+            </tr>
+            <tr>
+                <td>Rehabilitation</td>
+                <td><input type="checkbox" name="rehabilitation" id="rehabilitation"/></td>
+                <td>RIP </td>
+                <td><input type="checkbox" name="rip" id="rip"></td>
+            </tr>
+            <tr>
+                <td>Local DGH</td>
+                <td><input type="checkbox" name="localDgh" id="localDgh"/></td>
+                <td></td>
+                <td></td>
+            </tr>
+
+        </table>
+    </td>
+</tr>
+<tr>
+    <td colspan="4"> <button id="save" name="save" type="submit">Next</button> </td>
+</tr>
+
+</table>
+</form>
+
+</div>
+</div>
+<!-- <div class="hr grid_12 clearfix">&nbsp;</div>-->
+<!-- Footer -->
+@footer()
+</div>
+} {
+<script type="text/javascript" src="@routes.Assets.at("javascripts/user/events.js")"></script>
+<style>
+    .form input[type="text"]{
+    width:80px;
+    }
+</style>
+}
