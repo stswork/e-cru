@@ -6,7 +6,6 @@ import com.avaje.ebean.Expr;
 import com.avaje.ebean.annotation.Transactional;
 import models.album.Image;
 import models.album.Login;
-import models.amazon.s3.S3File;
 import models.response.ResponseMessage;
 import models.response.ResponseMessageType;
 import models.user.User;
@@ -28,7 +27,7 @@ import java.io.File;
  */
 public class LoginPicController extends Controller {
 
-    @Transactional
+    /*@Transactional
     @With(Authenticated.class)
     public static Result save(long id){
         models.response.user.User u = (models.response.user.User) ctx().args.get("user");
@@ -76,9 +75,9 @@ public class LoginPicController extends Controller {
         return redirect(controllers.loginPic.routes.LoginPicController.save(0));
 
     }
+*/
 
 
 
 
-
-    }
+}

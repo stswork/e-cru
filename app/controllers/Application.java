@@ -30,22 +30,22 @@ public class Application extends Controller {
         return ok(views.html.patient.save.render("Patient", user, patient));
     }*/
 
-    public static Result form(){
-        return ok(views.html.form1.render());
+    public static Result form1(){
+        return ok(views.html.data.form1.render());
     }
     public static Result form2(){
-        return ok(views.html.form2.render());
+        return ok(views.html.data.form2.render());
     }
     public static Result form3(){
-        return ok(views.html.form3.render());
+        return ok(views.html.data.form3.render());
     }
     public static Result form4(){
-        return ok(views.html.form4.render());
+        return ok(views.html.data.form4.render());
     }
     public static Result form5(){
-        return ok(views.html.form5.render());
+        return ok(views.html.data.form5.render());
     }
     public static Result form6(){
-        return ok(views.html.form6.render());
+        return ok(views.html.data.form6.render());
     }
 }

@@ -50,7 +50,7 @@ public class PatientController extends Controller {
 
     private static final DateTimeFormatter fmt = DateTimeFormat.forPattern("dd-MMM-yyyy");
     public static final String TELESTROKE_URL = Play.application().configuration().getString("telestroke.url.name");
-    //Will be used to display the form to save a patient or edit a patient. Id will be passed if it is edit patient function
+    //Will be used to display the form1 to save a patient or edit a patient. Id will be passed if it is edit patient function
     @With(Authenticated.class)
     public static Result save(Long id) {
         models.response.user.User u = (models.response.user.User) ctx().args.get("user");
@@ -84,7 +84,7 @@ public class PatientController extends Controller {
 		} else {
 			r = new Review();
 		}
-        return ok(views.html.patient.step1.render("Patient", u, users, r, sb.toString()));
+        return ok();
     }
 
     /*//Will be used to post data of a patient including the images. Same function will be used to post data after editing the patient info.
@@ -143,7 +143,7 @@ public class PatientController extends Controller {
                 p.setGender(Gender.valueOf(gender));
             } catch (Exception e) {
                 Logger.info("NO ENUM GENERATED FOR THE STRING " + gender);
-                return badRequest(Json.toJson(new ResponseMessage(400, "Invalid form submission!", ResponseMessageType.BAD_REQUEST)));
+                return badRequest(Json.toJson(new ResponseMessage(400, "Invalid form1 submission!", ResponseMessageType.BAD_REQUEST)));
             }
             p.setAge(age);
             p.setModifiedBy(loggedInUser);
@@ -289,7 +289,7 @@ public class PatientController extends Controller {
             //GETTING LIST OF FILES FROM MULTIPART FORM
             fps = fd.getFiles();
             if(fps.size() <= 0 || fps == null)
-                return badRequest(Json.toJson(new ResponseMessage(400, "Invalid form submission!", ResponseMessageType.BAD_REQUEST)));
+                return badRequest(Json.toJson(new ResponseMessage(400, "Invalid form1 submission!", ResponseMessageType.BAD_REQUEST)));
             //SAVING IMAGES
             for(Http.MultipartFormData.FilePart fp : fps) {
                 File file = null;

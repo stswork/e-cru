@@ -82,7 +82,7 @@ public class UserController extends Controller {
         }
         catch (Exception e) {
             Logger.info("NO ENUM GENERATED FOR THE STRING " + userType);
-            return badRequest(Json.toJson(new ResponseMessage(400, "Invalid form submission!", ResponseMessageType.BAD_REQUEST)));
+            return badRequest(Json.toJson(new ResponseMessage(400, "Invalid form1 submission!", ResponseMessageType.BAD_REQUEST)));
         }*/
         user.setCreatedBy(loggedInUser);
         user.save();

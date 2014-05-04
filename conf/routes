@@ -25,16 +25,16 @@ GET         /patient/:id             controllers.patient.PatientController.save(
 POST        /album/image/remove      controllers.album.AlbumController.removeImage()
 
 # REVIEW
-GET         /unreviewed              controllers.review.ReviewController.getPatientsToReview()
-GET         /reviewed                controllers.review.ReviewController.getPatientsReviewed()
-POST        /review/disable          controllers.review.ReviewController.disable()
+#GET         /unreviewed              controllers.review.ReviewController.getPatientsToReview()
+#GET         /reviewed                controllers.review.ReviewController.getPatientsReviewed()
+#POST        /review/disable          controllers.review.ReviewController.disable()
 
 # COMMENT
 POST        /comment                 controllers.comment.CommentController.handleSave()
 
 # ADMIN
-GET         /loginpic                controllers.loginPic.LoginPicController.save(id: Long ?= 0)
-POST        /loginpic                controllers.loginPic.LoginPicController.handleSave()
+#GET         /loginpic                controllers.loginPic.LoginPicController.save(id: Long ?= 0)
+#POST        /loginpic                controllers.loginPic.LoginPicController.handleSave()
 
 # USER
 GET         /users                   controllers.user.UserController.getUsers()
@@ -43,7 +43,7 @@ POST        /user                    controllers.user.UserController.handleSave(
 POST        /user/disable            controllers.user.UserController.disable()
 
 
-GET         /form                    controllers.Application.form()
+GET         /form1                   controllers.Application.form1()
 GET         /form2                   controllers.Application.form2()
 GET         /form3                   controllers.Application.form3()
 GET         /form4                   controllers.Application.form4()

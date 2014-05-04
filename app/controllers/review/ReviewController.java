@@ -32,7 +32,7 @@ public class ReviewController extends Controller {
 
     private static final DateTimeFormatter fmt = DateTimeFormat.forPattern("dd-MMM-yyyy");
 
-    @Transactional
+    /*@Transactional
     @With(Authenticated.class)
     public static Result getPatientsToReview() {
         List<Review> reviewList = new ArrayList<Review>();
@@ -161,7 +161,7 @@ public class ReviewController extends Controller {
             reviews.add(review);
         }
         return ok(views.html.review.list.render("Data list", u, reviews, StringUtils.EMPTY));
-    }
+    }*/
 
     /*@Transactional
     public static Result review() {
@@ -181,7 +181,7 @@ public class ReviewController extends Controller {
         return ok(Json.toJson(new ResponseMessage(200, "Patient successfully reviewed!", ResponseMessageType.SUCCESSFUL)));
     }*/
 
-    @Transactional
+    /*@Transactional
     @With(Authenticated.class)
     public static Result disable(){
         Long id = 0L;
@@ -199,5 +199,5 @@ public class ReviewController extends Controller {
         r.setModifiedBy(loggedInUser);
         r.update();
         return ok(Json.toJson(new ResponseMessage(200, "Review removed from the list!", ResponseMessageType.SUCCESSFUL)));
-    }
+    }*/
 }

@@ -42,7 +42,7 @@ public class DataCollectionForm1 extends Model {
     private Timestamp dateOfBirth;
 
     @Constraints.Required
-    private String address;
+    private String patientAddress;
 
     @Constraints.Required
     private Gender gender;
@@ -78,7 +78,7 @@ public class DataCollectionForm1 extends Model {
     private String bloodSampleNumber;
 
     @Formats.DateTime(pattern = "MM/dd/yy")
-    private Timestamp dateOfEvent;
+    private Timestamp dateOfStroke;
 
     @Formats.DateTime(pattern = "MM/dd/yy")
     private Timestamp created = new Timestamp(DateTime.now().toDate().getTime());
@@ -86,13 +86,13 @@ public class DataCollectionForm1 extends Model {
     public DataCollectionForm1() {
     }
 
-    public DataCollectionForm1(Integer patientIdNumber, String trialSite, Timestamp recruitedDate, String patientName, Timestamp dateOfBirth, String address, Gender gender, String landlinePhoneNumber, String cellPhoneNumber, String friendRelativePhoneNumber, String placeOfBirth, String ethnicity, String nativeLanguage, String religion, YesNo bloodSampleTaken, Timestamp bloodSampleDate, String bloodSampleNumber, Timestamp dateOfEvent) {
+    public DataCollectionForm1(Integer patientIdNumber, String trialSite, Timestamp recruitedDate, String patientName, Timestamp dateOfBirth, String patientAddress, Gender gender, String landlinePhoneNumber, String cellPhoneNumber, String friendRelativePhoneNumber, String placeOfBirth, String ethnicity, String nativeLanguage, String religion, YesNo bloodSampleTaken, Timestamp bloodSampleDate, String bloodSampleNumber, Timestamp dateOfStroke) {
         this.patientIdNumber = patientIdNumber;
         this.trialSite = trialSite;
         this.recruitedDate = recruitedDate;
         this.patientName = patientName;
         this.dateOfBirth = dateOfBirth;
-        this.address = address;
+        this.patientAddress = patientAddress;
         this.gender = gender;
         this.landlinePhoneNumber = landlinePhoneNumber;
         this.cellPhoneNumber = cellPhoneNumber;
@@ -104,7 +104,7 @@ public class DataCollectionForm1 extends Model {
         this.bloodSampleTaken = bloodSampleTaken;
         this.bloodSampleDate = bloodSampleDate;
         this.bloodSampleNumber = bloodSampleNumber;
-        this.dateOfEvent = dateOfEvent;
+        this.dateOfStroke = dateOfStroke;
     }
 
     public Long getId() {
@@ -155,12 +155,12 @@ public class DataCollectionForm1 extends Model {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public String getAddress() {
-        return address;
+    public String getPatientAddress() {
+        return patientAddress;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setPatientAddress(String patientAddress) {
+        this.patientAddress = patientAddress;
     }
 
     public Gender getGender() {
@@ -259,12 +259,12 @@ public class DataCollectionForm1 extends Model {
         this.bloodSampleNumber = bloodSampleNumber;
     }
 
-    public Timestamp getDateOfEvent() {
-        return dateOfEvent;
+    public Timestamp getDateOfStroke() {
+        return dateOfStroke;
     }
 
-    public void setDateOfEvent(Timestamp dateOfEvent) {
-        this.dateOfEvent = dateOfEvent;
+    public void setDateOfStroke(Timestamp dateOfStroke) {
+        this.dateOfStroke = dateOfStroke;
     }
 
     public Timestamp getCreated() {

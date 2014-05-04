@@ -22,21 +22,21 @@
                         <td colspan="2">Data Collection Form (DCF)</td>
 
                         <td>Patient’s ID Number</td>
-                        <td><input type="text" id="patient_id" name="patient_id" value=""/></td>
+                        <td><input type="text" id="patientIdNumber" name="patientIdNumber" value=""/></td>
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <h2>(1)	DETAILS OF RECRUTMENT</h2>
+                            <h2>(1)	DETAILS OF RECRUITMENT</h2>
                         </td>
                     </tr>
                       <tr>
                           <td>Trial SITE:</td>
-                          <td><input type="text" name="trail_site" id="trail_site" value="" ></td>
+                          <td><input type="text" name="trialSite" id="trialSite" value="" ></td>
                           <td>Date recruited</td>
                           <td>
-                              <input type="number" name="date_recruited" id="date_recruited" value="" style="width: 45px;"/>
-                              <input type="number" name="date_month" id="date_month" value="" style="width: 45px;"/>
-                              <input type="number" name="date_year" id="date_year" value="" style="width: 100px;"/>
+                              <input type="number" name="dateRecruited" id="dateRecruited" value="" style="width: 45px;"/>
+                              <input type="number" name="dateRecruitedMonth" id="dateRecruitedMonth" value="" style="width: 45px;"/>
+                              <input type="number" name="dateRecruitedYear" id="dateRecruitedYear" value="" style="width: 100px;"/>
                           </td>
                       </tr>
                      <tr>
@@ -46,19 +46,19 @@
                      </tr>
                      <tr>
                         <td>Name of Patient:</td>
-                         <td><input type="text" name="patient_name" id="patient_name" value="" ></td>
+                         <td><input type="text" name="patientName" id="patientName" value="" ></td>
                          <td>DOB:</td>
                          <td>
-                             <input type="number" name="patient_dob_date" id="patient_dob_date" value="" style="width: 45px;"/>
-                             <input type="number" name="patient_dob_month" id="patient_dob_month" value="" style="width: 45px;"/>
-                             <input type="number" name="patient_dob_year" id="patient_dob_year" value="" style="width: 100px;"/>
+                             <input type="number" name="patientDobDate" id="patientDobDate" value="" style="width: 45px;"/>
+                             <input type="number" name="patientDobMonth" id="patientDobMonth" value="" style="width: 45px;"/>
+                             <input type="number" name="patientDobYear" id="patientDobYear" value="" style="width: 100px;"/>
                          </td>
                      </tr>
                     <tr>
                         <td>Address:
                             (Patient’s label)
                         </td>
-                        <td><textarea name="patient_address" id="patient_address" value="" style="margin: 0px; width: 290px; height: 58px;"></textarea></td>
+                        <td><textarea name="patientAddress" id="patientAddress" value="" style="margin: 0px; width: 290px; height: 58px;"></textarea></td>
                         <td>Gender</td>
                         <td>
                             <select name="gender" id="gender" class="gender">
@@ -70,17 +70,17 @@
                     <tr>
                         <td colspan="2">Contact details for follow-up call:</td>
                          <td>Landline</td>
-                         <td><input type="text" id="landline" name="landline" value=""/></td>
+                         <td><input type="text" id="landlinePhoneNumber" name="landlinePhoneNumber" value=""/></td>
                     </tr>
                     <tr>
                         <td>Cell Phone</td>
-                        <td><input type="text" id="cell_phone" name="cell_phone" value=""/></td>
+                        <td><input type="text" id="cellPhoneNumber" name="cellPhoneNumber" value=""/></td>
                         <td>Friend/relative</td>
-                        <td><input type="text" id="friend" name="friend" value=""/></td>
+                        <td><input type="text" id="friendRelativePhoneNumber" name="friendRelativePhoneNumber" value=""/></td>
                     </tr>
                     <tr>
                         <td>Place of birth (town/country:)</td>
-                        <td><input type="text" id="birth_place" name="birth_place" value=""/></td>
+                        <td><input type="text" id="placeOfBirth" name="placeOfBirth" value=""/></td>
                         <td></td>
                         <td></td>
                     </tr>
@@ -88,7 +88,7 @@
                         <td>Ethnicity:</td>
                         <td><input type="text" id="ethnicity" name="ethnicity" value=""/></td>
                         <td>Native Language:</td>
-                        <td><input type="text" id="native_language" name="native_language" value=""/></td>
+                        <td><input type="text" id="nativeLanguage" name="nativeLanguage" value=""/></td>
                     </tr>
                     <tr>
                         <td>Religion:</td>
@@ -106,7 +106,7 @@
                                     <td><input type="checkbox" name="Table" id="Table" value="Table" title="(3) Table" />(3) Table</td>
                                 </tr>
                                 <tr>
-                                    <td><input type="checkbox" name="Tiolet" id="Tiolet" value="Tiolet" title="(4) Tiolet" />(4) Tiolet</td>
+                                    <td><input type="checkbox" name="Toilet" id="Toilet" value="Toilet" title="(4) Toilet" />(4) Toilet</td>
                                     <td><input type="checkbox" name=" Roofed house" id=" Roofed house" value=" Roofed house"  />(5) Roofed house</td>
                                     <td><input type="checkbox" name="Water Filter" id="Water Filter" value="Water Filter"  />(6) Water Filter</td>
                                 </tr>
@@ -114,46 +114,37 @@
                                     <td><input type="checkbox" name="Fan" id="Fan" value="Fan"  />(7)  Fan</td>
                                     <td><input type="checkbox" name="Cooler" id="Cooler" value="Cooler"  />(8) Cooler</td>
                                     <td><input type="checkbox" name="Cooking Gas" id="Cooking Gas" value="Cooking Gas"  />(9) Cooking Gas</td>
-
                                 </tr>
-
                                 <tr>
                                     <td><input type="checkbox" name="T.V." id="T.V." value="T.V."  />(10)  T.V.</td>
                                     <td><input type="checkbox" name="Phone" id="Phone" value="Phone"  />(11) Phone/Mobile</td>
                                     <td><input type="checkbox" name="Scooter" id="Scooter" value="Scooter"  />(12) Scooter/Bike</td>
                                 </tr>
-
                                 <tr>
                                     <td><input type="checkbox" name="Sofa Set" id="Sofa Set" value="Sofa Set"  />(13) Sofa Set</td>
                                     <td><input type="checkbox" name="Curtain in windows" id="Curtain in windows" value="Curtain in windows"  />(14) Curtain in windows</td>
                                     <td><input type="checkbox" name="Refrigerator" id="Refrigerator" value="Refrigerator"  />(15) Refrigerator</td>
                                 </tr>
-
                                 <tr>
                                     <td><input type="checkbox" name="Mixer Grinder" id="Mixer Grinder" value="Mixer Grinder"  />(16) Mixer Grinder</td>
                                     <td><input type="checkbox" name="Dining Table" id="Dining Table" value="Dining Table"  />(17) Dining Table</td>
                                     <td><input type="checkbox" name="Toaster" id="Toaster" value="Toaster"  />(18) Toaster</td>
                                 </tr>
-
                                 <tr>
                                     <td><input type="checkbox" name="Aqua guard" id="Aqua guard" value="Aqua guard"  />(19) Aqua guard</td>
                                     <td><input type="checkbox" name="Microwave oven" id="Microwave oven" value="Microwave oven"  />(20) Microwave oven</td>
                                     <td><input type="checkbox" name="Computer" id="Computer" value="Computer"  />(21) Computer</td>
                                 </tr>
-
                                 <tr>
                                     <td><input type="checkbox" name="Geyser" id="Geyser" value="Geyser"  />(22) Geyser</td>
                                     <td><input type="checkbox" name="R.O. Water Purifier System" id="R.O. Water Purifier System" value="R.O. Water Purifier System"  />(23) R.O. Water Purifier System</td>
                                     <td><input type="checkbox" name="Car" id="Car" value="Car"  />(24) Car</td>
                                 </tr>
-
                                 <tr>
                                     <td><input type="checkbox" name="A.C." id="A.C." value="A.C."  />(25) A.C.</td>
-
                                 </tr>
                             </table>
                         </td>
-
                     </tr>
                     <tr>
                         <td>Blood Sample</td>
@@ -162,20 +153,20 @@
                                 <tr>
                                     <td>Blood taken</td>
                                     <td>
-                                        <select name="blood_taken" id="blood_taken">
+                                        <select name="bloodSampleTaken" id="bloodSampleTaken">
                                             <option value="Yes">Yes</option>
                                             <option value="No">No</option>
                                         </select>
                                     </td>
                                     <td rowspan="2">Blood sample number=patient identification number (local centre)</td>
-                                    <td><input type="text" name="local_centre" id="local_centre" value=""></td>
+                                    <td><input type="text" name="bloodSampleNumber" id="bloodSampleNumber" value=""></td>
                                 </tr>
                                 <tr>
                                     <td>When:</td>
                                     <td style="width: 299px;">
-                                        <input type="number" name="blood_sample_date" id="blood_sample_date" value="" style="width: 45px;"/>
-                                        <input type="number" name="blood_sample_month" id="blood_sample_month" value="" style="width: 45px;"/>
-                                        <input type="number" name="blood_sample_year" id="blood_sample_year" value="" style="width: 100px;"/>
+                                        <input type="number" name="bloodSampleDate" id="bloodSampleDate" value="" style="width: 45px;"/>
+                                        <input type="number" name="bloodSampleMonth" id="bloodSampleMonth" value="" style="width: 45px;"/>
+                                        <input type="number" name="bloodSampleYear" id="bloodSampleYear" value="" style="width: 100px;"/>
                                     </td>
                                 </tr>
                             </table>
@@ -184,9 +175,9 @@
                     <tr>
                         <td>Date of stroke/ event</td>
                         <td>
-                            <input type="number" name="stroke_date" id="stroke_date" value="" style="width: 45px;"/>
-                            <input type="number" name="stroke_month" id="stroke_month" value="" style="width: 45px;"/>
-                            <input type="number" name="stroke_year" id="stroke_year" value="" style="width: 100px;"/>
+                            <input type="number" name="strokeDate" id="strokeDate" value="" style="width: 45px;"/>
+                            <input type="number" name="strokeMonth" id="strokeMonth" value="" style="width: 45px;"/>
+                            <input type="number" name="strokeYear" id="strokeYear" value="" style="width: 100px;"/>
                         </td>
 
                     </tr>
