@@ -15,7 +15,7 @@
             }
         </header>
         <div class="form" style="width:100%;background: #f1f1f1;border-radius: 10px;">
-                <form onsubmit="return validate()" id="patientForm" name="patientForm" method="post" action="@controllers.patient.routes.PatientController.stepOne()" data-uri="@controllers.patient.routes.PatientController.save(0)">
+                <form onsubmit="return validate()" id="patientForm" name="patientForm" method="post" action="" data-uri="">
                     <table cellspacing="5" cellpadding="5" style="clear: both;float: left;">
                     <tr>
                         @if(review.getAlbum() != null && review.getAlbum().getPatient() != null && review.getAlbum().getPatient().getId() != null) {
@@ -139,7 +139,7 @@
                 </table>
             </form>
             @if(u.getUserType().toUpperCase().equals("DOCTOR")) {
-            <form id="commentForm" method="post" action="@controllers.comment.routes.CommentController.handleSave()">
+            <form id="commentForm" method="post" action="">
                 <table style="display: inline;">
                     <tr>
                         <td colspan="3"><div class="box message" style="display:none;padding-top: 2%;padding-left: 1%;padding-bottom: 2%;color: red;">
