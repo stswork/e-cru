@@ -22,14 +22,14 @@
     <td colspan="2">Data Collection Form (DCF)</td>
 
     <td>Patient’s ID Number</td>
-    <td><input type="text" id="patient_id" name="patient_id" value=""/></td>
+    <td><input type="text" id="patientIdNumber" name="patientIdNumber" value=""/></td>
 </tr>
 
 <tr>
     <td rowspan="3">
         Alcohol</td>
     <td rowspan="3" colspan="1">
-        Drink <input type="text" id="alcohol" name="alcohol" class="small-textbox"/> &nbsp; unit(s) per week
+        Drink <input type="text" id="alcoholUnitsPerWeek" name="alcoholUnitsPerWeek" class="small-textbox"/> &nbsp; unit(s) per week
     </td>
     <td>Height: </td><td> <input type="text" name="height" id="height" class="small-textbox"/> &nbsp; cm</td>
 </tr>
@@ -47,38 +47,38 @@
         <table>
             <tr>
                 <td>Aspirin </td><td><input type="checkbox" name="aspirin" id="aspirin"/></td>
-                <td>Dose <input type="text" name="aspirinDose" id="aspirinDose" class="small-textbox"/> mg/day</td>
+                <td>Dose <input type="text" name="aspirinDosage" id="aspirinDosage" class="small-textbox"/> mg/day</td>
             </tr>
             <tr>
-                <td>Clopidogrel </td><td><input type="checkbox" name="aspirin" id="clopidogrel"/></td>
-                <td>Dose <input type="text" name="clopidogrelDose" id="clopidogrelDose" class="small-textbox"/> mg/day</td>
+                <td>Clopidogrel </td><td><input type="checkbox" name="clopidogrel" id="clopidogrel"/></td>
+                <td>Dose <input type="text" name="clopidogrelDosage" id="clopidogrelDosage" class="small-textbox"/> mg/day</td>
             </tr>
             <tr>
-                <td>Aspirin + Clopidogrel </td><td><input type="checkbox" name="aspirinClopidogrel" id="aspirinClopidogrel"/></td>
-                <td>Dose <input type="text" name="aspirinClopidogrelDose" id="aspirinClopidogrelDose" class="small-textbox"/> +<input type="text" name="aspirinClopidogrelDose2" id="aspirinClopidogrelDose2" class="small-textbox"/>  mg/day </td>
+                <td>Aspirin + Clopidogrel </td><td><input type="checkbox" name="aspirinPlusClopidogrel" id="aspirinPlusClopidogrel"/></td>
+                <td>Dose <input type="text" name="aspirinPlusClopidogrelDosage" id="aspirinPlusClopidogrelDosage" class="small-textbox"/> +<input type="text" name="aspirinClopidogrelDose2" id="aspirinClopidogrelDose2" class="small-textbox"/>  mg/day </td>
             </tr>
             <tr>
                 <td>Dipyridamole</td><td> <input type="checkbox" name="dipyridamole" id="dipyridamole"/></td>
-                <td>Dose <input type="text" name="dipyridamoleDose" id="dipyridamoleDose" class="small-textbox"/> mg/day</td>
+                <td>Dose <input type="text" name="dipyridamoleDosage" id="dipyridamoleDosage" class="small-textbox"/> mg/day</td>
             </tr>
             <tr>
-                <td>Aspirin + Dipyridamole </td><td><input type="checkbox" name="aspirinDipyridamole" id="aspirinDipyridamole"/></td>
+                <td>Aspirin + Dipyridamole </td><td><input type="checkbox" name="aspirinPlusDipyridamole" id="aspirinPlusDipyridamole"/></td>
                 <td>Dose <input type="text" name="aspirinDipyridamoleDose" id="aspirinDipyridamoleDose" class="small-textbox"/> + <input type="text" name="aspirinDipyridamoleDose2" id="aspirinDipyridamoleDose2" class="small-textbox"/> mg/day</td>
             </tr>
             <tr>
                 <td>Warfarin</td><td> <input type="checkbox" name="warfarin" id="warfarin"/></td>
-                <td>Dose <input type="text" name="warfarinDose" id="warfarinDose" class="small-textbox"/> mg/day</td>
+                <td>Dose <input type="text" name="warfarinInr" id="warfarinInr" class="small-textbox"/> mg/day</td>
             </tr>
             <tr>
                 <td>Statin</td><td> <input type="checkbox" name="statin" id="statin"/></td>
-                <td>Dose <input type="text" name="statinDose" id="statinDose" class="small-textbox"/> mg/day</td>
+                <td>Dose <input type="text" name="statinDosage" id="statinDosage" class="small-textbox"/> mg/day</td>
             </tr>
             <tr>
                 <td>Antihypertensive</td><td> <input type="checkbox" name="antihypertensive" id="antihypertensive"/></td>
-                <td>Dose <input type="text" name="antihypertensiveDose" id="antihypertensiveDose" class="small-textbox"/> mg/day</td>
+                <td>Dose <input type="text" name="antihypertensiveDosage" id="antihypertensiveDosage" class="small-textbox"/> mg/day</td>
             </tr>
             <tr>
-                <td>None of above</td><td> <input type="checkbox" name="noneOfAbove" id="noneOfAbove" class="small-textbox"/></td>
+                <td>None of above</td><td> <input type="checkbox" name="medicineNoneOfTheAbove" id="medicineNoneOfTheAbove" class="small-textbox"/></td>
                 <td></td>
             </tr>
         </table>
@@ -94,22 +94,22 @@
          <table>
              <tr>
                  <td>Glucose:</td>
-                 <td>Yes <input type="checkbox" name="glucose" id="glucose">/</td>
+                 <td>Yes <input type="checkbox" name="glucoseBloodTest" id="glucoseBloodTest">/</td>
                  <td>Result<input type="text" name="glucoseResult" id="glucoseResult"/></td>
-                 <td>Not done <input type="checkbox" name="glucoseNotDone" id="glucoseNotDone" /></td>
+                 <td>Not done <input type="checkbox" name="glucoseBloodTestResult" id="glucoseBloodTestResult" /></td>
 
              </tr>
              <tr>
                  <td>Total Cholesterol:</td>
-                 <td>Yes <input type="checkbox" name="glucose" id="totalCholesterol">/</td>
-                 <td>Result<input type="text" name="totalCholesterolResult" id="totalCholesterolResult"/></td>
+                 <td>Yes <input type="checkbox" name="totalCholesterolBloodTest" id="totalCholesterolBloodTest">/</td>
+                 <td>Result<input type="text" name="totalCholesterolBloodTestResult" id="totalCholesterolBloodTestResult"/></td>
                  <td>Not done <input type="checkbox" name="totalCholesterolNotDone" id="totalCholesterolNotDone" /></td>
 
              </tr>
              <tr>
                  <td>HDL-Cholesterol:</td>
-                 <td>Yes <input type="checkbox" name="hdlCholesterol" id="hdlCholesterol">/</td>
-                 <td>Result<input type="text" name="hdlCholesterolResult" id="hdlCholesterolResult"/></td>
+                 <td>Yes <input type="checkbox" name="hdlCholesterolBloodTest" id="hdlCholesterolBloodTest">/</td>
+                 <td>Result<input type="text" name="hdlCholesterolBloodTestResult" id="hdlCholesterolBloodTestResult"/></td>
                  <td>Not done <input type="checkbox" name="hdlCholesterolNotDone" id="hdlCholesterolNotDone" /></td>
 
              </tr>
@@ -122,85 +122,85 @@
              </tr>
              <tr>
                  <td>Triglyceride:</td>
-                 <td>Yes <input type="checkbox" name="triglyceride" id="triglyceride">/</td>
-                 <td>Result<input type="text" name="triglycerideResult" id="triglycerideResult"/></td>
+                 <td>Yes <input type="checkbox" name="triglycerideBloodTest" id="triglycerideBloodTest">/</td>
+                 <td>Result<input type="text" name="triglycerideBloodTestResult" id="triglycerideBloodTestResult"/></td>
                  <td>Not done <input type="checkbox" name="triglycerideNotDone" id="triglycerideNotDone" /></td>
 
              </tr>
              <tr>
                  <td>ESR:</td>
-                 <td>Yes <input type="checkbox" name="esr" id="esr">/</td>
-                 <td>Result<input type="text" name="esrResult" id="esrResult"/></td>
+                 <td>Yes <input type="checkbox" name="esrBloodTest" id="esrBloodTest">/</td>
+                 <td>Result<input type="text" name="esrBloodTestResult" id="esrBloodTestResult"/></td>
                  <td>Not done <input type="checkbox" name="esrNotDone" id="esrNotDone" /></td>
 
              </tr>
              <tr>
                  <td>CRP:</td>
-                 <td>Yes <input type="checkbox" name="crp" id="crp">/</td>
-                 <td>Result<input type="text" name="crpResult" id="crpResult"/></td>
+                 <td>Yes <input type="checkbox" name="crpBloodTest" id="crpBloodTest">/</td>
+                 <td>Result<input type="text" name="crpBloodTestResult" id="crpBloodTestResult"/></td>
                  <td>Not done <input type="checkbox" name="crpNotDone" id="crpNotDone" /></td>
 
              </tr>
              <tr>
              <td>Troponin:</td>
-             <td>Yes <input type="checkbox" name="troponin" id="troponin">/</td>
-             <td>Result<input type="text" name="troponinResult" id="troponinResult"/></td>
+             <td>Yes <input type="checkbox" name="troponimBloodTest" id="troponimBloodTest">/</td>
+             <td>Result<input type="text" name="troponimBloodTestResult" id="troponimBloodTestResult"/></td>
              <td>Not done <input type="checkbox" name="troponinNotDone" id="troponinNotDone" /></td>
 
             </tr>
              <tr>
              <td>Protein C:</td>
-             <td>Yes <input type="checkbox" name="proteinC" id="proteinC">/</td>
-             <td>Result<input type="text" name="proteinCResult" id="proteinCResult"/></td>
+             <td>Yes <input type="checkbox" name="proteinCBloodTest" id="proteinCBloodTest">/</td>
+             <td>Result<input type="text" name="proteinCBloodTestResult" id="proteinCBloodTestResult"/></td>
              <td>Not done <input type="checkbox" name="proteinCNotDone" id="proteinCNotDone" /></td>
 
             </tr>
              <tr>
                  <td>Protein S:</td>
-                 <td>Yes <input type="checkbox" name="proteinS" id="proteinS">/</td>
-                 <td>Result<input type="text" name="proteinSResult" id="proteinSResult"/></td>
+                 <td>Yes <input type="checkbox" name="proteinSBloodTest" id="proteinSBloodTest">/</td>
+                 <td>Result<input type="text" name="proteinSBloodTestResult" id="proteinSBloodTestResult"/></td>
                  <td>Not done <input type="checkbox" name="proteinSNotDone" id="proteinSNotDone" /></td>
 
              </tr>
              <tr>
                  <td>Fibrinogen:</td>
-                 <td>Yes <input type="checkbox" name="fibrinogen" id="fibrinogen">/</td>
-                 <td>Result<input type="text" name="fibrinogenResult" id="fibrinogenResult"/></td>
+                 <td>Yes <input type="checkbox" name="fibrinogenBloodTest" id="fibrinogenBloodTest">/</td>
+                 <td>Result<input type="text" name="fibrinogenBloodTestResult" id="fibrinogenBloodTestResult"/></td>
                  <td>Not done <input type="checkbox" name="fibrinogenNotDone" id="fibrinogenNotDone" /></td>
 
              </tr>
              <tr>
                  <td>Antithrombin 11:</td>
-                 <td>Yes <input type="checkbox" name="antithrombin11" id="antithrombin11">/</td>
-                 <td>Result<input type="text" name="antithrombin11Result" id="antithrombin11Result"/></td>
+                 <td>Yes <input type="checkbox" name="antithrombin11BloodTest" id="antithrombin11BloodTest">/</td>
+                 <td>Result<input type="text" name="antithrombin11BloodTestResult" id="antithrombin11BloodTestResult"/></td>
                  <td>Not done <input type="checkbox" name="antithrombin11NotDone" id="antithrombin11NotDone" /></td>
 
              </tr>
              <tr>
                  <td>Factor V:</td>
-                 <td>Yes <input type="checkbox" name="factorV" id="factorV">/</td>
-                 <td>Result<input type="text" name="factorVResult" id="factorVResult"/></td>
+                 <td>Yes <input type="checkbox" name="factorVBloodTest" id="factorVBloodTest">/</td>
+                 <td>Result<input type="text" name="factorVBloodTestResult" id="factorVBloodTestResult"/></td>
                  <td>Not done <input type="checkbox" name="factorVNotDone" id="factorVNotDone" /></td>
 
              </tr>
              <tr>
                  <td>Homocysteine:</td>
-                 <td>Yes <input type="checkbox" name="homocysteine" id="homocysteine">/</td>
-                 <td>Result<input type="text" name="homocysteineResult" id="homocysteineResult"/></td>
+                 <td>Yes <input type="checkbox" name="homocysteineBloodTest" id="homocysteineBloodTest">/</td>
+                 <td>Result<input type="text" name="homocysteineBloodTestResult" id="homocysteineBloodTestResult"/></td>
                  <td>Not done <input type="checkbox" name="homocysteineNotDone" id="homocysteineNotDone" /></td>
 
              </tr>
              <tr>
                  <td>Prothrombin:</td>
-                 <td>Yes <input type="checkbox" name="prothrombin" id="prothrombin">/</td>
-                 <td>Result<input type="text" name="prothrombinResult" id="prothrombinResult"/></td>
+                 <td>Yes <input type="checkbox" name="prothrombinBloodTest" id="prothrombinBloodTest">/</td>
+                 <td>Result<input type="text" name="prothrombinBloodTestResult" id="prothrombinBloodTestResult"/></td>
                  <td>Not done <input type="checkbox" name="prothrombinNotDone" id="prothrombinNotDone" /></td>
 
              </tr>
              <tr>
                  <td>Antiphospholipid:</td>
-                 <td>Yes <input type="checkbox" name="antiphospholipid" id="antiphospholipid">/</td>
-                 <td>Result<input type="text" name="antiphospholipidResult" id="antiphospholipidResult"/></td>
+                 <td>Yes <input type="checkbox" name="antiphospholipidBloodTest" id="antiphospholipidBloodTest">/</td>
+                 <td>Result<input type="text" name="antiphospholipidBloodTestResult" id="antiphospholipidBloodTestResult"/></td>
                  <td>Not done <input type="checkbox" name="antiphospholipidNotDone" id="antiphospholipidNotDone" /></td>
 
              </tr>
@@ -210,8 +210,8 @@
      </td>
  </tr>
 <tr>
-    <td colspan="2">BP on admission <input type="text" name="bp1" id="bp1" />/<input type="text" id="bp2" name="bp2" />mmHg</td>
-    <td colspan="2">Temperature on admission <input type="text" name="temperature" id="temperature"/> &#248; C
+    <td colspan="2">BP on admission <input type="text" name="bpOnAdmission" id="bpOnAdmission" />/<input type="text" id="bp2" name="bp2" />mmHg</td>
+    <td colspan="2">Temperature on admission <input type="text" name="temperatureOnAdmission" id="temperatureOnAdmission"/> &#248; C
     </td>
 </tr>
 <tr>
@@ -219,15 +219,15 @@
         Carotid endarterectomy
     </td>
     <td>
-        Done <input type="radio"  name="carotidEndarterectomy" id="carotidEndarterectomyDone"/>  /
-        Not Done <input type="radio" name="carotidEndarterectomy" id="carotidEndarterectomyNotDone"/>
+        Done <input type="radio"  name="carotidEndarterectomyDone" id="carotidEndarterectomyDone"/>  /
+        Not Done <input type="radio" name="carotidEndarterectomyDone" id="carotidEndarterectomynOTDone"/>
     </td>
     <td>
         Thrombolysed
     </td>
     <td>
-        Done <input type="radio" name="thrombolysed" id="thrombolysedDone" />  /
-        Not Done <input type="radio" name="thrombolysed" id="thrombolysedNotDone" />
+        Done <input type="radio" name="thrombolysedDone" id="thrombolysedDone" />  /
+        Not Done <input type="radio" name="thrombolysedDone" id="thrombolysedNotDone" />
     </td>
 </tr>
 <tr>
@@ -238,14 +238,14 @@
            <tr>
                <td>CTA</td>
                <td>
-                   Done <input type="radio" name="cta" id="ctaDone" />  /
-                   Not Done <input type="radio" name="cta" id="ctaNotDone" />
+                   Done <input type="radio" name="ctaDone" id="ctaDone" />  /
+                   Not Done <input type="radio" name="ctaDone" id="ctaNotDone" />
 
                </td>
                <td>MRA   </td>
                <td>
-                   Done <input type="radio" name="mra" id="mraDone" />  /
-                   Not Done <input type="radio" name="mra" id="mraNotDone" />
+                   Done <input type="radio" name="mraDone" id="mraDone" />  /
+                   Not Done <input type="radio" name="mraDone" id="mraNotDone" />
                </td>
            </tr>
            <tr>
@@ -253,8 +253,8 @@
                    Angiogram
                </td>
                <td>
-                   Done <input type="radio" name="angiogram" id="angiogramDone" />  /
-                   Not Done <input type="radio" name="angiogram" id="tangiogramNotDone" />
+                   Done <input type="radio" name="angiogramDone" id="angiogramDone" />  /
+                   Not Done <input type="radio" name="angiogramDone" id="angiogramNotDone" />
                </td>
                <td></td>
                <td></td>
