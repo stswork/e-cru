@@ -77,6 +77,8 @@ public class DataCollectionForm3 extends Model {
     @Constraints.Required
     private YesNo antihypertensive = YesNo.DONT_KNOW;
 
+    private String antihypertensiveDosage;
+
     private YesNo medicineNoneOfTheAbove = YesNo.DONT_KNOW;
 
     @Constraints.Required
