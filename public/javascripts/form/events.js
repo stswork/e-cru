@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $("#commentForm").live("submit", function(e) {
+    $("form").live("submit", function(e) {
         $("#loader-a").attr("style","display:inline;");
         e.preventDefault();
         var _data = $(e.currentTarget).serialize();

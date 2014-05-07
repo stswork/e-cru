@@ -11,7 +11,7 @@
 
         </header>
         <div class="form" style="width:100%;background: #f1f1f1;border-radius: 10px;">
-            <form id="userForm" method="post" style="padding-top: 2%;" action="@controllers.data.routes.DataController.handleSaveForm1()" data-uri="@controllers.data.routes.DataController.form1()">
+            <form id="form1" method="post" style="padding-top: 2%;" action="@controllers.data.routes.DataController.handleSaveForm1()" data-uri="@controllers.data.routes.DataController.form1()">
                 <div class="box message" ><!--style="display:none;padding-top: 2%;padding-left: 1%;padding-bottom: 2%;color: red;"-->
                     <div class="content-m">
 
@@ -99,49 +99,49 @@
                     <tr>
                         <td>Economic Status</td>
                         <td colspan="3">
-                            <table>
+                            <table name="economicStatus">
                                 <tr>
-                                    <td><input type="checkbox" name="economicStatus" id="bed" value="Bed"  />(1) Bed</td>
-                                    <td><input type="checkbox" name="economicStatus" id="Electricity" value="Electricity"  />(2) Electricity</td>
-                                    <td><input type="checkbox" name="economicStatus" id="Table" value="Table" title="(3) Table" />(3) Table</td>
+                                    <td><input type="checkbox" name="economicStatus[]" id="bed" value="Bed"  />(1) Bed</td>
+                                    <td><input type="checkbox" name="economicStatus[]" id="Electricity" value="Electricity"  />(2) Electricity</td>
+                                    <td><input type="checkbox" name="economicStatus[]" id="Table" value="Table" title="(3) Table" />(3) Table</td>
                                 </tr>
                                 <tr>
-                                    <td><input type="checkbox" name="economicStatus" id="Toilet" value="Toilet" title="(4) Toilet" />(4) Toilet</td>
-                                    <td><input type="checkbox" name="economicStatus" id=" Roofed house" value=" Roofed house"  />(5) Roofed house</td>
-                                    <td><input type="checkbox" name="economicStatus" id="Water Filter" value="Water Filter"  />(6) Water Filter</td>
+                                    <td><input type="checkbox" name="economicStatus[]" id="Toilet" value="Toilet" title="(4) Toilet" />(4) Toilet</td>
+                                    <td><input type="checkbox" name="economicStatus[]" id=" Roofed house" value=" Roofed house"  />(5) Roofed house</td>
+                                    <td><input type="checkbox" name="economicStatus[]" id="Water Filter" value="Water Filter"  />(6) Water Filter</td>
                                 </tr>
                                 <tr>
-                                    <td><input type="checkbox" name="economicStatus" id="Fan" value="Fan"  />(7)  Fan</td>
-                                    <td><input type="checkbox" name="economicStatus" id="Cooler" value="Cooler"  />(8) Cooler</td>
-                                    <td><input type="checkbox" name="economicStatus" id="Cooking Gas" value="Cooking Gas"  />(9) Cooking Gas</td>
+                                    <td><input type="checkbox" name="economicStatus[]" id="Fan" value="Fan"  />(7)  Fan</td>
+                                    <td><input type="checkbox" name="economicStatus[]" id="Cooler" value="Cooler"  />(8) Cooler</td>
+                                    <td><input type="checkbox" name="economicStatus[]" id="Cooking Gas" value="Cooking Gas"  />(9) Cooking Gas</td>
                                 </tr>
                                 <tr>
-                                    <td><input type="checkbox" name="economicStatus" id="T.V." value="T.V."  />(10)  T.V.</td>
-                                    <td><input type="checkbox" name="economicStatus" id="Phone" value="Phone"  />(11) Phone/Mobile</td>
-                                    <td><input type="checkbox" name="economicStatus" id="Scooter" value="Scooter"  />(12) Scooter/Bike</td>
+                                    <td><input type="checkbox" name="economicStatus[]" id="T.V." value="T.V."  />(10)  T.V.</td>
+                                    <td><input type="checkbox" name="economicStatus[]" id="Phone" value="Phone"  />(11) Phone/Mobile</td>
+                                    <td><input type="checkbox" name="economicStatus[]" id="Scooter" value="Scooter"  />(12) Scooter/Bike</td>
                                 </tr>
                                 <tr>
-                                    <td><input type="checkbox" name="economicStatus" id="Sofa Set" value="Sofa Set"  />(13) Sofa Set</td>
-                                    <td><input type="checkbox" name="economicStatus" id="Curtain in windows" value="Curtain in windows"  />(14) Curtain in windows</td>
-                                    <td><input type="checkbox" name="economicStatus" id="Refrigerator" value="Refrigerator"  />(15) Refrigerator</td>
+                                    <td><input type="checkbox" name="economicStatus[]" id="Sofa Set" value="Sofa Set"  />(13) Sofa Set</td>
+                                    <td><input type="checkbox" name="economicStatus[]" id="Curtain in windows" value="Curtain in windows"  />(14) Curtain in windows</td>
+                                    <td><input type="checkbox" name="economicStatus[]" id="Refrigerator" value="Refrigerator"  />(15) Refrigerator</td>
                                 </tr>
                                 <tr>
-                                    <td><input type="checkbox" name="economicStatus" id="Mixer Grinder" value="Mixer Grinder"  />(16) Mixer Grinder</td>
-                                    <td><input type="checkbox" name="economicStatus" id="Dining Table" value="Dining Table"  />(17) Dining Table</td>
-                                    <td><input type="checkbox" name="economicStatus" id="Toaster" value="Toaster"  />(18) Toaster</td>
+                                    <td><input type="checkbox" name="economicStatus[]" id="Mixer Grinder" value="Mixer Grinder"  />(16) Mixer Grinder</td>
+                                    <td><input type="checkbox" name="economicStatus[]" id="Dining Table" value="Dining Table"  />(17) Dining Table</td>
+                                    <td><input type="checkbox" name="economicStatus[]" id="Toaster" value="Toaster"  />(18) Toaster</td>
                                 </tr>
                                 <tr>
-                                    <td><input type="checkbox" name="economicStatus" id="Aqua guard" value="Aqua guard"  />(19) Aqua guard</td>
-                                    <td><input type="checkbox" name="economicStatus" id="Microwave oven" value="Microwave oven"  />(20) Microwave oven</td>
-                                    <td><input type="checkbox" name="economicStatus" id="Computer" value="Computer"  />(21) Computer</td>
+                                    <td><input type="checkbox" name="economicStatus[]" id="Aqua guard" value="Aqua guard"  />(19) Aqua guard</td>
+                                    <td><input type="checkbox" name="economicStatus[]" id="Microwave oven" value="Microwave oven"  />(20) Microwave oven</td>
+                                    <td><input type="checkbox" name="economicStatus[]" id="Computer" value="Computer"  />(21) Computer</td>
                                 </tr>
                                 <tr>
-                                    <td><input type="checkbox" name="economicStatus" id="Geyser" value="Geyser"  />(22) Geyser</td>
-                                    <td><input type="checkbox" name="economicStatus" id="R.O. Water Purifier System" value="R.O. Water Purifier System"  />(23) R.O. Water Purifier System</td>
-                                    <td><input type="checkbox" name="economicStatus" id="Car" value="Car"  />(24) Car</td>
+                                    <td><input type="checkbox" name="economicStatus[]" id="Geyser" value="Geyser"  />(22) Geyser</td>
+                                    <td><input type="checkbox" name="economicStatus[]" id="R.O. Water Purifier System" value="R.O. Water Purifier System"  />(23) R.O. Water Purifier System</td>
+                                    <td><input type="checkbox" name="economicStatus[]" id="Car" value="Car"  />(24) Car</td>
                                 </tr>
                                 <tr>
-                                    <td><input type="checkbox" name="economicStatus" id="A.C." value="A.C."  />(25) A.C.</td>
+                                    <td><input type="checkbox" name="economicStatus[]" id="A.C." value="A.C."  />(25) A.C.</td>
                                 </tr>
                             </table>
                         </td>
@@ -194,5 +194,5 @@
     @footer()
 </div>
 } {
-<script type="text/javascript" src="@routes.Assets.at("javascripts/form/form.js")"></script>
+<script type="text/javascript" src="@routes.Assets.at("javascripts/form/events.js")"></script>
 }
