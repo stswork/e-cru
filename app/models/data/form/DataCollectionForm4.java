@@ -6,6 +6,7 @@ import org.joda.time.DateTime;
 import play.data.format.Formats;
 import play.data.validation.Constraints;
 import play.db.ebean.Model;
+import scala.Double;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
