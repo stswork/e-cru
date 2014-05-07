@@ -32,24 +32,9 @@ public class AuthenticationController extends Controller {
         } else {
             return redirect(controllers.review.routes.ReviewController.getPatientsToReview());
         }*/
-        if(request().queryString().size() != 0) {
-            String username = StringUtils.isEmpty(request().queryString().get("username")[0]) ? StringUtils.EMPTY : request().queryString().get("username")[0];
-            String password = StringUtils.isEmpty(request().queryString().get("password")[0])? StringUtils.EMPTY :request().queryString().get("password")[0];
-            Long id = StringUtils.isEmpty(request().queryString().get("id")[0]) ? 0 : Long.parseLong(request().queryString().get("id")[0]);
-            if(StringUtils.isEmpty(username) || StringUtils.isEmpty(password) || id <= 0){
+
                 return ok(views.html.index.render("Welcome"));
-            }
-           else{
-                boolean isAuthenticated = doctorLogin(username, password, id);
-                if(isAuthenticated)
-                    return redirect(controllers.patient.routes.PatientController.save(id));
-                else
-                    return redirect(controllers.routes.AuthenticationController.login());
-            }
-        }
-        else {
-            return ok(views.html.index.render("Welcome"));
-        }
+
     }
 
     @BodyParser.Of(BodyParser.Json.class)

@@ -22,7 +22,7 @@ GET         /patient/:id             controllers.patient.PatientController.save(
 #POST        /patient/two             controllers.patient.PatientController.stepTwo()
 
 # ALBUM
-POST        /album/image/remove      controllers.album.AlbumController.removeImage()
+#POST        /album/image/remove      controllers.album.AlbumController.removeImage()
 
 # REVIEW
 #GET         /unreviewed              controllers.review.ReviewController.getPatientsToReview()
@@ -30,7 +30,7 @@ POST        /album/image/remove      controllers.album.AlbumController.removeIma
 #POST        /review/disable          controllers.review.ReviewController.disable()
 
 # COMMENT
-POST        /comment                 controllers.comment.CommentController.handleSave()
+#POST        /comment                 controllers.comment.CommentController.handleSave()
 
 # ADMIN
 #GET         /loginpic                controllers.loginPic.LoginPicController.save(id: Long ?= 0)
