@@ -22,7 +22,7 @@
     <td colspan="2">Data Collection Form (DCF)</td>
 
     <td>Patient’s ID Number</td>
-    <td><input type="text" id="patient_id" name="patient_id" value=""/></td>
+    <td><input type="text" id="patientIdNumber" name="patientIdNumber" value=""/></td>
 </tr>
     <tr>
         <td>Medicine on
@@ -32,36 +32,36 @@
             <table>
                 <tr>
                     <td>Aspirin </td><td><input type="checkbox" name="aspirin" id="aspirin"/></td>
-                    <td>Dose <input type="text" name="aspirinDose" id="aspirinDose" class="small-textbox"/> mg/day</td>
+                    <td>Dose <input type="text" name="aspirinDosage" id="aspirinDosage" class="small-textbox"/> mg/day</td>
                 </tr>
                 <tr>
-                    <td>Clopidogrel </td><td><input type="checkbox" name="aspirin" id="clopidogrel"/></td>
-                    <td>Dose <input type="text" name="clopidogrelDose" id="clopidogrelDose" class="small-textbox"/> mg/day</td>
+                    <td>Clopidogrel </td><td><input type="checkbox" name="clopidogrel" id="clopidogrel"/></td>
+                    <td>Dose <input type="text" name="clopidogrelDosage" id="clopidogrelDosage" class="small-textbox"/> mg/day</td>
                 </tr>
                 <tr>
-                    <td>Aspirin + Clopidogrel </td><td><input type="checkbox" name="aspirinClopidogrel" id="aspirinClopidogrel"/></td>
-                    <td>Dose <input type="text" name="aspirinClopidogrelDose" id="aspirinClopidogrelDose" class="small-textbox"/> +<input type="text" name="aspirinClopidogrelDose2" id="aspirinClopidogrelDose2" class="small-textbox"/>  mg/day </td>
+                    <td>Aspirin + Clopidogrel </td><td><input type="checkbox" name="aspirinPlusClopidogrel" id="aspirinPlusClopidogrel"/></td>
+                    <td>Dose <input type="text" name="aspirinPlusClopidogrelDosage" id="aspirinPlusClopidogrelDosage" class="small-textbox"/> +<input type="text" name="aspirinClopidogrelDose2" id="aspirinClopidogrelDose2" class="small-textbox"/>  mg/day </td>
                 </tr>
                 <tr>
                     <td>Dipyridamole</td><td> <input type="checkbox" name="dipyridamole" id="dipyridamole"/></td>
-                    <td>Dose <input type="text" name="dipyridamoleDose" id="dipyridamoleDose" class="small-textbox"/> mg/day</td>
+                    <td>Dose <input type="text" name="dipyridamoleDosage" id="dipyridamoleDosage" class="small-textbox"/> mg/day</td>
                 </tr>
                 <tr>
-                    <td>Aspirin + Dipyridamole </td><td><input type="checkbox" name="aspirinDipyridamole" id="aspirinDipyridamole"/></td>
-                    <td>Dose <input type="text" name="aspirinDipyridamoleDose" id="aspirinDipyridamoleDose" class="small-textbox"/> + <input type="text" name="aspirinDipyridamoleDose2" id="aspirinDipyridamoleDose2" class="small-textbox"/> mg/day</td>
+                    <td>Aspirin + Dipyridamole </td><td><input type="checkbox" name="aspirinPlusDipyridamole" id="aspirinPlusDipyridamole"/></td>
+                    <td>Dose <input type="text" name="aspirinPlusDipyridamoleDosage" id="aspirinPlusDipyridamoleDosage" class="small-textbox"/> + <input type="text" name="aspirinDipyridamoleDose2" id="aspirinDipyridamoleDose2" class="small-textbox"/> mg/day</td>
                 </tr>
 
                 <tr>
                     <td>Statin</td><td> <input type="checkbox" name="statin" id="statin"/></td>
-                    <td>Dose <input type="text" name="statinDose" id="statinDose" class="small-textbox"/> mg/day</td>
+                    <td>Dose <input type="text" name="statinDosage" id="statinDosage" class="small-textbox"/> mg/day</td>
                 </tr>
                 <tr>
                     <td>Antihypertensive</td><td> <input type="checkbox" name="antihypertensive" id="antihypertensive"/></td>
-                    <td>Dose <input type="text" name="antihypertensiveDose" id="antihypertensiveDose" class="small-textbox"/> mg/day</td>
+                    <td>Dose <input type="text" name="antihypertensiveDosage" id="antihypertensiveDosage" class="small-textbox"/> mg/day</td>
                 </tr>
                 <tr>
                     <td>Warfarin</td><td> <input type="checkbox" name="warfarin" id="warfarin"/></td>
-                    <td>Dose <input type="text" name="warfarinDose" id="warfarinDose" class="small-textbox"/> mg/day</td>
+                    <td>Dose <input type="text" name="warfarinDosage" id="warfarinDosage" class="small-textbox"/> mg/day</td>
                 </tr>
             </table>
 
@@ -73,10 +73,10 @@
             <table>
                 <tr>
                     <td>DOB</td>
-                    <td><input type="text" name="dob" id="dob"></td>
+                    <td><input type="text" name="spouseDateOfBirth" id="spouseDateOfBirth"></td>
                     <td>Gender</td>
-                    <td><input type="radio" name="gender" id="genderMale" >
-                    <input type="radio" name="gender" id="genderFemale">
+                    <td><input type="radio" name="spouseGender" id="spouseGenderMale" >
+                    <input type="radio" name="spouseGender" id="spouseGenderFemale">
                     </td>
                 </tr>
             </table>
@@ -88,32 +88,32 @@
              <table>
                  <tr>
                      <td>Landline   </td>
-                     <td> <input type="text" name="landline" id="landline"> </td>
+                     <td> <input type="text" name="spouseLandlinePhoneNumber" id="spouseLandlinePhoneNumber"> </td>
                  </tr>
                  <tr>
                      <td>Cell Phone  </td>
-                     <td> <input type="text" name="cellPhone" id="cellPhone"> </td>
+                     <td> <input type="text" name="spouseCellPhoneNumber" id="spouseCellPhoneNumber"> </td>
                  </tr>
                  <tr>
                      <td>Friend/relative </td>
-                     <td> <input type="text" name="friend" id="friend"> </td>
+                     <td> <input type="text" name="spouseFriendPhoneNumber" id="spouseFriendPhoneNumber"> </td>
                  </tr>
              </table>
         </td>
     </tr>
     <tr>
         <td>Place of birth (town/country): </td>
-        <td colspan="3"><input type="text" name="town" id="town"></td>
+        <td colspan="3"><input type="text" name="spousePlaceOfBirth" id="spousePlaceOfBirth"></td>
     </tr>
     <tr>
         <td>Ethnicity:</td>
-        <td><input type="text" name="ethnicity" id="ethnicity"></td>
+        <td><input type="text" name="spouseEthnicity" id="spouseEthnicity"></td>
         <td>Religion:</td>
-        <td><input type="text" name="religion" id="religion"></td>
+        <td><input type="text" name="spouseReligion" id="spouseReligion"></td>
     </tr>
     <tr>
         <td>Native Language:</td>
-        <td> <input type="text" name="nativeLanguage" id="nativeLanguage"> </td>
+        <td> <input type="text" name="spouseNativeLanguage" id="spouseNativeLanguage"> </td>
         <td>BP today   </td>
         <td><input type="text" name="bpToday" id="bpToday">/<input type="text" name="bpToday2" id="bpToday2">mmHg</td>
     </tr>
@@ -128,65 +128,65 @@
                 <tr>
                     <td>Hypertension</td>
                     <td colspan="2">
-                        <input type="radio" name="hypertension" value="Yes">Yes
-                        <input type="radio" name="hypertension" value="No">No
-                        <input type="radio" name="hypertension" value="DontKnow">Don't Know
+                        <input type="radio" name="spouseHypertension" value="Yes">Yes
+                        <input type="radio" name="spouseHypertension" value="No">No
+                        <input type="radio" name="spouseHypertension" value="DontKnow">Don't Know
                     </td>
                 </tr>
                 <tr>
                     <td>Diabetes Mellitus</td>
                     <td colspan="2">
-                        <input type="radio" name="diabetesMellitus" value="Yes">Yes
-                        <input type="radio" name="diabetesMellitus" value="No">No
-                        <input type="radio" name="diabetesMellitus" value="DontKnow">Don't Know
+                        <input type="radio" name="spouseDiabetesMellitus" value="Yes">Yes
+                        <input type="radio" name="spouseDiabetesMellitus" value="No">No
+                        <input type="radio" name="spouseDiabetesMellitus" value="DontKnow">Don't Know
                     </td>
                 </tr>
                 <tr>
                     <td>IHD/Angina</td>
                     <td colspan="2">
-                        <input type="radio" name="ihd" value="Yes">Yes
-                        <input type="radio" name="ihd" value="No">No
-                        <input type="radio" name="ihd" value="DontKnow">Don't Know
+                        <input type="radio" name="spouseIhdAngina" value="Yes">Yes
+                        <input type="radio" name="spouseIhdAngina" value="No">No
+                        <input type="radio" name="spouseIhdAngina" value="DontKnow">Don't Know
                     </td>
                 </tr>
                 <tr>
                     <td>Hypercholesterolemia</td>
                     <td colspan="2">
-                        <input type="radio" name="hypercholesterolemia" value="Yes">Yes
-                        <input type="radio" name="hypercholesterolemia" value="No">No
-                        <input type="radio" name="hypercholesterolemia" value="DontKnow">Don't Know
+                        <input type="radio" name="spouseHypercholesterolemia" value="Yes">Yes
+                        <input type="radio" name="spouseHypercholesterolemia" value="No">No
+                        <input type="radio" name="spouseHypercholesterolemia" value="DontKnow">Don't Know
                     </td>
                 </tr>
                 <tr>
                     <td>Atrial Fibrillation</td>
                     <td colspan="2">
-                        <input type="radio" name="atrialFibrillation" value="Yes">Yes
-                        <input type="radio" name="atrialFibrillation" value="No">No
-                        <input type="radio" name="atrialFibrillation" value="DontKnow">Don't Know
+                        <input type="radio" name="spouseAtrialFibrillation" value="Yes">Yes
+                        <input type="radio" name="spouseAtrialFibrillation" value="No">No
+                        <input type="radio" name="spouseAtrialFibrillation" value="DontKnow">Don't Know
                     </td>
                 </tr>
                 <tr>
                     <td>PVD</td>
                     <td colspan="2">
-                        <input type="radio" name="pvd" value="Yes">Yes
-                        <input type="radio" name="pvd" value="No">No
-                        <input type="radio" name="pvd" value="DontKnow">Don't Know
+                        <input type="radio" name="spousePvd" value="Yes">Yes
+                        <input type="radio" name="spousePvd" value="No">No
+                        <input type="radio" name="spousePvd" value="DontKnow">Don't Know
                     </td>
                 </tr>
                 <tr>
                     <td>MI</td>
                     <td colspan="2">
-                        <input type="radio" name="mi" value="Yes">Yes
-                        <input type="radio" name="mi" value="No">No
-                        <input type="radio" name="mi" value="DontKnow">Don't Know
+                        <input type="radio" name="spouseMi" value="Yes">Yes
+                        <input type="radio" name="spouseMi" value="No">No
+                        <input type="radio" name="spouseMi" value="DontKnow">Don't Know
                     </td>
                 </tr>
                 <tr>
                     <td>Migraine with aura</td>
                     <td colspan="2">
-                        <input type="radio" name="MigraineWithAura" value="Yes">Yes
-                        <input type="radio" name="MigraineWithAura" value="No">No
-                        <input type="radio" name="MigraineWithAura" value="DontKnow">Don't Know
+                        <input type="radio" name="spouseMigraineWithAura" value="Yes">Yes
+                        <input type="radio" name="spouseMigraineWithAura" value="No">No
+                        <input type="radio" name="spouseMigraineWithAura" value="DontKnow">Don't Know
                     </td>
 
                 </tr>

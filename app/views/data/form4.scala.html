@@ -22,7 +22,7 @@
     <td colspan="2">Data Collection Form (DCF)</td>
 
     <td>Patient’s ID Number</td>
-    <td><input type="text" id="patient_id" name="patient_id" value=""/></td>
+    <td><input type="text" id="patientIdNumber" name="patientIdNumber" value=""/></td>
 </tr>
 <tr>
     <td>
@@ -41,22 +41,22 @@
             </tr>
             <tr>
                 <td>Dopplers  </td>
-                <td>Done<input type="radio" name="dopplers" id="dopplersDone" >
-                Not Done <input type="radio" name="dopplers" id="dopplersNotDone" >
+                <td>Done<input type="radio" name="extracranialDopplersImagingDone" id="extracranialDopplersImagingDone" >
+                Not Done <input type="radio" name="extracranialDopplersImagingDone" id="extracranialDopplersImagingNotDone" >
                 </td>
             </tr>
             <tr>
                 <td>
                    MRA
                 </td>
-                <td>Done<input type="radio" name="mra" id="mraDone"/>
-                    Not Done <input type="radio" name="mra" id="mraNotDone"/>
+                <td>Done<input type="radio" name="extracranialMraImagingDone" id="extracranialMraImagingDone"/>
+                    Not Done <input type="radio" name="extracranialMraImagingDone" id="extracranialMraImagingNotDone"/>
                 </td>
             </tr>
             <tr>
                 <td>CTA</td>
-                <td>Done<input type="radio" name="cta" id="ctaDone" >
-                    Not Done <input type="radio" name="cta" id="ctaNotDone" >
+                <td>Done<input type="radio" name="extracranialCtaImagingDone" id="extracranialCtaImagingDone" >
+                    Not Done <input type="radio" name="extracranialCtaImagingDone" id="extracranialCtaImagingNotDone" >
                 </td>
             </tr>
         </table>
@@ -65,14 +65,14 @@
         <table>
             <tr>
                 <td>CT</td>
-                <td>Done<input type="radio" name="ct" id="ctDone" >
-                    Not Done <input type="radio" name="ct" id="ctNotDone" >
+                <td>Done<input type="radio" name="brainCtImagingDone" id="brainCtImagingDone" >
+                    Not Done <input type="radio" name="brainCtImagingDone" id="brainCtImagingNotDone" >
                 </td>
             </tr>
             <tr>
                 <td>MRI</td>
-                <td>Done<input type="radio" name="mri" id="mriDone" >
-                    Not Done <input type="radio" name="mri" id="mriNotDone" >
+                <td>Done<input type="radio" name="brainMriImagingDone" id="brainMriImagingDone" >
+                    Not Done <input type="radio" name="brainMriImagingDone" id="brainMriImagingNotDone" >
                 </td>
             </tr>
             <tr>
@@ -103,41 +103,41 @@
          <table>
              <tr>
                  <td>
-                     RICA  stenosis</td><td><input type="text" name="rica" id="rica"> %
+                     RICA  stenosis</td><td><input type="text" name="ricaStenosisPercent" id="ricaStenosisPercent"> %
                  </td>
              </tr>
              <tr>
                  <td>
-                     LICA  stenosis</td><td> <input type="text" name="lica" id="lica"> %
-                 </td>
-             </tr>
-
-             <tr>
-                 <td>
-                     RCCA  stenosis</td><td> <input type="text" name="rcca" id="rcca"> %
+                     LICA  stenosis</td><td> <input type="text" name="licaStenosisPercent" id="licaStenosisPercent"> %
                  </td>
              </tr>
 
              <tr>
                  <td>
-                     LCCA  stenosis </td><td><input type="text" name="lcca" id="lcca"> %
+                     RCCA  stenosis</td><td> <input type="text" name="rccaStenosisPercent" id="rccaStenosisPercent"> %
                  </td>
              </tr>
 
              <tr>
                  <td>
-                     R vertebral stenosis</td><td> <input type="text" name="rVertebral" id="rVertebral"> %
+                     LCCA  stenosis </td><td><input type="text" name="lccaStenosisPercent" id="lccaStenosisPercent"> %
                  </td>
              </tr>
 
              <tr>
                  <td>
-                     L vertebral stenosis </td><td><input type="text" name="lVertebral" id="lVertebral"> %
+                     R vertebral stenosis</td><td> <input type="text" name="rVertebralStenosisPercent" id="rVertebralStenosisPercent"> %
+                 </td>
+             </tr>
+
+             <tr>
+                 <td>
+                     L vertebral stenosis </td><td><input type="text" name="lVertebralStenosisPercent" id="lVertebralStenosisPercent"> %
                  </td>
              </tr>
              <tr>
                  <td>
-                     Basilar stenosis </td><td><input type="text" name="basilar" id="basilar"> %
+                     Basilar stenosis </td><td><input type="text" name="basilarStenosisPercent" id="basilarStenosisPercent"> %
                  </td>
              </tr>
          </table>
@@ -167,7 +167,7 @@
              </tr>
              <tr>
                  <td>((5) Stroke of other determined etiology</td>
-                 <td><input type="checkbox" name="etiology" id="etiology"></td>
+                 <td><input type="checkbox" name="strokeOfDeterminedEtiology" id="strokeOfDeterminedEtiology"></td>
              </tr>
              <tr>
                  <td>(6) Negative evaluation (no cause found) </td>
@@ -180,8 +180,8 @@
  <tr>
      <td>ECG</td>
      <td>
-         Done<input type="radio" name="ecg" id="ecgDone">
-         Not Done<input type="radio" name="ecg" id="ecgNotDone">
+         Done<input type="radio" name="ecgDone" id="ecgDone">
+         Not Done<input type="radio" name="ecgDone" id="ecgNotDone">
      </td>
      <td>ECHO</td>
      <td>
@@ -260,9 +260,9 @@
         <table>
             <tr>
                 <td>On admission </td>
-                <td><input type="text" name="nihssAdmission" id="nihssAdmission"/></td>
+                <td><input type="text" name="nihssOnAdmission" id="nihssOnAdmission"/></td>
                 <td>On discharge </td>
-                <td><input type="text" name="nihsDischarge" id="nihsDischarge"></td>
+                <td><input type="text" name="nihssOnDischarge" id="nihssOnDischarge"></td>
             </tr>
         </table>
     </td>
@@ -275,9 +275,9 @@
         <table>
             <tr>
                 <td>On admission </td>
-                <td><input type="text" name="barthelAdmission" id="barthelAdmission"/></td>
+                <td><input type="text" name="barthelOnAdmission" id="barthelOnAdmission"/></td>
                 <td>On discharge </td>
-                <td><input type="text" name="barthelDischarge" id="barthelDischarge"></td>
+                <td><input type="text" name="barthelOnDischarge" id="barthelOnDischarge"></td>
             </tr>
         </table>
     </td>
