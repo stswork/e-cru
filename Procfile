@@ -1,1 +1,1 @@
-web: target/universal/stage/bin/dicom-mri -Dhttp.port=$PORT -Dconfig.resource=app.prod.conf
+web: target/universal/stage/bin/e-cru -Dhttp.port=$PORT -Dconfig.resource=app.prod.conf
