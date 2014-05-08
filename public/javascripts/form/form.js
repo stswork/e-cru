@@ -1,6 +1,6 @@
 $(document).ready(function() {
     $("form").bind("submit", function(e) {
-            alert("INSIDE");
+           /* alert("INSIDE");*/
             $(e.currentTarget).find("div.error").hide();
             e.preventDefault();
             var serialized = $(e.currentTarget).serializeArray();

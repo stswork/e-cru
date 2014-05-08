@@ -1,5 +1,6 @@
 package controllers.data;
 
+import actions.Authenticated;
 import com.fasterxml.jackson.databind.JsonNode;
 import models.response.ResponseMessage;
 import models.response.ResponseMessageType;
@@ -7,6 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.With;
 
 import java.util.Map;
 
@@ -15,28 +17,40 @@ import java.util.Map;
  */
 public class DataController extends Controller {
 
+    @With(Authenticated.class)
     public static Result form1(){
-        return ok(views.html.data.form1.render());
+        models.response.user.User u = (models.response.user.User) ctx().args.get("user");
+        return ok(views.html.data.form1.render("Form1",u));
     }
 
+    @With(Authenticated.class)
     public static Result form2(){
-        return ok(views.html.data.form2.render());
+        models.response.user.User u = (models.response.user.User) ctx().args.get("user");
+        return ok(views.html.data.form2.render("Form2",u));
     }
 
+    @With(Authenticated.class)
     public static Result form3(){
-        return ok(views.html.data.form3.render());
+        models.response.user.User u = (models.response.user.User) ctx().args.get("user");
+        return ok(views.html.data.form3.render("Form3",u));
     }
 
+    @With(Authenticated.class)
     public static Result form4(){
-        return ok(views.html.data.form4.render());
+        models.response.user.User u = (models.response.user.User) ctx().args.get("user");
+        return ok(views.html.data.form4.render("Form4",u));
     }
 
+    @With(Authenticated.class)
     public static Result form5(){
-        return ok(views.html.data.form5.render());
+        models.response.user.User u = (models.response.user.User) ctx().args.get("user");
+        return ok(views.html.data.form5.render("Form5",u));
     }
 
+    @With(Authenticated.class)
     public static Result form6(){
-        return ok(views.html.data.form6.render());
+        models.response.user.User u = (models.response.user.User) ctx().args.get("user");
+        return ok(views.html.data.form6.render("Form6",u));
     }
 
 

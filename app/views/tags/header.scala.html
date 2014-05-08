@@ -4,12 +4,12 @@
 <div class="freshdesignweb-top">
     <ul id="navigation" class="grid_18">
         @if(u.getUserType.equalsIgnoreCase("SUPER_USER")) {
-        <li><a href="#"><span class="meta">Change Login Screen Picture</span><br />
-            Change</a></li>
+
         <li><a href="@controllers.user.routes.UserController.getUsers()"><span class="meta">New User?</span><br />
             Add</a></li>
         }
-
+        <li><a href="@controllers.data.routes.DataController.form1()"><span class="meta">Form Data?</span><br />
+            Add Form</a></li>
     </ul>
 <span class="right" style="font-size: 14PX;  font-family: fantasy;">
         <a href="@controllers.routes.AuthenticationController.logout()">LogOut</a>
