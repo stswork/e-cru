@@ -3,7 +3,7 @@ $(document).ready(function () {
         $("#loader-a").attr("style","display:inline;");
         e.preventDefault();
         var _data = $(e.currentTarget).serialize();
-        var _reviewId = $("#reviewId").val();
+        var _uri = $(e.currentTarget).data().uri;
         $.ajax({
             type: e.currentTarget.method,
             url: e.currentTarget.action,
@@ -14,7 +14,7 @@ $(document).ready(function () {
                 $(e.currentTarget).find("div.message").show();
                 setTimeout(function () {
                     $(e.currentTarget).find("div.message").hide();
-                    window.location = "/patient/" + _reviewId;
+                    window.location = _uri;
                 }, 3000);
                 $(e.currentTarget).get(0).reset();
             },
