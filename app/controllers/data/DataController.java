@@ -166,9 +166,7 @@ public class DataController extends Controller {
                 es.save();
             }
         } else if (id > 0) {
-            dcf1 = Ebean.find(DataCollectionForm1.class).fetch("economicStatuses").where(
-                    Expr.eq("id", id)
-            ).setMaxRows(1).findUnique();
+            dcf1 = DataCollectionForm1.find.byId(id);
             if(dcf1 == null)
                 return badRequest(Json.toJson(new ResponseMessage(400, "Invalid parameters passed!", ResponseMessageType.BAD_REQUEST)));
             dcf1.setPatientIdNumber(patientIdNumber);
@@ -190,15 +188,16 @@ public class DataController extends Controller {
             dcf1.setBloodSampleNumber(bloodSampleNumber);
             dcf1.setDateOfStroke(dateStroke == null ? null : new Timestamp(dateStroke.getMillis()));
             dcf1.update();
-            List<EconomicStatus> statuses = dcf1.getEconomicStatuses();
-            if(statuses.size() > 0) {
-                for(EconomicStatus es: statuses) {
-                    for(String s: economicStatuses) {
-                        if(!s.equalsIgnoreCase(es.getName())) {
-                            EconomicStatus economicStatus = new EconomicStatus(s, dcf1, null);
-                            economicStatus.save();
-                        }
-                    }
+            for(String s: economicStatuses) {
+                EconomicStatus status = Ebean.find(EconomicStatus.class).fetch("dataCollectionForm1").where(
+                        Expr.and(
+                                Expr.eq("dataCollectionForm1", id),
+                                Expr.ieq("name", s)
+                        )
+                ).setMaxRows(1).findUnique();
+                if(status == null) {
+                    status = new EconomicStatus(s, dcf1, null);
+                    status.save();
                 }
             }
         }
@@ -251,19 +250,47 @@ public class DataController extends Controller {
             Logger.info("INVALID DATE STRING FOR BLOOD SAMPLE DATE");
         }
         String bloodSampleNumber = StringUtils.isEmpty(map.get("bloodSampleNumber")[0]) ? StringUtils.EMPTY : map.get("bloodSampleNumber")[0];
-        dcf6 = new DataCollectionForm6(patientIdNumber,
-                hip,
-                waist,
-                height,
-                weight,
-                bmi,
-                bloodSampleTaken,
-                dateBloodSampleTaken == null ? null : new Timestamp(dateBloodSampleTaken.getMillis()),
-                bloodSampleNumber);
-        dcf6.save();
-        for(String s: economicStatuses) {
-            EconomicStatus es = new EconomicStatus(s, null, dcf6);
-            es.save();
+        if(id == 0) {
+            dcf6 = new DataCollectionForm6(patientIdNumber,
+                    hip,
+                    waist,
+                    height,
+                    weight,
+                    bmi,
+                    bloodSampleTaken,
+                    dateBloodSampleTaken == null ? null : new Timestamp(dateBloodSampleTaken.getMillis()),
+                    bloodSampleNumber);
+            dcf6.save();
+            for(String s: economicStatuses) {
+                EconomicStatus es = new EconomicStatus(s, null, dcf6);
+                es.save();
+            }
+        } else if (id > 0) {
+            dcf6 = DataCollectionForm6.find.byId(id);
+            if(dcf6 == null)
+                return badRequest(Json.toJson(new ResponseMessage(400, "Invalid parameters passed!", ResponseMessageType.BAD_REQUEST)));
+            dcf6.setPatientIdNumber(patientIdNumber);
+            dcf6.setHip(hip);
+            dcf6.setWaist(waist);
+            dcf6.setHeight(height);
+            dcf6.setWeight(weight);
+            dcf6.setBmi(bmi);
+            dcf6.setBloodSampleTaken(bloodSampleTaken);
+            dcf6.setBloodSampleDate(dateBloodSampleTaken == null ? null : new Timestamp(dateBloodSampleTaken.getMillis()));
+            dcf6.setBloodSampleNumber(bloodSampleNumber);
+            dcf6.update();
+            for(String s: economicStatuses) {
+                EconomicStatus status = Ebean.find(EconomicStatus.class).fetch("dataCollectionForm6").where(
+                        Expr.and(
+                                Expr.eq("dataCollectionForm6", id),
+                                Expr.ieq("name", s)
+                        )
+                ).setMaxRows(1).findUnique();
+                if(status == null) {
+                    status = new EconomicStatus(s, null, dcf6);
+                    status.save();
+                }
+            }
         }
         return ok(Json.toJson(new ResponseMessage(200, "Form three saved successfully", ResponseMessageType.SUCCESSFUL)));
     }
