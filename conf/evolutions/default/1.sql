@@ -322,6 +322,9 @@ create table data_collection_form5 (
   spouse_mi                 integer,
   spouse_migraine_with_aura integer,
   spouse_migraine_without_aura integer,
+  spouse_ischaemic_stroke   integer,
+  spouse_hoemorrhagic_stroke integer,
+  spouse_tia                integer,
   created                   timestamp,
   constraint ck_data_collection_form5_aspirin check (aspirin in (0,1,2,3)),
   constraint ck_data_collection_form5_clopidogrel check (clopidogrel in (0,1,2,3)),
@@ -341,15 +344,15 @@ create table data_collection_form5 (
   constraint ck_data_collection_form5_spouse_mi check (spouse_mi in (0,1,2,3)),
   constraint ck_data_collection_form5_spouse_migraine_with_aura check (spouse_migraine_with_aura in (0,1,2,3)),
   constraint ck_data_collection_form5_spouse_migraine_without_aura check (spouse_migraine_without_aura in (0,1,2,3)),
+  constraint ck_data_collection_form5_spouse_ischaemic_stroke check (spouse_ischaemic_stroke in (0,1,2,3)),
+  constraint ck_data_collection_form5_spouse_hoemorrhagic_stroke check (spouse_hoemorrhagic_stroke in (0,1,2,3)),
+  constraint ck_data_collection_form5_spouse_tia check (spouse_tia in (0,1,2,3)),
   constraint pk_data_collection_form5 primary key (id))
 ;
 
 create table data_collection_form6 (
   id                        bigint not null,
   patient_id_number         integer,
-  spouse_ischaemic_stroke   integer,
-  spouse_hoemorrhagic_stroke integer,
-  spouse_tia                integer,
   hip                       float,
   waist                     float,
   height                    float,
@@ -359,9 +362,6 @@ create table data_collection_form6 (
   blood_sample_date         timestamp,
   blood_sample_number       varchar(255),
   created                   timestamp,
-  constraint ck_data_collection_form6_spouse_ischaemic_stroke check (spouse_ischaemic_stroke in (0,1,2,3)),
-  constraint ck_data_collection_form6_spouse_hoemorrhagic_stroke check (spouse_hoemorrhagic_stroke in (0,1,2,3)),
-  constraint ck_data_collection_form6_spouse_tia check (spouse_tia in (0,1,2,3)),
   constraint ck_data_collection_form6_blood_sample_taken check (blood_sample_taken in (0,1,2,3)),
   constraint pk_data_collection_form6 primary key (id))
 ;
