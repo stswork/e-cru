@@ -1,4 +1,4 @@
-@(message: String, u: models.response.user.User)
+@(message: String, u: models.response.user.User, pid: Integer)
 
 @import tags._
 @main("User") {
@@ -12,7 +12,7 @@
 
 </header>
 <div class="form" style="width:100%;background: #f1f1f1;border-radius: 10px;">
-<form id="userForm" method="GET" style="padding-top: 2%;" action="/form4" data-uri="@controllers.user.routes.UserController.save(0)">
+<form id="form3" method="POST" style="padding-top: 2%;" action="@controllers.data.routes.DataController.handleSaveForm3()" data-uri="@controllers.data.routes.DataController.form4()">
 <div class="box message" ><!--style="display:none;padding-top: 2%;padding-left: 1%;padding-bottom: 2%;color: red;"-->
     <div class="content-m">
 
@@ -23,7 +23,7 @@
     <td colspan="2">Data Collection Form (DCF)</td>
 
     <td>Patient’s ID Number</td>
-    <td><input type="text" id="patientIdNumber" name="patientIdNumber" value=""/></td>
+    <td><input type="text" id="patientIdNumber" name="patientIdNumber" value="@pid"/></td>
 </tr>
 
 <tr>

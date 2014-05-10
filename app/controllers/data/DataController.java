@@ -1,8 +1,11 @@
 package controllers.data;
 
 import actions.Authenticated;
+import com.avaje.ebean.Ebean;
+import com.avaje.ebean.Expr;
 import models.YesNo;
 import models.data.form.DataCollectionForm1;
+import models.data.form.DataCollectionForm6;
 import models.data.form.EconomicStatus;
 import models.data.form.Gender;
 import models.response.ResponseMessage;
@@ -20,6 +23,8 @@ import play.mvc.With;
 
 import java.net.URL;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -49,25 +54,37 @@ public class DataController extends Controller {
     @With(Authenticated.class)
     public static Result form3(){
         models.response.user.User u = (models.response.user.User) ctx().args.get("user");
-        return ok(views.html.data.form3.render("Form3",u));
+        if(StringUtils.isEmpty(session("pid")))
+            return redirect(controllers.data.routes.DataController.form1());
+        Integer pid = Integer.valueOf(session("pid"));
+        return ok(views.html.data.form3.render("Form3", u, pid));
     }
 
     @With(Authenticated.class)
     public static Result form4(){
         models.response.user.User u = (models.response.user.User) ctx().args.get("user");
-        return ok(views.html.data.form4.render("Form4",u));
+        if(StringUtils.isEmpty(session("pid")))
+            return redirect(controllers.data.routes.DataController.form1());
+        Integer pid = Integer.valueOf(session("pid"));
+        return ok(views.html.data.form4.render("Form4", u, pid));
     }
 
     @With(Authenticated.class)
     public static Result form5(){
         models.response.user.User u = (models.response.user.User) ctx().args.get("user");
-        return ok(views.html.data.form5.render("Form5",u));
+        if(StringUtils.isEmpty(session("pid")))
+            return redirect(controllers.data.routes.DataController.form1());
+        Integer pid = Integer.valueOf(session("pid"));
+        return ok(views.html.data.form5.render("Form5", u, pid));
     }
 
     @With(Authenticated.class)
     public static Result form6(){
         models.response.user.User u = (models.response.user.User) ctx().args.get("user");
-        return ok(views.html.data.form6.render("Form6",u));
+        if(StringUtils.isEmpty(session("pid")))
+            return redirect(controllers.data.routes.DataController.form1());
+        Integer pid = Integer.valueOf(session("pid"));
+        return ok(views.html.data.form6.render("Form6", u, pid));
     }
 
     @With(Authenticated.class)
@@ -124,36 +141,157 @@ public class DataController extends Controller {
         } catch (Exception e) {
             Logger.info("INVALID DATE STRING FOR BLOOD SAMPLE DATE");
         }
-        dcf1 = new DataCollectionForm1(patientIdNumber,
-                trialSite,
-                recruitedDate == null ? null : new Timestamp(recruitedDate.getMillis()),
-                patientName,
-                datePatientDob == null ? null : new Timestamp(datePatientDob.getMillis()),
-                patientAddress,
-                gender,
-                landlinePhoneNumber,
-                cellPhoneNumber,
-                friendRelativePhoneNumber,
-                placeOfBirth,
-                ethnicity,
-                nativeLanguage,
-                religion,
-                bloodSampleTaken,
-                dateBloodSampleTaken == null ? null : new Timestamp(dateBloodSampleTaken.getMillis()),
-                bloodSampleNumber,
-                dateStroke == null ? null : new Timestamp(dateStroke.getMillis()));
-        dcf1.save();
-        for(String s: economicStatuses) {
-            EconomicStatus es = new EconomicStatus(s, dcf1, null);
-            es.save();
+        if(id == 0) {
+            dcf1 = new DataCollectionForm1(patientIdNumber,
+                    trialSite,
+                    recruitedDate == null ? null : new Timestamp(recruitedDate.getMillis()),
+                    patientName,
+                    datePatientDob == null ? null : new Timestamp(datePatientDob.getMillis()),
+                    patientAddress,
+                    gender,
+                    landlinePhoneNumber,
+                    cellPhoneNumber,
+                    friendRelativePhoneNumber,
+                    placeOfBirth,
+                    ethnicity,
+                    nativeLanguage,
+                    religion,
+                    bloodSampleTaken,
+                    dateBloodSampleTaken == null ? null : new Timestamp(dateBloodSampleTaken.getMillis()),
+                    bloodSampleNumber,
+                    dateStroke == null ? null : new Timestamp(dateStroke.getMillis()));
+            dcf1.save();
+            for(String s: economicStatuses) {
+                EconomicStatus es = new EconomicStatus(s, dcf1, null);
+                es.save();
+            }
+        } else if (id > 0) {
+            dcf1 = DataCollectionForm1.find.byId(id);
+            if(dcf1 == null)
+                return badRequest(Json.toJson(new ResponseMessage(400, "Invalid parameters passed!", ResponseMessageType.BAD_REQUEST)));
+            dcf1.setPatientIdNumber(patientIdNumber);
+            dcf1.setTrialSite(trialSite);
+            dcf1.setRecruitedDate(recruitedDate == null ? null : new Timestamp(recruitedDate.getMillis()));
+            dcf1.setPatientName(patientName);
+            dcf1.setDateOfBirth(datePatientDob == null ? null : new Timestamp(datePatientDob.getMillis()));
+            dcf1.setPatientAddress(patientAddress);
+            dcf1.setGender(gender);
+            dcf1.setLandlinePhoneNumber(landlinePhoneNumber);
+            dcf1.setCellPhoneNumber(cellPhoneNumber);
+            dcf1.setFriendRelativePhoneNumber(friendRelativePhoneNumber);
+            dcf1.setPlaceOfBirth(placeOfBirth);
+            dcf1.setEthnicity(ethnicity);
+            dcf1.setNativeLanguage(nativeLanguage);
+            dcf1.setReligion(religion);
+            dcf1.setBloodSampleTaken(bloodSampleTaken);
+            dcf1.setBloodSampleDate(dateBloodSampleTaken == null ? null : new Timestamp(dateBloodSampleTaken.getMillis()));
+            dcf1.setBloodSampleNumber(bloodSampleNumber);
+            dcf1.setDateOfStroke(dateStroke == null ? null : new Timestamp(dateStroke.getMillis()));
+            dcf1.update();
+            for(String s: economicStatuses) {
+                EconomicStatus status = Ebean.find(EconomicStatus.class).fetch("dataCollectionForm1").where(
+                        Expr.and(
+                                Expr.eq("dataCollectionForm1", id),
+                                Expr.ieq("name", s)
+                        )
+                ).setMaxRows(1).findUnique();
+                if(status == null) {
+                    status = new EconomicStatus(s, dcf1, null);
+                    status.save();
+                }
+            }
         }
         session("pid", patientIdNumber.toString());
         return ok(Json.toJson(new ResponseMessage(200, "Form one saved successfully", ResponseMessageType.SUCCESSFUL)));
     }
 
     @With(Authenticated.class)
-    public static Result handleSaveForm2() {
+     public static Result handleSaveForm2() {
+
+        Map<String, String[]> map = request().body().asFormUrlEncoded();
+        if(map.size() <= 0)
+            return badRequest(Json.toJson(new ResponseMessage(400, "Invalid parameters passed!", ResponseMessageType.BAD_REQUEST)));
 
         return ok(Json.toJson(new ResponseMessage(200, "Form two saved successfully", ResponseMessageType.SUCCESSFUL)));
+    }
+
+    @With(Authenticated.class)
+    public static Result handleSaveForm3() {
+
+        Map<String, String[]> map = request().body().asFormUrlEncoded();
+        if(map.size() <= 0)
+            return badRequest(Json.toJson(new ResponseMessage(400, "Invalid parameters passed!", ResponseMessageType.BAD_REQUEST)));
+
+        return ok(Json.toJson(new ResponseMessage(200, "Form three saved successfully", ResponseMessageType.SUCCESSFUL)));
+    }
+
+    @With(Authenticated.class)
+    public static Result handleSaveForm6() {
+        DataCollectionForm6 dcf6 = new DataCollectionForm6();
+        Map<String, String[]> map = request().body().asFormUrlEncoded();
+        if(map.size() <= 0)
+            return badRequest(Json.toJson(new ResponseMessage(400, "Invalid parameters passed!", ResponseMessageType.BAD_REQUEST)));
+        Long id = Long.valueOf(StringUtils.isEmpty(map.get("id")[0]) ? "0" : map.get("id")[0]);
+        Integer patientIdNumber = Integer.valueOf(StringUtils.isEmpty(map.get("patientIdNumber")[0]) ? StringUtils.EMPTY : map.get("patientIdNumber")[0]);
+        Double hip = Double.valueOf(StringUtils.isEmpty(map.get("hip")[0]) ? "0" : map.get("hip")[0]);
+        Double height = Double.valueOf(StringUtils.isEmpty(map.get("height")[0]) ? "0" : map.get("height")[0]);
+        Double waist = Double.valueOf(StringUtils.isEmpty(map.get("waist")[0]) ? "0" : map.get("waist")[0]);
+        Double weight = Double.valueOf(StringUtils.isEmpty(map.get("weight")[0]) ? "0" : map.get("weight")[0]);
+        Double bmi = Double.valueOf(StringUtils.isEmpty(map.get("bmi")[0]) ? "0" : map.get("bmi")[0]);
+        YesNo bloodSampleTaken = YesNo.valueOf(StringUtils.isEmpty(map.get("bloodSampleTaken")[0]) ? StringUtils.EMPTY : map.get("bloodSampleTaken")[0].toUpperCase());
+        String bloodSampleDate = StringUtils.isEmpty(map.get("bloodSampleDate")[0]) ? StringUtils.EMPTY : map.get("bloodSampleDate")[0];
+        String bloodSampleMonth = StringUtils.isEmpty(map.get("bloodSampleMonth")[0]) ? StringUtils.EMPTY : map.get("bloodSampleMonth")[0];
+        String bloodSampleYear = StringUtils.isEmpty(map.get("bloodSampleYear")[0]) ? StringUtils.EMPTY : map.get("bloodSampleYear")[0];
+        String[] economicStatuses = map.get("economicStatuses[]") == null ? new String[0] : map.get("economicStatuses[]");
+        DateTime dateBloodSampleTaken = null;
+        try {
+            dateBloodSampleTaken = DATE_TIME_FORMATTER.parseDateTime(bloodSampleDate + URL_SEPARATOR + bloodSampleMonth + URL_SEPARATOR + bloodSampleYear);
+        } catch (Exception e) {
+            Logger.info("INVALID DATE STRING FOR BLOOD SAMPLE DATE");
+        }
+        String bloodSampleNumber = StringUtils.isEmpty(map.get("bloodSampleNumber")[0]) ? StringUtils.EMPTY : map.get("bloodSampleNumber")[0];
+        if(id == 0) {
+            dcf6 = new DataCollectionForm6(patientIdNumber,
+                    hip,
+                    waist,
+                    height,
+                    weight,
+                    bmi,
+                    bloodSampleTaken,
+                    dateBloodSampleTaken == null ? null : new Timestamp(dateBloodSampleTaken.getMillis()),
+                    bloodSampleNumber);
+            dcf6.save();
+            for(String s: economicStatuses) {
+                EconomicStatus es = new EconomicStatus(s, null, dcf6);
+                es.save();
+            }
+        } else if (id > 0) {
+            dcf6 = DataCollectionForm6.find.byId(id);
+            if(dcf6 == null)
+                return badRequest(Json.toJson(new ResponseMessage(400, "Invalid parameters passed!", ResponseMessageType.BAD_REQUEST)));
+            dcf6.setPatientIdNumber(patientIdNumber);
+            dcf6.setHip(hip);
+            dcf6.setWaist(waist);
+            dcf6.setHeight(height);
+            dcf6.setWeight(weight);
+            dcf6.setBmi(bmi);
+            dcf6.setBloodSampleTaken(bloodSampleTaken);
+            dcf6.setBloodSampleDate(dateBloodSampleTaken == null ? null : new Timestamp(dateBloodSampleTaken.getMillis()));
+            dcf6.setBloodSampleNumber(bloodSampleNumber);
+            dcf6.update();
+            for(String s: economicStatuses) {
+                EconomicStatus status = Ebean.find(EconomicStatus.class).fetch("dataCollectionForm6").where(
+                        Expr.and(
+                                Expr.eq("dataCollectionForm6", id),
+                                Expr.ieq("name", s)
+                        )
+                ).setMaxRows(1).findUnique();
+                if(status == null) {
+                    status = new EconomicStatus(s, null, dcf6);
+                    status.save();
+                }
+            }
+        }
+        return ok(Json.toJson(new ResponseMessage(200, "Form three saved successfully", ResponseMessageType.SUCCESSFUL)));
     }
 }

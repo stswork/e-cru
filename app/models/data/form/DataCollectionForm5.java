@@ -107,13 +107,19 @@ public class DataCollectionForm5 extends Model {
 
     private YesNo spouseMigraineWithoutAura = YesNo.DONT_KNOW;
 
+    private YesNo spouseIschaemicStroke = YesNo.DONT_KNOW;
+
+    private YesNo spouseHoemorrhagicStroke = YesNo.DONT_KNOW;
+
+    private YesNo spouseTia = YesNo.DONT_KNOW;
+
     @Formats.DateTime(pattern = "MM/dd/yy")
     private Timestamp created = new Timestamp(DateTime.now().toDate().getTime());
 
     public DataCollectionForm5() {
     }
 
-    public DataCollectionForm5(Integer patientIdNumber, YesNo aspirin, String aspirinDosage, YesNo clopidogrel, String clopidogrelDosage, YesNo aspirinPlusClopidogrel, String aspirinPlusClopidogrelDosage, YesNo dipyridamole, String dipyridamoleDosage, YesNo aspirinPlusDipyridamole, String aspirinPlusDipyridamoleDosage, YesNo warfarin, String warfarinInr, YesNo statin, String statinDosage, String statinName, YesNo antihypertensive, String spouseName, String spouseAddress, Timestamp spouseDateOfBirth, Gender spouseGender, String spouseLandlinePhoneNumber, String spouseCellPhoneNumber, String spouseFriendPhoneNumber, String spousePlaceOfBirth, String spouseEthnicity, String spouseNativeLanguage, String spouseReligion, YesNo spouseHypertension, YesNo spouseDiabetesMellitus, YesNo spouseIhdAngina, YesNo spouseHypercholesterolemia, YesNo spouseAtrialFibrillation, YesNo spousePvd, YesNo spouseMi, YesNo spouseMigraineWithAura, YesNo spouseMigraineWithoutAura) {
+    public DataCollectionForm5(Integer patientIdNumber, YesNo aspirin, String aspirinDosage, YesNo clopidogrel, String clopidogrelDosage, YesNo aspirinPlusClopidogrel, String aspirinPlusClopidogrelDosage, YesNo dipyridamole, String dipyridamoleDosage, YesNo aspirinPlusDipyridamole, String aspirinPlusDipyridamoleDosage, YesNo warfarin, String warfarinInr, YesNo statin, String statinDosage, String statinName, YesNo antihypertensive, String spouseName, String spouseAddress, Timestamp spouseDateOfBirth, Gender spouseGender, String spouseLandlinePhoneNumber, String spouseCellPhoneNumber, String spouseFriendPhoneNumber, String spousePlaceOfBirth, String spouseEthnicity, String spouseNativeLanguage, String spouseReligion, YesNo spouseHypertension, YesNo spouseDiabetesMellitus, YesNo spouseIhdAngina, YesNo spouseHypercholesterolemia, YesNo spouseAtrialFibrillation, YesNo spousePvd, YesNo spouseMi, YesNo spouseMigraineWithAura, YesNo spouseMigraineWithoutAura, YesNo spouseIschaemicStroke, YesNo spouseHoemorrhagicStroke, YesNo spouseTia) {
         this.patientIdNumber = patientIdNumber;
         this.aspirin = aspirin;
         this.aspirinDosage = aspirinDosage;
@@ -151,6 +157,9 @@ public class DataCollectionForm5 extends Model {
         this.spouseMi = spouseMi;
         this.spouseMigraineWithAura = spouseMigraineWithAura;
         this.spouseMigraineWithoutAura = spouseMigraineWithoutAura;
+        this.spouseIschaemicStroke = spouseIschaemicStroke;
+        this.spouseHoemorrhagicStroke = spouseHoemorrhagicStroke;
+        this.spouseTia = spouseTia;
     }
 
     public Long getId() {
@@ -455,6 +464,30 @@ public class DataCollectionForm5 extends Model {
 
     public void setSpouseMigraineWithoutAura(YesNo spouseMigraineWithoutAura) {
         this.spouseMigraineWithoutAura = spouseMigraineWithoutAura;
+    }
+
+    public YesNo getSpouseIschaemicStroke() {
+        return spouseIschaemicStroke;
+    }
+
+    public void setSpouseIschaemicStroke(YesNo spouseIschaemicStroke) {
+        this.spouseIschaemicStroke = spouseIschaemicStroke;
+    }
+
+    public YesNo getSpouseHoemorrhagicStroke() {
+        return spouseHoemorrhagicStroke;
+    }
+
+    public void setSpouseHoemorrhagicStroke(YesNo spouseHoemorrhagicStroke) {
+        this.spouseHoemorrhagicStroke = spouseHoemorrhagicStroke;
+    }
+
+    public YesNo getSpouseTia() {
+        return spouseTia;
+    }
+
+    public void setSpouseTia(YesNo spouseTia) {
+        this.spouseTia = spouseTia;
     }
 
     public Timestamp getCreated() {

@@ -12,7 +12,7 @@
 
         </header>
         <div class="form" style="width:100%;background: #f1f1f1;border-radius: 10px;">
-            <form id="form2" method="POST" style="padding-top: 2%;" action="" data-uri="@controllers.data.routes.DataController.form3()">
+            <form id="form2" method="POST" style="padding-top: 2%;" action="@controllers.data.routes.DataController.handleSaveForm2()" data-uri="@controllers.data.routes.DataController.form3()">
                 <div class="box message" ><!--style="display:none;padding-top: 2%;padding-left: 1%;padding-bottom: 2%;color: red;"-->
                     <div class="content-m">
 
@@ -359,5 +359,5 @@
     @footer()
 </div>
 } {
-<!--<script type="text/javascript" src="@routes.Assets.at("javascripts/user/events.js")"></script>-->
+<script type="text/javascript" src="@routes.Assets.at("javascripts/form/events.js")"></script>
 }

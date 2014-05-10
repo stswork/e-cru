@@ -1,4 +1,4 @@
-@(message: String, u: models.response.user.User)
+@(message: String, u: models.response.user.User, pid: Integer)
 
 @import tags._
 @main("User") {
@@ -23,7 +23,7 @@
     <td colspan="2">Data Collection Form (DCF)</td>
 
     <td>Patient’s ID Number</td>
-    <td><input type="text" id="patientIdNumber" name="patientIdNumber" value=""/></td>
+    <td><input type="text" id="patientIdNumber" name="patientIdNumber" value="@pid"/></td>
 </tr>
 <tr>
     <td>

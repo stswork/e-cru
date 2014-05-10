@@ -27,12 +27,6 @@ public class DataCollectionForm6 extends Model {
     @Constraints.Required
     private Integer patientIdNumber;
 
-    private YesNo spouseIschaemicStroke = YesNo.DONT_KNOW;
-
-    private YesNo spouseHoemorrhagicStroke = YesNo.DONT_KNOW;
-
-    private YesNo spouseTia = YesNo.DONT_KNOW;
-
     @OneToMany
     private List<EconomicStatus> economicStatuses = new ArrayList<EconomicStatus>();
 
@@ -59,11 +53,8 @@ public class DataCollectionForm6 extends Model {
     public DataCollectionForm6() {
     }
 
-    public DataCollectionForm6(Integer patientIdNumber, YesNo spouseIschaemicStroke, YesNo spouseHoemorrhagicStroke, YesNo spouseTia, Double hip, Double waist, Double height, Double weight, Double bmi, YesNo bloodSampleTaken, Timestamp bloodSampleDate, String bloodSampleNumber) {
+    public DataCollectionForm6(Integer patientIdNumber, Double hip, Double waist, Double height, Double weight, Double bmi, YesNo bloodSampleTaken, Timestamp bloodSampleDate, String bloodSampleNumber) {
         this.patientIdNumber = patientIdNumber;
-        this.spouseIschaemicStroke = spouseIschaemicStroke;
-        this.spouseHoemorrhagicStroke = spouseHoemorrhagicStroke;
-        this.spouseTia = spouseTia;
         this.hip = hip;
         this.waist = waist;
         this.height = height;
@@ -88,30 +79,6 @@ public class DataCollectionForm6 extends Model {
 
     public void setPatientIdNumber(Integer patientIdNumber) {
         this.patientIdNumber = patientIdNumber;
-    }
-
-    public YesNo getSpouseIschaemicStroke() {
-        return spouseIschaemicStroke;
-    }
-
-    public void setSpouseIschaemicStroke(YesNo spouseIschaemicStroke) {
-        this.spouseIschaemicStroke = spouseIschaemicStroke;
-    }
-
-    public YesNo getSpouseHoemorrhagicStroke() {
-        return spouseHoemorrhagicStroke;
-    }
-
-    public void setSpouseHoemorrhagicStroke(YesNo spouseHoemorrhagicStroke) {
-        this.spouseHoemorrhagicStroke = spouseHoemorrhagicStroke;
-    }
-
-    public YesNo getSpouseTia() {
-        return spouseTia;
-    }
-
-    public void setSpouseTia(YesNo spouseTia) {
-        this.spouseTia = spouseTia;
     }
 
     public List<EconomicStatus> getEconomicStatuses() {
