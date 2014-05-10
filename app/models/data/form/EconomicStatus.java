@@ -15,7 +15,7 @@ import java.sql.Timestamp;
  */
 @Entity
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class EconomicStatus {
+public class EconomicStatus extends Model {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

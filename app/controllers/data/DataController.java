@@ -4,6 +4,7 @@ import actions.Authenticated;
 import com.fasterxml.jackson.databind.JsonNode;
 import models.YesNo;
 import models.data.form.DataCollectionForm1;
+import models.data.form.EconomicStatus;
 import models.data.form.Gender;
 import models.response.ResponseMessage;
 import models.response.ResponseMessageType;
@@ -11,6 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+import play.cache.Cache;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -122,6 +124,11 @@ public class DataController extends Controller {
                 bloodSampleNumber,
                 new Timestamp(dateStroke.getMillis()));
         dcf1.save();
+        for(String s: economicStatuses) {
+            EconomicStatus es = new EconomicStatus(s, dcf1, null);
+            es.save();
+        }
+        Cache.set("pid", patientIdNumber);
         return ok(Json.toJson(new ResponseMessage(200, "Form one saved successfully", ResponseMessageType.SUCCESSFUL)));
     }
 }
