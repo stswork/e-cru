@@ -12,16 +12,12 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import play.Logger;
-import play.cache.Cache;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.With;
 
-import java.net.URL;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -88,7 +84,6 @@ public class DataController extends Controller {
     @With(Authenticated.class)
     public static Result handleSaveForm1() {
         DataCollectionForm1 dcf1 = new DataCollectionForm1();
-
         Map<String, String[]> map = request().body().asFormUrlEncoded();
         if(map.size() <= 0)
             return badRequest(Json.toJson(new ResponseMessage(400, "Invalid parameters passed!", ResponseMessageType.BAD_REQUEST)));
@@ -139,52 +134,36 @@ public class DataController extends Controller {
         } catch (Exception e) {
             Logger.info("INVALID DATE STRING FOR BLOOD SAMPLE DATE");
         }
+        if(id > 0) {
+            dcf1 = DataCollectionForm1.find.byId(id);
+            if(dcf1 == null)
+                return badRequest(Json.toJson(new ResponseMessage(400, "Invalid parameters passed!", ResponseMessageType.BAD_REQUEST)));
+        }
+        dcf1.setPatientIdNumber(patientIdNumber);
+        dcf1.setTrialSite(trialSite);
+        dcf1.setRecruitedDate(recruitedDate == null ? null : new Timestamp(recruitedDate.getMillis()));
+        dcf1.setPatientName(patientName);
+        dcf1.setDateOfBirth(datePatientDob == null ? null : new Timestamp(datePatientDob.getMillis()));
+        dcf1.setPatientAddress(patientAddress);
+        dcf1.setGender(gender);
+        dcf1.setLandlinePhoneNumber(landlinePhoneNumber);
+        dcf1.setCellPhoneNumber(cellPhoneNumber);
+        dcf1.setFriendRelativePhoneNumber(friendRelativePhoneNumber);
+        dcf1.setPlaceOfBirth(placeOfBirth);
+        dcf1.setEthnicity(ethnicity);
+        dcf1.setNativeLanguage(nativeLanguage);
+        dcf1.setReligion(religion);
+        dcf1.setBloodSampleTaken(bloodSampleTaken);
+        dcf1.setBloodSampleDate(dateBloodSampleTaken == null ? null : new Timestamp(dateBloodSampleTaken.getMillis()));
+        dcf1.setBloodSampleNumber(bloodSampleNumber);
+        dcf1.setDateOfStroke(dateStroke == null ? null : new Timestamp(dateStroke.getMillis()));
         if(id == 0) {
-            dcf1 = new DataCollectionForm1(patientIdNumber,
-                    trialSite,
-                    recruitedDate == null ? null : new Timestamp(recruitedDate.getMillis()),
-                    patientName,
-                    datePatientDob == null ? null : new Timestamp(datePatientDob.getMillis()),
-                    patientAddress,
-                    gender,
-                    landlinePhoneNumber,
-                    cellPhoneNumber,
-                    friendRelativePhoneNumber,
-                    placeOfBirth,
-                    ethnicity,
-                    nativeLanguage,
-                    religion,
-                    bloodSampleTaken,
-                    dateBloodSampleTaken == null ? null : new Timestamp(dateBloodSampleTaken.getMillis()),
-                    bloodSampleNumber,
-                    dateStroke == null ? null : new Timestamp(dateStroke.getMillis()));
             dcf1.save();
             for(String s: economicStatuses) {
                 EconomicStatus es = new EconomicStatus(s, dcf1, null);
                 es.save();
             }
         } else if (id > 0) {
-            dcf1 = DataCollectionForm1.find.byId(id);
-            if(dcf1 == null)
-                return badRequest(Json.toJson(new ResponseMessage(400, "Invalid parameters passed!", ResponseMessageType.BAD_REQUEST)));
-            dcf1.setPatientIdNumber(patientIdNumber);
-            dcf1.setTrialSite(trialSite);
-            dcf1.setRecruitedDate(recruitedDate == null ? null : new Timestamp(recruitedDate.getMillis()));
-            dcf1.setPatientName(patientName);
-            dcf1.setDateOfBirth(datePatientDob == null ? null : new Timestamp(datePatientDob.getMillis()));
-            dcf1.setPatientAddress(patientAddress);
-            dcf1.setGender(gender);
-            dcf1.setLandlinePhoneNumber(landlinePhoneNumber);
-            dcf1.setCellPhoneNumber(cellPhoneNumber);
-            dcf1.setFriendRelativePhoneNumber(friendRelativePhoneNumber);
-            dcf1.setPlaceOfBirth(placeOfBirth);
-            dcf1.setEthnicity(ethnicity);
-            dcf1.setNativeLanguage(nativeLanguage);
-            dcf1.setReligion(religion);
-            dcf1.setBloodSampleTaken(bloodSampleTaken);
-            dcf1.setBloodSampleDate(dateBloodSampleTaken == null ? null : new Timestamp(dateBloodSampleTaken.getMillis()));
-            dcf1.setBloodSampleNumber(bloodSampleNumber);
-            dcf1.setDateOfStroke(dateStroke == null ? null : new Timestamp(dateStroke.getMillis()));
             dcf1.update();
             for(String s: economicStatuses) {
                 EconomicStatus status = Ebean.find(EconomicStatus.class).fetch("dataCollectionForm1").where(
@@ -205,17 +184,131 @@ public class DataController extends Controller {
 
     @With(Authenticated.class)
      public static Result handleSaveForm2() {
-
         Map<String, String[]> map = request().body().asFormUrlEncoded();
         if(map.size() <= 0)
             return badRequest(Json.toJson(new ResponseMessage(400, "Invalid parameters passed!", ResponseMessageType.BAD_REQUEST)));
-
         return ok(Json.toJson(new ResponseMessage(200, "Form two saved successfully", ResponseMessageType.SUCCESSFUL)));
     }
 
     @With(Authenticated.class)
-    public static Result handleSaveForm5() {
+    public static Result handleSaveForm4() {
+        DataCollectionForm4 dcf4 = new DataCollectionForm4();
+        Map<String, String[]> map = request().body().asFormUrlEncoded();
+        if(map.size() <= 0)
+            return badRequest(Json.toJson(new ResponseMessage(400, "Invalid parameters passed!", ResponseMessageType.BAD_REQUEST)));
+        Long id = Long.valueOf(StringUtils.isEmpty(map.get("id")[0]) ? "0" : map.get("id")[0]);
+        Integer patientIdNumber = Integer.valueOf(StringUtils.isEmpty(map.get("patientIdNumber")[0]) ? StringUtils.EMPTY : map.get("patientIdNumber")[0]);
+        YesNo intracranialStenosis = YesNo.valueOf(StringUtils.isEmpty(map.get("intracranialStenosis")[0]) ? StringUtils.EMPTY : map.get("intracranialStenosis")[0]);
+        String intracranialStenosisPercent = StringUtils.isEmpty(map.get("intracranialStenosisPercent")[0]) ? StringUtils.EMPTY : map.get("intracranialStenosisPercent")[0];
+        YesNo extracranialDopplersImagingDone = YesNo.valueOf(StringUtils.isEmpty(map.get("extracranialDopplersImagingDone")[0]) ? StringUtils.EMPTY : map.get("extracranialDopplersImagingDone")[0]);
+        YesNo extracranialMraImagingDone = YesNo.valueOf(StringUtils.isEmpty(map.get("extracranialMraImagingDone")[0]) ? StringUtils.EMPTY : map.get("extracranialMraImagingDone")[0]);
+        YesNo extracranialCtaImagingDone = YesNo.valueOf(StringUtils.isEmpty(map.get("extracranialCtaImagingDone")[0]) ? StringUtils.EMPTY : map.get("extracranialCtaImagingDone")[0]);
+        YesNo brainCtImagingDone = YesNo.valueOf(StringUtils.isEmpty(map.get("brainCtImagingDone")[0]) ? StringUtils.EMPTY : map.get("brainCtImagingDone")[0]);
+        YesNo brainMriImagingDone = YesNo.valueOf(StringUtils.isEmpty(map.get("brainMriImagingDone")[0]) ? StringUtils.EMPTY : map.get("brainMriImagingDone")[0]);
+        YesNo anterior = YesNo.valueOf(StringUtils.isEmpty(map.get("anterior")[0]) ? StringUtils.EMPTY : map.get("anterior")[0]);
+        YesNo right = YesNo.valueOf(StringUtils.isEmpty(map.get("right")[0]) ? StringUtils.EMPTY : map.get("right")[0]);
+        YesNo left = YesNo.valueOf(StringUtils.isEmpty(map.get("left")[0]) ? StringUtils.EMPTY : map.get("left")[0]);
+        YesNo bilateral = YesNo.valueOf(StringUtils.isEmpty(map.get("bilateral")[0]) ? StringUtils.EMPTY : map.get("bilateral")[0]);
+        YesNo posterior = YesNo.valueOf(StringUtils.isEmpty(map.get("posterior")[0]) ? StringUtils.EMPTY : map.get("posterior")[0]);
+        YesNo anterioposterior = YesNo.valueOf(StringUtils.isEmpty(map.get("anterioposterior")[0]) ? StringUtils.EMPTY : map.get("anterioposterior")[0]);
+        Double ricaStenosisPercent = Double.valueOf(StringUtils.isEmpty(map.get("ricaStenosisPercent")[0]) ? "0" : map.get("ricaStenosisPercent")[0]);
+        Double licaStenosisPercent = Double.valueOf(StringUtils.isEmpty(map.get("licaStenosisPercent")[0]) ? "0" : map.get("licaStenosisPercent")[0]);
+        Double rccaStenosisPercent = Double.valueOf(StringUtils.isEmpty(map.get("rccaStenosisPercent")[0]) ? "0" : map.get("rccaStenosisPercent")[0]);
+        Double lccaStenosisPercent = Double.valueOf(StringUtils.isEmpty(map.get("lccaStenosisPercent")[0]) ? "0" : map.get("lccaStenosisPercent")[0]);
+        Double rVertebralStenosisPercent = Double.valueOf(StringUtils.isEmpty(map.get("rVertebralStenosisPercent")[0]) ? "0" : map.get("rVertebralStenosisPercent")[0]);
+        Double lVertebralStenosisPercent = Double.valueOf(StringUtils.isEmpty(map.get("lVertebralStenosisPercent")[0]) ? "0" : map.get("lVertebralStenosisPercent")[0]);
+        Double basilarStenosisPercent = Double.valueOf(StringUtils.isEmpty(map.get("basilarStenosisPercent")[0]) ? StringUtils.EMPTY : map.get("basilarStenosisPercent")[0]);
+        YesNo lvd = YesNo.valueOf(StringUtils.isEmpty(map.get("lvd")[0]) ? StringUtils.EMPTY : map.get("lvd")[0]);
+        YesNo svd = YesNo.valueOf(StringUtils.isEmpty(map.get("svd")[0]) ? StringUtils.EMPTY : map.get("svd")[0]);
+        YesNo cardioembolism = YesNo.valueOf(StringUtils.isEmpty(map.get("cardioembolism")[0]) ? StringUtils.EMPTY : map.get("cardioembolism")[0]);
+        YesNo combined = YesNo.valueOf(StringUtils.isEmpty(map.get("combined")[0]) ? StringUtils.EMPTY : map.get("combined")[0]);
+        YesNo strokeOfDeterminedEtiology = YesNo.valueOf(StringUtils.isEmpty(map.get("strokeOfDeterminedEtiology")[0]) ? StringUtils.EMPTY : map.get("strokeOfDeterminedEtiology")[0]);
+        YesNo negativeEvaluation = YesNo.valueOf(StringUtils.isEmpty(map.get("negativeEvaluation")[0]) ? StringUtils.EMPTY : map.get("negativeEvaluation")[0]);
+        YesNo ecgDone = YesNo.valueOf(StringUtils.isEmpty(map.get("ecgDone")[0]) ? StringUtils.EMPTY : map.get("ecgDone")[0]);
+        YesNo echoDone = YesNo.valueOf(StringUtils.isEmpty(map.get("echoDone")[0]) ? StringUtils.EMPTY : map.get("echoDone")[0]);
+        YesNo ecgNormal = YesNo.valueOf(StringUtils.isEmpty(map.get("ecgNormal")[0]) ? StringUtils.EMPTY : map.get("ecgNormal")[0]);
+        YesNo ecgLvf = YesNo.valueOf(StringUtils.isEmpty(map.get("ecgLvf")[0]) ? StringUtils.EMPTY : map.get("ecgLvf")[0]);
+        YesNo ecgAf = YesNo.valueOf(StringUtils.isEmpty(map.get("ecgAf")[0]) ? StringUtils.EMPTY : map.get("ecgAf")[0]);
+        YesNo ecgVentricularEctopics = YesNo.valueOf(StringUtils.isEmpty(map.get("ecgVentricularEctopics")[0]) ? StringUtils.EMPTY : map.get("ecgVentricularEctopics")[0]);
+        YesNo ecgArtialEctopics = YesNo.valueOf(StringUtils.isEmpty(map.get("ecgArtialEctopics")[0]) ? StringUtils.EMPTY : map.get("ecgArtialEctopics")[0]);
+        YesNo ecgNoneOfAbove = YesNo.valueOf(StringUtils.isEmpty(map.get("ecgNoneOfAbove")[0]) ? StringUtils.EMPTY : map.get("ecgNoneOfAbove")[0]);
+        YesNo ecgDontKnow = YesNo.valueOf(StringUtils.isEmpty(map.get("ecgDontKnow")[0]) ? StringUtils.EMPTY : map.get("ecgDontKnow")[0]);
+        YesNo echoNormal = YesNo.valueOf(StringUtils.isEmpty(map.get("echoNormal")[0]) ? StringUtils.EMPTY : map.get("echoNormal")[0]);
+        YesNo echoLvh = YesNo.valueOf(StringUtils.isEmpty(map.get("echoLvh")[0]) ? StringUtils.EMPTY : map.get("echoLvh")[0]);
+        YesNo echoPfo = YesNo.valueOf(StringUtils.isEmpty(map.get("echoPfo")[0]) ? StringUtils.EMPTY : map.get("echoPfo")[0]);
+        YesNo echoThrombus = YesNo.valueOf(StringUtils.isEmpty(map.get("echoThrombus")[0]) ? StringUtils.EMPTY : map.get("echoThrombus")[0]);
+        YesNo echoNoneOfAbove = YesNo.valueOf(StringUtils.isEmpty(map.get("echoNoneOfAbove")[0]) ? StringUtils.EMPTY : map.get("echoNoneOfAbove")[0]);
+        YesNo echoDontKnow = YesNo.valueOf(StringUtils.isEmpty(map.get("echoDontKnow")[0]) ? StringUtils.EMPTY : map.get("echoDontKnow")[0]);
+        String nihssOnAdmission = StringUtils.isEmpty(map.get("nihssOnAdmission")[0]) ? StringUtils.EMPTY : map.get("nihssOnAdmission")[0];
+        String nihssOnDischarge = StringUtils.isEmpty(map.get("nihssOnDischarge")[0]) ? StringUtils.EMPTY : map.get("nihssOnDischarge")[0];
+        String barthelOnAdmission = StringUtils.isEmpty(map.get("barthelOnAdmission")[0]) ? StringUtils.EMPTY : map.get("barthelOnAdmission")[0];
+        String barthelOnDischarge = StringUtils.isEmpty(map.get("barthelOnDischarge")[0]) ? StringUtils.EMPTY : map.get("barthelOnDischarge")[0];
+        YesNo home = YesNo.valueOf(StringUtils.isEmpty(map.get("home")[0]) ? StringUtils.EMPTY : map.get("home")[0]);
+        YesNo nursingHome = YesNo.valueOf(StringUtils.isEmpty(map.get("nursingHome")[0]) ? StringUtils.EMPTY : map.get("nursingHome")[0]);
+        YesNo rehabilitation = YesNo.valueOf(StringUtils.isEmpty(map.get("rehabilitation")[0]) ? StringUtils.EMPTY : map.get("rehabilitation")[0]);
+        YesNo rip = YesNo.valueOf(StringUtils.isEmpty(map.get("rip")[0]) ? StringUtils.EMPTY : map.get("rip")[0]);
+        YesNo localDgh = YesNo.valueOf(StringUtils.isEmpty(map.get("localDgh")[0]) ? StringUtils.EMPTY : map.get("localDgh")[0]);
+        dcf4.setPatientIdNumber(patientIdNumber);
+        dcf4.setIntracranialStenosis(intracranialStenosis);
+        dcf4.setIntracranialStenosisPercent(intracranialStenosisPercent);
+        dcf4.setExtracranialDopplersImagingDone(extracranialCtaImagingDone);
+        dcf4.setExtracranialMraImagingDone(extracranialMraImagingDone);
+        dcf4.setExtracranialCtaImagingDone(extracranialCtaImagingDone);
+        dcf4.setBrainCtImagingDone(brainCtImagingDone);
+        dcf4.setBrainMriImagingDone(brainMriImagingDone);
+        dcf4.setLesionAnterior(anterior);
+        dcf4.setLesionRight(right);
+        dcf4.setLesionLeft(left);
+        dcf4.setLesionBilateral(bilateral);
+        dcf4.setLesionPosterior(posterior);
+        dcf4.setLesionAnterioposterior(anterioposterior);
+        dcf4.setRicaStenosisPercent(ricaStenosisPercent);
+        dcf4.setLicaStenosisPercent(licaStenosisPercent);
+        dcf4.setRccaStenosisPercent(rccaStenosisPercent);
+        dcf4.setLccaStenosisPercent(lccaStenosisPercent);
+        dcf4.setrVertebralStenosisPercent(rVertebralStenosisPercent);
+        dcf4.setlVertebralStenosisPercent(lVertebralStenosisPercent);
+        dcf4.setBasilarStenosisPercent(basilarStenosisPercent);
+        dcf4.setLvd(lvd);
+        dcf4.setSvd(svd);
+        dcf4.setCardioembolism(cardioembolism);
+        dcf4.setCombined(combined);
+        dcf4.setStrokeOfDeterminedEtiology(strokeOfDeterminedEtiology);
+        dcf4.setNegativeEvaluation(negativeEvaluation);
+        dcf4.setEcgDone(ecgDone);
+        dcf4.setEchoDone(echoDone);
+        dcf4.setEcgNormal(ecgNormal);
+        dcf4.setEcgLvh(ecgLvf);
+        dcf4.setEcgAf(ecgAf);
+        dcf4.setEcgVentricularEctopics(ecgVentricularEctopics);
+        dcf4.setEcgArtialEctopics(ecgArtialEctopics);
+        dcf4.setEcgNoneOfAbove(ecgNoneOfAbove);
+        dcf4.setEcgDontKnow(ecgDontKnow);
+        dcf4.setEchoNormal(echoNormal);
+        dcf4.setEchoLvh(echoLvh);
+        dcf4.setEchoPfo(echoPfo);
+        dcf4.setEchoThrombus(echoThrombus);
+        dcf4.setEchoNoneOfAbove(echoNoneOfAbove);
+        dcf4.setEchoDontKnow(echoDontKnow);
+        dcf4.setNihssOnAdmission(nihssOnAdmission);
+        dcf4.setNihssOnDischarge(nihssOnDischarge);
+        dcf4.setBarthelOnAdmission(barthelOnAdmission);
+        dcf4.setBarthelOnDischarge(barthelOnDischarge);
+        dcf4.setHome(home);
+        dcf4.setNursingHome(nursingHome);
+        dcf4.setRehabilitation(rehabilitation);
+        dcf4.setRip(rip);
+        dcf4.setLocalDgh(localDgh);
+        if(id > 0)
+            dcf4.update();
+        else
+            dcf4.save();
+        session("pid", patientIdNumber.toString());
+        return ok(Json.toJson(new ResponseMessage(200, "Form four saved successfully", ResponseMessageType.SUCCESSFUL)));
+    }
 
+    @With(Authenticated.class)
+    public static Result handleSaveForm5() {
         DataCollectionForm5 dcf5 = new DataCollectionForm5();
         Map<String, String[]> map = request().body().asFormUrlEncoded();
         if(map.size() <= 0)
@@ -230,6 +323,11 @@ public class DataController extends Controller {
         String antihypertensive = map.containsKey("antihypertensive") ? StringUtils.EMPTY : map.get("antihypertensive")[0];
         String warfarin = map.containsKey("warfarin") ? StringUtils.EMPTY : map.get("warfarin")[0];
         String statin = map.containsKey("statin") ? StringUtils.EMPTY : map.get("statin")[0];
+        if(id > 0) {
+            dcf5 = DataCollectionForm5.find.byId(id);
+            if(dcf5 == null)
+                return badRequest(Json.toJson(new ResponseMessage(400, "Invalid parameters passed!", ResponseMessageType.BAD_REQUEST)));
+        }
         if(!StringUtils.isEmpty(aspirin)){
             String aspirinDosage = StringUtils.isEmpty(map.get("aspirinDosage")[0]) ? StringUtils.EMPTY : map.get("aspirinDosage")[0];
             dcf5.setAspirin(YesNo.YES);
@@ -244,8 +342,7 @@ public class DataController extends Controller {
             String aspirinPlusClopidogrelDosage1 = StringUtils.isEmpty(map.get("aspirinPlusClopidogrelDosage1")[0]) ? StringUtils.EMPTY : map.get("aspirinPlusClopidogrelDosage1")[0];
             String aspirinPlusClopidogrelDosage2 = StringUtils.isEmpty(map.get("aspirinPlusClopidogrelDosage2")[0]) ? StringUtils.EMPTY : map.get("aspirinPlusClopidogrelDosage2")[0];
             dcf5.setAspirinPlusClopidogrel(YesNo.YES);
-            dcf5.setAspirinPlusClopidogrelDosage1(aspirinPlusClopidogrelDosage1);
-            dcf5.setAspirinPlusClopidogrelDosage2(aspirinPlusClopidogrelDosage2);
+            dcf5.setAspirinPlusClopidogrelDosage(aspirinPlusClopidogrelDosage1 + "+" + aspirinPlusClopidogrelDosage2);
         }
         if(!StringUtils.isEmpty(dipyridamole)){
             String dipyridamoleDosage = StringUtils.isEmpty(map.get("dipyridamoleDosage")[0]) ? StringUtils.EMPTY : map.get("dipyridamoleDosage")[0];
@@ -256,8 +353,7 @@ public class DataController extends Controller {
             String aspirinPlusDipyridamoleDosage1 = StringUtils.isEmpty(map.get("aspirinPlusDipyridamoleDosage1")[0]) ? StringUtils.EMPTY : map.get("aspirinPlusDipyridamoleDosage1")[0];
             String aspirinPlusDipyridamoleDosage2 = StringUtils.isEmpty(map.get("aspirinPlusDipyridamoleDosage2")[0]) ? StringUtils.EMPTY : map.get("aspirinPlusDipyridamoleDosage2")[0];
             dcf5.setAspirinPlusDipyridamole(YesNo.YES);
-            dcf5.setAspirinPlusDipyridamoleDosage1(aspirinPlusDipyridamoleDosage1);
-            dcf5.setAspirinPlusDipyridamoleDosage2(aspirinPlusDipyridamoleDosage2);
+            dcf5.setAspirinPlusDipyridamoleDosage(aspirinPlusDipyridamoleDosage1 + "+" + aspirinPlusDipyridamoleDosage2);
         }
         if(!StringUtils.isEmpty(antihypertensive)){
             dcf5.setAntihypertensive(YesNo.YES);
@@ -305,36 +401,36 @@ public class DataController extends Controller {
         YesNo ischaemicStroke = YesNo.valueOf(StringUtils.isEmpty(map.get("ischaemicStroke")[0]) ? StringUtils.EMPTY : map.get("ischaemicStroke")[0]);
         YesNo hoemorrhagicStroke = YesNo.valueOf(StringUtils.isEmpty(map.get("hoemorrhagicStroke")[0]) ? StringUtils.EMPTY : map.get("hoemorrhagicStroke")[0]);
         YesNo tia = YesNo.valueOf(StringUtils.isEmpty(map.get("tia")[0]) ? StringUtils.EMPTY : map.get("tia")[0]);
-        if(id == 0) {
-            dcf5.setPatientIdNumber(patientIdNumber);
-            dcf5.setSpouseName(spouseName);
-            dcf5.setSpouseAddress(spouseAddress);
-            dcf5.setSpouseDateOfBirth(spouseDateOfBirth == null ? null : new Timestamp(spouseDateOfBirth.getMillis()));
-            dcf5.setSpouseGender(spouseGender);
-            dcf5.setSpouseLandlinePhoneNumber(spouseLandlinePhoneNumber);
-            dcf5.setSpouseCellPhoneNumber(spouseCellPhoneNumber);
-            dcf5.setSpouseFriendPhoneNumber(spouseFriendPhoneNumber);
-            dcf5.setSpousePlaceOfBirth(spousePlaceOfBirth);
-            dcf5.setSpouseEthnicity(spouseEthnicity);
-            dcf5.setSpouseNativeLanguage(spouseNativeLanguage);
-            dcf5.setSpouseReligion(spouseReligion);
-            dcf5.setSpouseHypertension(spouseHypertension);
-            dcf5.setSpouseDiabetesMellitus(spouseDiabetesMellitus);
-            dcf5.setSpouseIhdAngina(spouseIhdAngina);
-            dcf5.setSpouseHypercholesterolemia(spouseHypercholesterolemia);
-            dcf5.setSpouseAtrialFibrillation(spouseAtrialFibrillation);
-            dcf5.setSpousePvd(spousePvd);
-            dcf5.setSpouseMi(spouseMi);
-            dcf5.setSpouseMigraineWithAura(spouseMigraineWithAura);
-            dcf5.setSpouseMigraineWithoutAura(spouseMigraineWithoutAura);
-            dcf5.setSpouseIschaemicStroke(ischaemicStroke);
-            dcf5.setSpouseHoemorrhagicStroke(hoemorrhagicStroke);
-            dcf5.setSpouseTia(tia);
-
+        dcf5.setPatientIdNumber(patientIdNumber);
+        dcf5.setSpouseName(spouseName);
+        dcf5.setSpouseAddress(spouseAddress);
+        dcf5.setSpouseDateOfBirth(spouseDateOfBirth == null ? null : new Timestamp(spouseDateOfBirth.getMillis()));
+        dcf5.setSpouseGender(spouseGender);
+        dcf5.setSpouseLandlinePhoneNumber(spouseLandlinePhoneNumber);
+        dcf5.setSpouseCellPhoneNumber(spouseCellPhoneNumber);
+        dcf5.setSpouseFriendPhoneNumber(spouseFriendPhoneNumber);
+        dcf5.setSpousePlaceOfBirth(spousePlaceOfBirth);
+        dcf5.setSpouseEthnicity(spouseEthnicity);
+        dcf5.setSpouseNativeLanguage(spouseNativeLanguage);
+        dcf5.setSpouseReligion(spouseReligion);
+        dcf5.setSpouseHypertension(spouseHypertension);
+        dcf5.setSpouseDiabetesMellitus(spouseDiabetesMellitus);
+        dcf5.setSpouseIhdAngina(spouseIhdAngina);
+        dcf5.setSpouseHypercholesterolemia(spouseHypercholesterolemia);
+        dcf5.setSpouseAtrialFibrillation(spouseAtrialFibrillation);
+        dcf5.setSpousePvd(spousePvd);
+        dcf5.setSpouseMi(spouseMi);
+        dcf5.setSpouseMigraineWithAura(spouseMigraineWithAura);
+        dcf5.setSpouseMigraineWithoutAura(spouseMigraineWithoutAura);
+        dcf5.setSpouseIschaemicStroke(ischaemicStroke);
+        dcf5.setSpouseHoemorrhagicStroke(hoemorrhagicStroke);
+        dcf5.setSpouseTia(tia);
+        dcf5.setBpToday(bpToday1 + "/" + bpToday2);
+        if(id > 0)
+            dcf5.update();
+        else
             dcf5.save();
-        } else if (id > 0) {
-
-        }
+        session("pid", patientIdNumber.toString());
         return ok(Json.toJson(new ResponseMessage(200, "Form five saved successfully", ResponseMessageType.SUCCESSFUL)));
     }
 
@@ -363,34 +459,27 @@ public class DataController extends Controller {
             Logger.info("INVALID DATE STRING FOR BLOOD SAMPLE DATE");
         }
         String bloodSampleNumber = StringUtils.isEmpty(map.get("bloodSampleNumber")[0]) ? StringUtils.EMPTY : map.get("bloodSampleNumber")[0];
+        if(id > 0) {
+            dcf6 = DataCollectionForm6.find.byId(id);
+            if(dcf6 == null)
+                return badRequest(Json.toJson(new ResponseMessage(400, "Invalid parameters passed!", ResponseMessageType.BAD_REQUEST)));
+        }
+        dcf6.setPatientIdNumber(patientIdNumber);
+        dcf6.setHip(hip);
+        dcf6.setWaist(waist);
+        dcf6.setHeight(height);
+        dcf6.setWeight(weight);
+        dcf6.setBmi(bmi);
+        dcf6.setBloodSampleTaken(bloodSampleTaken);
+        dcf6.setBloodSampleDate(dateBloodSampleTaken == null ? null : new Timestamp(dateBloodSampleTaken.getMillis()));
+        dcf6.setBloodSampleNumber(bloodSampleNumber);
         if(id == 0) {
-            dcf6 = new DataCollectionForm6(patientIdNumber,
-                    hip,
-                    waist,
-                    height,
-                    weight,
-                    bmi,
-                    bloodSampleTaken,
-                    dateBloodSampleTaken == null ? null : new Timestamp(dateBloodSampleTaken.getMillis()),
-                    bloodSampleNumber);
             dcf6.save();
             for(String s: economicStatuses) {
                 EconomicStatus es = new EconomicStatus(s, null, dcf6);
                 es.save();
             }
         } else if (id > 0) {
-            dcf6 = DataCollectionForm6.find.byId(id);
-            if(dcf6 == null)
-                return badRequest(Json.toJson(new ResponseMessage(400, "Invalid parameters passed!", ResponseMessageType.BAD_REQUEST)));
-            dcf6.setPatientIdNumber(patientIdNumber);
-            dcf6.setHip(hip);
-            dcf6.setWaist(waist);
-            dcf6.setHeight(height);
-            dcf6.setWeight(weight);
-            dcf6.setBmi(bmi);
-            dcf6.setBloodSampleTaken(bloodSampleTaken);
-            dcf6.setBloodSampleDate(dateBloodSampleTaken == null ? null : new Timestamp(dateBloodSampleTaken.getMillis()));
-            dcf6.setBloodSampleNumber(bloodSampleNumber);
             dcf6.update();
             for(String s: economicStatuses) {
                 EconomicStatus status = Ebean.find(EconomicStatus.class).fetch("dataCollectionForm6").where(

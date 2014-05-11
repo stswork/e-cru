@@ -29,9 +29,10 @@
     <td>
         Intracranial stenosis:
     </td>
-    <td colspan="3"> Yes <input type="radio" name="intracranialStenosis"  id="intracranialStenosisYes">
+    <td colspan="3">
+        Yes <input type="radio" name="intracranialStenosis" value="Yes">
         <input type="text" id="intracranialStenosisPercent" name="intracranialStenosisPercent" /> %
-      No <input type="radio" name="intracranialStenosis" id="intracranialStenosisNo" >
+        No <input type="radio" name="intracranialStenosis" id="intracranialStenosisNo" value="No"/>
     </td>
 </tr>
 <tr>
@@ -42,22 +43,22 @@
             </tr>
             <tr>
                 <td>Dopplers  </td>
-                <td>Done<input type="radio" name="extracranialDopplersImagingDone" id="extracranialDopplersImagingDone" >
-                Not Done <input type="radio" name="extracranialDopplersImagingDone" id="extracranialDopplersImagingNotDone" >
+                <td>Done<input type="radio" name="extracranialDopplersImagingDone" id="extracranialDopplersImagingDone" value="Yes"/>
+                Not Done <input type="radio" name="extracranialDopplersImagingDone" id="extracranialDopplersImagingNotDone" value="No"/>
                 </td>
             </tr>
             <tr>
                 <td>
                    MRA
                 </td>
-                <td>Done<input type="radio" name="extracranialMraImagingDone" id="extracranialMraImagingDone"/>
-                    Not Done <input type="radio" name="extracranialMraImagingDone" id="extracranialMraImagingNotDone"/>
+                <td>Done<input type="radio" name="extracranialMraImagingDone" id="extracranialMraImagingDone" value="Yes"/>
+                    Not Done <input type="radio" name="extracranialMraImagingDone" id="extracranialMraImagingNotDone" value="No"/>
                 </td>
             </tr>
             <tr>
                 <td>CTA</td>
-                <td>Done<input type="radio" name="extracranialCtaImagingDone" id="extracranialCtaImagingDone" >
-                    Not Done <input type="radio" name="extracranialCtaImagingDone" id="extracranialCtaImagingNotDone" >
+                <td>Done<input type="radio" name="extracranialCtaImagingDone" id="extracranialCtaImagingDone" value="Yes"/>
+                    Not Done <input type="radio" name="extracranialCtaImagingDone" id="extracranialCtaImagingNotDone" value="No"/>
                 </td>
             </tr>
         </table>
@@ -66,14 +67,14 @@
         <table>
             <tr>
                 <td>CT</td>
-                <td>Done<input type="radio" name="brainCtImagingDone" id="brainCtImagingDone" >
-                    Not Done <input type="radio" name="brainCtImagingDone" id="brainCtImagingNotDone" >
+                <td>Done<input type="radio" name="brainCtImagingDone" id="brainCtImagingDone" value="Yes"/>
+                    Not Done <input type="radio" name="brainCtImagingDone" id="brainCtImagingNotDone" value="No"/>
                 </td>
             </tr>
             <tr>
                 <td>MRI</td>
-                <td>Done<input type="radio" name="brainMriImagingDone" id="brainMriImagingDone" >
-                    Not Done <input type="radio" name="brainMriImagingDone" id="brainMriImagingNotDone" >
+                <td>Done<input type="radio" name="brainMriImagingDone" id="brainMriImagingDone" value="Yes"/>
+                    Not Done <input type="radio" name="brainMriImagingDone" id="brainMriImagingNotDone" value="No"/>
                 </td>
             </tr>
             <tr>
@@ -186,8 +187,8 @@
      </td>
      <td>ECHO</td>
      <td>
-         Done<input type="radio" name="echo" id="echoDone">
-         Not Done<input type="radio" name="echo" id="echoNotDone">
+         Done<input type="radio" name="echoDone" id="echoDone">
+         Not Done<input type="radio" name="echoDone" id="echoNotDone">
      </td>
  </tr>
     <tr>
@@ -195,31 +196,31 @@
             <table>
                 <tr>
                     <td>Result:   Normal</td>
-                    <td><input type="checkbox" name="normal" id="normal"></td>
+                    <td><input type="checkbox" name="ecgNormal" id="ecgNormal"></td>
                 </tr>
                 <tr>
                     <td>LVH</td>
-                    <td><input type="checkbox" name="lvf" id="lvf"></td>
+                    <td><input type="checkbox" name="ecgLvh" id="ecgLvh"></td>
                 </tr>
                 <tr>
                     <td>AF</td>
-                    <td><input type="checkbox" name="af" id="af"></td>
+                    <td><input type="checkbox" name="ecgAf" id="ecgAf"></td>
                 </tr>
                 <tr>
                     <td>Ventricular ectopics</td>
-                    <td><input type="checkbox" name="ventricularEctopics" id="ventricularEctopics"></td>
+                    <td><input type="checkbox" name="ecgVentricularEctopics" id="ecgVentricularEctopics"></td>
                 </tr>
                 <tr>
                     <td>Atrial ectopics</td>
-                    <td><input type="checkbox" name="artialEctopics" id="artialEctopics"></td>
+                    <td><input type="checkbox" name="ecgArtialEctopics" id="ecgArtialEctopics"></td>
                 </tr>
                 <tr>
                     <td>None of above</td>
-                    <td><input type="checkbox" name="noneOfAbove" id="noneOfAbove"></td>
+                    <td><input type="checkbox" name="ecgNoneOfAbove" id="ecgNoneOfAbove"></td>
                 </tr>
                 <tr>
                     <td>Don’t know</td>
-                    <td><input type="checkbox" name="dontKnow" id="dontKnow"></td>
+                    <td><input type="checkbox" name="ecgDontKnow" id="ecgDontKnow"></td>
                 </tr>
             </table>
         </td>
@@ -227,27 +228,27 @@
             <table>
                 <tr>
                     <td>Result:   Normal</td>
-                    <td><input type="checkbox" name="normal2" id="normal2"></td>
+                    <td><input type="checkbox" name="echoNormal" id="echoNormal"></td>
                 </tr>
                 <tr>
                     <td>LVH</td>
-                    <td><input type="checkbox" name="lvh2" id="lvh2"></td>
+                    <td><input type="checkbox" name="echoLvh" id="echoLvh"></td>
                 </tr>
                 <tr>
                     <td>PFO</td>
-                    <td><input type="checkbox" name="pfo2" id="pfo2"></td>
+                    <td><input type="checkbox" name="echoPfo" id="echoPfo"></td>
                 </tr>
                 <tr>
                     <td>Thrombus</td>
-                    <td><input type="checkbox" name="thrombus" id="thrombus"></td>
+                    <td><input type="checkbox" name="echoThrombus" id="echoThrombus"></td>
                 </tr>
                 <tr>
                     <td>None of above</td>
-                    <td><input type="checkbox" name="noneOfAbove2" id="noneOfAbove2"></td>
+                    <td><input type="checkbox" name="echoNoneOfAbove" id="echoNoneOfAbove"></td>
                 </tr>
                 <tr>
                     <td>Don’t know</td>
-                    <td><input type="checkbox" name="dontKnow2" id="dontKnow2"></td>
+                    <td><input type="checkbox" name="echoDontKnow" id="echoDontKnow"></td>
                 </tr>
 
             </table>

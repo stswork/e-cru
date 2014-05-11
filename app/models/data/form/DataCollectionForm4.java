@@ -6,7 +6,6 @@ import org.joda.time.DateTime;
 import play.data.format.Formats;
 import play.data.validation.Constraints;
 import play.db.ebean.Model;
-import scala.Double;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -27,6 +26,11 @@ public class DataCollectionForm4 extends Model {
     private Integer patientIdNumber;
 
     @Constraints.Required
+    private YesNo intracranialStenosis = YesNo.NO;
+
+    private String intracranialStenosisPercent;
+
+    @Constraints.Required
     private YesNo extracranialDopplersImagingDone = YesNo.NO;
 
     @Constraints.Required
@@ -41,7 +45,23 @@ public class DataCollectionForm4 extends Model {
     @Constraints.Required
     private YesNo brainMriImagingDone = YesNo.NO;
 
-    private LesionLocation lesionLocation;
+    @Constraints.Required
+    private YesNo lesionAnterior = YesNo.NO;
+
+    @Constraints.Required
+    private YesNo lesionRight = YesNo.NO;
+
+    @Constraints.Required
+    private YesNo lesionLeft = YesNo.NO;
+
+    @Constraints.Required
+    private YesNo lesionBilateral = YesNo.NO;
+
+    @Constraints.Required
+    private YesNo lesionPosterior = YesNo.NO;
+
+    @Constraints.Required
+    private YesNo lesionAnterioposterior = YesNo.NO;
 
     private Double ricaStenosisPercent;
 
@@ -58,32 +78,67 @@ public class DataCollectionForm4 extends Model {
     private Double basilarStenosisPercent;
 
     @Constraints.Required
-    private YesNo lvd;
+    private YesNo lvd = YesNo.NO;
 
     @Constraints.Required
-    private YesNo svd;
+    private YesNo svd = YesNo.NO;
 
     @Constraints.Required
-    private YesNo cardioembolism;
+    private YesNo cardioembolism = YesNo.NO;
 
     @Constraints.Required
-    private YesNo combined;
+    private YesNo combined = YesNo.NO;
 
     @Constraints.Required
-    private YesNo strokeOfDeterminedEtiology;
+    private YesNo strokeOfDeterminedEtiology = YesNo.NO;
 
     @Constraints.Required
-    private YesNo negativeEvaluation;
+    private YesNo negativeEvaluation = YesNo.NO;
 
     @Constraints.Required
-    private YesNo ecgDone;
+    private YesNo ecgDone = YesNo.NO;
 
     @Constraints.Required
-    private YesNo echoDone;
+    private YesNo echoDone = YesNo.NO;
 
-    private Result ecgResult;
+    @Constraints.Required
+    private YesNo ecgNormal = YesNo.NO;
 
-    private Result echoResult;
+    @Constraints.Required
+    private YesNo ecgLvh = YesNo.NO;
+
+    @Constraints.Required
+    private YesNo ecgAf = YesNo.NO;
+
+    @Constraints.Required
+    private YesNo ecgVentricularEctopics = YesNo.NO;
+
+    @Constraints.Required
+    private YesNo ecgArtialEctopics = YesNo.NO;
+
+    @Constraints.Required
+    private YesNo ecgNoneOfAbove = YesNo.NO;
+
+    @Constraints.Required
+    private YesNo echoNormal = YesNo.NO;
+
+    @Constraints.Required
+    private YesNo echoLvh = YesNo.NO;
+
+    @Constraints.Required
+    private YesNo echoPfo = YesNo.NO;
+
+    @Constraints.Required
+    private YesNo echoThrombus = YesNo.NO;
+
+    @Constraints.Required
+    private YesNo echoNoneOfAbove = YesNo.NO;
+
+    @Constraints.Required
+    private YesNo echoDontKnow = YesNo.NO;
+
+    @Constraints.Required
+    private YesNo ecgDontKnow = YesNo.NO;
 
     private String nihssOnAdmission;
 
@@ -94,7 +149,19 @@ public class DataCollectionForm4 extends Model {
     private String barthelOnDischarge;
 
     @Constraints.Required
-    private DischargePlace dischargePlace;
+    private YesNo home = YesNo.NO;
+
+    @Constraints.Required
+    private YesNo nursingHome = YesNo.NO;
+
+    @Constraints.Required
+    private YesNo rehabilitation = YesNo.NO;
+
+    @Constraints.Required
+    private YesNo rip = YesNo.NO;
+
+    @Constraints.Required
+    private YesNo localDgh = YesNo.NO;
 
     @Formats.DateTime(pattern = "MM/dd/yy")
     private Timestamp created = new Timestamp(DateTime.now().toDate().getTime());
@@ -102,14 +169,21 @@ public class DataCollectionForm4 extends Model {
     public DataCollectionForm4() {
     }
 
-    public DataCollectionForm4(Integer patientIdNumber, YesNo extracranialDopplersImagingDone, YesNo extracranialMraImagingDone, YesNo extracranialCtaImagingDone, YesNo brainCtImagingDone, YesNo brainMriImagingDone, LesionLocation lesionLocation, Double ricaStenosisPercent, Double licaStenosisPercent, Double rccaStenosisPercent, Double lccaStenosisPercent, Double rVertebralStenosisPercent, Double lVertebralStenosisPercent, Double basilarStenosisPercent, YesNo lvd, YesNo svd, YesNo cardioembolism, YesNo combined, YesNo strokeOfDeterminedEtiology, YesNo negativeEvaluation, YesNo ecgDone, YesNo echoDone, Result ecgResult, Result echoResult, String nihssOnAdmission, String nihssOnDischarge, String barthelOnAdmission, String barthelOnDischarge, DischargePlace dischargePlace) {
+    public DataCollectionForm4(Integer patientIdNumber, YesNo intracranialStenosis, String intracranialStenosisPercent, YesNo extracranialDopplersImagingDone, YesNo extracranialMraImagingDone, YesNo extracranialCtaImagingDone, YesNo brainCtImagingDone, YesNo brainMriImagingDone, YesNo lesionAnterior, YesNo lesionRight, YesNo lesionLeft, YesNo lesionBilateral, YesNo lesionPosterior, YesNo lesionAnterioposterior, Double ricaStenosisPercent, Double licaStenosisPercent, Double rccaStenosisPercent, Double lccaStenosisPercent, Double rVertebralStenosisPercent, Double lVertebralStenosisPercent, Double basilarStenosisPercent, YesNo lvd, YesNo svd, YesNo cardioembolism, YesNo combined, YesNo strokeOfDeterminedEtiology, YesNo negativeEvaluation, YesNo ecgDone, YesNo echoDone, YesNo ecgNormal, YesNo ecgLvh, YesNo ecgAf, YesNo ecgVentricularEctopics, YesNo ecgArtialEctopics, YesNo ecgNoneOfAbove, YesNo echoNormal, YesNo echoLvh, YesNo echoPfo, YesNo echoThrombus, YesNo echoNoneOfAbove, YesNo echoDontKnow, YesNo ecgDontKnow, String nihssOnAdmission, String nihssOnDischarge, String barthelOnAdmission, String barthelOnDischarge, YesNo home, YesNo nursingHome, YesNo rehabilitation, YesNo rip, YesNo localDgh) {
         this.patientIdNumber = patientIdNumber;
+        this.intracranialStenosis = intracranialStenosis;
+        this.intracranialStenosisPercent = intracranialStenosisPercent;
         this.extracranialDopplersImagingDone = extracranialDopplersImagingDone;
         this.extracranialMraImagingDone = extracranialMraImagingDone;
         this.extracranialCtaImagingDone = extracranialCtaImagingDone;
         this.brainCtImagingDone = brainCtImagingDone;
         this.brainMriImagingDone = brainMriImagingDone;
-        this.lesionLocation = lesionLocation;
+        this.lesionAnterior = lesionAnterior;
+        this.lesionRight = lesionRight;
+        this.lesionLeft = lesionLeft;
+        this.lesionBilateral = lesionBilateral;
+        this.lesionPosterior = lesionPosterior;
+        this.lesionAnterioposterior = lesionAnterioposterior;
         this.ricaStenosisPercent = ricaStenosisPercent;
         this.licaStenosisPercent = licaStenosisPercent;
         this.rccaStenosisPercent = rccaStenosisPercent;
@@ -125,13 +199,28 @@ public class DataCollectionForm4 extends Model {
         this.negativeEvaluation = negativeEvaluation;
         this.ecgDone = ecgDone;
         this.echoDone = echoDone;
-        this.ecgResult = ecgResult;
-        this.echoResult = echoResult;
+        this.ecgNormal = ecgNormal;
+        this.ecgLvh = ecgLvh;
+        this.ecgAf = ecgAf;
+        this.ecgVentricularEctopics = ecgVentricularEctopics;
+        this.ecgArtialEctopics = ecgArtialEctopics;
+        this.ecgNoneOfAbove = ecgNoneOfAbove;
+        this.echoNormal = echoNormal;
+        this.echoLvh = echoLvh;
+        this.echoPfo = echoPfo;
+        this.echoThrombus = echoThrombus;
+        this.echoNoneOfAbove = echoNoneOfAbove;
+        this.echoDontKnow = echoDontKnow;
+        this.ecgDontKnow = ecgDontKnow;
         this.nihssOnAdmission = nihssOnAdmission;
         this.nihssOnDischarge = nihssOnDischarge;
         this.barthelOnAdmission = barthelOnAdmission;
         this.barthelOnDischarge = barthelOnDischarge;
-        this.dischargePlace = dischargePlace;
+        this.home = home;
+        this.nursingHome = nursingHome;
+        this.rehabilitation = rehabilitation;
+        this.rip = rip;
+        this.localDgh = localDgh;
     }
 
     public Long getId() {
@@ -188,14 +277,6 @@ public class DataCollectionForm4 extends Model {
 
     public void setBrainMriImagingDone(YesNo brainMriImagingDone) {
         this.brainMriImagingDone = brainMriImagingDone;
-    }
-
-    public LesionLocation getLesionLocation() {
-        return lesionLocation;
-    }
-
-    public void setLesionLocation(LesionLocation lesionLocation) {
-        this.lesionLocation = lesionLocation;
     }
 
     public Double getRicaStenosisPercent() {
@@ -318,22 +399,6 @@ public class DataCollectionForm4 extends Model {
         this.echoDone = echoDone;
     }
 
-    public Result getEcgResult() {
-        return ecgResult;
-    }
-
-    public void setEcgResult(Result ecgResult) {
-        this.ecgResult = ecgResult;
-    }
-
-    public Result getEchoResult() {
-        return echoResult;
-    }
-
-    public void setEchoResult(Result echoResult) {
-        this.echoResult = echoResult;
-    }
-
     public String getNihssOnAdmission() {
         return nihssOnAdmission;
     }
@@ -366,14 +431,6 @@ public class DataCollectionForm4 extends Model {
         this.barthelOnDischarge = barthelOnDischarge;
     }
 
-    public DischargePlace getDischargePlace() {
-        return dischargePlace;
-    }
-
-    public void setDischargePlace(DischargePlace dischargePlace) {
-        this.dischargePlace = dischargePlace;
-    }
-
     public Timestamp getCreated() {
         return created;
     }
@@ -385,4 +442,212 @@ public class DataCollectionForm4 extends Model {
     public static Model.Finder<Long, DataCollectionForm4> find = new Model.Finder<Long, DataCollectionForm4>(
             Long.class, DataCollectionForm4.class
     );
+
+    public YesNo getIntracranialStenosis() {
+        return intracranialStenosis;
+    }
+
+    public void setIntracranialStenosis(YesNo intracranialStenosis) {
+        this.intracranialStenosis = intracranialStenosis;
+    }
+
+    public String getIntracranialStenosisPercent() {
+        return intracranialStenosisPercent;
+    }
+
+    public void setIntracranialStenosisPercent(String intracranialStenosisPercent) {
+        this.intracranialStenosisPercent = intracranialStenosisPercent;
+    }
+
+    public YesNo getLesionAnterior() {
+        return lesionAnterior;
+    }
+
+    public void setLesionAnterior(YesNo lesionAnterior) {
+        this.lesionAnterior = lesionAnterior;
+    }
+
+    public YesNo getLesionRight() {
+        return lesionRight;
+    }
+
+    public void setLesionRight(YesNo lesionRight) {
+        this.lesionRight = lesionRight;
+    }
+
+    public YesNo getLesionLeft() {
+        return lesionLeft;
+    }
+
+    public void setLesionLeft(YesNo lesionLeft) {
+        this.lesionLeft = lesionLeft;
+    }
+
+    public YesNo getLesionBilateral() {
+        return lesionBilateral;
+    }
+
+    public void setLesionBilateral(YesNo lesionBilateral) {
+        this.lesionBilateral = lesionBilateral;
+    }
+
+    public YesNo getLesionPosterior() {
+        return lesionPosterior;
+    }
+
+    public void setLesionPosterior(YesNo lesionPosterior) {
+        this.lesionPosterior = lesionPosterior;
+    }
+
+    public YesNo getLesionAnterioposterior() {
+        return lesionAnterioposterior;
+    }
+
+    public void setLesionAnterioposterior(YesNo lesionAnterioposterior) {
+        this.lesionAnterioposterior = lesionAnterioposterior;
+    }
+
+    public YesNo getEcgNormal() {
+        return ecgNormal;
+    }
+
+    public void setEcgNormal(YesNo ecgNormal) {
+        this.ecgNormal = ecgNormal;
+    }
+
+    public YesNo getEcgLvh() {
+        return ecgLvh;
+    }
+
+    public void setEcgLvh(YesNo ecgLvh) {
+        this.ecgLvh = ecgLvh;
+    }
+
+    public YesNo getEcgAf() {
+        return ecgAf;
+    }
+
+    public void setEcgAf(YesNo ecgAf) {
+        this.ecgAf = ecgAf;
+    }
+
+    public YesNo getEcgVentricularEctopics() {
+        return ecgVentricularEctopics;
+    }
+
+    public void setEcgVentricularEctopics(YesNo ecgVentricularEctopics) {
+        this.ecgVentricularEctopics = ecgVentricularEctopics;
+    }
+
+    public YesNo getEcgArtialEctopics() {
+        return ecgArtialEctopics;
+    }
+
+    public void setEcgArtialEctopics(YesNo ecgArtialEctopics) {
+        this.ecgArtialEctopics = ecgArtialEctopics;
+    }
+
+    public YesNo getEcgNoneOfAbove() {
+        return ecgNoneOfAbove;
+    }
+
+    public void setEcgNoneOfAbove(YesNo ecgNoneOfAbove) {
+        this.ecgNoneOfAbove = ecgNoneOfAbove;
+    }
+
+    public YesNo getEcgDontKnow() {
+        return ecgDontKnow;
+    }
+
+    public void setEcgDontKnow(YesNo ecgDontKnow) {
+        this.ecgDontKnow = ecgDontKnow;
+    }
+
+    public YesNo getEchoNormal() {
+        return echoNormal;
+    }
+
+    public void setEchoNormal(YesNo echoNormal) {
+        this.echoNormal = echoNormal;
+    }
+
+    public YesNo getEchoLvh() {
+        return echoLvh;
+    }
+
+    public void setEchoLvh(YesNo echoLvh) {
+        this.echoLvh = echoLvh;
+    }
+
+    public YesNo getEchoPfo() {
+        return echoPfo;
+    }
+
+    public void setEchoPfo(YesNo echoPfo) {
+        this.echoPfo = echoPfo;
+    }
+
+    public YesNo getEchoThrombus() {
+        return echoThrombus;
+    }
+
+    public void setEchoThrombus(YesNo echoThrombus) {
+        this.echoThrombus = echoThrombus;
+    }
+
+    public YesNo getEchoNoneOfAbove() {
+        return echoNoneOfAbove;
+    }
+
+    public void setEchoNoneOfAbove(YesNo echoNoneOfAbove) {
+        this.echoNoneOfAbove = echoNoneOfAbove;
+    }
+
+    public YesNo getEchoDontKnow() {
+        return echoDontKnow;
+    }
+
+    public void setEchoDontKnow(YesNo echoDontKnow) {
+        this.echoDontKnow = echoDontKnow;
+    }
+
+    public YesNo getHome() {
+        return home;
+    }
+
+    public void setHome(YesNo home) {
+        this.home = home;
+    }
+
+    public YesNo getNursingHome() {
+        return nursingHome;
+    }
+
+    public void setNursingHome(YesNo nursingHome) {
+        this.nursingHome = nursingHome;
+    }
+
+    public YesNo getRehabilitation() {
+        return rehabilitation;
+    }
+
+    public void setRehabilitation(YesNo rehabilitation) {
+        this.rehabilitation = rehabilitation;
+    }
+
+    public YesNo getRip() {
+        return rip;
+    }
+
+    public void setRip(YesNo rip) {
+        this.rip = rip;
+    }
+
+    public YesNo getLocalDgh() {
+        return localDgh;
+    }
+
+    public void setLocalDgh(YesNo localDgh) {
+        this.localDgh = localDgh;
+    }
 }
