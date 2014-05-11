@@ -4,10 +4,7 @@ import actions.Authenticated;
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.Expr;
 import models.YesNo;
-import models.data.form.DataCollectionForm1;
-import models.data.form.DataCollectionForm6;
-import models.data.form.EconomicStatus;
-import models.data.form.Gender;
+import models.data.form.*;
 import models.response.ResponseMessage;
 import models.response.ResponseMessageType;
 import org.apache.commons.lang3.StringUtils;
@@ -71,6 +68,7 @@ public class DataController extends Controller {
 
     @With(Authenticated.class)
     public static Result form5(){
+        session("pid", "2");
         models.response.user.User u = (models.response.user.User) ctx().args.get("user");
         if(StringUtils.isEmpty(session("pid")))
             return redirect(controllers.data.routes.DataController.form1());
@@ -216,13 +214,64 @@ public class DataController extends Controller {
     }
 
     @With(Authenticated.class)
-    public static Result handleSaveForm3() {
+    public static Result handleSaveForm5() {
 
+        DataCollectionForm5 dcf5 = new DataCollectionForm5();
         Map<String, String[]> map = request().body().asFormUrlEncoded();
         if(map.size() <= 0)
             return badRequest(Json.toJson(new ResponseMessage(400, "Invalid parameters passed!", ResponseMessageType.BAD_REQUEST)));
+        Long id = Long.valueOf(StringUtils.isEmpty(map.get("id")[0]) ? "0" : map.get("id")[0]);
+        Integer patientIdNumber = Integer.valueOf(StringUtils.isEmpty(map.get("patientIdNumber")[0]) ? StringUtils.EMPTY : map.get("patientIdNumber")[0]);
+        String[] medicines = map.get("medicines[]") == null ? new String[0] : map.get("medicines[]");
+        String aspirinDosage = StringUtils.isEmpty(map.get("aspirinDosage")[0]) ? StringUtils.EMPTY : map.get("aspirinDosage")[0];
+        String clopidogrelDosage = StringUtils.isEmpty(map.get("clopidogrelDosage")[0]) ? StringUtils.EMPTY : map.get("clopidogrelDosage")[0];
+        String aspirinPlusClopidogrelDosage1 = StringUtils.isEmpty(map.get("aspirinPlusClopidogrelDosage1")[0]) ? StringUtils.EMPTY : map.get("aspirinPlusClopidogrelDosage1")[0];
+        String aspirinPlusClopidogrelDosage2 = StringUtils.isEmpty(map.get("aspirinPlusClopidogrelDosage2")[0]) ? StringUtils.EMPTY : map.get("aspirinPlusClopidogrelDosage2")[0];
+        String dipyridamoleDosage = StringUtils.isEmpty(map.get("dipyridamoleDosage")[0]) ? StringUtils.EMPTY : map.get("dipyridamoleDosage")[0];
+        String aspirinPlusDipyridamoleDosage1 = StringUtils.isEmpty(map.get("aspirinPlusDipyridamoleDosage1")[0]) ? StringUtils.EMPTY : map.get("aspirinPlusDipyridamoleDosage1")[0];
+        String aspirinPlusDipyridamoleDosage2 = StringUtils.isEmpty(map.get("aspirinPlusDipyridamoleDosage2")[0]) ? StringUtils.EMPTY : map.get("aspirinPlusDipyridamoleDosage2")[0];
+        String antihypertensiveDosage = StringUtils.isEmpty(map.get("antihypertensiveDosage")[0]) ? StringUtils.EMPTY : map.get("antihypertensiveDosage")[0];
+        String warfarinDosage = StringUtils.isEmpty(map.get("warfarinDosage")[0]) ? StringUtils.EMPTY : map.get("warfarinDosage")[0];
+        String statinDosage = StringUtils.isEmpty(map.get("statinDosage")[0]) ? StringUtils.EMPTY : map.get("statinDosage")[0];
+        String spouseDobDate = StringUtils.isEmpty(map.get("spouseDobDate")[0]) ? StringUtils.EMPTY : map.get("spouseDobDate")[0];
+        String spouseDobMonth = StringUtils.isEmpty(map.get("spouseDobMonth")[0]) ? StringUtils.EMPTY : map.get("spouseDobMonth")[0];
+        String spouseDobYear = StringUtils.isEmpty(map.get("spouseDobYear")[0]) ? StringUtils.EMPTY : map.get("spouseDobYear")[0];
+        DateTime spouseDateOfBirth = null;
+        try {
+            spouseDateOfBirth = DATE_TIME_FORMATTER.parseDateTime(spouseDobDate + URL_SEPARATOR + spouseDobMonth + URL_SEPARATOR + spouseDobYear);
+        } catch (Exception e) {
+            Logger.info("INVALID DATE STRING FOR BLOOD SAMPLE DATE");
+        }
+        Gender spouseGender = Gender.valueOf(StringUtils.isEmpty(map.get("spouseGender")[0]) ? StringUtils.EMPTY : map.get("spouseGender")[0]);
+        String spouseLandlinePhoneNumber = StringUtils.isEmpty(map.get("spouseLandlinePhoneNumber")[0]) ? StringUtils.EMPTY : map.get("spouseLandlinePhoneNumber")[0];
+        String spouseCellPhoneNumber = StringUtils.isEmpty(map.get("spouseCellPhoneNumber")[0]) ? StringUtils.EMPTY : map.get("spouseCellPhoneNumber")[0];
+        String spouseFriendPhoneNumber = StringUtils.isEmpty(map.get("spouseFriendPhoneNumber")[0]) ? StringUtils.EMPTY : map.get("spouseFriendPhoneNumber")[0];
+        String spousePlaceOfBirth = StringUtils.isEmpty(map.get("spousePlaceOfBirth")[0]) ? StringUtils.EMPTY : map.get("spousePlaceOfBirth")[0];
+        String spouseEthnicity = StringUtils.isEmpty(map.get("spouseEthnicity")[0]) ? StringUtils.EMPTY : map.get("spouseEthnicity")[0];
+        String spouseNativeLanguage = StringUtils.isEmpty(map.get("spouseNativeLanguage")[0]) ? StringUtils.EMPTY : map.get("spouseNativeLanguage")[0];
+        String bpToday1 = StringUtils.isEmpty(map.get("bpToday1")[0]) ? StringUtils.EMPTY : map.get("bpToday1")[0];
+        String bpToday2 = StringUtils.isEmpty(map.get("bpToday2")[0]) ? StringUtils.EMPTY : map.get("bpToday2")[0];
+        YesNo spouseHypertension = YesNo.valueOf(StringUtils.isEmpty(map.get("spouseHypertension")[0]) ? StringUtils.EMPTY : map.get("spouseHypertension")[0]);
+        YesNo spouseDiabetesMellitus = YesNo.valueOf(StringUtils.isEmpty(map.get("spouseDiabetesMellitus")[0]) ? StringUtils.EMPTY : map.get("spouseDiabetesMellitus")[0]);
+        YesNo spouseIhdAngina = YesNo.valueOf(StringUtils.isEmpty(map.get("spouseIhdAngina")[0]) ? StringUtils.EMPTY : map.get("spouseIhdAngina")[0]);
+        YesNo spouseHypercholesterolemia = YesNo.valueOf(StringUtils.isEmpty(map.get("spouseHypercholesterolemia")[0]) ? StringUtils.EMPTY : map.get("spouseHypercholesterolemia")[0]);
+        YesNo spouseAtrialFibrillation = YesNo.valueOf(StringUtils.isEmpty(map.get("spouseAtrialFibrillation")[0]) ? StringUtils.EMPTY : map.get("spouseAtrialFibrillation")[0]);
+        YesNo spousePvd = YesNo.valueOf(StringUtils.isEmpty(map.get("spousePvd")[0]) ? StringUtils.EMPTY : map.get("spousePvd")[0]);
+        YesNo spouseMi = YesNo.valueOf(StringUtils.isEmpty(map.get("spouseMi")[0]) ? StringUtils.EMPTY : map.get("spouseMi")[0]);
+        YesNo spouseMigraineWithAura = YesNo.valueOf(StringUtils.isEmpty(map.get("spouseMigraineWithAura")[0]) ? StringUtils.EMPTY : map.get("spouseMigraineWithAura")[0]);
+        YesNo ischaemic = YesNo.valueOf(StringUtils.isEmpty(map.get("ischaemic")[0]) ? StringUtils.EMPTY : map.get("ischaemic")[0]);
+        YesNo hoemorrhagic = YesNo.valueOf(StringUtils.isEmpty(map.get("hoemorrhagic")[0]) ? StringUtils.EMPTY : map.get("hoemorrhagic")[0]);
+        YesNo tia = YesNo.valueOf(StringUtils.isEmpty(map.get("tia")[0]) ? StringUtils.EMPTY : map.get("tia")[0]);
+        for(String s: medicines) {
 
-        return ok(Json.toJson(new ResponseMessage(200, "Form three saved successfully", ResponseMessageType.SUCCESSFUL)));
+        }
+        if(id == 0) {
+            //dcf5 = new DataCollectionForm5(patientIdNumber,
+              //      aspi)
+        } else if (id > 0) {
+
+        }
+        return ok(Json.toJson(new ResponseMessage(200, "Form five saved successfully", ResponseMessageType.SUCCESSFUL)));
     }
 
     @With(Authenticated.class)

@@ -39,7 +39,9 @@ public class DataCollectionForm5 extends Model {
     @Constraints.Required
     private YesNo aspirinPlusClopidogrel;
 
-    private String aspirinPlusClopidogrelDosage;
+    private String aspirinPlusClopidogrelDosage1;
+
+    private String aspirinPlusClopidogrelDosage2;
 
     @Constraints.Required
     private YesNo dipyridamole;
@@ -49,7 +51,9 @@ public class DataCollectionForm5 extends Model {
     @Constraints.Required
     private YesNo aspirinPlusDipyridamole;
 
-    private String aspirinPlusDipyridamoleDosage;
+    private String aspirinPlusDipyridamoleDosage1;
+
+    private String aspirinPlusDipyridamoleDosage2;
 
     @Constraints.Required
     private YesNo warfarin;
@@ -119,18 +123,20 @@ public class DataCollectionForm5 extends Model {
     public DataCollectionForm5() {
     }
 
-    public DataCollectionForm5(Integer patientIdNumber, YesNo aspirin, String aspirinDosage, YesNo clopidogrel, String clopidogrelDosage, YesNo aspirinPlusClopidogrel, String aspirinPlusClopidogrelDosage, YesNo dipyridamole, String dipyridamoleDosage, YesNo aspirinPlusDipyridamole, String aspirinPlusDipyridamoleDosage, YesNo warfarin, String warfarinInr, YesNo statin, String statinDosage, String statinName, YesNo antihypertensive, String spouseName, String spouseAddress, Timestamp spouseDateOfBirth, Gender spouseGender, String spouseLandlinePhoneNumber, String spouseCellPhoneNumber, String spouseFriendPhoneNumber, String spousePlaceOfBirth, String spouseEthnicity, String spouseNativeLanguage, String spouseReligion, YesNo spouseHypertension, YesNo spouseDiabetesMellitus, YesNo spouseIhdAngina, YesNo spouseHypercholesterolemia, YesNo spouseAtrialFibrillation, YesNo spousePvd, YesNo spouseMi, YesNo spouseMigraineWithAura, YesNo spouseMigraineWithoutAura, YesNo spouseIschaemicStroke, YesNo spouseHoemorrhagicStroke, YesNo spouseTia) {
+    public DataCollectionForm5(Integer patientIdNumber, YesNo aspirin, String aspirinDosage, YesNo clopidogrel, String clopidogrelDosage, YesNo aspirinPlusClopidogrel, String aspirinPlusClopidogrelDosage1, String aspirinPlusClopidogrelDosage2, YesNo dipyridamole, String dipyridamoleDosage, YesNo aspirinPlusDipyridamole, String aspirinPlusDipyridamoleDosage1, String aspirinPlusDipyridamoleDosage2, YesNo warfarin, String warfarinInr, YesNo statin, String statinDosage, String statinName, YesNo antihypertensive, String spouseName, String spouseAddress, Timestamp spouseDateOfBirth, Gender spouseGender, String spouseLandlinePhoneNumber, String spouseCellPhoneNumber, String spouseFriendPhoneNumber, String spousePlaceOfBirth, String spouseEthnicity, String spouseNativeLanguage, String spouseReligion, YesNo spouseHypertension, YesNo spouseDiabetesMellitus, YesNo spouseIhdAngina, YesNo spouseHypercholesterolemia, YesNo spouseAtrialFibrillation, YesNo spousePvd, YesNo spouseMi, YesNo spouseMigraineWithAura, YesNo spouseMigraineWithoutAura, YesNo spouseIschaemicStroke, YesNo spouseHoemorrhagicStroke, YesNo spouseTia) {
         this.patientIdNumber = patientIdNumber;
         this.aspirin = aspirin;
         this.aspirinDosage = aspirinDosage;
         this.clopidogrel = clopidogrel;
         this.clopidogrelDosage = clopidogrelDosage;
         this.aspirinPlusClopidogrel = aspirinPlusClopidogrel;
-        this.aspirinPlusClopidogrelDosage = aspirinPlusClopidogrelDosage;
+        this.aspirinPlusClopidogrelDosage1 = aspirinPlusClopidogrelDosage1;
+        this.aspirinPlusClopidogrelDosage2 = aspirinPlusClopidogrelDosage2;
         this.dipyridamole = dipyridamole;
         this.dipyridamoleDosage = dipyridamoleDosage;
         this.aspirinPlusDipyridamole = aspirinPlusDipyridamole;
-        this.aspirinPlusDipyridamoleDosage = aspirinPlusDipyridamoleDosage;
+        this.aspirinPlusDipyridamoleDosage1 = aspirinPlusDipyridamoleDosage1;
+        this.aspirinPlusDipyridamoleDosage2 = aspirinPlusDipyridamoleDosage2;
         this.warfarin = warfarin;
         this.warfarinInr = warfarinInr;
         this.statin = statin;
@@ -218,12 +224,20 @@ public class DataCollectionForm5 extends Model {
         this.aspirinPlusClopidogrel = aspirinPlusClopidogrel;
     }
 
-    public String getAspirinPlusClopidogrelDosage() {
-        return aspirinPlusClopidogrelDosage;
+    public String getAspirinPlusClopidogrelDosage1() {
+        return aspirinPlusClopidogrelDosage1;
     }
 
-    public void setAspirinPlusClopidogrelDosage(String aspirinPlusClopidogrelDosage) {
-        this.aspirinPlusClopidogrelDosage = aspirinPlusClopidogrelDosage;
+    public void setAspirinPlusClopidogrelDosage1(String aspirinPlusClopidogrelDosage1) {
+        this.aspirinPlusClopidogrelDosage1 = aspirinPlusClopidogrelDosage1;
+    }
+
+    public String getAspirinPlusClopidogrelDosage2() {
+        return aspirinPlusClopidogrelDosage2;
+    }
+
+    public void setAspirinPlusClopidogrelDosage2(String aspirinPlusClopidogrelDosage2) {
+        this.aspirinPlusClopidogrelDosage2 = aspirinPlusClopidogrelDosage2;
     }
 
     public YesNo getDipyridamole() {
@@ -250,12 +264,20 @@ public class DataCollectionForm5 extends Model {
         this.aspirinPlusDipyridamole = aspirinPlusDipyridamole;
     }
 
-    public String getAspirinPlusDipyridamoleDosage() {
-        return aspirinPlusDipyridamoleDosage;
+    public String getAspirinPlusDipyridamoleDosage1() {
+        return aspirinPlusDipyridamoleDosage1;
     }
 
-    public void setAspirinPlusDipyridamoleDosage(String aspirinPlusDipyridamoleDosage) {
-        this.aspirinPlusDipyridamoleDosage = aspirinPlusDipyridamoleDosage;
+    public void setAspirinPlusDipyridamoleDosage1(String aspirinPlusDipyridamoleDosage1) {
+        this.aspirinPlusDipyridamoleDosage1 = aspirinPlusDipyridamoleDosage1;
+    }
+
+    public String getAspirinPlusDipyridamoleDosage2() {
+        return aspirinPlusDipyridamoleDosage2;
+    }
+
+    public void setAspirinPlusDipyridamoleDosage2(String aspirinPlusDipyridamoleDosage2) {
+        this.aspirinPlusDipyridamoleDosage2 = aspirinPlusDipyridamoleDosage2;
     }
 
     public YesNo getWarfarin() {

@@ -12,7 +12,7 @@
 
 </header>
 <div class="form" style="width:100%;background: #f1f1f1;border-radius: 10px;">
-<form id="userForm" method="GET" style="padding-top: 2%;" action="/form6" data-uri="@controllers.user.routes.UserController.save(0)">
+<form id="form5" method="POST" style="padding-top: 2%;" action="@controllers.data.routes.DataController.handleSaveForm5()" data-uri="@controllers.data.routes.DataController.form6()">
 <div class="box message" ><!--style="display:none;padding-top: 2%;padding-left: 1%;padding-bottom: 2%;color: red;"-->
     <div class="content-m">
 
@@ -32,36 +32,39 @@
         <td colspan="3">
             <table>
                 <tr>
-                    <td>Aspirin </td><td><input type="checkbox" name="aspirin" id="aspirin"/></td>
+                    <td><input type="hidden" id="id" name="id" value=""/></td>
+                </tr>
+                <tr>
+                    <td>Aspirin </td><td><input type="checkbox" name="aspirin" value="aspirin" id="aspirin"/></td>
                     <td>Dose <input type="text" name="aspirinDosage" id="aspirinDosage" class="small-textbox"/> mg/day</td>
                 </tr>
                 <tr>
-                    <td>Clopidogrel </td><td><input type="checkbox" name="clopidogrel" id="clopidogrel"/></td>
+                    <td>Clopidogrel </td><td><input type="checkbox" name="clopidogrel" value="clopidogrel" id="clopidogrel"/></td>
                     <td>Dose <input type="text" name="clopidogrelDosage" id="clopidogrelDosage" class="small-textbox"/> mg/day</td>
                 </tr>
                 <tr>
-                    <td>Aspirin + Clopidogrel </td><td><input type="checkbox" name="aspirinPlusClopidogrel" id="aspirinPlusClopidogrel"/></td>
-                    <td>Dose <input type="text" name="aspirinPlusClopidogrelDosage" id="aspirinPlusClopidogrelDosage" class="small-textbox"/> +<input type="text" name="aspirinClopidogrelDose2" id="aspirinClopidogrelDose2" class="small-textbox"/>  mg/day </td>
+                    <td>Aspirin + Clopidogrel </td><td><input type="checkbox" name="aspirinPlusClopidogrel" value="aspirinPlusClopidogrel" id="aspirinPlusClopidogrel"/></td>
+                    <td>Dose <input type="text" name="aspirinPlusClopidogrelDosage1" id="aspirinPlusClopidogrelDosage1" class="small-textbox"/> +<input type="text" name="aspirinPlusClopidogrelDosage2" id="aspirinPlusClopidogrelDosage2" class="small-textbox"/>  mg/day </td>
                 </tr>
                 <tr>
-                    <td>Dipyridamole</td><td> <input type="checkbox" name="dipyridamole" id="dipyridamole"/></td>
+                    <td>Dipyridamole</td><td> <input type="checkbox" name="dipyridamole" value="dipyridamole" id="dipyridamole"/></td>
                     <td>Dose <input type="text" name="dipyridamoleDosage" id="dipyridamoleDosage" class="small-textbox"/> mg/day</td>
                 </tr>
                 <tr>
-                    <td>Aspirin + Dipyridamole </td><td><input type="checkbox" name="aspirinPlusDipyridamole" id="aspirinPlusDipyridamole"/></td>
-                    <td>Dose <input type="text" name="aspirinPlusDipyridamoleDosage" id="aspirinPlusDipyridamoleDosage" class="small-textbox"/> + <input type="text" name="aspirinDipyridamoleDose2" id="aspirinDipyridamoleDose2" class="small-textbox"/> mg/day</td>
+                    <td>Aspirin + Dipyridamole </td><td><input type="checkbox" name="aspirinPlusDipyridamole" value="aspirinPlusDipyridamole" id="aspirinPlusDipyridamole"/></td>
+                    <td>Dose <input type="text" name="aspirinPlusDipyridamoleDosage1" id="aspirinPlusDipyridamoleDosage1" class="small-textbox"/> + <input type="text" name="aspirinPlusDipyridamoleDosage2" id="aspirinPlusDipyridamoleDosage2" class="small-textbox"/> mg/day</td>
                 </tr>
 
                 <tr>
-                    <td>Statin</td><td> <input type="checkbox" name="statin" id="statin"/></td>
+                    <td>Statin</td><td> <input type="checkbox" name="statin" value="statin" id="statin"/></td>
                     <td>Dose <input type="text" name="statinDosage" id="statinDosage" class="small-textbox"/> mg/day</td>
                 </tr>
                 <tr>
-                    <td>Antihypertensive</td><td> <input type="checkbox" name="antihypertensive" id="antihypertensive"/></td>
+                    <td>Antihypertensive</td><td> <input type="checkbox" name="antihypertensive" value="antihypertensive" id="antihypertensive"/></td>
                     <td>Dose <input type="text" name="antihypertensiveDosage" id="antihypertensiveDosage" class="small-textbox"/> mg/day</td>
                 </tr>
                 <tr>
-                    <td>Warfarin</td><td> <input type="checkbox" name="warfarin" id="warfarin"/></td>
+                    <td>Warfarin</td><td> <input type="checkbox" name="warfarin" value="warfarin" id="warfarin"/></td>
                     <td>Dose <input type="text" name="warfarinDosage" id="warfarinDosage" class="small-textbox"/> mg/day</td>
                 </tr>
             </table>
@@ -74,10 +77,15 @@
             <table>
                 <tr>
                     <td>DOB</td>
-                    <td><input type="text" name="spouseDateOfBirth" id="spouseDateOfBirth"></td>
+                    <td>
+                        <input type="number" name="spouseDobDate" id="spouseDobDate" value="" style="width: 45px;"/>
+                        <input type="number" name="spouseDobMonth" id="spouseDobMonth" value="" style="width: 45px;"/>
+                        <input type="number" name="spouseDobYear" id="spouseDobYear" value="" style="width: 100px;"/>
+                    </td>
                     <td>Gender</td>
-                    <td><input type="radio" name="spouseGender" id="spouseGenderMale" >
-                    <input type="radio" name="spouseGender" id="spouseGenderFemale">
+                    <td>
+                        <input type="radio" name="spouseGender" id="spouseGenderMale">Male
+                        <input type="radio" name="spouseGender" id="spouseGenderFemale">Female
                     </td>
                 </tr>
             </table>
@@ -116,7 +124,7 @@
         <td>Native Language:</td>
         <td> <input type="text" name="spouseNativeLanguage" id="spouseNativeLanguage"> </td>
         <td>BP today   </td>
-        <td><input type="text" name="bpToday" id="bpToday">/<input type="text" name="bpToday2" id="bpToday2">mmHg</td>
+        <td><input type="text" name="bpToday1" id="bpToday1">/<input type="text" name="bpToday2" id="bpToday2">mmHg</td>
     </tr>
     <tr>
         <td>
