@@ -12,13 +12,16 @@
 
         </header>
         <div class="form" style="width:100%;background: #f1f1f1;border-radius: 10px;">
-            <form id="form2" method="POST" style="padding-top: 2%;" action="@controllers.data.routes.DataController.handleSaveForm2()" data-uri="@controllers.data.routes.DataController.form3()">
+            <form id="form2" method="POST" style="padding-top: 2%;" action="@controllers.data.routes.Form2Controller.handleSaveForm2()" data-uri="@controllers.data.routes.DataController.form3()">
                 <div class="box message" ><!--style="display:none;padding-top: 2%;padding-left: 1%;padding-bottom: 2%;color: red;"-->
                     <div class="content-m">
 
                     </div>
                 </div>
                 <table cellspacing="5" cellpadding="5" style="clear: both;float: left;"/>
+                <tr>
+                    <td><input type="hidden" id="id" name="id" value=""/></td>
+                </tr>
                 <tr>
                     <td colspan="2">Data Collection Form (DCF)</td>
 
@@ -51,6 +54,90 @@
                                 <td>
                                     <input type="checkbox" name="laci" id="laci"/>Laci
                                     <input type="checkbox" name="poci" id="poci"/>Poci
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Hoemorrhagic Stroke
+                                </td>
+                                <td>
+                                    <select name="hoemorrhagicStroke" id="hoemorrhagicStroke">
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Venous Sinus Thrombosis
+                                </td>
+                                <td>
+                                    <select name="venousSinusThrombosis" id="venousSinusThrombosis">
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    TIA
+                                </td>
+                                <td>
+                                    <select name="tia" id="tia">
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    AVM
+                                </td>
+                                <td>
+                                    <select name="avm" id="avm">
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Aneurysm
+                                </td>
+                                <td>
+                                    <select name="aneurysm" id="aneurysm">
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Subarachnoid
+                                </td>
+                                <td>
+                                    <select name="subaranchoid" id="subaranchoid">
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+
+                                </td>
+                                <td>
                                 </td>
                             </tr>
                         </table>
