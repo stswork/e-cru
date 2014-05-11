@@ -2,6 +2,7 @@ $(document).ready(function () {
     $("form").live("submit", function(e) {
         $("#loader-a").attr("style","display:inline;");
         e.preventDefault();
+        alert("INSIDE");
         var _data = $(e.currentTarget).serialize();
         var _uri = $(e.currentTarget).data().uri;
         $.ajax({

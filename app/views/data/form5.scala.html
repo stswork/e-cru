@@ -58,14 +58,13 @@
                 <tr>
                     <td>Statin</td><td> <input type="checkbox" name="statin" value="statin" id="statin"/></td>
                     <td>Dose <input type="text" name="statinDosage" id="statinDosage" class="small-textbox"/> mg/day</td>
+                    <td>Name <input type="text" name="statinName" id="statinName" class="small-textbox"/></td>
                 </tr>
                 <tr>
                     <td>Antihypertensive</td><td> <input type="checkbox" name="antihypertensive" value="antihypertensive" id="antihypertensive"/></td>
-                    <td>Dose <input type="text" name="antihypertensiveDosage" id="antihypertensiveDosage" class="small-textbox"/> mg/day</td>
                 </tr>
                 <tr>
                     <td>Warfarin</td><td> <input type="checkbox" name="warfarin" value="warfarin" id="warfarin"/></td>
-                    <td>Dose <input type="text" name="warfarinDosage" id="warfarinDosage" class="small-textbox"/> mg/day</td>
                 </tr>
             </table>
 
@@ -76,15 +75,23 @@
         <td colspan="3">
             <table>
                 <tr>
+                    <td>Name</td>
+                    <td><input type="text" name="spouseName" id="spouseName" value="" style="width: 290px;" /></td>
+                </tr>
+                <tr>
+                    <td>Address</td>
+                    <td><textarea name="spouseAddress" id="spouseAddress" value="" style="margin: 0px; width: 290px; height: 58px;"></textarea></td>
+                </tr>
+                <tr>
                     <td>DOB</td>
                     <td>
-                        <input type="number" name="spouseDobDate" id="spouseDobDate" value="" style="width: 45px;"/>
-                        <input type="number" name="spouseDobMonth" id="spouseDobMonth" value="" style="width: 45px;"/>
+                        <input type="number" name="spouseDobDate" id="spouseDobDate" value="" style="width: 50px;"/>
+                        <input type="number" name="spouseDobMonth" id="spouseDobMonth" value="" style="width: 50px;"/>
                         <input type="number" name="spouseDobYear" id="spouseDobYear" value="" style="width: 100px;"/>
                     </td>
                     <td>Gender</td>
                     <td>
-                        <input type="radio" name="spouseGender" id="spouseGenderMale">Male
+                        <input type="radio" name="spouseGender" id="spouseGenderMale" checked="checked">Male
                         <input type="radio" name="spouseGender" id="spouseGenderFemale">Female
                     </td>
                 </tr>
@@ -97,15 +104,15 @@
              <table>
                  <tr>
                      <td>Landline   </td>
-                     <td> <input type="text" name="spouseLandlinePhoneNumber" id="spouseLandlinePhoneNumber"> </td>
+                     <td> <input type="text" name="spouseLandlinePhoneNumber" id="spouseLandlinePhoneNumber" style="width: 120px;"> </td>
                  </tr>
                  <tr>
                      <td>Cell Phone  </td>
-                     <td> <input type="text" name="spouseCellPhoneNumber" id="spouseCellPhoneNumber"> </td>
+                     <td> <input type="text" name="spouseCellPhoneNumber" id="spouseCellPhoneNumber" style="width: 120px;"> </td>
                  </tr>
                  <tr>
                      <td>Friend/relative </td>
-                     <td> <input type="text" name="spouseFriendPhoneNumber" id="spouseFriendPhoneNumber"> </td>
+                     <td> <input type="text" name="spouseFriendPhoneNumber" id="spouseFriendPhoneNumber" style="width: 120px;"> </td>
                  </tr>
              </table>
         </td>
@@ -197,23 +204,30 @@
                         <input type="radio" name="spouseMigraineWithAura" value="No">No
                         <input type="radio" name="spouseMigraineWithAura" value="DontKnow">Don't Know
                     </td>
-
+                </tr>
+                <tr>
+                    <td>Migraine without aura</td>
+                    <td colspan="2">
+                        <input type="radio" name="spouseMigraineWithoutAura" value="Yes">Yes
+                        <input type="radio" name="spouseMigraineWithoutAura" value="No">No
+                        <input type="radio" name="spouseMigraineWithoutAura" value="DontKnow">Don't Know
+                    </td>
                 </tr>
                 <tr>
                     <td>Ischaemic Stroke</td>
                     <td colspan="2">
-                        <input type="radio" name="ischaemic" value="Yes">Yes
-                        <input type="radio" name="ischaemic" value="No">No
-                        <input type="radio" name="ischaemic" value="DontKnow">Don't Know
+                        <input type="radio" name="ischaemicStroke" value="Yes">Yes
+                        <input type="radio" name="ischaemicStroke" value="No">No
+                        <input type="radio" name="ischaemicStroke" value="DontKnow">Don't Know
                     </td>
 
                 </tr>
                 <tr>
                     <td>Hoemorrhagic Stroke  </td>
                     <td colspan="2">
-                        <input type="radio" name="hoemorrhagic" value="Yes">Yes
-                        <input type="radio" name="hoemorrhagic" value="No">No
-                        <input type="radio" name="hoemorrhagic" value="DontKnow">Don't Know
+                        <input type="radio" name="hoemorrhagicStroke" value="Yes">Yes
+                        <input type="radio" name="hoemorrhagicStroke" value="No">No
+                        <input type="radio" name="hoemorrhagicStroke" value="DontKnow">Don't Know
                     </td>
 
                 </tr>
@@ -247,7 +261,31 @@
 @footer()
 </div>
 } {
-<!--<script type="text/javascript" src="@routes.Assets.at("javascripts/user/events.js")"></script>-->
+<script type="text/javascript" src="@routes.Assets.at("javascripts/form/events.js")"></script>
+<script>
+$(document).ready(function () {
+
+    <!--For checkbox and textbox validation-->
+    $("form input:checkbox").change(function() {
+        var _id = $(this).attr('id');
+        if(_id == 'aspirinPlusClopidogrel' || _id == 'aspirinPlusDipyridamole') {
+            if($('#' + _id).is(':checked')) {
+                $('#' + _id + 'Dosage1').prop('required', true);
+                $('#' + _id + 'Dosage2').prop('required', true);
+            } else {
+                $('#' + _id + 'Dosage1').prop('required', false);
+                $('#' + _id + 'Dosage2').prop('required', false);
+            }
+        } else {
+            if($('#' + _id).is(':checked')) {
+                $('#' + _id + 'Dosage').prop('required', true);
+            } else {
+                $('#' + _id + 'Dosage').prop('required', false);
+            }
+        }
+    });
+});
+</script>
 <style>
     .form input[type="text"]{
     width:80px;

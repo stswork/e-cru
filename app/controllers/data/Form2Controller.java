@@ -86,10 +86,8 @@ public class Form2Controller extends Controller {
                    ,dipyridamoleDosage,aspirinPlusDipyridamoleDosage,warfarinInr,statinDosage,statinName,antihypertensive,
                    medicineNoneOfTheAbove,bpOnAdmission,temperatureOnAdmission,carotidEndarterectomyDone,thrombolysedDone,
                    ctaDone,mraDone,angiogramDone*/);
-
         dcf2.save();
         session("pid", patientIdNumber.toString());
         return ok(Json.toJson(new ResponseMessage(200, "Form two saved successfully", ResponseMessageType.SUCCESSFUL)));
-
     }
 }

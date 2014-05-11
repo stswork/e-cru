@@ -299,7 +299,6 @@ create table data_collection_form5 (
   aspirin_plus_dipyridamole_dosage1 varchar(255),
   aspirin_plus_dipyridamole_dosage2 varchar(255),
   warfarin                  integer,
-  warfarin_inr              varchar(255),
   statin                    integer,
   statin_dosage             varchar(255),
   statin_name               varchar(255),
