@@ -29,7 +29,7 @@ public class Form3Controller extends Controller {
     private static final String URL_SEPARATOR = "/";
 
     @With(Authenticated.class)
-    public static Result handleSaveForm2() {
+    public static Result handleSaveForm3() {
         DataCollectionForm3 dcf3 = new DataCollectionForm3();
 
         Map<String, String[]> map = request().body().asFormUrlEncoded();
@@ -42,17 +42,20 @@ public class Form3Controller extends Controller {
         Double height = Double.valueOf(map.get("height").length <= 0 ? StringUtils.EMPTY : map.get("height")[0]);
         Double weight = Double.valueOf(map.get("weight").length <= 0 ? StringUtils.EMPTY : map.get("weight")[0]);
         Double bmi = Double.valueOf(map.get("bmi").length <= 0 ? StringUtils.EMPTY : map.get("bmi")[0]);
-        YesNo aspirin = YesNo.valueOf(StringUtils.isEmpty(map.get("aspirin")[0]) ? StringUtils.EMPTY : map.get("aspirin")[0].toUpperCase());
+
+        YesNo aspirin = YesNo.valueOf(StringUtils.isEmpty(map.get("aspirin")[0]) ? StringUtils.EMPTY : map.get("aspirin")[0]);
+
+        //YesNo aspirin = YesNo.valueOf(StringUtils.isEmpty(map.get("aspirin")[0]) ? StringUtils.EMPTY : map.get("aspirin")[0].toUpperCase());
         String aspirinDosage = StringUtils.isEmpty(map.get("aspirinDosage")[0]) ? StringUtils.EMPTY : map.get("aspirinDosage")[0];
-        YesNo clopidogrel = YesNo.valueOf(StringUtils.isEmpty(map.get("clopidogrel")[0]) ? StringUtils.EMPTY : map.get("clopidogrel")[0].toUpperCase());
+        YesNo clopidogrel = YesNo.valueOf(StringUtils.isEmpty(map.get("clopidogrel")[0]) ? StringUtils.EMPTY : map.get("clopidogrel")[0]);
         String clopidogrelDosage = StringUtils.isEmpty(map.get("clopidogrelDosage")[0]) ? StringUtils.EMPTY : map.get("clopidogrelDosage")[0];
-        YesNo aspirinPlusClopidogrel = YesNo.valueOf(StringUtils.isEmpty(map.get("aspirinPlusClopidogrel")[0]) ? StringUtils.EMPTY : map.get("aspirinPlusClopidogrel")[0].toUpperCase());
+        YesNo aspirinPlusClopidogrel = YesNo.valueOf(StringUtils.isEmpty(map.get("aspirinPlusClopidogrel")[0]) ? StringUtils.EMPTY : map.get("aspirinPlusClopidogrel")[0]);
         String aspirinPlusClopidogrelDosage = StringUtils.isEmpty(map.get("aspirinPlusClopidogrelDosage")[0]) ? StringUtils.EMPTY : map.get("aspirinPlusClopidogrelDosage")[0];
-        YesNo dipyridamole = YesNo.valueOf(StringUtils.isEmpty(map.get("dipyridamole")[0]) ? StringUtils.EMPTY : map.get("dipyridamole")[0].toUpperCase());
+        YesNo dipyridamole = YesNo.valueOf(StringUtils.isEmpty(map.get("dipyridamole")[0]) ? StringUtils.EMPTY : map.get("dipyridamole")[0]);
         String dipyridamoleDosage = StringUtils.isEmpty(map.get("dipyridamoleDosage")[0]) ? StringUtils.EMPTY : map.get("dipyridamoleDosage")[0];
-        YesNo aspirinPlusDipyridamole = YesNo.valueOf(StringUtils.isEmpty(map.get("aspirinPlusDipyridamole")[0]) ? StringUtils.EMPTY : map.get("aspirinPlusDipyridamole")[0].toUpperCase());
+        YesNo aspirinPlusDipyridamole = YesNo.valueOf(StringUtils.isEmpty(map.get("aspirinPlusDipyridamole")[0]) ? StringUtils.EMPTY : map.get("aspirinPlusDipyridamole")[0]);
         String aspirinPlusDipyridamoleDosage = StringUtils.isEmpty(map.get("aspirinPlusDipyridamoleDosage")[0]) ? StringUtils.EMPTY : map.get("aspirinPlusDipyridamoleDosage")[0];
-        YesNo warfarin = YesNo.valueOf(StringUtils.isEmpty(map.get("warfarin")[0]) ? StringUtils.EMPTY : map.get("warfarin")[0].toUpperCase());
+        YesNo warfarin = YesNo.valueOf(StringUtils.isEmpty(map.get("warfarin")[0]) ? StringUtils.EMPTY : map.get("warfarin")[0]);
         String warfarinInr = StringUtils.isEmpty(map.get("warfarinInr")[0]) ? StringUtils.EMPTY : map.get("warfarinInr")[0];
         YesNo statin = YesNo.valueOf(StringUtils.isEmpty(map.get("statin")[0]) ? StringUtils.EMPTY : map.get("statin")[0].toUpperCase());
         String statinDosage = StringUtils.isEmpty(map.get("statinDosage")[0]) ? StringUtils.EMPTY : map.get("statinDosage")[0];
