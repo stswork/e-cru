@@ -100,7 +100,6 @@ public class Form3Controller extends Controller {
         if(!StringUtils.isEmpty(medicineNoneOfTheAbove)){
             dcf3.setMedicineNoneOfTheAbove(YesNo.YES);
         }
-
         String glucoseBloodTest = map.containsKey("glucoseBloodTest") ? StringUtils.EMPTY : map.get("glucoseBloodTest")[0];
         String totalCholesterolBloodTest = map.containsKey("totalCholesterolBloodTest") ? StringUtils.EMPTY : map.get("totalCholesterolBloodTest")[0];
         String hdlCholesterolBloodTest = map.containsKey("hdlCholesterolBloodTest") ? StringUtils.EMPTY : map.get("hdlCholesterolBloodTest")[0];
@@ -197,17 +196,32 @@ public class Form3Controller extends Controller {
             dcf3.setAntiphospholipidBloodTest(YesNo.YES);
             dcf3.setAntiphospholipidBloodTestResult(antiphospholipidBloodTestResult);
         }
-        String bpOnAdmission = StringUtils.isEmpty(map.get("bpOnAdmission")[0]) ? StringUtils.EMPTY : map.get("bpOnAdmission")[0];
+        String bpOnAdmission1 = StringUtils.isEmpty(map.get("bpOnAdmission1")[0]) ? StringUtils.EMPTY : map.get("bpOnAdmission1")[0];
+        String bpOnAdmission2 = StringUtils.isEmpty(map.get("bpOnAdmission2")[0]) ? StringUtils.EMPTY : map.get("bpOnAdmission2")[0];
         String temperatureOnAdmission = StringUtils.isEmpty(map.get("temperatureOnAdmission")[0]) ? StringUtils.EMPTY : map.get("temperatureOnAdmission")[0];
         YesNo carotidEndarterectomyDone = YesNo.valueOf(StringUtils.isEmpty(map.get("carotidEndarterectomyDone")[0]) ? StringUtils.EMPTY : map.get("carotidEndarterectomyDone")[0]);
         YesNo thrombolysedDone = YesNo.valueOf(StringUtils.isEmpty(map.get("thrombolysedDone")[0]) ? StringUtils.EMPTY : map.get("thrombolysedDone")[0]);
         YesNo ctaDone = YesNo.valueOf(StringUtils.isEmpty(map.get("ctaDone")[0]) ? StringUtils.EMPTY : map.get("ctaDone")[0]);
         YesNo mraDone = YesNo.valueOf(StringUtils.isEmpty(map.get("mraDone")[0]) ? StringUtils.EMPTY : map.get("mraDone")[0]);
         YesNo angiogramDone = YesNo.valueOf(StringUtils.isEmpty(map.get("angiogramDone")[0]) ? StringUtils.EMPTY : map.get("angiogramDone")[0]);
-
-        dcf3.save();
+        dcf3.setPatientIdNumber(patientIdNumber);
+        dcf3.setAlcoholUnitsPerWeek(alcoholUnitsPerWeek);
+        dcf3.setHeight(height);
+        dcf3.setWeight(weight);
+        dcf3.setBmi(bmi);
+        dcf3.setBpOnAdmission(bpOnAdmission1 + "/" + bpOnAdmission2);
+        dcf3.setTemperatureOnAdmission(temperatureOnAdmission);
+        dcf3.setCarotidEndarterectomyDone(carotidEndarterectomyDone);
+        dcf3.setThrombolysedDone(thrombolysedDone);
+        dcf3.setCtaDone(ctaDone);
+        dcf3.setMraDone(mraDone);
+        dcf3.setAngiogramDone(angiogramDone);
+        if(id > 0)
+            dcf3.update();
+        else
+            dcf3.save();
         session("pid", patientIdNumber.toString());
         return ok(Json.toJson(new ResponseMessage(200, "Form two saved successfully", ResponseMessageType.SUCCESSFUL)));
 
     }
-    }
+}
