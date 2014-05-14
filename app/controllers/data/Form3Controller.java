@@ -43,7 +43,7 @@ public class Form3Controller extends Controller {
         Double weight = Double.valueOf(map.get("weight").length <= 0 ? StringUtils.EMPTY : map.get("weight")[0]);
         Double bmi = Double.valueOf(map.get("bmi").length <= 0 ? StringUtils.EMPTY : map.get("bmi")[0]);
 
-        YesNo aspirin = YesNo.valueOf(StringUtils.isEmpty(map.get("aspirin")[0]) ? StringUtils.EMPTY : map.get("aspirin")[0]);
+        YesNo aspirin = YesNo.valueOf(map.containsKey("aspirin") ? StringUtils.EMPTY : map.get("aspirin")[0]);
 
 
         String aspirinDosage = StringUtils.isEmpty(map.get("aspirinDosage")[0]) ? StringUtils.EMPTY : map.get("aspirinDosage")[0];
