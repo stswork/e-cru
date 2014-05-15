@@ -68,12 +68,29 @@ public class Form2Controller extends Controller {
         YesNo familyPvd = YesNo.valueOf(map.get("familyPvd").length <= 0 ? StringUtils.EMPTY : map.get("familyPvd")[0].toUpperCase());
         YesNo familyHypertension = YesNo.valueOf(map.get("familyHypertension").length <= 0 ? StringUtils.EMPTY : map.get("familyHypertension")[0].toUpperCase());
         YesNo familyNoneOfTheAbove = YesNo.valueOf(map.get("familyNoneOfTheAbove").length <= 0 ? StringUtils.EMPTY : map.get("familyNoneOfTheAbove")[0].toUpperCase());
-        YesNo currentSmoker = YesNo.DONT_KNOW/*YesNo.valueOf(map.get("currentSmoker").length <= 0 ? StringUtils.EMPTY : map.get("currentSmoker")[0].toUpperCase())*/;
+
+        String currentSmoker = !map.containsKey("currentSmoker") ? StringUtils.EMPTY : map.get("currentSmoker")[0];
+        if(!StringUtils.isEmpty(currentSmoker)){
+            dcf2.setCurrentSmoker(YesNo.YES);
+        }
+
+
         Integer cigarettePerDay = Integer.valueOf(map.get("cigarettePerDay").length <= 0 ? StringUtils.EMPTY : map.get("cigarettePerDay")[0]);
-        YesNo exSmoker = YesNo.DONT_KNOW/*YesNo.valueOf(map.get("exSmoker").length <= 0 ? StringUtils.EMPTY : map.get("exSmoker")[0].toUpperCase())*/;
-        YesNo never = YesNo.DONT_KNOW/*YesNo.valueOf(map.get("never").length <= 0 ? StringUtils.EMPTY : map.get("never")[0].toUpperCase())*/;
+        //YesNo exSmoker = YesNo.DONT_KNOW/*YesNo.valueOf(map.get("exSmoker").length <= 0 ? StringUtils.EMPTY : map.get("exSmoker")[0].toUpperCase())*/;
+        String exSmoker = !map.containsKey("exSmoker") ? StringUtils.EMPTY : map.get("exSmoker")[0];
+        if(!StringUtils.isEmpty(exSmoker)){
+            dcf2.setExSmoker(YesNo.YES);
+        }
+
+        //YesNo never = YesNo.DONT_KNOW/*YesNo.valueOf(map.get("never").length <= 0 ? StringUtils.EMPTY : map.get("never")[0].toUpperCase())*/;
+        String never = !map.containsKey("never") ? StringUtils.EMPTY : map.get("never")[0];
+        if(!StringUtils.isEmpty(never)){
+            dcf2.setNever(YesNo.YES);
+        }
         Double hip = Double.valueOf(map.get("cigarettePerDay").length <= 0 ? StringUtils.EMPTY : map.get("cigarettePerDay")[0]);
         Double waist = Double.valueOf(map.get("cigarettePerDay").length <= 0 ? StringUtils.EMPTY : map.get("cigarettePerDay")[0]);
+
+
 
         dcf2= new DataCollectionForm2(patientIdNumber,ischaemicStroke,
                    hoemorrhagicStroke,venousSinusThrombosis,tia,avm,aneurysm,subaranchoid,
@@ -81,7 +98,7 @@ public class Form2Controller extends Controller {
                    pvd,mi,migraineWithAura,migraineWithoutAura,ischaemicStrokeYear,hoemorrhagicStrokeYear,
                    tiaYear,strokeAssociatedWithDissection,strokeAssociatedWithPfo,strokeAssociatedWithMi,
                    familyStroke,familyIhdAngina,familyDiabetesMellitus,familyMi,familyPvd,familyHypertension,
-                   familyNoneOfTheAbove,currentSmoker,cigarettePerDay,exSmoker,never,hip,waist
+                   familyNoneOfTheAbove,/*currentSmoker,*/cigarettePerDay,/*exSmoker,never,*/hip,waist
                    /*,alcoholUnitsPerWeek,height,weight,bmi,aspirinDosage,clopidogrelDosage,aspirinPlusClopidogrelDosage
                    ,dipyridamoleDosage,aspirinPlusDipyridamoleDosage,warfarinInr,statinDosage,statinName,antihypertensive,
                    medicineNoneOfTheAbove,bpOnAdmission,temperatureOnAdmission,carotidEndarterectomyDone,thrombolysedDone,

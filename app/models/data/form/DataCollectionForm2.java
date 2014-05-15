@@ -132,7 +132,7 @@ public class DataCollectionForm2 extends Model {
     public DataCollectionForm2() {
     }
 
-    public DataCollectionForm2(Integer patientIdNumber, YesNo ischaemicStroke, YesNo hoemorrhagicStroke, YesNo venousSinusThrombosis, YesNo tia, YesNo avm, YesNo aneurysm, YesNo subaranchoid, YesNo hypertension, YesNo diabetesMellitus, YesNo ihdAngina, YesNo hypercholesterolemia, YesNo atrialFibrillation, YesNo pvd, YesNo mi, YesNo migraineWithAura, YesNo migraineWithoutAura, Integer ischaemicStrokeYear, Integer hoemorrhagicStrokeYear, Integer tiaYear, YesNo strokeAssociatedWithDissection, YesNo strokeAssociatedWithPfo, YesNo strokeAssociatedWithMi, YesNo familyStroke, YesNo familyIhdAngina, YesNo familyDiabetesMellitus, YesNo familyMi, YesNo familyPvd, YesNo familyHypertension, YesNo familyNoneOfTheAbove, YesNo currentSmoker, Integer cigarettePerDay, YesNo exSmoker, YesNo never, Double hip, Double waist
+    public DataCollectionForm2(Integer patientIdNumber, YesNo ischaemicStroke, YesNo hoemorrhagicStroke, YesNo venousSinusThrombosis, YesNo tia, YesNo avm, YesNo aneurysm, YesNo subaranchoid, YesNo hypertension, YesNo diabetesMellitus, YesNo ihdAngina, YesNo hypercholesterolemia, YesNo atrialFibrillation, YesNo pvd, YesNo mi, YesNo migraineWithAura, YesNo migraineWithoutAura, Integer ischaemicStrokeYear, Integer hoemorrhagicStrokeYear, Integer tiaYear, YesNo strokeAssociatedWithDissection, YesNo strokeAssociatedWithPfo, YesNo strokeAssociatedWithMi, YesNo familyStroke, YesNo familyIhdAngina, YesNo familyDiabetesMellitus, YesNo familyMi, YesNo familyPvd, YesNo familyHypertension, YesNo familyNoneOfTheAbove,/* YesNo currentSmoker,*/ Integer cigarettePerDay, /*YesNo exSmoker, YesNo never,*/ Double hip, Double waist
             /*, Integer alcoholUnitsPerWeek, Double height, Double weight, Double bmi, String aspirinDosage, String clopidogrelDosage, String aspirinPlusClopidogrelDosage, String dipyridamoleDosage, String aspirinPlusDipyridamoleDosage, String warfarinInr, String statinDosage, String statinName, YesNo antihypertensive, YesNo medicineNoneOfTheAbove, String bpOnAdmission, String temperatureOnAdmission, YesNo carotidEndarterectomyDone, YesNo thrombolysedDone, YesNo ctaDone, YesNo mraDone, YesNo angiogramDone*/
     ) {
         this.patientIdNumber = patientIdNumber;
@@ -165,10 +165,10 @@ public class DataCollectionForm2 extends Model {
         this.familyPvd = familyPvd;
         this.familyHypertension = familyHypertension;
         this.familyNoneOfTheAbove = familyNoneOfTheAbove;
-        this.currentSmoker = currentSmoker;
+        //this.currentSmoker = currentSmoker;
         this.cigarettePerDay = cigarettePerDay;
-        this.exSmoker = exSmoker;
-        this.never = never;
+        //this.exSmoker = exSmoker;
+        //this.never = never;
         this.hip = hip;
         this.waist = waist;
     }

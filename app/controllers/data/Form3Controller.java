@@ -48,15 +48,15 @@ public class Form3Controller extends Controller {
         Double weight = Double.valueOf(map.get("weight").length <= 0 ? StringUtils.EMPTY : map.get("weight")[0]);
         Double bmi = Double.valueOf(map.get("bmi").length <= 0 ? StringUtils.EMPTY : map.get("bmi")[0]);
 
-        String aspirin = map.containsKey("aspirin") ? StringUtils.EMPTY : map.get("aspirin")[0];
-        String clopidogrel = map.containsKey("clopidogrel") ? StringUtils.EMPTY : map.get("clopidogrel")[0];
-        String aspirinPlusClopidogrel = map.containsKey("aspirinPlusClopidogrel") ? StringUtils.EMPTY : map.get("aspirinPlusClopidogrel")[0];
-        String dipyridamole = map.containsKey("dipyridamole") ? StringUtils.EMPTY : map.get("dipyridamole")[0];
-        String aspirinPlusDipyridamole = map.containsKey("aspirinPlusDipyridamole") ? StringUtils.EMPTY : map.get("aspirinPlusDipyridamole")[0];
-        String warfarin = map.containsKey("warfarin") ? StringUtils.EMPTY : map.get("warfarin")[0];
-        String statin = map.containsKey("statin") ? StringUtils.EMPTY : map.get("statin")[0];
-        String antihypertensive = map.containsKey("antihypertensive") ? StringUtils.EMPTY : map.get("antihypertensive")[0];
-        String medicineNoneOfTheAbove = map.containsKey("medicineNoneOfTheAbove") ? StringUtils.EMPTY : map.get("medicineNoneOfTheAbove")[0];
+        String aspirin = !map.containsKey("aspirin") ? StringUtils.EMPTY : map.get("aspirin")[0];
+        String clopidogrel = !map.containsKey("clopidogrel") ? StringUtils.EMPTY : map.get("clopidogrel")[0];
+        String aspirinPlusClopidogrel = !map.containsKey("aspirinPlusClopidogrel") ? StringUtils.EMPTY : map.get("aspirinPlusClopidogrel")[0];
+        String dipyridamole = !map.containsKey("dipyridamole") ? StringUtils.EMPTY : map.get("dipyridamole")[0];
+        String aspirinPlusDipyridamole = !map.containsKey("aspirinPlusDipyridamole") ? StringUtils.EMPTY : map.get("aspirinPlusDipyridamole")[0];
+        String warfarin = !map.containsKey("warfarin") ? StringUtils.EMPTY : map.get("warfarin")[0];
+        String statin = !map.containsKey("statin") ? StringUtils.EMPTY : map.get("statin")[0];
+        String antihypertensive = !map.containsKey("antihypertensive") ? StringUtils.EMPTY : map.get("antihypertensive")[0];
+        String medicineNoneOfTheAbove = !map.containsKey("medicineNoneOfTheAbove") ? StringUtils.EMPTY : map.get("medicineNoneOfTheAbove")[0];
         if(!StringUtils.isEmpty(aspirin)){
             String aspirinDosage = StringUtils.isEmpty(map.get("aspirinDosage")[0]) ? StringUtils.EMPTY : map.get("aspirinDosage")[0];
             dcf3.setAspirin(YesNo.YES);
@@ -100,22 +100,22 @@ public class Form3Controller extends Controller {
         if(!StringUtils.isEmpty(medicineNoneOfTheAbove)){
             dcf3.setMedicineNoneOfTheAbove(YesNo.YES);
         }
-        String glucoseBloodTest = map.containsKey("glucoseBloodTest") ? StringUtils.EMPTY : map.get("glucoseBloodTest")[0];
-        String totalCholesterolBloodTest = map.containsKey("totalCholesterolBloodTest") ? StringUtils.EMPTY : map.get("totalCholesterolBloodTest")[0];
-        String hdlCholesterolBloodTest = map.containsKey("hdlCholesterolBloodTest") ? StringUtils.EMPTY : map.get("hdlCholesterolBloodTest")[0];
-        String ldlCholesterolBloodTest = map.containsKey("ldlCholesterolBloodTest") ? StringUtils.EMPTY : map.get("ldlCholesterolBloodTest")[0];
-        String triglycerideBloodTest = map.containsKey("triglycerideBloodTest") ? StringUtils.EMPTY : map.get("triglycerideBloodTest")[0];
-        String esrBloodTest = map.containsKey("esrBloodTest") ? StringUtils.EMPTY : map.get("esrBloodTest")[0];
-        String crpBloodTest = map.containsKey("crpBloodTest") ? StringUtils.EMPTY : map.get("crpBloodTest")[0];
-        String troponimBloodTest = map.containsKey("troponimBloodTest") ? StringUtils.EMPTY : map.get("troponimBloodTest")[0];
-        String proteinCBloodTest = map.containsKey("proteinCBloodTest") ? StringUtils.EMPTY : map.get("proteinCBloodTest")[0];
-        String proteinSBloodTest = map.containsKey("proteinSBloodTest") ? StringUtils.EMPTY : map.get("proteinSBloodTest")[0];
-        String fibrinogenBloodTest = map.containsKey("fibrinogenBloodTest") ? StringUtils.EMPTY : map.get("fibrinogenBloodTest")[0];
-        String antithrombin11BloodTest = map.containsKey("antithrombin11BloodTest") ? StringUtils.EMPTY : map.get("antithrombin11BloodTest")[0];
-        String factorVBloodTest = map.containsKey("factorVBloodTest") ? StringUtils.EMPTY : map.get("factorVBloodTest")[0];
-        String homocysteineBloodTest = map.containsKey("homocysteineBloodTest") ? StringUtils.EMPTY : map.get("homocysteineBloodTest")[0];
-        String prothrombinBloodTest = map.containsKey("prothrombinBloodTest") ? StringUtils.EMPTY : map.get("prothrombinBloodTest")[0];
-        String antiphospholipidBloodTest = map.containsKey("antiphospholipidBloodTest") ? StringUtils.EMPTY : map.get("antiphospholipidBloodTest")[0];
+        String glucoseBloodTest = !map.containsKey("glucoseBloodTest") ? StringUtils.EMPTY : map.get("glucoseBloodTest")[0];
+        String totalCholesterolBloodTest = !map.containsKey("totalCholesterolBloodTest") ? StringUtils.EMPTY : map.get("totalCholesterolBloodTest")[0];
+        String hdlCholesterolBloodTest = !map.containsKey("hdlCholesterolBloodTest") ? StringUtils.EMPTY : map.get("hdlCholesterolBloodTest")[0];
+        String ldlCholesterolBloodTest = !map.containsKey("ldlCholesterolBloodTest") ? StringUtils.EMPTY : map.get("ldlCholesterolBloodTest")[0];
+        String triglycerideBloodTest = !map.containsKey("triglycerideBloodTest") ? StringUtils.EMPTY : map.get("triglycerideBloodTest")[0];
+        String esrBloodTest = !map.containsKey("esrBloodTest") ? StringUtils.EMPTY : map.get("esrBloodTest")[0];
+        String crpBloodTest = !map.containsKey("crpBloodTest") ? StringUtils.EMPTY : map.get("crpBloodTest")[0];
+        String troponimBloodTest = !map.containsKey("troponimBloodTest") ? StringUtils.EMPTY : map.get("troponimBloodTest")[0];
+        String proteinCBloodTest = !map.containsKey("proteinCBloodTest") ? StringUtils.EMPTY : map.get("proteinCBloodTest")[0];
+        String proteinSBloodTest = !map.containsKey("proteinSBloodTest") ? StringUtils.EMPTY : map.get("proteinSBloodTest")[0];
+        String fibrinogenBloodTest = !map.containsKey("fibrinogenBloodTest") ? StringUtils.EMPTY : map.get("fibrinogenBloodTest")[0];
+        String antithrombin11BloodTest = !map.containsKey("antithrombin11BloodTest") ? StringUtils.EMPTY : map.get("antithrombin11BloodTest")[0];
+        String factorVBloodTest = !map.containsKey("factorVBloodTest") ? StringUtils.EMPTY : map.get("factorVBloodTest")[0];
+        String homocysteineBloodTest = !map.containsKey("homocysteineBloodTest") ? StringUtils.EMPTY : map.get("homocysteineBloodTest")[0];
+        String prothrombinBloodTest = !map.containsKey("prothrombinBloodTest") ? StringUtils.EMPTY : map.get("prothrombinBloodTest")[0];
+        String antiphospholipidBloodTest = !map.containsKey("antiphospholipidBloodTest") ? StringUtils.EMPTY : map.get("antiphospholipidBloodTest")[0];
         if(!StringUtils.isEmpty(glucoseBloodTest)) {
             String glucoseBloodTestResult = StringUtils.isEmpty(map.get("glucoseBloodTestResult")[0]) ? StringUtils.EMPTY : map.get("glucoseBloodTestResult")[0];
             dcf3.setGlucoseBloodTest(YesNo.YES);
