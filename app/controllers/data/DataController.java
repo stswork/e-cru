@@ -226,7 +226,7 @@ public class DataController extends Controller {
         YesNo negativeEvaluation = !map.containsKey("negativeEvaluation") ? YesNo.NO : YesNo.YES;
         YesNo ecgDone = YesNo.valueOf(StringUtils.isEmpty(map.get("ecgDone")[0]) ? StringUtils.EMPTY : map.get("ecgDone")[0]);
         YesNo echoDone = YesNo.valueOf(StringUtils.isEmpty(map.get("echoDone")[0]) ? StringUtils.EMPTY : map.get("echoDone")[0]);
-        YesNo ecgNormal = YesNo.valueOf(map.containsKey("ecgNormal") ? StringUtils.EMPTY : map.get("ecgNormal")[0]);
+        YesNo ecgNormal = !map.containsKey("ecgNormal") ? YesNo.NO : YesNo.YES;
         YesNo ecgLvf = !map.containsKey("ecgLvf") ? YesNo.NO : YesNo.YES;
         YesNo ecgAf = !map.containsKey("ecgAf") ? YesNo.NO : YesNo.YES;
         YesNo ecgVentricularEctopics = !map.containsKey("ecgVentricularEctopics") ? YesNo.NO : YesNo.YES;
