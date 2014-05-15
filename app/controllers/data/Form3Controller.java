@@ -45,6 +45,7 @@ public class Form3Controller extends Controller {
 
         YesNo aspirin = YesNo.valueOf(StringUtils.isEmpty(map.get("aspirin")[0]) ? StringUtils.EMPTY : map.get("aspirin")[0]);
 
+       /* String aspirin = map.containsKey("aspirin") ? StringUtils.EMPTY : map.get("aspirin")[0];*/
 
         String aspirinDosage = StringUtils.isEmpty(map.get("aspirinDosage")[0]) ? StringUtils.EMPTY : map.get("aspirinDosage")[0];
         YesNo clopidogrel = YesNo.valueOf(StringUtils.isEmpty(map.get("clopidogrel")[0]) ? StringUtils.EMPTY : map.get("clopidogrel")[0]);
