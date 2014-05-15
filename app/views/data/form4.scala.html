@@ -12,13 +12,16 @@
 
 </header>
 <div class="form" style="width:100%;background: #f1f1f1;border-radius: 10px;">
-<form id="userForm" method="GET" style="padding-top: 2%;" action="/form5" data-uri="@controllers.user.routes.UserController.save(0)">
+<form id="userForm" method="POST" style="padding-top: 2%;" action="@controllers.data.routes.DataController.handleSaveForm4()" data-uri="@controllers.user.routes.UserController.save(0)">
 <div class="box message" ><!--style="display:none;padding-top: 2%;padding-left: 1%;padding-bottom: 2%;color: red;"-->
     <div class="content-m">
 
     </div>
 </div>
 <table cellspacing="5" cellpadding="5" style="clear: both;float: left;"/>
+<tr>
+    <td><input type="hidden" id="id" name="id" value=""/></td>
+</tr>
 <tr>
     <td colspan="2">Data Collection Form (DCF)</td>
 
@@ -30,9 +33,9 @@
         Intracranial stenosis:
     </td>
     <td colspan="3">
-        Yes <input type="radio" name="intracranialStenosis" value="Yes">
+        Yes <input type="radio" name="intracranialStenosis" value="YES">
         <input type="text" id="intracranialStenosisPercent" name="intracranialStenosisPercent" /> %
-        No <input type="radio" name="intracranialStenosis" id="intracranialStenosisNo" value="No"/>
+        No <input type="radio" name="intracranialStenosis" id="intracranialStenosisNo" value="NO"/>
     </td>
 </tr>
 <tr>
@@ -43,22 +46,22 @@
             </tr>
             <tr>
                 <td>Dopplers  </td>
-                <td>Done<input type="radio" name="extracranialDopplersImagingDone" id="extracranialDopplersImagingDone" value="Yes"/>
-                Not Done <input type="radio" name="extracranialDopplersImagingDone" id="extracranialDopplersImagingNotDone" value="No"/>
+                <td>Done<input type="radio" name="extracranialDopplersImagingDone" id="extracranialDopplersImagingDone" value="YES"/>
+                Not Done <input type="radio" name="extracranialDopplersImagingDone" id="extracranialDopplersImagingNotDone" value="NO"/>
                 </td>
             </tr>
             <tr>
                 <td>
                    MRA
                 </td>
-                <td>Done<input type="radio" name="extracranialMraImagingDone" id="extracranialMraImagingDone" value="Yes"/>
-                    Not Done <input type="radio" name="extracranialMraImagingDone" id="extracranialMraImagingNotDone" value="No"/>
+                <td>Done<input type="radio" name="extracranialMraImagingDone" id="extracranialMraImagingDone" value="YES"/>
+                    Not Done <input type="radio" name="extracranialMraImagingDone" id="extracranialMraImagingNotDone" value="NO"/>
                 </td>
             </tr>
             <tr>
                 <td>CTA</td>
-                <td>Done<input type="radio" name="extracranialCtaImagingDone" id="extracranialCtaImagingDone" value="Yes"/>
-                    Not Done <input type="radio" name="extracranialCtaImagingDone" id="extracranialCtaImagingNotDone" value="No"/>
+                <td>Done<input type="radio" name="extracranialCtaImagingDone" id="extracranialCtaImagingDone" value="YES"/>
+                    Not Done <input type="radio" name="extracranialCtaImagingDone" id="extracranialCtaImagingNotDone" value="NO"/>
                 </td>
             </tr>
         </table>
@@ -67,14 +70,14 @@
         <table>
             <tr>
                 <td>CT</td>
-                <td>Done<input type="radio" name="brainCtImagingDone" id="brainCtImagingDone" value="Yes"/>
-                    Not Done <input type="radio" name="brainCtImagingDone" id="brainCtImagingNotDone" value="No"/>
+                <td>Done<input type="radio" name="brainCtImagingDone" id="brainCtImagingDone" value="YES"/>
+                    Not Done <input type="radio" name="brainCtImagingDone" id="brainCtImagingNotDone" value="NO"/>
                 </td>
             </tr>
             <tr>
                 <td>MRI</td>
-                <td>Done<input type="radio" name="brainMriImagingDone" id="brainMriImagingDone" value="Yes"/>
-                    Not Done <input type="radio" name="brainMriImagingDone" id="brainMriImagingNotDone" value="No"/>
+                <td>Done<input type="radio" name="brainMriImagingDone" id="brainMriImagingDone" value="YES"/>
+                    Not Done <input type="radio" name="brainMriImagingDone" id="brainMriImagingNotDone" value="NO"/>
                 </td>
             </tr>
             <tr>
@@ -182,13 +185,13 @@
  <tr>
      <td>ECG</td>
      <td>
-         Done<input type="radio" name="ecgDone" id="ecgDone">
-         Not Done<input type="radio" name="ecgDone" id="ecgNotDone">
+         Done<input type="radio" name="ecgDone" id="ecgDone" value="YES">
+         Not Done<input type="radio" name="ecgDone" id="ecgNotDone" value="NO">
      </td>
      <td>ECHO</td>
      <td>
-         Done<input type="radio" name="echoDone" id="echoDone">
-         Not Done<input type="radio" name="echoDone" id="echoNotDone">
+         Done<input type="radio" name="echoDone" id="echoDone" value="YES">
+         Not Done<input type="radio" name="echoDone" id="echoNotDone" value="NO">
      </td>
  </tr>
     <tr>
@@ -228,7 +231,7 @@
             <table>
                 <tr>
                     <td>Result:   Normal</td>
-                    <td><input type="checkbox" name="echoNormal" id="echoNormal" value="echoNormal" />/td>
+                    <td><input type="checkbox" name="echoNormal" id="echoNormal" value="echoNormal" /></td>
                 </tr>
                 <tr>
                     <td>LVH</td>

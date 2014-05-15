@@ -51,6 +51,7 @@ POST        /form2                   controllers.data.Form2Controller.handleSave
 GET         /form3                   controllers.data.DataController.form3()
 POST        /form3                   controllers.data.Form3Controller.handleSaveForm3()
 GET         /form4                   controllers.data.DataController.form4()
+POST        /form4                   controllers.data.DataController.handleSaveForm4()
 GET         /form5                   controllers.data.DataController.form5()
 POST        /form5                   controllers.data.DataController.handleSaveForm5()
 GET         /form6                   controllers.data.DataController.form6()
