@@ -11,16 +11,6 @@ create table album (
   constraint pk_album primary key (id))
 ;
 
-create table answer (
-  id                        bigint not null,
-  question_id               bigint,
-  answer                    varchar(255),
-  form_type                 integer,
-  barthel_index_form_id     bigint,
-  constraint ck_answer_form_type check (form_type in (0,1,2)),
-  constraint pk_answer primary key (id))
-;
-
 create table barthel_index_form (
   id                        bigint not null,
   protocol_number           varchar(255),
@@ -518,8 +508,6 @@ create table o_user (
 
 create sequence album_seq;
 
-create sequence answer_seq;
-
 create sequence barthel_index_form_seq;
 
 create sequence comment_seq;
@@ -558,58 +546,52 @@ alter table album add constraint fk_album_createdBy_1 foreign key (created_by_id
 create index ix_album_createdBy_1 on album (created_by_id);
 alter table album add constraint fk_album_modifiedBy_2 foreign key (modified_by_id) references o_user (id);
 create index ix_album_modifiedBy_2 on album (modified_by_id);
-alter table answer add constraint fk_answer_question_3 foreign key (question_id) references question (id);
-create index ix_answer_question_3 on answer (question_id);
-alter table answer add constraint fk_answer_barthelIndexForm_4 foreign key (barthel_index_form_id) references barthel_index_form (id);
-create index ix_answer_barthelIndexForm_4 on answer (barthel_index_form_id);
-alter table comment add constraint fk_comment_album_5 foreign key (album_id) references album (id);
-create index ix_comment_album_5 on comment (album_id);
-alter table comment add constraint fk_comment_commentedBy_6 foreign key (commented_by_id) references o_user (id);
-create index ix_comment_commentedBy_6 on comment (commented_by_id);
-alter table comment add constraint fk_comment_createdBy_7 foreign key (created_by_id) references o_user (id);
-create index ix_comment_createdBy_7 on comment (created_by_id);
-alter table comment add constraint fk_comment_modifiedBy_8 foreign key (modified_by_id) references o_user (id);
-create index ix_comment_modifiedBy_8 on comment (modified_by_id);
-alter table economic_status add constraint fk_economic_status_dataCollect_9 foreign key (data_collection_form1_id) references data_collection_form1 (id);
-create index ix_economic_status_dataCollect_9 on economic_status (data_collection_form1_id);
-alter table economic_status add constraint fk_economic_status_dataCollec_10 foreign key (data_collection_form6_id) references data_collection_form6 (id);
-create index ix_economic_status_dataCollec_10 on economic_status (data_collection_form6_id);
-alter table image add constraint fk_image_album_11 foreign key (album_id) references album (id);
-create index ix_image_album_11 on image (album_id);
-alter table image add constraint fk_image_createdBy_12 foreign key (created_by_id) references o_user (id);
-create index ix_image_createdBy_12 on image (created_by_id);
-alter table image add constraint fk_image_modifiedBy_13 foreign key (modified_by_id) references o_user (id);
-create index ix_image_modifiedBy_13 on image (modified_by_id);
-alter table login add constraint fk_login_createdBy_14 foreign key (created_by_id) references o_user (id);
-create index ix_login_createdBy_14 on login (created_by_id);
-alter table login add constraint fk_login_modifiedBy_15 foreign key (modified_by_id) references o_user (id);
-create index ix_login_modifiedBy_15 on login (modified_by_id);
-alter table option add constraint fk_option_question_16 foreign key (question_id) references question (id);
-create index ix_option_question_16 on option (question_id);
-alter table patient add constraint fk_patient_createdBy_17 foreign key (created_by_id) references o_user (id);
-create index ix_patient_createdBy_17 on patient (created_by_id);
-alter table patient add constraint fk_patient_modifiedBy_18 foreign key (modified_by_id) references o_user (id);
-create index ix_patient_modifiedBy_18 on patient (modified_by_id);
-alter table review add constraint fk_review_album_19 foreign key (album_id) references album (id);
-create index ix_review_album_19 on review (album_id);
-alter table review add constraint fk_review_assignedTo_20 foreign key (assigned_to_id) references o_user (id);
-create index ix_review_assignedTo_20 on review (assigned_to_id);
-alter table review add constraint fk_review_createdBy_21 foreign key (created_by_id) references o_user (id);
-create index ix_review_createdBy_21 on review (created_by_id);
-alter table review add constraint fk_review_modifiedBy_22 foreign key (modified_by_id) references o_user (id);
-create index ix_review_modifiedBy_22 on review (modified_by_id);
-alter table o_user add constraint fk_o_user_createdBy_23 foreign key (created_by_id) references o_user (id);
-create index ix_o_user_createdBy_23 on o_user (created_by_id);
-alter table o_user add constraint fk_o_user_modifiedBy_24 foreign key (modified_by_id) references o_user (id);
-create index ix_o_user_modifiedBy_24 on o_user (modified_by_id);
+alter table comment add constraint fk_comment_album_3 foreign key (album_id) references album (id);
+create index ix_comment_album_3 on comment (album_id);
+alter table comment add constraint fk_comment_commentedBy_4 foreign key (commented_by_id) references o_user (id);
+create index ix_comment_commentedBy_4 on comment (commented_by_id);
+alter table comment add constraint fk_comment_createdBy_5 foreign key (created_by_id) references o_user (id);
+create index ix_comment_createdBy_5 on comment (created_by_id);
+alter table comment add constraint fk_comment_modifiedBy_6 foreign key (modified_by_id) references o_user (id);
+create index ix_comment_modifiedBy_6 on comment (modified_by_id);
+alter table economic_status add constraint fk_economic_status_dataCollect_7 foreign key (data_collection_form1_id) references data_collection_form1 (id);
+create index ix_economic_status_dataCollect_7 on economic_status (data_collection_form1_id);
+alter table economic_status add constraint fk_economic_status_dataCollect_8 foreign key (data_collection_form6_id) references data_collection_form6 (id);
+create index ix_economic_status_dataCollect_8 on economic_status (data_collection_form6_id);
+alter table image add constraint fk_image_album_9 foreign key (album_id) references album (id);
+create index ix_image_album_9 on image (album_id);
+alter table image add constraint fk_image_createdBy_10 foreign key (created_by_id) references o_user (id);
+create index ix_image_createdBy_10 on image (created_by_id);
+alter table image add constraint fk_image_modifiedBy_11 foreign key (modified_by_id) references o_user (id);
+create index ix_image_modifiedBy_11 on image (modified_by_id);
+alter table login add constraint fk_login_createdBy_12 foreign key (created_by_id) references o_user (id);
+create index ix_login_createdBy_12 on login (created_by_id);
+alter table login add constraint fk_login_modifiedBy_13 foreign key (modified_by_id) references o_user (id);
+create index ix_login_modifiedBy_13 on login (modified_by_id);
+alter table option add constraint fk_option_question_14 foreign key (question_id) references question (id);
+create index ix_option_question_14 on option (question_id);
+alter table patient add constraint fk_patient_createdBy_15 foreign key (created_by_id) references o_user (id);
+create index ix_patient_createdBy_15 on patient (created_by_id);
+alter table patient add constraint fk_patient_modifiedBy_16 foreign key (modified_by_id) references o_user (id);
+create index ix_patient_modifiedBy_16 on patient (modified_by_id);
+alter table review add constraint fk_review_album_17 foreign key (album_id) references album (id);
+create index ix_review_album_17 on review (album_id);
+alter table review add constraint fk_review_assignedTo_18 foreign key (assigned_to_id) references o_user (id);
+create index ix_review_assignedTo_18 on review (assigned_to_id);
+alter table review add constraint fk_review_createdBy_19 foreign key (created_by_id) references o_user (id);
+create index ix_review_createdBy_19 on review (created_by_id);
+alter table review add constraint fk_review_modifiedBy_20 foreign key (modified_by_id) references o_user (id);
+create index ix_review_modifiedBy_20 on review (modified_by_id);
+alter table o_user add constraint fk_o_user_createdBy_21 foreign key (created_by_id) references o_user (id);
+create index ix_o_user_createdBy_21 on o_user (created_by_id);
+alter table o_user add constraint fk_o_user_modifiedBy_22 foreign key (modified_by_id) references o_user (id);
+create index ix_o_user_modifiedBy_22 on o_user (modified_by_id);
 
 
 
 # --- !Downs
 
 drop table if exists album cascade;
-
-drop table if exists answer cascade;
 
 drop table if exists barthel_index_form cascade;
 
@@ -646,8 +628,6 @@ drop table if exists review cascade;
 drop table if exists o_user cascade;
 
 drop sequence if exists album_seq;
-
-drop sequence if exists answer_seq;
 
 drop sequence if exists barthel_index_form_seq;
 

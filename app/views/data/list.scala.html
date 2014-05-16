@@ -1,4 +1,4 @@
-@(message: String, u: models.response.user.User, reviewList: List[models.response.review.Review], messageSuccess: String)
+@(message: String, u: models.response.user.User, pl: List[models.response.data.Patient])
 @import tags._
 @import java.math.BigInteger; var i=0
 @main("Home") {
@@ -10,9 +10,9 @@
             <h1>Patient List</h1>
         </header>
         <div style="width:100%;background: #f1f1f1;border-radius: 4px;" class="form">
-        @if(!u.getUserType().toUpperCase().equals("DOCTOR")) {
+        <!--@if(!u.getUserType().toUpperCase().equals("DOCTOR")) {
         <button onclick="location.href='@controllers.patient.routes.PatientController.save(0)'" style="font-size: 18px;">Add Patient</button>
-        }
+        }-->
         <div id="disable-dialog" style="display:none; width: 10%;" title="Delete Record">
             <p>Do you want to delete this record?</p>
             <div class="span3"><img src='@routes.Assets.at("images/loader.gif")' id="loader-d" style="display:none;"/></div>
@@ -20,7 +20,7 @@
         <input type="text" placeholder="Patient Name/ ID/ Trail Site" name="searchQ" id="searchQ" style="margin: 13px 0px 0px 0px;"/>
         </div>
         <div style="width:100%;" class="form">
-            <form id="contactform">
+            <form id="patientListForm">
                 <div class="box message" style="display:none;padding-top: 2%;padding-left: 1%;padding-bottom: 2%;color: red;">
                     <div class="content-m">
                         <p></p>
@@ -31,57 +31,23 @@
                       <!--  <th>Sr No.</th>-->
                         <th>Patient Id</th>
                         <th>Patient Name</th>
-                        <!--<th>Age</th>-->
                         <th>Trail Site</th>
-                        <th>Date Recruited</th>
-                        <th>Created Date</th>
-                        @if(!u.getUserType().toUpperCase().equals("DOCTOR")) {
+                        <th>Date Of Birth</th>
+                        <th>Gender</th>
+                        <th>Record Created On</th>
                         <th>Edit</th>
                         <th>Delete</th>
-                        }
                     </tr>
 
-                    @for(r <- reviewList) {
+                    @for(p <- pl) {
                         <tr>
-                            <!--   <td>@(i+=1)</td>-->
-                            @if(r == null || r.getPatientName() == "") {
-                                <td></td>
-                            } else {
-                                @if(u.getUserType().toUpperCase().equals("DOCTOR")) {
-                                    <td><a href="/patient/@r.getId()">@r.getPatientName()</a></td>
-                                } else {
-                                    <td>@r.getPatientName()</td>
-                                }
-                            }
-                            @if(r == null || r.getEmail() == "") {
-                                <td></td>
-                            } else {
-                                <td>@r.getEmail()</td>
-                            }
-                            <!--    @if(r.getAge().equals("")) {
-                                <td></td>
-                            } else {
-                                <td>@r.getAge()</td>
-                            }-->
-                            @if(r == null || r.getGender() == "") {
-                                <td></td>
-                            } else {
-                                <td>@r.getGender()</td>
-                            }
-                            @if(r == null || r.getCreated() == null) {
-                                <td></td>
-                            } else {
-                                <td>@r.getCreated().toString()</td>
-                            }
-                            @if(r == null || r.getAssignedToName() == "") {
-                                <td></td>
-                            } else {
-                                <td>@r.getAssignedToName()</td>
-                            }
-                            @if(!u.getUserType().toUpperCase().equalsIgnoreCase("DOCTOR")) {
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                             <td><a href="/patient/@r.getId()"><img src="@routes.Assets.at("images/edit.png")" style="width: 30px;" alt="Edit" title="Edit"></a></td>
                             <td><a class="disable" id="disable-action" data-href="" data-id="@r.getId()"><img src="@routes.Assets.at("images/delete.png")" style="width: 30px;cursor: pointer;" alt="Delete" title="Delete"></a></td>
-                            }
                         </tr>
                     }
                 </table>

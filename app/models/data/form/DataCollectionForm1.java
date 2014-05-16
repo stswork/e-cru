@@ -2,6 +2,7 @@ package models.data.form;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import models.YesNo;
+import models.user.User;
 import org.joda.time.DateTime;
 import play.data.format.Formats;
 import play.data.validation.Constraints;
@@ -79,6 +80,12 @@ public class DataCollectionForm1 extends Model {
 
     @Formats.DateTime(pattern = "MM/dd/yy")
     private Timestamp dateOfStroke;
+
+    @OneToOne
+    private User createdBy;
+
+    @OneToOne
+    private User modifiedBy;
 
     @Formats.DateTime(pattern = "MM/dd/yy")
     private Timestamp created = new Timestamp(DateTime.now().toDate().getTime());
@@ -278,4 +285,20 @@ public class DataCollectionForm1 extends Model {
     public static Model.Finder<Long, DataCollectionForm1> find = new Model.Finder<Long, DataCollectionForm1>(
             Long.class, DataCollectionForm1.class
     );
+
+    public User getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public User getModifiedBy() {
+        return modifiedBy;
+    }
+
+    public void setModifiedBy(User modifiedBy) {
+        this.modifiedBy = modifiedBy;
+    }
 }

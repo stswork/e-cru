@@ -6,6 +6,7 @@ package models.data.form;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import models.YesNo;
+import models.user.User;
 import org.joda.time.DateTime;
 import play.data.format.Formats;
 import play.data.validation.Constraints;
@@ -112,6 +113,12 @@ public class DataCollectionForm5 extends Model {
     private YesNo spouseTia = YesNo.DONT_KNOW;
 
     private String bpToday;
+
+    @OneToOne
+    private User createdBy;
+
+    @OneToOne
+    private User modifiedBy;
 
     @Formats.DateTime(pattern = "MM/dd/yy")
     private Timestamp created = new Timestamp(DateTime.now().toDate().getTime());
@@ -500,5 +507,21 @@ public class DataCollectionForm5 extends Model {
 
     public void setBpToday(String bpToday) {
         this.bpToday = bpToday;
+    }
+
+    public User getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public User getModifiedBy() {
+        return modifiedBy;
+    }
+
+    public void setModifiedBy(User modifiedBy) {
+        this.modifiedBy = modifiedBy;
     }
 }
