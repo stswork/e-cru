@@ -315,14 +315,14 @@ public class DataController extends Controller {
             return badRequest(Json.toJson(new ResponseMessage(400, "Invalid parameters passed!", ResponseMessageType.BAD_REQUEST)));
         Long id = Long.valueOf(StringUtils.isEmpty(map.get("id")[0]) ? "0" : map.get("id")[0]);
         Integer patientIdNumber = Integer.valueOf(StringUtils.isEmpty(map.get("patientIdNumber")[0]) ? StringUtils.EMPTY : map.get("patientIdNumber")[0]);
-        String aspirin = map.containsKey("aspirin") ? StringUtils.EMPTY : map.get("aspirin")[0];
-        String clopidogrel = map.containsKey("clopidogrel") ? StringUtils.EMPTY : map.get("clopidogrel")[0];
+        String aspirin = !map.containsKey("aspirin") ? StringUtils.EMPTY : map.get("aspirin")[0];
+        String clopidogrel = !map.containsKey("clopidogrel") ? StringUtils.EMPTY : map.get("clopidogrel")[0];
         String aspirinPlusClopidogrel = StringUtils.isEmpty(map.get("aspirinPlusClopidogrel")[0]) ? StringUtils.EMPTY : map.get("aspirinPlusClopidogrel")[0];
-        String dipyridamole = map.containsKey("dipyridamole") ? StringUtils.EMPTY : map.get("dipyridamole")[0];
-        String aspirinPlusDipyridamole = map.containsKey("aspirinPlusDipyridamole1") ? StringUtils.EMPTY : map.get("aspirinPlusDipyridamole1")[0];
-        String antihypertensive = map.containsKey("antihypertensive") ? StringUtils.EMPTY : map.get("antihypertensive")[0];
-        String warfarin = map.containsKey("warfarin") ? StringUtils.EMPTY : map.get("warfarin")[0];
-        String statin = map.containsKey("statin") ? StringUtils.EMPTY : map.get("statin")[0];
+        String dipyridamole = !map.containsKey("dipyridamole") ? StringUtils.EMPTY : map.get("dipyridamole")[0];
+        String aspirinPlusDipyridamole = !map.containsKey("aspirinPlusDipyridamole1") ? StringUtils.EMPTY : map.get("aspirinPlusDipyridamole1")[0];
+        String antihypertensive = !map.containsKey("antihypertensive") ? StringUtils.EMPTY : map.get("antihypertensive")[0];
+        String warfarin = !map.containsKey("warfarin") ? StringUtils.EMPTY : map.get("warfarin")[0];
+        String statin = !map.containsKey("statin") ? StringUtils.EMPTY : map.get("statin")[0];
         if(id > 0) {
             dcf5 = DataCollectionForm5.find.byId(id);
             if(dcf5 == null)
