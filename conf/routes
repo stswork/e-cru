@@ -14,27 +14,9 @@ GET  /assets/*file                  controllers.Assets.at(path="/public", file)
 GET         /                        controllers.AuthenticationController.login()
 POST        /authenticate            controllers.AuthenticationController.handleLogin()
 GET         /logout                  controllers.AuthenticationController.logout()
-#POST        /doctorLogin             controllers.AuthenticationController.doctorLogin()
 
 # PATIENT
 GET         /patient/:id             controllers.patient.PatientController.save(id: Long)
-#POST        /patient/one             controllers.patient.PatientController.stepOne()
-#POST        /patient/two             controllers.patient.PatientController.stepTwo()
-
-# ALBUM
-#POST        /album/image/remove      controllers.album.AlbumController.removeImage()
-
-# REVIEW
-#GET         /unreviewed              controllers.review.ReviewController.getPatientsToReview()
-#GET         /reviewed                controllers.review.ReviewController.getPatientsReviewed()
-#POST        /review/disable          controllers.review.ReviewController.disable()
-
-# COMMENT
-#POST        /comment                 controllers.comment.CommentController.handleSave()
-
-# ADMIN
-#GET         /loginpic                controllers.loginPic.LoginPicController.save(id: Long ?= 0)
-#POST        /loginpic                controllers.loginPic.LoginPicController.handleSave()
 
 # USER
 GET         /users                   controllers.user.UserController.getUsers()
@@ -44,15 +26,17 @@ POST        /user/disable            controllers.user.UserController.disable()
 
 # DATA
 
-GET         /form1                   controllers.data.DataController.form1()
-POST        /form1                   controllers.data.DataController.handleSaveForm1()
-GET         /form2                   controllers.data.DataController.form2()
-POST        /form2                   controllers.data.DataController.handleSaveForm2()
-GET         /form3                   controllers.data.DataController.form3()
-POST        /form3                   controllers.data.DataController.handleSaveForm3()
-GET         /form4                   controllers.data.DataController.form4()
-POST        /form4                   controllers.data.DataController.handleSaveForm4()
-GET         /form5                   controllers.data.DataController.form5()
-POST        /form5                   controllers.data.DataController.handleSaveForm5()
-GET         /form6                   controllers.data.DataController.form6()
-POST        /form6                   controllers.data.DataController.handleSaveForm6()
+GET         /data/form1/:id               controllers.data.DataController.form1(id: Long)
+POST        /data/form1                   controllers.data.DataController.handleSaveForm1()
+GET         /data/form2                   controllers.data.DataController.form2()
+POST        /data/form2                   controllers.data.DataController.handleSaveForm2()
+GET         /data/form3                   controllers.data.DataController.form3()
+POST        /data/form3                   controllers.data.DataController.handleSaveForm3()
+GET         /data/form4                   controllers.data.DataController.form4()
+POST        /data/form4                   controllers.data.DataController.handleSaveForm4()
+GET         /data/form5                   controllers.data.DataController.form5()
+POST        /data/form5                   controllers.data.DataController.handleSaveForm5()
+GET         /data/form6                   controllers.data.DataController.form6()
+POST        /data/form6                   controllers.data.DataController.handleSaveForm6()
+POST        /data/list                    controllers.data.DataController.patientList()
+POST        /data/disable                 controllers.data.DataController.disable()

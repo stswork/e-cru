@@ -85,9 +85,7 @@
                 <tr>
                     <td>DOB</td>
                     <td>
-                        <input type="number" name="spouseDobDate" id="spouseDobDate" value="" style="width: 50px;"/>
-                        <input type="number" name="spouseDobMonth" id="spouseDobMonth" value="" style="width: 50px;"/>
-                        <input type="number" name="spouseDobYear" id="spouseDobYear" value="" style="width: 100px;"/>
+                        <input type="text" name="spouseDob" id="spouseDob" value="" style="width: 50px;"/>
                     </td>
                     <td>Gender</td>
                     <td>
@@ -231,7 +229,6 @@
                     </td>
 
                 </tr>
-
                 <tr>
                     <td>TIA</td>
                     <td colspan="2">
@@ -241,9 +238,6 @@
                     </td>
 
                 </tr>
-
-
-
             </table>
         </td>
     </tr>
@@ -262,6 +256,11 @@
 </div>
 } {
 <script type="text/javascript" src="@routes.Assets.at("javascripts/form/events.js")"></script>
+<script>
+    $(function() {
+        $('#spouseDob').datepicker();
+    });
+</script>
 <script>
 $(document).ready(function () {
 
@@ -287,8 +286,8 @@ $(document).ready(function () {
 });
 </script>
 <style>
-    .form input[type="text"]{
+.form input[type="text"]{
     width:80px;
-    }
+}
 </style>
 }

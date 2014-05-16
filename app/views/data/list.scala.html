@@ -26,12 +26,12 @@
                         <p></p>
                     </div>
                 </div>
-                <table cellspacing="0" id="reviewList">
+                <table cellspacing="0" id="patientList">
                     <tr>
                       <!--  <th>Sr No.</th>-->
                         <th>Patient Id</th>
                         <th>Patient Name</th>
-                        <th>Trail Site</th>
+                        <th>Trial Site</th>
                         <th>Date Of Birth</th>
                         <th>Gender</th>
                         <th>Record Created On</th>
@@ -41,13 +41,13 @@
 
                     @for(p <- pl) {
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td><a href="/patient/@r.getId()"><img src="@routes.Assets.at("images/edit.png")" style="width: 30px;" alt="Edit" title="Edit"></a></td>
-                            <td><a class="disable" id="disable-action" data-href="" data-id="@r.getId()"><img src="@routes.Assets.at("images/delete.png")" style="width: 30px;cursor: pointer;" alt="Delete" title="Delete"></a></td>
+                            <td>@p.getPatientId()</td>
+                            <td>@p.getPatientName()</td>
+                            <td>@p.getTrialSite()</td>
+                            <td>@p.getDateOfBirth()</td>
+                            <td>@p.getCreatedOn()</td>
+                            <td><a href="#"><img src="@routes.Assets.at("images/edit.png")" style="width: 30px;" alt="Edit" title="Edit"></a></td>
+                            <td><a class="disable" id="disable-action" data-href="@controllers.data.routes.DataController.disable()" data-id="@p.getId()"><img src="@routes.Assets.at("images/delete.png")" style="width: 30px;cursor: pointer;" alt="Delete" title="Delete"></a></td>
                         </tr>
                     }
                 </table>
@@ -104,14 +104,14 @@
               currPage : 1,
               optionsForRows : [10,15,20],
               rowsPerPage : 5,
-              ignoreRows : $('tr:first', $('#reviewList')),
+              ignoreRows : $('tr:first', $('#patientList')),
               firstArrow : (new Image()).src="@routes.Assets.at("images/first.gif")",
               prevArrow : (new Image()).src="@routes.Assets.at("images/prev.gif")",
               lastArrow : (new Image()).src="@routes.Assets.at("images/last.gif")",
               nextArrow : (new Image()).src="@routes.Assets.at("images/next.gif")",
               topNav : true
             }
-            $('#reviewList').tablePagination(options);
+            $('#patientList').tablePagination(options);
 
             /** disable click **/
             $('#disable-action').live("click", function(e) {

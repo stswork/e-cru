@@ -5,14 +5,14 @@
 <div id="wrapper" class="container_12 clearfix">
 <!-- Text Logo -->
 
-    @header(u)
+@header(u)
 <div class="container">
 <header>
     <h1><!--<span>ADMIN</span>--> Genetic basis of stroke in an Indian population (www.brainsgenetics.com)</h1>
 
 </header>
 <div class="form" style="width:100%;background: #f1f1f1;border-radius: 10px;">
-<form id="form6" method="POST" style="padding-top: 2%;" action="@controllers.data.routes.DataController.handleSaveForm6()" data-uri="@controllers.data.routes.DataController.form1()">
+<form id="form6" method="POST" style="padding-top: 2%;" action="@controllers.data.routes.DataController.handleSaveForm6()" data-uri="@controllers.data.routes.DataController.form1(0)">
 <div class="box message" ><!--style="display:none;padding-top: 2%;padding-left: 1%;padding-bottom: 2%;color: red;"-->
     <div class="content-m">
 
@@ -117,9 +117,7 @@
                 <tr>
                     <td>When:</td>
                     <td style="width: 299px;">
-                        <input type="number" name="bloodSampleDate" id="bloodSampleDate" value="" style="width: 45px;"/>
-                        <input type="number" name="bloodSampleMonth" id="bloodSampleMonth" value="" style="width: 45px;"/>
-                        <input type="number" name="bloodSampleYear" id="bloodSampleYear" value="" style="width: 100px;"/>
+                        <input type="text" name="bloodSampleDate" id="bloodSampleDate" value="" style="width: 45px;"/>
                     </td>
                 </tr>
             </table>
@@ -140,9 +138,14 @@
 </div>
 } {
 <script type="text/javascript" src="@routes.Assets.at("javascripts/form/events.js")"></script>
+<script>
+    $(function() {
+        $('#bloodSampleDate').datepicker();
+    });
+</script>
 <style>
-    .form input[type="text"]{
+.form input[type="text"]{
     width:80px;
-    }
+}
 </style>
 }

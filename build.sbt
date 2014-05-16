@@ -1,6 +1,6 @@
 import _root_.sbt.Keys._
 
-name := "e-cru"
+name := "ecrs"
 
 version := "1.0-SNAPSHOT"
 

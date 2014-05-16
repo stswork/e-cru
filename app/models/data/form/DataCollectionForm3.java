@@ -1,6 +1,7 @@
 package models.data.form;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import models.Status;
 import models.YesNo;
 import models.user.User;
 import org.joda.time.DateTime;
@@ -175,6 +176,9 @@ public class DataCollectionForm3 extends Model {
     private YesNo mraDone = YesNo.DONT_KNOW;
 
     private YesNo angiogramDone = YesNo.DONT_KNOW;
+
+    @Constraints.Required
+    public Status status = Status.ACTIVE;
 
     @OneToOne
     private User createdBy;
@@ -782,5 +786,13 @@ public class DataCollectionForm3 extends Model {
 
     public void setModifiedBy(User modifiedBy) {
         this.modifiedBy = modifiedBy;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }

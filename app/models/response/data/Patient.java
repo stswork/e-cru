@@ -8,8 +8,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Patient {
 
+    public Long id;
     public Integer patientId;
     public String patientName;
+    public String trialSite;
     public String dateOfBirth;
     public String Gender;
     public String createdOn;
@@ -17,9 +19,11 @@ public class Patient {
     public Patient() {
     }
 
-    public Patient(Integer patientId, String patientName, String dateOfBirth, String gender, String createdOn) {
+    public Patient(Long id, Integer patientId, String patientName, String trialSite, String dateOfBirth, String gender, String createdOn) {
+        this.id = id;
         this.patientId = patientId;
         this.patientName = patientName;
+        this.trialSite = trialSite;
         this.dateOfBirth = dateOfBirth;
         Gender = gender;
         this.createdOn = createdOn;
@@ -63,5 +67,21 @@ public class Patient {
 
     public void setCreatedOn(String createdOn) {
         this.createdOn = createdOn;
+    }
+
+    public String getTrialSite() {
+        return trialSite;
+    }
+
+    public void setTrialSite(String trialSite) {
+        this.trialSite = trialSite;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

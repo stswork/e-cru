@@ -53,6 +53,8 @@ create table data_collection_form1 (
   blood_sample_date         timestamp,
   blood_sample_number       varchar(255),
   date_of_stroke            timestamp,
+  created_by_id             bigint,
+  modified_by_id            bigint,
   created                   timestamp,
   constraint ck_data_collection_form1_gender check (gender in (0,1,2)),
   constraint ck_data_collection_form1_blood_sample_taken check (blood_sample_taken in (0,1,2,3)),
@@ -97,6 +99,8 @@ create table data_collection_form2 (
   never                     integer,
   hip                       float,
   waist                     float,
+  created_by_id             bigint,
+  modified_by_id            bigint,
   created                   timestamp,
   constraint ck_data_collection_form2_ischaemic_stroke check (ischaemic_stroke in (0,1,2,3)),
   constraint ck_data_collection_form2_hoemorrhagic_stroke check (hoemorrhagic_stroke in (0,1,2,3)),
@@ -194,6 +198,8 @@ create table data_collection_form3 (
   cta_done                  integer,
   mra_done                  integer,
   angiogram_done            integer,
+  created_by_id             bigint,
+  modified_by_id            bigint,
   created                   timestamp,
   constraint ck_data_collection_form3_aspirin check (aspirin in (0,1,2,3)),
   constraint ck_data_collection_form3_clopidogrel check (clopidogrel in (0,1,2,3)),
@@ -281,6 +287,8 @@ create table data_collection_form4 (
   rehabilitation            integer,
   rip                       integer,
   local_dgh                 integer,
+  created_by_id             bigint,
+  modified_by_id            bigint,
   created                   timestamp,
   constraint ck_data_collection_form4_intracranial_stenosis check (intracranial_stenosis in (0,1,2,3)),
   constraint ck_data_collection_form4_extracranial_dopplers_imaging_done check (extracranial_dopplers_imaging_done in (0,1,2,3)),
@@ -365,6 +373,8 @@ create table data_collection_form5 (
   spouse_hoemorrhagic_stroke integer,
   spouse_tia                integer,
   bp_today                  varchar(255),
+  created_by_id             bigint,
+  modified_by_id            bigint,
   created                   timestamp,
   constraint ck_data_collection_form5_aspirin check (aspirin in (0,1,2,3)),
   constraint ck_data_collection_form5_clopidogrel check (clopidogrel in (0,1,2,3)),
@@ -401,6 +411,8 @@ create table data_collection_form6 (
   blood_sample_taken        integer,
   blood_sample_date         timestamp,
   blood_sample_number       varchar(255),
+  created_by_id             bigint,
+  modified_by_id            bigint,
   created                   timestamp,
   constraint ck_data_collection_form6_blood_sample_taken check (blood_sample_taken in (0,1,2,3)),
   constraint pk_data_collection_form6 primary key (id))
@@ -554,38 +566,62 @@ alter table comment add constraint fk_comment_createdBy_5 foreign key (created_b
 create index ix_comment_createdBy_5 on comment (created_by_id);
 alter table comment add constraint fk_comment_modifiedBy_6 foreign key (modified_by_id) references o_user (id);
 create index ix_comment_modifiedBy_6 on comment (modified_by_id);
-alter table economic_status add constraint fk_economic_status_dataCollect_7 foreign key (data_collection_form1_id) references data_collection_form1 (id);
-create index ix_economic_status_dataCollect_7 on economic_status (data_collection_form1_id);
-alter table economic_status add constraint fk_economic_status_dataCollect_8 foreign key (data_collection_form6_id) references data_collection_form6 (id);
-create index ix_economic_status_dataCollect_8 on economic_status (data_collection_form6_id);
-alter table image add constraint fk_image_album_9 foreign key (album_id) references album (id);
-create index ix_image_album_9 on image (album_id);
-alter table image add constraint fk_image_createdBy_10 foreign key (created_by_id) references o_user (id);
-create index ix_image_createdBy_10 on image (created_by_id);
-alter table image add constraint fk_image_modifiedBy_11 foreign key (modified_by_id) references o_user (id);
-create index ix_image_modifiedBy_11 on image (modified_by_id);
-alter table login add constraint fk_login_createdBy_12 foreign key (created_by_id) references o_user (id);
-create index ix_login_createdBy_12 on login (created_by_id);
-alter table login add constraint fk_login_modifiedBy_13 foreign key (modified_by_id) references o_user (id);
-create index ix_login_modifiedBy_13 on login (modified_by_id);
-alter table option add constraint fk_option_question_14 foreign key (question_id) references question (id);
-create index ix_option_question_14 on option (question_id);
-alter table patient add constraint fk_patient_createdBy_15 foreign key (created_by_id) references o_user (id);
-create index ix_patient_createdBy_15 on patient (created_by_id);
-alter table patient add constraint fk_patient_modifiedBy_16 foreign key (modified_by_id) references o_user (id);
-create index ix_patient_modifiedBy_16 on patient (modified_by_id);
-alter table review add constraint fk_review_album_17 foreign key (album_id) references album (id);
-create index ix_review_album_17 on review (album_id);
-alter table review add constraint fk_review_assignedTo_18 foreign key (assigned_to_id) references o_user (id);
-create index ix_review_assignedTo_18 on review (assigned_to_id);
-alter table review add constraint fk_review_createdBy_19 foreign key (created_by_id) references o_user (id);
-create index ix_review_createdBy_19 on review (created_by_id);
-alter table review add constraint fk_review_modifiedBy_20 foreign key (modified_by_id) references o_user (id);
-create index ix_review_modifiedBy_20 on review (modified_by_id);
-alter table o_user add constraint fk_o_user_createdBy_21 foreign key (created_by_id) references o_user (id);
-create index ix_o_user_createdBy_21 on o_user (created_by_id);
-alter table o_user add constraint fk_o_user_modifiedBy_22 foreign key (modified_by_id) references o_user (id);
-create index ix_o_user_modifiedBy_22 on o_user (modified_by_id);
+alter table data_collection_form1 add constraint fk_data_collection_form1_creat_7 foreign key (created_by_id) references o_user (id);
+create index ix_data_collection_form1_creat_7 on data_collection_form1 (created_by_id);
+alter table data_collection_form1 add constraint fk_data_collection_form1_modif_8 foreign key (modified_by_id) references o_user (id);
+create index ix_data_collection_form1_modif_8 on data_collection_form1 (modified_by_id);
+alter table data_collection_form2 add constraint fk_data_collection_form2_creat_9 foreign key (created_by_id) references o_user (id);
+create index ix_data_collection_form2_creat_9 on data_collection_form2 (created_by_id);
+alter table data_collection_form2 add constraint fk_data_collection_form2_modi_10 foreign key (modified_by_id) references o_user (id);
+create index ix_data_collection_form2_modi_10 on data_collection_form2 (modified_by_id);
+alter table data_collection_form3 add constraint fk_data_collection_form3_crea_11 foreign key (created_by_id) references o_user (id);
+create index ix_data_collection_form3_crea_11 on data_collection_form3 (created_by_id);
+alter table data_collection_form3 add constraint fk_data_collection_form3_modi_12 foreign key (modified_by_id) references o_user (id);
+create index ix_data_collection_form3_modi_12 on data_collection_form3 (modified_by_id);
+alter table data_collection_form4 add constraint fk_data_collection_form4_crea_13 foreign key (created_by_id) references o_user (id);
+create index ix_data_collection_form4_crea_13 on data_collection_form4 (created_by_id);
+alter table data_collection_form4 add constraint fk_data_collection_form4_modi_14 foreign key (modified_by_id) references o_user (id);
+create index ix_data_collection_form4_modi_14 on data_collection_form4 (modified_by_id);
+alter table data_collection_form5 add constraint fk_data_collection_form5_crea_15 foreign key (created_by_id) references o_user (id);
+create index ix_data_collection_form5_crea_15 on data_collection_form5 (created_by_id);
+alter table data_collection_form5 add constraint fk_data_collection_form5_modi_16 foreign key (modified_by_id) references o_user (id);
+create index ix_data_collection_form5_modi_16 on data_collection_form5 (modified_by_id);
+alter table data_collection_form6 add constraint fk_data_collection_form6_crea_17 foreign key (created_by_id) references o_user (id);
+create index ix_data_collection_form6_crea_17 on data_collection_form6 (created_by_id);
+alter table data_collection_form6 add constraint fk_data_collection_form6_modi_18 foreign key (modified_by_id) references o_user (id);
+create index ix_data_collection_form6_modi_18 on data_collection_form6 (modified_by_id);
+alter table economic_status add constraint fk_economic_status_dataCollec_19 foreign key (data_collection_form1_id) references data_collection_form1 (id);
+create index ix_economic_status_dataCollec_19 on economic_status (data_collection_form1_id);
+alter table economic_status add constraint fk_economic_status_dataCollec_20 foreign key (data_collection_form6_id) references data_collection_form6 (id);
+create index ix_economic_status_dataCollec_20 on economic_status (data_collection_form6_id);
+alter table image add constraint fk_image_album_21 foreign key (album_id) references album (id);
+create index ix_image_album_21 on image (album_id);
+alter table image add constraint fk_image_createdBy_22 foreign key (created_by_id) references o_user (id);
+create index ix_image_createdBy_22 on image (created_by_id);
+alter table image add constraint fk_image_modifiedBy_23 foreign key (modified_by_id) references o_user (id);
+create index ix_image_modifiedBy_23 on image (modified_by_id);
+alter table login add constraint fk_login_createdBy_24 foreign key (created_by_id) references o_user (id);
+create index ix_login_createdBy_24 on login (created_by_id);
+alter table login add constraint fk_login_modifiedBy_25 foreign key (modified_by_id) references o_user (id);
+create index ix_login_modifiedBy_25 on login (modified_by_id);
+alter table option add constraint fk_option_question_26 foreign key (question_id) references question (id);
+create index ix_option_question_26 on option (question_id);
+alter table patient add constraint fk_patient_createdBy_27 foreign key (created_by_id) references o_user (id);
+create index ix_patient_createdBy_27 on patient (created_by_id);
+alter table patient add constraint fk_patient_modifiedBy_28 foreign key (modified_by_id) references o_user (id);
+create index ix_patient_modifiedBy_28 on patient (modified_by_id);
+alter table review add constraint fk_review_album_29 foreign key (album_id) references album (id);
+create index ix_review_album_29 on review (album_id);
+alter table review add constraint fk_review_assignedTo_30 foreign key (assigned_to_id) references o_user (id);
+create index ix_review_assignedTo_30 on review (assigned_to_id);
+alter table review add constraint fk_review_createdBy_31 foreign key (created_by_id) references o_user (id);
+create index ix_review_createdBy_31 on review (created_by_id);
+alter table review add constraint fk_review_modifiedBy_32 foreign key (modified_by_id) references o_user (id);
+create index ix_review_modifiedBy_32 on review (modified_by_id);
+alter table o_user add constraint fk_o_user_createdBy_33 foreign key (created_by_id) references o_user (id);
+create index ix_o_user_createdBy_33 on o_user (created_by_id);
+alter table o_user add constraint fk_o_user_modifiedBy_34 foreign key (modified_by_id) references o_user (id);
+create index ix_o_user_modifiedBy_34 on o_user (modified_by_id);
 
 
 
