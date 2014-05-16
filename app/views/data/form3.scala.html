@@ -36,19 +36,19 @@
         Alcohol
     </td>
     <td rowspan="3" colspan="1">
-        Drink <input type="text" id="alcoholUnitsPerWeek" name="alcoholUnitsPerWeek" class="small-textbox"/> &nbsp;
+        Drink <input type="text" id="alcoholUnitsPerWeek" name="alcoholUnitsPerWeek" class="small-textbox" value="0"/> &nbsp;
         unit(s) per week
     </td>
     <td>Height:</td>
-    <td><input type="text" name="height" id="height" class="small-textbox"/> &nbsp; cm</td>
+    <td><input type="text" name="height" id="height" class="small-textbox" value="0"/> &nbsp; cm</td>
 </tr>
 <tr>
     <td>Weight:</td>
-    <td><input type="text" name="weight" id="weight" class="small-textbox"/> &nbsp; kg</td>
+    <td><input type="text" name="weight" id="weight" class="small-textbox" value="0"/> &nbsp; kg</td>
 </tr>
 <tr>
     <td>BMI:</td>
-    <td><input type="text" name="bmi" id="bmi" class="small-textbox"/></td>
+    <td><input type="text" name="bmi" id="bmi" class="small-textbox" value="0"/></td>
 </tr>
 <tr>
     <td>Medicine on
@@ -135,7 +135,6 @@
                 </td>
                 <td>Result<input type="text" name="glucoseBloodTestResult" id="glucoseBloodTestResult"/></td>
                 <td>Not done <input type="checkbox" name="glucoseBloodTestNotDone" id="glucoseBloodTestNotDone"/></td>
-
             </tr>
             <tr>
                 <td>Total Cholesterol:</td>
@@ -145,7 +144,6 @@
                 <td>Result<input type="text" name="totalCholesterolBloodTestResult"
                                  id="totalCholesterolBloodTestResult"/></td>
                 <td>Not done <input type="checkbox" name="totalCholesterolNotDone" id="totalCholesterolNotDone"/></td>
-
             </tr>
             <tr>
                 <td>HDL-Cholesterol:</td>
@@ -155,7 +153,6 @@
                 <td>Result<input type="text" name="hdlCholesterolBloodTestResult" id="hdlCholesterolBloodTestResult"/>
                 </td>
                 <td>Not done <input type="checkbox" name="hdlCholesterolNotDone" id="hdlCholesterolNotDone"/></td>
-
             </tr>
             <tr>
                 <td>LDL-Cholesterol:</td>
@@ -275,12 +272,12 @@
     </td>
 </tr>
 <tr>
-    <td colspan="2">BP on admission <input type="text" name="bpOnAdmission1" id="bpOnAdmission1"/>/<input type="text"
+    <td colspan="2">BP on admission <input type="text" name="bpOnAdmission1" id="bpOnAdmission1" value="0"/>/<input type="text"
                                                                                                           id="bpOnAdmission2"
-                                                                                                          name="bpOnAdmission2"/>mmHg
+                                                                                                          name="bpOnAdmission2" value="0"/>mmHg
     </td>
     <td colspan="2">Temperature on admission <input type="text" name="temperatureOnAdmission"
-                                                    id="temperatureOnAdmission"/> &#248; C
+                                                    id="temperatureOnAdmission" value="0"/> &#248; C
     </td>
 </tr>
 <tr>
@@ -288,15 +285,15 @@
         Carotid endarterectomy
     </td>
     <td>
-        Done <input type="radio" name="carotidEndarterectomyDone" id="carotidEndarterectomyDone" value="YES"/> /
-        Not Done <input type="radio" name="carotidEndarterectomyDone" id="carotidEndarterectomynOTDone" value="NO"/>
+        Done <input type="radio" name="carotidEndarterectomyDone" id="carotidEndarterectomyDone" value="YES" required="required"/> /
+        Not Done <input type="radio" name="carotidEndarterectomyDone" id="carotidEndarterectomyNotDone" value="NO" required="required"/>
     </td>
     <td>
         Thrombolysed
     </td>
     <td>
-        Done <input type="radio" name="thrombolysedDone" id="thrombolysedDone" value="YES"/> /
-        Not Done <input type="radio" name="thrombolysedDone" id="thrombolysedNotDone" value="NO"/>
+        Done <input type="radio" name="thrombolysedDone" id="thrombolysedDone" value="YES" required="required"/> /
+        Not Done <input type="radio" name="thrombolysedDone" id="thrombolysedNotDone" value="NO" required="required"/>
     </td>
 </tr>
 <tr>
@@ -307,14 +304,14 @@
             <tr>
                 <td>CTA</td>
                 <td>
-                    Done <input type="radio" name="ctaDone" id="ctaDone" value="YES"/> /
-                    Not Done <input type="radio" name="ctaDone" id="ctaNotDone" value="NO"/>
+                    Done <input type="radio" name="ctaDone" id="ctaDone" value="YES" required="required"/> /
+                    Not Done <input type="radio" name="ctaDone" id="ctaNotDone" value="NO" required="required"/>
 
                 </td>
                 <td>MRA</td>
                 <td>
-                    Done <input type="radio" name="mraDone" id="mraDone" value="YES"/> /
-                    Not Done <input type="radio" name="mraDone" id="mraNotDone" value="NO"/>
+                    Done <input type="radio" name="mraDone" id="mraDone" value="YES" required="required"/> /
+                    Not Done <input type="radio" name="mraDone" id="mraNotDone" value="NO" required="required"/>
                 </td>
             </tr>
             <tr>
@@ -322,8 +319,8 @@
                     Angiogram
                 </td>
                 <td>
-                    Done <input type="radio" name="angiogramDone" id="angiogramDone" value="YES"/> /
-                    Not Done <input type="radio" name="angiogramDone" id="angiogramNotDone" value="NO"/>
+                    Done <input type="radio" name="angiogramDone" id="angiogramDone" value="YES" required="required"/> /
+                    Not Done <input type="radio" name="angiogramDone" id="angiogramNotDone" value="NO" required="required"/>
                 </td>
                 <td></td>
                 <td></td>
@@ -348,6 +345,38 @@
 </div>
 } {
 <script type="text/javascript" src="@routes.Assets.at(" javascripts/form/events.js")"></script>
+<script>
+$(document).ready(function () {
+
+    <!--For checkbox and textbox validation-->
+    $("form input:checkbox").change(function() {
+        var _id = $(this).attr('id');
+        if(_id.toLowerCase().indexOf("test") >= 0) {
+            if($('#' + _id).is(':checked')) {
+                $('#' + _id + 'Result').prop('required', true);
+            } else {
+                $('#' + _id + 'Result').prop('required', false);
+            }
+        } else {
+            if(_id == 'aspirinPlusClopidogrel' || _id == 'aspirinPlusDipyridamole') {
+                if($('#' + _id).is(':checked')) {
+                    $('#' + _id + 'Dosage1').prop('required', true);
+                    $('#' + _id + 'Dosage2').prop('required', true);
+                } else {
+                    $('#' + _id + 'Dosage1').prop('required', false);
+                    $('#' + _id + 'Dosage2').prop('required', false);
+                }
+            } else {
+                if($('#' + _id).is(':checked')) {
+                    $('#' + _id + 'Dosage').prop('required', true);
+                } else {
+                    $('#' + _id + 'Dosage').prop('required', false);
+                }
+            }
+        }
+    });
+});
+</script>
 <style>
     .form input[type="text"]{
     width:80px;

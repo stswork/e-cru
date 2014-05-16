@@ -31,7 +31,7 @@ import java.util.Map;
  */
 public class DataController extends Controller {
 
-    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormat.forPattern("dd/MM/yyyy");
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormat.forPattern("MM/dd/yyyy");
     private static final String URL_SEPARATOR = "/";
 
     @With(Authenticated.class)
@@ -312,7 +312,6 @@ public class DataController extends Controller {
         Double height = Double.valueOf(map.get("height").length <= 0 ? StringUtils.EMPTY : map.get("height")[0]);
         Double weight = Double.valueOf(map.get("weight").length <= 0 ? StringUtils.EMPTY : map.get("weight")[0]);
         Double bmi = Double.valueOf(map.get("bmi").length <= 0 ? StringUtils.EMPTY : map.get("bmi")[0]);
-
         String aspirin = !map.containsKey("aspirin") ? StringUtils.EMPTY : map.get("aspirin")[0];
         String clopidogrel = !map.containsKey("clopidogrel") ? StringUtils.EMPTY : map.get("clopidogrel")[0];
         String aspirinPlusClopidogrel = !map.containsKey("aspirinPlusClopidogrel") ? StringUtils.EMPTY : map.get("aspirinPlusClopidogrel")[0];

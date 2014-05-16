@@ -13,7 +13,7 @@
         </header>
         <div class="form" style="width:100%;background: #f1f1f1;border-radius: 10px;">
             <form id="form2" method="POST" style="padding-top: 2%;" action="@controllers.data.routes.DataController.handleSaveForm2()" data-uri="@controllers.data.routes.DataController.form3()">
-                <div class="box message" ><!--style="display:none;padding-top: 2%;padding-left: 1%;padding-bottom: 2%;color: red;"-->
+                <div class="box message">
                     <div class="content-m">
 
                     </div>
@@ -150,83 +150,83 @@
                 <tr>
                     <td>Hypertension</td>
                     <td colspan="2">
-                        <input type="radio" name="hypertension" value="Yes">Yes
-                        <input type="radio" name="hypertension" value="No">No
-                        <input type="radio" name="hypertension" value="DontKnow">Don't Know
+                        <input type="radio" name="hypertension" value="Yes" required="required"/>Yes
+                        <input type="radio" name="hypertension" value="No" required="required"/>No
+                        <input type="radio" name="hypertension" value="Dont_Know" required="required"/>Don't Know
                     </td>
-                    <td><input type="checkbox" name="hypertension" value="hypertension">New</td>
+                    <td><input type="checkbox" name="hypertension" value="hypertension" required="required"/>New</td>
                 </tr>
                 <tr>
                     <td>Diabetes Mellitus</td>
                     <td colspan="2">
-                        <input type="radio" name="diabetesMellitus" value="Yes">Yes
-                        <input type="radio" name="diabetesMellitus" value="No">No
-                        <input type="radio" name="diabetesMellitus" value="DontKnow">Don't Know
+                        <input type="radio" name="diabetesMellitus" value="Yes" required="required"/>Yes
+                        <input type="radio" name="diabetesMellitus" value="No" required="required"/>No
+                        <input type="radio" name="diabetesMellitus" value="Dont_Know" required="required"/>Don't Know
                     </td>
-                    <td><input type="checkbox" name="hypertension" value="hypertension">New</td>
+                    <td><input type="checkbox" name="hypertension" value="hypertension" required="required"/>New</td>
                 </tr>
                 <tr>
                     <td>IHD/Angina</td>
                     <td colspan="2">
-                        <input type="radio" name="ihdAngina" value="Yes">Yes
-                        <input type="radio" name="ihdAngina" value="No">No
-                        <input type="radio" name="ihdAngina" value="DontKnow">Don't Know
+                        <input type="radio" name="ihdAngina" value="Yes" required="required" required="required"/>Yes
+                        <input type="radio" name="ihdAngina" value="No" required="required" required="required"/>No
+                        <input type="radio" name="ihdAngina" value="DontKnow" required="required" required="required"/>Don't Know
                     </td>
-                    <td><input type="checkbox" name="ihd" value="ihd">New</td>
+                    <td><input type="checkbox" name="ihd" value="ihd" required="required"/>New</td>
                 </tr>
                 <tr>
                     <td>Hypercholesterolemia</td>
                     <td colspan="2">
-                        <input type="radio" name="hypercholesterolemia" value="Yes">Yes
-                        <input type="radio" name="hypercholesterolemia" value="No">No
-                        <input type="radio" name="hypercholesterolemia" value="DontKnow">Don't Know
+                        <input type="radio" name="hypercholesterolemia" value="Yes" required="required"/>Yes
+                        <input type="radio" name="hypercholesterolemia" value="No" required="required"/>No
+                        <input type="radio" name="hypercholesterolemia" value="Dont_Know" required="required"/>Don't Know
                     </td>
-                    <td><input type="checkbox" name="hypercholesterolemia" value="hypercholesterolemia">New</td>
+                    <td><input type="checkbox" name="hypercholesterolemia" value="hypercholesterolemia" required="required"/>New</td>
                 </tr>
                 <tr>
                     <td>Atrial Fibrillation</td>
                     <td colspan="2">
-                        <input type="radio" name="atrialFibrillation" value="Yes">Yes
-                        <input type="radio" name="atrialFibrillation" value="No">No
-                        <input type="radio" name="atrialFibrillation" value="DontKnow">Don't Know
+                        <input type="radio" name="atrialFibrillation" value="Yes" required="required"/>Yes
+                        <input type="radio" name="atrialFibrillation" value="No" required="required"/>No
+                        <input type="radio" name="atrialFibrillation" value="Dont_Know" required="required"/>Don't Know
                     </td>
-                    <td><input type="checkbox" name="atrialFibrillation" value="atrialFibrillation">New</td>
+                    <td><input type="checkbox" name="atrialFibrillation" value="atrialFibrillation" required="required"/>New</td>
                 </tr>
                 <tr>
                     <td>PVD</td>
                     <td colspan="2">
-                        <input type="radio" name="pvd" value="Yes">Yes
-                        <input type="radio" name="pvd" value="No">No
-                        <input type="radio" name="pvd" value="DontKnow">Don't Know
+                        <input type="radio" name="pvd" value="Yes" required="required"/>Yes
+                        <input type="radio" name="pvd" value="No" required="required"/>No
+                        <input type="radio" name="pvd" value="Dont_Know" required="required"/>Don't Know
                     </td>
-                    <td><input type="checkbox" name="pvd" value="pvd">New</td>
+                    <td><input type="checkbox" name="pvd" value="pvd" required="required"/>New</td>
                 </tr>
                 <tr>
                     <td>MI</td>
                     <td colspan="2">
-                        <input type="radio" name="mi" value="Yes">Yes
-                        <input type="radio" name="mi" value="No">No
-                        <input type="radio" name="mi" value="DontKnow">Don't Know
+                        <input type="radio" name="mi" value="Yes" required="required"/>Yes
+                        <input type="radio" name="mi" value="No" required="required"/>No
+                        <input type="radio" name="mi" value="Dont_Know" required="required"/>Don't Know
                     </td>
-                    <td><input type="checkbox" name="mi" value="mi">New</td>
+                    <td><input type="checkbox" name="mi" value="mi" required="required"/>New</td>
                 </tr>
                 <tr>
                     <td>Migraine with aura</td>
                     <td colspan="2">
-                        <input type="radio" name="migraineWithAura" value="Yes">Yes
-                        <input type="radio" name="migraineWithAura" value="No">No
-                        <input type="radio" name="migraineWithAura" value="DontKnow">Don't Know
+                        <input type="radio" name="migraineWithAura" value="Yes" required="required"/>Yes
+                        <input type="radio" name="migraineWithAura" value="No" required="required"/>No
+                        <input type="radio" name="migraineWithAura" value="Dont_Know" required="required"/>Don't Know
                     </td>
-                    <td><input type="checkbox" name="MigraineWithAura" value="MigraineWithAura">New</td>
+                    <td><input type="checkbox" name="MigraineWithAura" value="MigraineWithAura" required="required"/>New</td>
                 </tr>
                 <tr>
                     <td>Migraine without aura</td>
                     <td colspan="2">
-                        <input type="radio" name="migraineWithoutAura" value="Yes">Yes
-                        <input type="radio" name="migraineWithoutAura" value="No">No
-                        <input type="radio" name="migraineWithoutAura" value="DontKnow">Don't Know
+                        <input type="radio" name="migraineWithoutAura" value="Yes" required="required"/>Yes
+                        <input type="radio" name="migraineWithoutAura" value="No" required="required"/>No
+                        <input type="radio" name="migraineWithoutAura" value="Dont_Know" required="required"/>Don't Know
                     </td>
-                    <td><input type="checkbox" name="MigraineWithoutAura" value="MigraineWithoutAura">New</td>
+                    <td><input type="checkbox" name="MigraineWithoutAura" value="MigraineWithoutAura" required="required"/>New</td>
                 </tr>
 
                 <tr>
@@ -237,8 +237,8 @@
                         Ischaemic Stroke
                     </td>
                     <td >
-                        <input type="radio" name="ischaemicStrokeYear" value="Yes">Yes
-                        <input type="radio" name="ischaemicStrokeYear" value="No">No
+                        <input type="radio" name="ischaemicStroke" value="Yes" required="required"/>Yes
+                        <input type="radio" name="ischaemicStroke" value="No" required="required"/>No
                     </td>
                     <td rowspan="3">When <input type="text" name="patientPreviousStroke" id="patientPreviousStroke" style="width: 80px;"/>(year)</td>
                 </tr>
@@ -247,8 +247,8 @@
                          Hoemorrhagic Stroke
                      </td>
                      <td >
-                         <input type="radio" name="hoemorrhagicStrokeYear" value="Yes">Yes
-                         <input type="radio" name="hoemorrhagicStrokeYear" value="No">No
+                         <input type="radio" name="hoemorrhagicStroke" value="Yes" required="required"/>Yes
+                         <input type="radio" name="hoemorrhagicStroke" value="No" required="required"/>No
                      </td>
                  </tr>
                 <tr>
@@ -256,24 +256,24 @@
                         TIA
                     </td>
                     <td >
-                        <input type="radio" name="tiaYear" value="Yes">Yes
-                        <input type="radio" name="tiaYear" value="No">No
+                        <input type="radio" name="tia" value="Yes" required="required"/>Yes
+                        <input type="radio" name="tia" value="No" required="required"/>No
                     </td>
                 </tr>
 
                 <tr>
                     <td>Stroke associated with</td>
                     <td>Dissection
-                        <input type="radio" name="strokeAssociatedWithDissection" value="Yes">Yes
-                        <input type="radio" name="strokeAssociatedWithDissection" value="No">No
+                        <input type="radio" name="strokeAssociatedWithDissection" value="Yes" required="required"/>Yes
+                        <input type="radio" name="strokeAssociatedWithDissection" value="No" required="required"/>No
                     </td>
                     <td>PFO
-                        <input type="radio" name="strokeAssociatedWithPfo" value="Yes">Yes
-                        <input type="radio" name="strokeAssociatedWithPfo" value="No">No
+                        <input type="radio" name="strokeAssociatedWithPfo" value="Yes" required="required"/>Yes
+                        <input type="radio" name="strokeAssociatedWithPfo" value="No" required="required"/>No
                     </td>
                     <td> MI
-                        <input type="radio" name="strokeAssociatedWithMi" value="Yes">Yes
-                        <input type="radio" name="strokeAssociatedWithMi" value="No">No
+                        <input type="radio" name="strokeAssociatedWithMi" value="Yes" required="required"/>Yes
+                        <input type="radio" name="strokeAssociatedWithMi" value="No" required="required"/>No
                     </td>
                 </tr>
                 <tr>
@@ -283,75 +283,74 @@
                     </td>
                     <td>Stroke</td>
                     <td colspan="2">
-                        <input type="radio" name="familyStroke" value="Yes">Yes
-                        <input type="radio" name="familyStroke" value="No">No
-                        <input type="radio" name="familyStroke" value="DontKnow">Don't Know
+                        <input type="radio" name="familyStroke" value="Yes" required="required"/>Yes
+                        <input type="radio" name="familyStroke" value="No" required="required"/>No
+                        <input type="radio" name="familyStroke" value="Dont_Know" required="required"/>Don't Know
                     </td>
                 </tr>
                 <tr>
                     <td>IHD/Angina  </td>
                     <td colspan="2">
-                        <input type="radio" name="familyIhdAngina" value="Yes">Yes
-                        <input type="radio" name="familyIhdAngina" value="No">No
-                        <input type="radio" name="familyIhdAngina" value="DontKnow">Don't Know
+                        <input type="radio" name="familyIhdAngina" value="Yes" required="required"/>Yes
+                        <input type="radio" name="familyIhdAngina" value="No" required="required"/>No
+                        <input type="radio" name="familyIhdAngina" value="Dont_Know" required="required"/>Don't Know
                     </td>
                 </tr>
                 <tr>
                     <td>Diabetes Mellitus </td>
                     <td colspan="2">
-                        <input type="radio" name="familyDiabetesMellitus" value="Yes">Yes
-                        <input type="radio" name="familyDiabetesMellitus" value="No">No
-                        <input type="radio" name="familyDiabetesMellitus" value="DontKnow">Don't Know
+                        <input type="radio" name="familyDiabetesMellitus" value="Yes" required="required"/>Yes
+                        <input type="radio" name="familyDiabetesMellitus" value="No" required="required"/>No
+                        <input type="radio" name="familyDiabetesMellitus" value="Dont_Know" required="required"/>Don't Know
                     </td>
                 </tr>
                 <tr>
                     <td>MI</td>
                     <td colspan="2">
-                        <input type="radio" name="familyMi" value="Yes">Yes
-                        <input type="radio" name="familyMi" value="No">No
-                        <input type="radio" name="familyMi" value="DontKnow">Don't Know
+                        <input type="radio" name="familyMi" value="Yes" required="required"/>Yes
+                        <input type="radio" name="familyMi" value="No" required="required"/>No
+                        <input type="radio" name="familyMi" value="Dont_Know" required="required"/>Don't Know
                     </td>
                 </tr>
                 <tr>
                     <td>PVD</td>
                     <td colspan="2">
-                        <input type="radio" name="familyPvd" value="Yes">Yes
-                        <input type="radio" name="familyPvd" value="No">No
-                        <input type="radio" name="familyPvd" value="DontKnow">Don't Know
+                        <input type="radio" name="familyPvd" value="Yes" required="required"/>Yes
+                        <input type="radio" name="familyPvd" value="No" required="required"/>No
+                        <input type="radio" name="familyPvd" value="Dont_Know" required="required"/>Don't Know
                     </td>
                 </tr>
                 <tr>
                     <td>Hypertension</td>
                     <td colspan="2">
-                        <input type="radio" name="familyHypertension" value="Yes">Yes
-                        <input type="radio" name="familyHypertension" value="No">No
-                        <input type="radio" name="familyHypertension" value="DontKnow">Don't Know
+                        <input type="radio" name="familyHypertension" value="Yes" required="required"/>Yes
+                        <input type="radio" name="familyHypertension" value="No" required="required"/>No
+                        <input type="radio" name="familyHypertension" value="Dont_Know" required="required"/>Don't Know
                     </td>
                 </tr>
                 <tr>
                     <td>None of above</td>
                     <td colspan="2">
-                        <input type="radio" name="familyNoneOfTheAbove" value="Yes">Yes
-                        <input type="radio" name="familyNoneOfTheAbove" value="No">No
-                        <input type="radio" name="familyNoneOfTheAbove" value="DontKnow">Don't Know
+                        <input type="radio" name="familyNoneOfTheAbove" value="Yes" required="required"/>Yes
+                        <input type="radio" name="familyNoneOfTheAbove" value="No" required="required"/>No
+                        <input type="radio" name="familyNoneOfTheAbove" value="Dont_Know" required="required"/>Don't Know
                     </td>
                 </tr>
 
                 <tr>
                     <td rowspan="2">Cigarettes</td>
                     <td>Current Smoker <input type="checkbox" name="currentSmoker" id="currentSmoker" value="currentSmoker"/></td>
-                    <td>Cig/day <input type="text" name="cigarettePerDay" id="cigarettePerDay" style="width: 80px;"/></td>
-                    <td>Hip:<input type="text" name="hip" id="hip" style="width: 80px;"/>cm</td>
+                    <td>Cig/day <input type="text" name="cigarettePerDay" id="cigarettePerDay" style="width: 80px;" value="0"/></td>
+                    <td>Hip:<input type="text" name="hip" id="hip" style="width: 80px;" value="0"/>cm</td>
                 </tr>
                 <tr>
                     <td>Ex-smoker <input type="checkbox" name="exSmoker" id="exSmoker" value="exSmoker"/></td>
                     <td>Never <input type="checkbox" name="never" id="never" value="never"/></td>
-                    <td>Waist:<input type="text" name="waist" id="waist" style="width: 80px;"/>cm</td>
+                    <td>Waist:<input type="text" name="waist" id="waist" style="width: 80px;" value="0"/>cm</td>
                 </tr>
                 <tr>
-                    <td colspan="4"><a href="/form3"> <button id="save" name="save" >Next</button> </a></td>
+                    <td colspan="4"><button id="save" name="save">Next</button></a></td>
                 </tr>
-
                 </table>
             </form>
 

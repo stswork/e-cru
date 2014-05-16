@@ -53,11 +53,13 @@ create table data_collection_form1 (
   blood_sample_date         timestamp,
   blood_sample_number       varchar(255),
   date_of_stroke            timestamp,
+  status                    integer,
   created_by_id             bigint,
   modified_by_id            bigint,
   created                   timestamp,
   constraint ck_data_collection_form1_gender check (gender in (0,1,2)),
   constraint ck_data_collection_form1_blood_sample_taken check (blood_sample_taken in (0,1,2,3)),
+  constraint ck_data_collection_form1_status check (status in (0,1,2)),
   constraint pk_data_collection_form1 primary key (id))
 ;
 
@@ -99,6 +101,7 @@ create table data_collection_form2 (
   never                     integer,
   hip                       float,
   waist                     float,
+  status                    integer,
   created_by_id             bigint,
   modified_by_id            bigint,
   created                   timestamp,
@@ -131,6 +134,7 @@ create table data_collection_form2 (
   constraint ck_data_collection_form2_current_smoker check (current_smoker in (0,1,2,3)),
   constraint ck_data_collection_form2_ex_smoker check (ex_smoker in (0,1,2,3)),
   constraint ck_data_collection_form2_never check (never in (0,1,2,3)),
+  constraint ck_data_collection_form2_status check (status in (0,1,2)),
   constraint pk_data_collection_form2 primary key (id))
 ;
 
@@ -198,6 +202,7 @@ create table data_collection_form3 (
   cta_done                  integer,
   mra_done                  integer,
   angiogram_done            integer,
+  status                    integer,
   created_by_id             bigint,
   modified_by_id            bigint,
   created                   timestamp,
@@ -231,6 +236,7 @@ create table data_collection_form3 (
   constraint ck_data_collection_form3_cta_done check (cta_done in (0,1,2,3)),
   constraint ck_data_collection_form3_mra_done check (mra_done in (0,1,2,3)),
   constraint ck_data_collection_form3_angiogram_done check (angiogram_done in (0,1,2,3)),
+  constraint ck_data_collection_form3_status check (status in (0,1,2)),
   constraint pk_data_collection_form3 primary key (id))
 ;
 
@@ -287,6 +293,7 @@ create table data_collection_form4 (
   rehabilitation            integer,
   rip                       integer,
   local_dgh                 integer,
+  status                    integer,
   created_by_id             bigint,
   modified_by_id            bigint,
   created                   timestamp,
@@ -328,6 +335,7 @@ create table data_collection_form4 (
   constraint ck_data_collection_form4_rehabilitation check (rehabilitation in (0,1,2,3)),
   constraint ck_data_collection_form4_rip check (rip in (0,1,2,3)),
   constraint ck_data_collection_form4_local_dgh check (local_dgh in (0,1,2,3)),
+  constraint ck_data_collection_form4_status check (status in (0,1,2)),
   constraint pk_data_collection_form4 primary key (id))
 ;
 
@@ -373,6 +381,7 @@ create table data_collection_form5 (
   spouse_hoemorrhagic_stroke integer,
   spouse_tia                integer,
   bp_today                  varchar(255),
+  status                    integer,
   created_by_id             bigint,
   modified_by_id            bigint,
   created                   timestamp,
@@ -397,6 +406,7 @@ create table data_collection_form5 (
   constraint ck_data_collection_form5_spouse_ischaemic_stroke check (spouse_ischaemic_stroke in (0,1,2,3)),
   constraint ck_data_collection_form5_spouse_hoemorrhagic_stroke check (spouse_hoemorrhagic_stroke in (0,1,2,3)),
   constraint ck_data_collection_form5_spouse_tia check (spouse_tia in (0,1,2,3)),
+  constraint ck_data_collection_form5_status check (status in (0,1,2)),
   constraint pk_data_collection_form5 primary key (id))
 ;
 
@@ -411,10 +421,12 @@ create table data_collection_form6 (
   blood_sample_taken        integer,
   blood_sample_date         timestamp,
   blood_sample_number       varchar(255),
+  status                    integer,
   created_by_id             bigint,
   modified_by_id            bigint,
   created                   timestamp,
   constraint ck_data_collection_form6_blood_sample_taken check (blood_sample_taken in (0,1,2,3)),
+  constraint ck_data_collection_form6_status check (status in (0,1,2)),
   constraint pk_data_collection_form6 primary key (id))
 ;
 

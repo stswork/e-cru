@@ -38,5 +38,5 @@ GET         /data/form5                   controllers.data.DataController.form5(
 POST        /data/form5                   controllers.data.DataController.handleSaveForm5()
 GET         /data/form6                   controllers.data.DataController.form6()
 POST        /data/form6                   controllers.data.DataController.handleSaveForm6()
-POST        /data/list                    controllers.data.DataController.patientList()
+GET         /data/list                    controllers.data.DataController.patientList()
 POST        /data/disable                 controllers.data.DataController.disable()
