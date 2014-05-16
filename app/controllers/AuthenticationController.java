@@ -21,7 +21,7 @@ public class AuthenticationController extends Controller {
     @BodyParser.Of(BodyParser.Json.class)
     public static Result login() {
         /*Login l = Ebean.find(Login.class).orderBy("created desc").setMaxRows(1).findUnique();
-        if (StringUtils.isEmpty(session("user"))) {
+
             if(l == null) {
                 String _url = controllers.routes.Assets.at("images/mri.jpeg").absoluteURL(request());
                 return ok(views.html.index.render("Welcome", _url));
@@ -32,8 +32,11 @@ public class AuthenticationController extends Controller {
         } else {
             return redirect(controllers.review.routes.ReviewController.getPatientsToReview());
         }*/
-
-                return ok(views.html.index.render("Welcome"));
+        if (StringUtils.isEmpty(session("user"))) {
+            return ok(views.html.index.render("Welcome"));
+        } else {
+            return redirect(controllers.data.routes.DataController.patientList());
+        }
 
     }
 
