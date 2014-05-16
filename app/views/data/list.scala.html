@@ -85,14 +85,14 @@
             $("table tr").each(function(index) {
                 if (index !== 0) {
                     $row = $(this);
-                    var _pn = $row.find("td").eq(0).text().toUpperCase();
-                    var _email = $row.find("td").eq(1).text().toUpperCase();
-                    var _doc = $row.find("td").eq(4).text().toUpperCase();
-                    if (_pn.indexOf(value) >= 0) {
+                    var _pid = $row.find("td").eq(0).text().toUpperCase();
+                    var _pn = $row.find("td").eq(1).text().toUpperCase();
+                    var _ts = $row.find("td").eq(2).text().toUpperCase();
+                    if (_pid.indexOf(value) >= 0) {
                         $row.show();
-                    } else if (_email.indexOf(value) >= 0) {
+                    } else if (_pn.indexOf(value) >= 0) {
                         $row.show();
-                    } else if (_doc.indexOf(value) >= 0) {
+                    } else if (_ts.indexOf(value) >= 0) {
                         $row.show();
                     } else {
                         $row.hide();
