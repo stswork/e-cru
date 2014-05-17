@@ -88,7 +88,7 @@
                 <tr>
                     @if(d != null && d.getEconomicStatuses() != null && d.getEconomicStatuses().size() > 0) {
                         @for(e <- d.getEconomicStatuses()){
-                            <td><input type="checkbox" name="economicStatuses[]" id="@e.getName()" value="@e.getName()"  />@e.getName()</td>
+                            <td><input type="checkbox" name="economicStatuses[]" id="@e.getName()" value="@e.getName()" checked="checked" disabled="disabled"/>@e.getName()</td>
                         }
                     }
                 </tr>
