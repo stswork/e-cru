@@ -52,7 +52,7 @@ public class DataController extends Controller {
             return redirect(controllers.data.routes.DataController.form1(0));
         Integer pid = Integer.valueOf(session("pid"));
         DataCollectionForm2 d = null;
-        d = (id > 0) ? Ebean.find(DataCollectionForm2.class).fetch("economicStatuses").fetch("createdBy").fetch("modifiedBy").where(
+        d = (id > 0) ? Ebean.find(DataCollectionForm2.class).fetch("createdBy").fetch("modifiedBy").where(
                 Expr.eq("id", id)
         ).setMaxRows(1).findUnique() : new DataCollectionForm2();
         return ok(views.html.data.form2.render("Form2", u, pid, d));
@@ -65,7 +65,7 @@ public class DataController extends Controller {
             return redirect(controllers.data.routes.DataController.form1(0));
         Integer pid = Integer.valueOf(session("pid"));
         DataCollectionForm3 d = null;
-        d = (id > 0) ? Ebean.find(DataCollectionForm3.class).fetch("economicStatuses").fetch("createdBy").fetch("modifiedBy").where(
+        d = (id > 0) ? Ebean.find(DataCollectionForm3.class).fetch("createdBy").fetch("modifiedBy").where(
                 Expr.eq("id", id)
         ).setMaxRows(1).findUnique() : new DataCollectionForm3();
         return ok(views.html.data.form3.render("Form3", u, pid, d));
@@ -78,7 +78,7 @@ public class DataController extends Controller {
             return redirect(controllers.data.routes.DataController.form1(0));
         Integer pid = Integer.valueOf(session("pid"));
         DataCollectionForm4 d = null;
-        d = (id > 0) ? Ebean.find(DataCollectionForm4.class).fetch("economicStatuses").fetch("createdBy").fetch("modifiedBy").where(
+        d = (id > 0) ? Ebean.find(DataCollectionForm4.class).fetch("createdBy").fetch("modifiedBy").where(
                 Expr.eq("id", id)
         ).setMaxRows(1).findUnique() : new DataCollectionForm4();
         return ok(views.html.data.form4.render("Form4", u, pid, d));
@@ -92,7 +92,7 @@ public class DataController extends Controller {
             return redirect(controllers.data.routes.DataController.form1(0));
         Integer pid = Integer.valueOf(session("pid"));
         DataCollectionForm5 d = null;
-        d = (id > 0) ? Ebean.find(DataCollectionForm5.class).fetch("economicStatuses").fetch("createdBy").fetch("modifiedBy").where(
+        d = (id > 0) ? Ebean.find(DataCollectionForm5.class).fetch("createdBy").fetch("modifiedBy").where(
                 Expr.eq("id", id)
         ).setMaxRows(1).findUnique() : new DataCollectionForm5();
         return ok(views.html.data.form5.render("Form5", u, pid, d));
