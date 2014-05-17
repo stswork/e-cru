@@ -10,6 +10,8 @@ import models.YesNo;
 import models.user.User;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import play.data.format.Formats;
 import play.data.validation.Constraints;
 import play.db.ebean.Model;
@@ -372,6 +374,11 @@ public class DataCollectionForm5 extends Model {
 
     public Timestamp getSpouseDateOfBirth() {
         return spouseDateOfBirth;
+    }
+
+    public String getSpouseDateOfBirthString() {
+        DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormat.forPattern("MM/dd/yyyy");
+        return spouseDateOfBirth == null ? StringUtils.EMPTY : DATE_TIME_FORMATTER.print(spouseDateOfBirth.getTime());
     }
 
     public void setSpouseDateOfBirth(Timestamp spouseDateOfBirth) {

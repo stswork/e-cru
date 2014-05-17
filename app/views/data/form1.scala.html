@@ -41,7 +41,7 @@
                           <td>Trial Site:</td>
                           <td><input type="text" name="trialSite" id="trialSite" value="@d.getTrialSite()" ></td>
                           <td>Date recruited</td>
-                          <td><input type="text" name="recruitedDate" id="recruitedDate" value="@d.getRecruitedDate()"/></td>
+                          <td><input type="text" name="recruitedDate" id="recruitedDate" value="@d.getRecruitedDateString()"/></td>
                       </tr>
                      <tr>
                         <td colspan="4">
@@ -53,7 +53,7 @@
                          <td><input type="text" name="patientName" id="patientName" value="@d.getPatientName()" ></td>
                          <td>Date Of Birth:</td>
                          <td>
-                             <input type="text" name="patientDob" id="patientDob" value="@d.getDateOfBirth()"/>
+                             <input type="text" name="patientDob" id="patientDob" value="@d.getDateOfBirthString()"/>
                          </td>
                      </tr>
                     <tr>
@@ -186,7 +186,7 @@
                                 <tr>
                                     <td>When:</td>
                                     <td style="width: 299px;">
-                                        <input type="text" name="bloodSampleDate" id="bloodSampleDate" value="@d.getBloodSampleDate()"/>
+                                        <input type="text" name="bloodSampleDate" id="bloodSampleDate" value="@d.getBloodSampleDateString()"/>
                                     </td>
                                 </tr>
                             </table>
@@ -195,7 +195,7 @@
                     <tr>
                         <td>Date of stroke/ event</td>
                         <td>
-                            <input type="text" name="strokeDate" id="strokeDate" value="@d.getDateOfStroke()"/>
+                            <input type="text" name="strokeDate" id="strokeDate" value="@d.getDateOfStrokeString()"/>
                         </td>
 
                     </tr>

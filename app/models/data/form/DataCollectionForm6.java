@@ -6,6 +6,8 @@ import models.YesNo;
 import models.user.User;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import play.data.format.Formats;
 import play.data.validation.Constraints;
 import play.db.ebean.Model;
@@ -151,6 +153,11 @@ public class DataCollectionForm6 extends Model {
 
     public Timestamp getBloodSampleDate() {
         return bloodSampleDate;
+    }
+
+    public String getBloodSampleDateString() {
+        DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormat.forPattern("MM/dd/yyyy");
+        return bloodSampleDate == null ? StringUtils.EMPTY : DATE_TIME_FORMATTER.print(bloodSampleDate.getTime());
     }
 
     public void setBloodSampleDate(Timestamp bloodSampleDate) {
