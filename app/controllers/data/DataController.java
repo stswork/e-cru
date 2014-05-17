@@ -32,6 +32,7 @@ import java.util.Map;
 public class DataController extends Controller {
 
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormat.forPattern("MM/dd/yyyy");
+    private static final String NO = "NO";
     private static final String URL_SEPARATOR = "/";
 
     @With(Authenticated.class)
@@ -152,7 +153,7 @@ public class DataController extends Controller {
         String nativeLanguage = StringUtils.isEmpty(map.get("nativeLanguage")[0]) ? StringUtils.EMPTY : map.get("nativeLanguage")[0];
         String religion = StringUtils.isEmpty(map.get("religion")[0]) ? StringUtils.EMPTY : map.get("religion")[0];
         String[] economicStatuses = map.get("economicStatuses[]") == null ? new String[0] : map.get("economicStatuses[]");
-        YesNo bloodSampleTaken = YesNo.valueOf(StringUtils.isEmpty(map.get("bloodSampleTaken")[0]) ? StringUtils.EMPTY : map.get("bloodSampleTaken")[0].toUpperCase());
+        YesNo bloodSampleTaken = YesNo.valueOf(!map.containsKey("bloodSampleTaken") ? NO : map.get("bloodSampleTaken")[0].toUpperCase());
         String bloodSampleDate = StringUtils.isEmpty(map.get("bloodSampleDate")[0]) ? StringUtils.EMPTY : map.get("bloodSampleDate")[0];
         DateTime dateBloodSampleTaken = null;
         try {
@@ -227,52 +228,49 @@ public class DataController extends Controller {
             if(dcf2 == null)
                 return badRequest(Json.toJson(new ResponseMessage(400, "Invalid parameters passed!", ResponseMessageType.BAD_REQUEST)));
         }
-        Integer patientIdNumber = Integer.valueOf(map.get("patientIdNumber").length <= 0 ? StringUtils.EMPTY : map.get("patientIdNumber")[0]);
-        YesNo ischaemicStroke = YesNo.valueOf(map.get("ischaemicStroke").length <= 0 ? StringUtils.EMPTY : map.get("ischaemicStroke")[0].toUpperCase());
-        YesNo taci = YesNo.valueOf(map.get("taci").length <= 0 ? StringUtils.EMPTY : map.get("taci")[0].toUpperCase());
-        YesNo paci = YesNo.valueOf(map.get("paci").length <= 0 ? StringUtils.EMPTY : map.get("paci")[0].toUpperCase());
-        YesNo laci = YesNo.valueOf(map.get("laci").length <= 0 ? StringUtils.EMPTY : map.get("laci")[0].toUpperCase());
-        YesNo poci = YesNo.valueOf(map.get("poci").length <= 0 ? StringUtils.EMPTY : map.get("poci")[0].toUpperCase());
-        YesNo hoemorrhagicStroke = YesNo.valueOf(map.get("hoemorrhagicStroke").length <= 0 ? StringUtils.EMPTY : map.get("hoemorrhagicStroke")[0].toUpperCase());
-        YesNo venousSinusThrombosis = YesNo.valueOf(map.get("venousSinusThrombosis").length <= 0 ? StringUtils.EMPTY : map.get("venousSinusThrombosis")[0].toUpperCase());
-        YesNo tia = YesNo.valueOf(map.get("tia").length <= 0 ? StringUtils.EMPTY : map.get("tia")[0].toUpperCase());
-        YesNo avm = YesNo.valueOf(map.get("avm").length <= 0 ? StringUtils.EMPTY : map.get("avm")[0].toUpperCase());
-        YesNo aneurysm = YesNo.valueOf(map.get("aneurysm").length <= 0 ? StringUtils.EMPTY : map.get("aneurysm")[0].toUpperCase());
-        YesNo subaranchoid = YesNo.valueOf(map.get("subaranchoid").length <= 0 ? StringUtils.EMPTY : map.get("subaranchoid")[0].toUpperCase());
-        YesNo hypertension = YesNo.valueOf(map.get("hypertension").length <= 0 ? StringUtils.EMPTY : map.get("hypertension")[0].toUpperCase());
-        YesNo diabetesMellitus = YesNo.valueOf(map.get("diabetesMellitus").length <= 0 ? StringUtils.EMPTY : map.get("diabetesMellitus")[0].toUpperCase());
-        YesNo ihdAngina = YesNo.valueOf(map.get("ihdAngina").length <= 0 ? StringUtils.EMPTY : map.get("ihdAngina")[0].toUpperCase());
-        YesNo hypercholesterolemia = YesNo.valueOf(map.get("hypercholesterolemia").length <= 0 ? StringUtils.EMPTY : map.get("hypercholesterolemia")[0].toUpperCase());
-        YesNo atrialFibrillation = YesNo.valueOf(map.get("atrialFibrillation").length <= 0 ? StringUtils.EMPTY : map.get("atrialFibrillation")[0].toUpperCase());
-        YesNo pvd = YesNo.valueOf(map.get("pvd").length <= 0 ? StringUtils.EMPTY : map.get("pvd")[0].toUpperCase());
-        YesNo mi = YesNo.valueOf(map.get("mi").length <= 0 ? StringUtils.EMPTY : map.get("mi")[0].toUpperCase());
-        YesNo migraineWithAura = YesNo.valueOf(map.get("migraineWithAura").length <= 0 ? StringUtils.EMPTY : map.get("migraineWithAura")[0].toUpperCase());
-        YesNo migraineWithoutAura = YesNo.valueOf(map.get("migraineWithoutAura").length <= 0 ? StringUtils.EMPTY : map.get("migraineWithoutAura")[0].toUpperCase());
-        Integer ischaemicStrokeYear = 0/*Integer.valueOf(map.get("ischaemicStrokeYear").length <= 0 ? StringUtils.EMPTY : map.get("ischaemicStrokeYear")[0])*/;
-        Integer hoemorrhagicStrokeYear = 0/*Integer.valueOf(map.get("hoemorrhagicStrokeYear").length <= 0 ? StringUtils.EMPTY : map.get("hoemorrhagicStrokeYear")[0])*/;
-        Integer tiaYear = 0/*Integer.valueOf(map.get("tiaYear").length <= 0 ? StringUtils.EMPTY : map.get("tiaYear")[0])*/;
-        YesNo strokeAssociatedWithDissection = YesNo.valueOf(map.get("strokeAssociatedWithDissection").length <= 0 ? StringUtils.EMPTY : map.get("strokeAssociatedWithDissection")[0].toUpperCase());
-        YesNo strokeAssociatedWithPfo = YesNo.valueOf(map.get("strokeAssociatedWithPfo").length <= 0 ? StringUtils.EMPTY : map.get("strokeAssociatedWithPfo")[0].toUpperCase());
-        YesNo strokeAssociatedWithMi = YesNo.valueOf(map.get("strokeAssociatedWithMi").length <= 0 ? StringUtils.EMPTY : map.get("strokeAssociatedWithMi")[0].toUpperCase());
-        YesNo familyStroke = YesNo.valueOf(map.get("familyStroke").length <= 0 ? StringUtils.EMPTY : map.get("familyStroke")[0].toUpperCase());
-        YesNo familyIhdAngina = YesNo.valueOf(map.get("familyIhdAngina").length <= 0 ? StringUtils.EMPTY : map.get("familyIhdAngina")[0].toUpperCase());
-        YesNo familyDiabetesMellitus = YesNo.valueOf(map.get("familyDiabetesMellitus").length <= 0 ? StringUtils.EMPTY : map.get("familyDiabetesMellitus")[0].toUpperCase());
-        YesNo familyMi = YesNo.valueOf(map.get("familyMi").length <= 0 ? StringUtils.EMPTY : map.get("familyMi")[0].toUpperCase());
-        YesNo familyPvd = YesNo.valueOf(map.get("familyPvd").length <= 0 ? StringUtils.EMPTY : map.get("familyPvd")[0].toUpperCase());
-        YesNo familyHypertension = YesNo.valueOf(map.get("familyHypertension").length <= 0 ? StringUtils.EMPTY : map.get("familyHypertension")[0].toUpperCase());
-        YesNo familyNoneOfTheAbove = YesNo.valueOf(map.get("familyNoneOfTheAbove").length <= 0 ? StringUtils.EMPTY : map.get("familyNoneOfTheAbove")[0].toUpperCase());
-        String currentSmoker = !map.containsKey("currentSmoker") ? StringUtils.EMPTY : map.get("currentSmoker")[0];
-        if(!StringUtils.isEmpty(currentSmoker))
-            dcf2.setCurrentSmoker(YesNo.YES);
-        Integer cigarettePerDay = Integer.valueOf(map.get("cigarettePerDay").length <= 0 ? StringUtils.EMPTY : map.get("cigarettePerDay")[0]);
-        String exSmoker = !map.containsKey("exSmoker") ? StringUtils.EMPTY : map.get("exSmoker")[0];
-        if(!StringUtils.isEmpty(exSmoker))
-            dcf2.setExSmoker(YesNo.YES);
-        String never = !map.containsKey("never") ? StringUtils.EMPTY : map.get("never")[0];
-        if(!StringUtils.isEmpty(never))
-            dcf2.setNever(YesNo.YES);
-        Double hip = Double.valueOf(map.get("cigarettePerDay").length <= 0 ? StringUtils.EMPTY : map.get("cigarettePerDay")[0]);
-        Double waist = Double.valueOf(map.get("cigarettePerDay").length <= 0 ? StringUtils.EMPTY : map.get("cigarettePerDay")[0]);
+        Integer patientIdNumber = Integer.valueOf(StringUtils.isEmpty(map.get("patientIdNumber")[0]) ? "0" : map.get("patientIdNumber")[0]);
+        YesNo ischaemicStroke = YesNo.valueOf(!map.containsKey("ischaemicStroke") ? NO : map.get("ischaemicStroke")[0].toUpperCase());
+        YesNo taci = YesNo.valueOf(!map.containsKey("taci") ? NO : map.get("taci")[0].toUpperCase());
+        YesNo paci = YesNo.valueOf(!map.containsKey("paci") ? NO : map.get("paci")[0].toUpperCase());
+        YesNo laci = YesNo.valueOf(!map.containsKey("laci") ? NO : map.get("laci")[0].toUpperCase());
+        YesNo poci = YesNo.valueOf(!map.containsKey("poci") ? NO : map.get("poci")[0].toUpperCase());
+        YesNo hoemorrhagicStroke = YesNo.valueOf(!map.containsKey("hoemorrhagicStroke") ? NO : map.get("hoemorrhagicStroke")[0].toUpperCase());
+        YesNo venousSinusThrombosis = YesNo.valueOf(!map.containsKey("venousSinusThrombosis") ? NO : map.get("venousSinusThrombosis")[0].toUpperCase());
+        YesNo tia = YesNo.valueOf(!map.containsKey("tia") ? NO : map.get("tia")[0].toUpperCase());
+        YesNo avm = YesNo.valueOf(!map.containsKey("avm") ? NO : map.get("avm")[0].toUpperCase());
+        YesNo aneurysm = YesNo.valueOf(!map.containsKey("aneurysm") ? NO : map.get("aneurysm")[0].toUpperCase());
+        YesNo subaranchoid = YesNo.valueOf(!map.containsKey("subaranchoid") ? NO : map.get("subaranchoid")[0].toUpperCase());
+        YesNo hypertension = YesNo.valueOf(!map.containsKey("hypertension") ? NO : map.get("hypertension")[0].toUpperCase());
+        YesNo diabetesMellitus = YesNo.valueOf(!map.containsKey("diabetesMellitus") ? NO : map.get("diabetesMellitus")[0].toUpperCase());
+        YesNo ihdAngina = YesNo.valueOf(!map.containsKey("ihdAngina") ? NO : map.get("ihdAngina")[0].toUpperCase());
+        YesNo hypercholesterolemia = YesNo.valueOf(!map.containsKey("hypercholesterolemia") ? NO : map.get("hypercholesterolemia")[0].toUpperCase());
+        YesNo atrialFibrillation = YesNo.valueOf(!map.containsKey("atrialFibrillation") ? NO : map.get("atrialFibrillation")[0].toUpperCase());
+        YesNo pvd = YesNo.valueOf(!map.containsKey("pvd") ? NO : map.get("pvd")[0].toUpperCase());
+        YesNo mi = YesNo.valueOf(!map.containsKey("mi") ? NO : map.get("mi")[0].toUpperCase());
+        YesNo migraineWithAura = YesNo.valueOf(!map.containsKey("migraineWithAura") ? NO : map.get("migraineWithAura")[0].toUpperCase());
+        YesNo migraineWithoutAura = YesNo.valueOf(!map.containsKey("migraineWithoutAura") ? NO : map.get("migraineWithoutAura")[0].toUpperCase());
+        Integer ischaemicStrokeYear = 0/*Integer.valueOf(map.get("ischaemicStrokeYear") ? StringUtils.EMPTY : map.get("ischaemicStrokeYear")[0])*/;
+        Integer hoemorrhagicStrokeYear = 0/*Integer.valueOf(map.get("hoemorrhagicStrokeYear") ? StringUtils.EMPTY : map.get("hoemorrhagicStrokeYear")[0])*/;
+        Integer tiaYear = 0/*Integer.valueOf(map.get("tiaYear") ? StringUtils.EMPTY : map.get("tiaYear")[0])*/;
+        YesNo strokeAssociatedWithDissection = YesNo.valueOf(!map.containsKey("strokeAssociatedWithDissection") ? NO : map.get("strokeAssociatedWithDissection")[0].toUpperCase());
+        YesNo strokeAssociatedWithPfo = YesNo.valueOf(!map.containsKey("strokeAssociatedWithPfo") ? NO : map.get("strokeAssociatedWithPfo")[0].toUpperCase());
+        YesNo strokeAssociatedWithMi = YesNo.valueOf(!map.containsKey("strokeAssociatedWithMi") ? NO : map.get("strokeAssociatedWithMi")[0].toUpperCase());
+        YesNo familyStroke = YesNo.valueOf(!map.containsKey("familyStroke") ? NO : map.get("familyStroke")[0].toUpperCase());
+        YesNo familyIhdAngina = YesNo.valueOf(!map.containsKey("familyIhdAngina") ? NO : map.get("familyIhdAngina")[0].toUpperCase());
+        YesNo familyDiabetesMellitus = YesNo.valueOf(!map.containsKey("familyDiabetesMellitus") ? NO : map.get("familyDiabetesMellitus")[0].toUpperCase());
+        YesNo familyMi = YesNo.valueOf(!map.containsKey("familyMi") ? NO : map.get("familyMi")[0].toUpperCase());
+        YesNo familyPvd = YesNo.valueOf(!map.containsKey("familyPvd") ? NO : map.get("familyPvd")[0].toUpperCase());
+        YesNo familyHypertension = YesNo.valueOf(!map.containsKey("familyHypertension") ? NO : map.get("familyHypertension")[0].toUpperCase());
+        YesNo familyNoneOfTheAbove = YesNo.valueOf(!map.containsKey("familyNoneOfTheAbove") ? NO : map.get("familyNoneOfTheAbove")[0].toUpperCase());
+        YesNo currentSmoker = YesNo.valueOf(!map.containsKey("currentSmoker") ? NO : map.get("currentSmoker")[0]);
+        dcf2.setCurrentSmoker(currentSmoker);
+        Integer cigarettePerDay = Integer.valueOf(map.containsKey("cigarettePerDay") ? "0" : map.get("cigarettePerDay")[0]);
+        YesNo exSmoker = YesNo.valueOf(!map.containsKey("exSmoker") ? NO : map.get("exSmoker")[0]);
+        dcf2.setExSmoker(exSmoker);
+        YesNo never = YesNo.valueOf(!map.containsKey("never") ? NO : map.get("never")[0]);
+        dcf2.setNever(never);
+        Double hip = Double.valueOf(!map.containsKey("cigarettePerDay") ? "0" : map.get("cigarettePerDay")[0]);
+        Double waist = Double.valueOf(!map.containsKey("cigarettePerDay") ? "0" : map.get("cigarettePerDay")[0]);
         dcf2.setPatientIdNumber(patientIdNumber);
         dcf2.setIschaemicStroke(ischaemicStroke);
         dcf2.setTaci(taci);
@@ -335,11 +333,11 @@ public class DataController extends Controller {
             if(dcf3 == null)
                 return badRequest(Json.toJson(new ResponseMessage(400, "Invalid parameters passed!", ResponseMessageType.BAD_REQUEST)));
         }
-        Integer patientIdNumber = Integer.valueOf(map.get("patientIdNumber").length <= 0 ? StringUtils.EMPTY : map.get("patientIdNumber")[0]);
-        Integer alcoholUnitsPerWeek = Integer.valueOf(map.get("alcoholUnitsPerWeek").length <= 0 ? StringUtils.EMPTY : map.get("alcoholUnitsPerWeek")[0]);
-        Double height = Double.valueOf(map.get("height").length <= 0 ? StringUtils.EMPTY : map.get("height")[0]);
-        Double weight = Double.valueOf(map.get("weight").length <= 0 ? StringUtils.EMPTY : map.get("weight")[0]);
-        Double bmi = Double.valueOf(map.get("bmi").length <= 0 ? StringUtils.EMPTY : map.get("bmi")[0]);
+        Integer patientIdNumber = Integer.valueOf(map.containsKey("patientIdNumber") ? StringUtils.EMPTY : map.get("patientIdNumber")[0]);
+        Integer alcoholUnitsPerWeek = Integer.valueOf(map.containsKey("alcoholUnitsPerWeek") ? StringUtils.EMPTY : map.get("alcoholUnitsPerWeek")[0]);
+        Double height = Double.valueOf(map.containsKey("height") ? StringUtils.EMPTY : map.get("height")[0]);
+        Double weight = Double.valueOf(map.containsKey("weight") ? StringUtils.EMPTY : map.get("weight")[0]);
+        Double bmi = Double.valueOf(map.containsKey("bmi") ? StringUtils.EMPTY : map.get("bmi")[0]);
         String aspirin = !map.containsKey("aspirin") ? StringUtils.EMPTY : map.get("aspirin")[0];
         String clopidogrel = !map.containsKey("clopidogrel") ? StringUtils.EMPTY : map.get("clopidogrel")[0];
         String aspirinPlusClopidogrel = !map.containsKey("aspirinPlusClopidogrel") ? StringUtils.EMPTY : map.get("aspirinPlusClopidogrel")[0];

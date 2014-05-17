@@ -1,1 +1,1 @@
-web: target/universal/stage/bin/ecrs -Dhttp.port=$PORT -Dconfig.resource=app.prod.conf
+web: target/universal/stage/bin/ecrf -Dhttp.port=$PORT -Dconfig.resource=app.prod.conf

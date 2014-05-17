@@ -1,6 +1,6 @@
 import _root_.sbt.Keys._
 
-name := "ecrs"
+name := "ecrf"
 
 version := "1.0-SNAPSHOT"
 

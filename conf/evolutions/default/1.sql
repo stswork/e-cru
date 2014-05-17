@@ -1,3 +1,6 @@
+# --- Created by Ebean DDL
+# To stop Ebean DDL generation, remove this comment and start using Evolutions
+
 # --- !Ups
 
 create table album (
@@ -64,6 +67,10 @@ create table data_collection_form2 (
   id                        bigint not null,
   patient_id_number         integer,
   ischaemic_stroke          integer,
+  taci                      integer,
+  paci                      integer,
+  laci                      integer,
+  poci                      integer,
   hoemorrhagic_stroke       integer,
   venous_sinus_thrombosis   integer,
   tia                       integer,
@@ -103,6 +110,10 @@ create table data_collection_form2 (
   modified_by_id            bigint,
   created                   timestamp,
   constraint ck_data_collection_form2_ischaemic_stroke check (ischaemic_stroke in (0,1,2,3)),
+  constraint ck_data_collection_form2_taci check (taci in (0,1,2,3)),
+  constraint ck_data_collection_form2_paci check (paci in (0,1,2,3)),
+  constraint ck_data_collection_form2_laci check (laci in (0,1,2,3)),
+  constraint ck_data_collection_form2_poci check (poci in (0,1,2,3)),
   constraint ck_data_collection_form2_hoemorrhagic_stroke check (hoemorrhagic_stroke in (0,1,2,3)),
   constraint ck_data_collection_form2_venous_sinus_thrombosis check (venous_sinus_thrombosis in (0,1,2,3)),
   constraint ck_data_collection_form2_tia check (tia in (0,1,2,3)),
