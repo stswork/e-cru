@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import models.Status;
 import models.YesNo;
 import models.user.User;
+import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import play.data.format.Formats;
 import play.data.validation.Constraints;
@@ -31,27 +32,27 @@ public class DataCollectionForm5 extends Model {
     @Constraints.Required
     private YesNo aspirin;
 
-    private String aspirinDosage;
+    private String aspirinDosage = StringUtils.EMPTY;
 
     @Constraints.Required
     private YesNo clopidogrel;
 
-    private String clopidogrelDosage;
+    private String clopidogrelDosage = StringUtils.EMPTY;
 
     @Constraints.Required
     private YesNo aspirinPlusClopidogrel;
 
-    private String aspirinPlusClopidogrelDosage;
+    private String aspirinPlusClopidogrelDosage = StringUtils.EMPTY;
 
     @Constraints.Required
     private YesNo dipyridamole;
 
-    private String dipyridamoleDosage;
+    private String dipyridamoleDosage = StringUtils.EMPTY;
 
     @Constraints.Required
     private YesNo aspirinPlusDipyridamole;
 
-    private String aspirinPlusDipyridamoleDosage;
+    private String aspirinPlusDipyridamoleDosage = StringUtils.EMPTY;
 
     @Constraints.Required
     private YesNo warfarin;
@@ -59,61 +60,73 @@ public class DataCollectionForm5 extends Model {
     @Constraints.Required
     private YesNo statin;
 
-    private String statinDosage;
+    private String statinDosage = StringUtils.EMPTY;
 
-    private String statinName;
+    private String statinName = StringUtils.EMPTY;
 
     @Constraints.Required
     private YesNo antihypertensive = YesNo.DONT_KNOW;
 
-    private String spouseName;
+    private String spouseName = StringUtils.EMPTY;
 
-    private String spouseAddress;
+    private String spouseAddress = StringUtils.EMPTY;
 
     @Formats.DateTime(pattern = "MM/dd/yy")
     private Timestamp spouseDateOfBirth;
 
     private Gender spouseGender;
 
-    private String spouseLandlinePhoneNumber;
+    private String spouseLandlinePhoneNumber = StringUtils.EMPTY;
 
-    private String spouseCellPhoneNumber;
+    private String spouseCellPhoneNumber = StringUtils.EMPTY;
 
-    private String spouseFriendPhoneNumber;
+    private String spouseFriendPhoneNumber = StringUtils.EMPTY;
 
-    private String spousePlaceOfBirth;
+    private String spousePlaceOfBirth = StringUtils.EMPTY;
 
-    private String spouseEthnicity;
+    private String spouseEthnicity = StringUtils.EMPTY;
 
-    private String spouseNativeLanguage;
+    private String spouseNativeLanguage = StringUtils.EMPTY;
 
-    private String spouseReligion;
+    private String spouseReligion = StringUtils.EMPTY;
 
-    private YesNo spouseHypertension = YesNo.DONT_KNOW;
+    @Constraints.Required
+    private YesNo spouseHypertension = YesNo.NO;
 
-    private YesNo spouseDiabetesMellitus = YesNo.DONT_KNOW;
+    @Constraints.Required
+    private YesNo spouseDiabetesMellitus = YesNo.NO;
 
-    private YesNo spouseIhdAngina = YesNo.DONT_KNOW;
+    @Constraints.Required
+    private YesNo spouseIhdAngina = YesNo.NO;
 
-    private YesNo spouseHypercholesterolemia = YesNo.DONT_KNOW;
+    @Constraints.Required
+    private YesNo spouseHypercholesterolemia = YesNo.NO;
 
-    private YesNo spouseAtrialFibrillation = YesNo.DONT_KNOW;
+    @Constraints.Required
+    private YesNo spouseAtrialFibrillation = YesNo.NO;
 
-    private YesNo spousePvd = YesNo.DONT_KNOW;
+    @Constraints.Required
+    private YesNo spousePvd = YesNo.NO;
 
-    private YesNo spouseMi = YesNo.DONT_KNOW;
+    @Constraints.Required
+    private YesNo spouseMi = YesNo.NO;
 
-    private YesNo spouseMigraineWithAura = YesNo.DONT_KNOW;
+    @Constraints.Required
+    private YesNo spouseMigraineWithAura = YesNo.NO;
 
-    private YesNo spouseMigraineWithoutAura = YesNo.DONT_KNOW;
+    @Constraints.Required
+    private YesNo spouseMigraineWithoutAura = YesNo.NO;
 
-    private YesNo spouseIschaemicStroke = YesNo.DONT_KNOW;
+    @Constraints.Required
+    private YesNo spouseIschaemicStroke = YesNo.NO;
 
-    private YesNo spouseHoemorrhagicStroke = YesNo.DONT_KNOW;
+    @Constraints.Required
+    private YesNo spouseHoemorrhagicStroke = YesNo.NO;
 
-    private YesNo spouseTia = YesNo.DONT_KNOW;
+    @Constraints.Required
+    private YesNo spouseTia = YesNo.NO;
 
-    private String bpToday;
+    private String bpToday = StringUtils.EMPTY;
 
     @Constraints.Required
     public Status status = Status.ACTIVE;
@@ -233,6 +246,22 @@ public class DataCollectionForm5 extends Model {
         return aspirinPlusClopidogrelDosage;
     }
 
+    public String getAspirinPlusClopidogrelDosage1() {
+        if(StringUtils.isEmpty(aspirinPlusClopidogrelDosage)) {
+            return StringUtils.EMPTY;
+        } else {
+            return aspirinPlusClopidogrelDosage.split("\\+").length <= 0 ? StringUtils.EMPTY : aspirinPlusClopidogrelDosage.split("\\+")[0];
+        }
+    }
+
+    public String getAspirinPlusClopidogrelDosage2() {
+        if(StringUtils.isEmpty(aspirinPlusClopidogrelDosage)) {
+            return StringUtils.EMPTY;
+        } else {
+            return aspirinPlusClopidogrelDosage.split("\\+").length <= 0 ? StringUtils.EMPTY : aspirinPlusClopidogrelDosage.split("\\+")[1];
+        }
+    }
+
     public void setAspirinPlusClopidogrelDosage(String aspirinPlusClopidogrelDosage) {
         this.aspirinPlusClopidogrelDosage = aspirinPlusClopidogrelDosage;
     }
@@ -263,6 +292,22 @@ public class DataCollectionForm5 extends Model {
 
     public String getAspirinPlusDipyridamoleDosage() {
         return aspirinPlusDipyridamoleDosage;
+    }
+
+    public String getAspirinPlusDipyridamoleDosage1() {
+        if(StringUtils.isEmpty(aspirinPlusDipyridamoleDosage)) {
+            return StringUtils.EMPTY;
+        } else {
+            return aspirinPlusDipyridamoleDosage.split("\\+").length <= 0 ? StringUtils.EMPTY : aspirinPlusDipyridamoleDosage.split("\\+")[0];
+        }
+    }
+
+    public String getAspirinPlusDipyridamoleDosage2() {
+        if(StringUtils.isEmpty(aspirinPlusDipyridamoleDosage)) {
+            return StringUtils.EMPTY;
+        } else {
+            return aspirinPlusDipyridamoleDosage.split("\\+").length <= 0 ? StringUtils.EMPTY : aspirinPlusDipyridamoleDosage.split("\\+")[1];
+        }
     }
 
     public void setAspirinPlusDipyridamoleDosage(String aspirinPlusDipyridamoleDosage) {
@@ -507,6 +552,22 @@ public class DataCollectionForm5 extends Model {
 
     public String getBpToday() {
         return bpToday;
+    }
+
+    public String getBpToday1() {
+        if(StringUtils.isEmpty(bpToday)) {
+            return StringUtils.EMPTY;
+        } else {
+            return bpToday.split("/").length <= 0 ? StringUtils.EMPTY : bpToday.split("/")[0];
+        }
+    }
+
+    public String getBpToday2() {
+        if(StringUtils.isEmpty(bpToday)) {
+            return StringUtils.EMPTY;
+        } else {
+            return bpToday.split("/").length <= 0 ? StringUtils.EMPTY : bpToday.split("/")[1];
+        }
     }
 
     public void setBpToday(String bpToday) {

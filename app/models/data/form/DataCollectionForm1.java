@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import models.Status;
 import models.YesNo;
 import models.user.User;
+import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import play.data.format.Formats;
 import play.data.validation.Constraints;
@@ -30,42 +31,38 @@ public class DataCollectionForm1 extends Model {
     private Integer patientIdNumber;
 
     @Constraints.Required
-    private String trialSite;
+    private String trialSite = StringUtils.EMPTY;
 
     @Constraints.Required
     @Formats.DateTime(pattern = "MM/dd/yy")
     private Timestamp recruitedDate;
 
     @Constraints.Required
-    private String patientName;
+    private String patientName = StringUtils.EMPTY;
 
     @Constraints.Required
     @Formats.DateTime(pattern = "MM/dd/yy")
     private Timestamp dateOfBirth;
 
     @Constraints.Required
-    private String patientAddress;
+    private String patientAddress = StringUtils.EMPTY;
 
     @Constraints.Required
     private Gender gender;
 
-    private String landlinePhoneNumber;
+    private String landlinePhoneNumber = StringUtils.EMPTY;
 
-    private String cellPhoneNumber;
+    private String cellPhoneNumber = StringUtils.EMPTY;
 
-    private String friendRelativePhoneNumber;
+    private String friendRelativePhoneNumber = StringUtils.EMPTY;
 
-    @Constraints.Required
-    private String placeOfBirth;
+    private String placeOfBirth = StringUtils.EMPTY;
 
-    @Constraints.Required
-    private String ethnicity;
+    private String ethnicity = StringUtils.EMPTY;
 
-    @Constraints.Required
-    private String nativeLanguage;
+    private String nativeLanguage = StringUtils.EMPTY;
 
-    @Constraints.Required
-    private String religion;
+    private String religion = StringUtils.EMPTY;
 
     @OneToMany
     private List<EconomicStatus> economicStatuses = new ArrayList<EconomicStatus>();
@@ -76,8 +73,7 @@ public class DataCollectionForm1 extends Model {
     @Formats.DateTime(pattern = "MM/dd/yy")
     private Timestamp bloodSampleDate;
 
-    @Constraints.Required
-    private String bloodSampleNumber;
+    private String bloodSampleNumber = StringUtils.EMPTY;
 
     @Formats.DateTime(pattern = "MM/dd/yy")
     private Timestamp dateOfStroke;

@@ -1,4 +1,4 @@
-@(message: String, u: models.response.user.User, pid: Integer)
+@(message: String, u: models.response.user.User, pid: Integer, d: models.data.form.DataCollectionForm6)
 
 @import tags._
 @main("User") {
@@ -23,15 +23,24 @@
     <td colspan="2">Data Collection Form (DCF)</td>
 
     <td>Patient’s ID Number</td>
+    @if(d != null && d.getPatientIdNumber() != null) {
+    <td><input type="text" id="patientIdNumber" name="patientIdNumber" value="@d.getPatientIdNumber().toString()"/></td>
+    } else {
     <td><input type="text" id="patientIdNumber" name="patientIdNumber" value="@pid"/></td>
+    }
 </tr>
     <tr>
         <td>Economic Status</td>
         <td colspan="3">
             <table>
                 <tr>
+                    @if(d != null && d.getId() != null) {
+                    <td><input type="hidden" id="id" name="id" value="@d.getId()"/></td>
+                    } else {
                     <td><input type="hidden" id="id" name="id" value=""/></td>
+                    }
                 </tr>
+                @if(d == null || d.getEconomicStatuses() == null || d.getEconomicStatuses().size() == 0) {
                 <tr>
                     <td><input type="checkbox" name="economicStatuses[]" id="bed" value="Bed"  />(1) Bed</td>
                     <td><input type="checkbox" name="economicStatuses[]" id="Electricity" value="Electricity"  />(2) Electricity</td>
@@ -75,6 +84,15 @@
                 <tr>
                     <td><input type="checkbox" name="economicStatuses[]" id="A.C." value="A.C."  />(25) A.C.</td>
                 </tr>
+                } else {
+                <tr>
+                    @if(d != null && d.getEconomicStatuses() != null && d.getEconomicStatuses().size() > 0) {
+                        @for(e <- d.getEconomicStatuses()){
+                            <td><input type="checkbox" name="economicStatuses[]" id="@e.getName()" value="@e.getName()"  />@e.getName()</td>
+                        }
+                    }
+                </tr>
+                }
             </table>
         </td>
 
@@ -84,17 +102,17 @@
            <table>
                <tr>
                    <td>Hip </td>
-                   <td><input type="text" name="hip" id="hip"/>cm</td>
+                   <td><input type="text" name="hip" id="hip" value="@d.getHip()"/>cm</td>
                    <td>Height </td>
-                   <td><input type="text" name="height" id="height"/>cm</td>
+                   <td><input type="text" name="height" id="height" value="@d.getHeight()"/>cm</td>
                    <td rowspan="2">BMI </td>
-                   <td rowspan="2"><input type="text" name="bmi" id="bmi"></td>
+                   <td rowspan="2"><input type="text" name="bmi" id="bmi" value="@d.getBmi()"/></td>
                </tr>
                <tr>
                    <td>Waist </td>
-                   <td><input type="text" name="waist" id="waist"/>cm</td>
+                   <td><input type="text" name="waist" id="waist" value="@d.getWaist()"/>cm</td>
                    <td>Weight </td>
-                   <td><input type="text" name="weight" id="weight"/>kg</td>
+                   <td><input type="text" name="weight" id="weight" value="@d.getWeight()"/>kg</td>
                </tr>
            </table>
        </td>
@@ -107,18 +125,21 @@
                     <td>Blood taken</td>
                     <td>
                         <select name="bloodSampleTaken" id="bloodSampleTaken">
-                            <option value="Yes">Yes</option>
+                            @if(d != null && d.getBloodSampleTaken() != null && d.getBloodSampleTaken().name().toUpperCase() == "YES") {
+                            <option value="Yes" selected="selected">Yes</option>
                             <option value="No">No</option>
+                            } else {
+                            <option value="Yes">Yes</option>
+                            <option value="No" selected="selected">No</option>
+                            }
                         </select>
                     </td>
                     <td rowspan="2">Blood sample number=control identification number (local centre):  </td>
-                    <td><input type="text" name="bloodSampleNumber" id="bloodSampleNumber" value=""></td>
+                    <td><input type="text" name="bloodSampleNumber" id="bloodSampleNumber" value="@d.getBloodSampleNumber()"></td>
                 </tr>
                 <tr>
                     <td>When:</td>
-                    <td style="width: 299px;">
-                        <input type="text" name="bloodSampleDate" id="bloodSampleDate" value="" style="width: 45px;"/>
-                    </td>
+                    <td><input type="text" name="bloodSampleDate" id="bloodSampleDate" value="@d.getBloodSampleDate()"/></td>
                 </tr>
             </table>
         </td>

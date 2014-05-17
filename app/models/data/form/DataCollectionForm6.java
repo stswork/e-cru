@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import models.Status;
 import models.YesNo;
 import models.user.User;
+import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import play.data.format.Formats;
 import play.data.validation.Constraints;
@@ -32,22 +33,22 @@ public class DataCollectionForm6 extends Model {
     @OneToMany
     private List<EconomicStatus> economicStatuses = new ArrayList<EconomicStatus>();
 
-    private Double hip;
+    private Double hip = 0.0;
 
-    private Double waist;
+    private Double waist = 0.0;
 
-    private Double height;
+    private Double height = 0.0;
 
-    private Double weight;
+    private Double weight = 0.0;
 
-    private Double bmi;
+    private Double bmi = 0.0;
 
     private YesNo bloodSampleTaken = YesNo.NO;
 
     @Formats.DateTime(pattern = "MM/dd/yy")
     private Timestamp bloodSampleDate;
 
-    private String bloodSampleNumber;
+    private String bloodSampleNumber = StringUtils.EMPTY;
 
     @Constraints.Required
     public Status status = Status.ACTIVE;

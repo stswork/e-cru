@@ -36,59 +36,79 @@ public class DataController extends Controller {
 
     @With(Authenticated.class)
     public static Result form1(Long id){
+        models.response.user.User u = (models.response.user.User) ctx().args.get("user");
         session("pid", StringUtils.EMPTY);
         DataCollectionForm1 d = null;
         d = (id > 0) ? Ebean.find(DataCollectionForm1.class).fetch("economicStatuses").fetch("createdBy").fetch("modifiedBy").where(
                 Expr.eq("id", id)
         ).setMaxRows(1).findUnique() : new DataCollectionForm1();
-        models.response.user.User u = (models.response.user.User) ctx().args.get("user");
         return ok(views.html.data.form1.render("Form1", u, d));
     }
 
     @With(Authenticated.class)
-    public static Result form2(){
+    public static Result form2(Long id){
         models.response.user.User u = (models.response.user.User) ctx().args.get("user");
         if(StringUtils.isEmpty(session("pid")))
             return redirect(controllers.data.routes.DataController.form1(0));
         Integer pid = Integer.valueOf(session("pid"));
-        return ok(views.html.data.form2.render("Form2", u, pid));
+        DataCollectionForm2 d = null;
+        d = (id > 0) ? Ebean.find(DataCollectionForm2.class).fetch("economicStatuses").fetch("createdBy").fetch("modifiedBy").where(
+                Expr.eq("id", id)
+        ).setMaxRows(1).findUnique() : new DataCollectionForm2();
+        return ok(views.html.data.form2.render("Form2", u, pid, d));
     }
 
     @With(Authenticated.class)
-    public static Result form3(){
+    public static Result form3(Long id){
         models.response.user.User u = (models.response.user.User) ctx().args.get("user");
         if(StringUtils.isEmpty(session("pid")))
             return redirect(controllers.data.routes.DataController.form1(0));
         Integer pid = Integer.valueOf(session("pid"));
-        return ok(views.html.data.form3.render("Form3", u, pid));
+        DataCollectionForm3 d = null;
+        d = (id > 0) ? Ebean.find(DataCollectionForm3.class).fetch("economicStatuses").fetch("createdBy").fetch("modifiedBy").where(
+                Expr.eq("id", id)
+        ).setMaxRows(1).findUnique() : new DataCollectionForm3();
+        return ok(views.html.data.form3.render("Form3", u, pid, d));
     }
 
     @With(Authenticated.class)
-    public static Result form4(){
+    public static Result form4(Long id){
         models.response.user.User u = (models.response.user.User) ctx().args.get("user");
         if(StringUtils.isEmpty(session("pid")))
             return redirect(controllers.data.routes.DataController.form1(0));
         Integer pid = Integer.valueOf(session("pid"));
-        return ok(views.html.data.form4.render("Form4", u, pid));
+        DataCollectionForm4 d = null;
+        d = (id > 0) ? Ebean.find(DataCollectionForm4.class).fetch("economicStatuses").fetch("createdBy").fetch("modifiedBy").where(
+                Expr.eq("id", id)
+        ).setMaxRows(1).findUnique() : new DataCollectionForm4();
+        return ok(views.html.data.form4.render("Form4", u, pid, d));
     }
 
     @With(Authenticated.class)
-    public static Result form5(){
+    public static Result form5(Long id){
         session("pid", "2");
         models.response.user.User u = (models.response.user.User) ctx().args.get("user");
         if(StringUtils.isEmpty(session("pid")))
             return redirect(controllers.data.routes.DataController.form1(0));
         Integer pid = Integer.valueOf(session("pid"));
-        return ok(views.html.data.form5.render("Form5", u, pid));
+        DataCollectionForm5 d = null;
+        d = (id > 0) ? Ebean.find(DataCollectionForm5.class).fetch("economicStatuses").fetch("createdBy").fetch("modifiedBy").where(
+                Expr.eq("id", id)
+        ).setMaxRows(1).findUnique() : new DataCollectionForm5();
+        return ok(views.html.data.form5.render("Form5", u, pid, d));
     }
 
     @With(Authenticated.class)
-    public static Result form6(){
+    public static Result form6(Long id){
         models.response.user.User u = (models.response.user.User) ctx().args.get("user");
         if(StringUtils.isEmpty(session("pid")))
             return redirect(controllers.data.routes.DataController.form1(0));
         Integer pid = Integer.valueOf(session("pid"));
-        return ok(views.html.data.form6.render("Form6", u, pid));
+        DataCollectionForm6 d = null;
+        d = (id > 0) ? Ebean.find(DataCollectionForm6.class).fetch("economicStatuses").fetch("createdBy").fetch("modifiedBy").where(
+                Expr.eq("id", id)
+        ).setMaxRows(1).findUnique() : new DataCollectionForm6();
+        return ok(views.html.data.form6.render("Form6", u, pid, d));
     }
 
     @With(Authenticated.class)
@@ -209,6 +229,10 @@ public class DataController extends Controller {
         }
         Integer patientIdNumber = Integer.valueOf(map.get("patientIdNumber").length <= 0 ? StringUtils.EMPTY : map.get("patientIdNumber")[0]);
         YesNo ischaemicStroke = YesNo.valueOf(map.get("ischaemicStroke").length <= 0 ? StringUtils.EMPTY : map.get("ischaemicStroke")[0].toUpperCase());
+        YesNo taci = YesNo.valueOf(map.get("taci").length <= 0 ? StringUtils.EMPTY : map.get("taci")[0].toUpperCase());
+        YesNo paci = YesNo.valueOf(map.get("paci").length <= 0 ? StringUtils.EMPTY : map.get("paci")[0].toUpperCase());
+        YesNo laci = YesNo.valueOf(map.get("laci").length <= 0 ? StringUtils.EMPTY : map.get("laci")[0].toUpperCase());
+        YesNo poci = YesNo.valueOf(map.get("poci").length <= 0 ? StringUtils.EMPTY : map.get("poci")[0].toUpperCase());
         YesNo hoemorrhagicStroke = YesNo.valueOf(map.get("hoemorrhagicStroke").length <= 0 ? StringUtils.EMPTY : map.get("hoemorrhagicStroke")[0].toUpperCase());
         YesNo venousSinusThrombosis = YesNo.valueOf(map.get("venousSinusThrombosis").length <= 0 ? StringUtils.EMPTY : map.get("venousSinusThrombosis")[0].toUpperCase());
         YesNo tia = YesNo.valueOf(map.get("tia").length <= 0 ? StringUtils.EMPTY : map.get("tia")[0].toUpperCase());
@@ -251,6 +275,10 @@ public class DataController extends Controller {
         Double waist = Double.valueOf(map.get("cigarettePerDay").length <= 0 ? StringUtils.EMPTY : map.get("cigarettePerDay")[0]);
         dcf2.setPatientIdNumber(patientIdNumber);
         dcf2.setIschaemicStroke(ischaemicStroke);
+        dcf2.setTaci(taci);
+        dcf2.setPaci(paci);
+        dcf2.setLaci(laci);
+        dcf2.setPoci(poci);
         dcf2.setHoemorrhagicStroke(hoemorrhagicStroke);
         dcf2.setVenousSinusThrombosis(venousSinusThrombosis);
         dcf2.setTia(tia);

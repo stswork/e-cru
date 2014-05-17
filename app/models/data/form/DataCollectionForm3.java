@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import models.Status;
 import models.YesNo;
 import models.user.User;
+import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import play.data.format.Formats;
 import play.data.validation.Constraints;
@@ -31,151 +32,151 @@ public class DataCollectionForm3 extends Model {
     private Integer alcoholUnitsPerWeek;
 
     @Constraints.Required
-    private Double height;
+    private Double height = 0.0;
 
     @Constraints.Required
-    private Double weight;
+    private Double weight = 0.0;
 
     @Constraints.Required
-    private Double bmi;
+    private Double bmi = 0.0;
 
     @Constraints.Required
-    private YesNo aspirin;
+    private YesNo aspirin = YesNo.NO;
 
-    private String aspirinDosage;
-
-    @Constraints.Required
-    private YesNo clopidogrel;
-
-    private String clopidogrelDosage;
+    private String aspirinDosage = StringUtils.EMPTY;
 
     @Constraints.Required
-    private YesNo aspirinPlusClopidogrel;
+    private YesNo clopidogrel = YesNo.NO;
 
-    private String aspirinPlusClopidogrelDosage;
-
-    @Constraints.Required
-    private YesNo dipyridamole;
-
-    private String dipyridamoleDosage;
+    private String clopidogrelDosage = StringUtils.EMPTY;
 
     @Constraints.Required
-    private YesNo aspirinPlusDipyridamole;
+    private YesNo aspirinPlusClopidogrel = YesNo.NO;
 
-    private String aspirinPlusDipyridamoleDosage;
-
-    @Constraints.Required
-    private YesNo warfarin;
-
-    private String warfarinInr;
+    private String aspirinPlusClopidogrelDosage = StringUtils.EMPTY;
 
     @Constraints.Required
-    private YesNo statin;
+    private YesNo dipyridamole = YesNo.NO;
 
-    private String statinDosage;
-
-    private String statinName;
+    private String dipyridamoleDosage = StringUtils.EMPTY;
 
     @Constraints.Required
-    private YesNo antihypertensive = YesNo.DONT_KNOW;
+    private YesNo aspirinPlusDipyridamole = YesNo.NO;
 
-    private String antihypertensiveDosage;
-
-    private YesNo medicineNoneOfTheAbove = YesNo.DONT_KNOW;
+    private String aspirinPlusDipyridamoleDosage = StringUtils.EMPTY;
 
     @Constraints.Required
-    private YesNo glucoseBloodTest = YesNo.DONT_KNOW;
+    private YesNo warfarin = YesNo.NO;
 
-    private String glucoseBloodTestResult;
-
-    @Constraints.Required
-    private YesNo totalCholesterolBloodTest = YesNo.DONT_KNOW;
-
-    private String totalCholesterolBloodTestResult;
+    private String warfarinInr = StringUtils.EMPTY;
 
     @Constraints.Required
-    private YesNo hdlCholesterolBloodTest = YesNo.DONT_KNOW;
+    private YesNo statin = YesNo.NO;
 
-    private String hdlCholesterolBloodTestResult;
+    private String statinDosage = StringUtils.EMPTY;
 
-    @Constraints.Required
-    private YesNo ldlCholesterolBloodTest = YesNo.DONT_KNOW;
-
-    private String ldlCholesterolBloodTestResult;
+    private String statinName = StringUtils.EMPTY;
 
     @Constraints.Required
-    private YesNo triglycerideBloodTest = YesNo.DONT_KNOW;
+    private YesNo antihypertensive = YesNo.NO;
 
-    private String triglycerideBloodTestResult;
+    private String antihypertensiveDosage = StringUtils.EMPTY;
 
-    @Constraints.Required
-    private YesNo esrBloodTest = YesNo.DONT_KNOW;
-
-    private String esrBloodTestResult;
+    private YesNo medicineNoneOfTheAbove = YesNo.NO;
 
     @Constraints.Required
-    private YesNo crpBloodTest = YesNo.DONT_KNOW;
+    private YesNo glucoseBloodTest = YesNo.NO;
 
-    private String crpBloodTestResult;
-
-    @Constraints.Required
-    private YesNo troponimBloodTest = YesNo.DONT_KNOW;
-
-    private String troponimBloodTestResult;
+    private String glucoseBloodTestResult = StringUtils.EMPTY;
 
     @Constraints.Required
-    private YesNo proteinCBloodTest = YesNo.DONT_KNOW;
+    private YesNo totalCholesterolBloodTest = YesNo.NO;
 
-    private String proteinCBloodTestResult;
-
-    @Constraints.Required
-    private YesNo proteinSBloodTest = YesNo.DONT_KNOW;
-
-    private String proteinSBloodTestResult;
+    private String totalCholesterolBloodTestResult = StringUtils.EMPTY;
 
     @Constraints.Required
-    private YesNo fibrinogenBloodTest = YesNo.DONT_KNOW;
+    private YesNo hdlCholesterolBloodTest = YesNo.NO;
 
-    private String fibrinogenBloodTestResult;
-
-    @Constraints.Required
-    private YesNo antithrombin11BloodTest = YesNo.DONT_KNOW;
-
-    private String antithrombin11BloodTestResult;
+    private String hdlCholesterolBloodTestResult = StringUtils.EMPTY;
 
     @Constraints.Required
-    private YesNo factorVBloodTest = YesNo.DONT_KNOW;
+    private YesNo ldlCholesterolBloodTest = YesNo.NO;
 
-    private String factorVBloodTestResult;
-
-    @Constraints.Required
-    private YesNo homocysteineBloodTest = YesNo.DONT_KNOW;
-
-    private String homocysteineBloodTestResult;
+    private String ldlCholesterolBloodTestResult = StringUtils.EMPTY;
 
     @Constraints.Required
-    private YesNo prothrombinBloodTest = YesNo.DONT_KNOW;
+    private YesNo triglycerideBloodTest = YesNo.NO;
 
-    private String prothrombinBloodTestResult;
+    private String triglycerideBloodTestResult = StringUtils.EMPTY;
 
     @Constraints.Required
-    private YesNo antiphospholipidBloodTest = YesNo.DONT_KNOW;
+    private YesNo esrBloodTest = YesNo.NO;
 
-    private String antiphospholipidBloodTestResult;
+    private String esrBloodTestResult = StringUtils.EMPTY;
 
-    private String bpOnAdmission;
+    @Constraints.Required
+    private YesNo crpBloodTest = YesNo.NO;
 
-    private String temperatureOnAdmission;
+    private String crpBloodTestResult = StringUtils.EMPTY;
 
-    private YesNo carotidEndarterectomyDone = YesNo.DONT_KNOW;
+    @Constraints.Required
+    private YesNo troponimBloodTest = YesNo.NO;
 
-    private YesNo thrombolysedDone = YesNo.DONT_KNOW;
+    private String troponimBloodTestResult = StringUtils.EMPTY;
 
-    private YesNo ctaDone = YesNo.DONT_KNOW;
+    @Constraints.Required
+    private YesNo proteinCBloodTest = YesNo.NO;
 
-    private YesNo mraDone = YesNo.DONT_KNOW;
+    private String proteinCBloodTestResult = StringUtils.EMPTY;
 
-    private YesNo angiogramDone = YesNo.DONT_KNOW;
+    @Constraints.Required
+    private YesNo proteinSBloodTest = YesNo.NO;
+
+    private String proteinSBloodTestResult = StringUtils.EMPTY;
+
+    @Constraints.Required
+    private YesNo fibrinogenBloodTest = YesNo.NO;
+
+    private String fibrinogenBloodTestResult = StringUtils.EMPTY;
+
+    @Constraints.Required
+    private YesNo antithrombin11BloodTest = YesNo.NO;
+
+    private String antithrombin11BloodTestResult = StringUtils.EMPTY;
+
+    @Constraints.Required
+    private YesNo factorVBloodTest = YesNo.NO;
+
+    private String factorVBloodTestResult = StringUtils.EMPTY;
+
+    @Constraints.Required
+    private YesNo homocysteineBloodTest = YesNo.NO;
+
+    private String homocysteineBloodTestResult = StringUtils.EMPTY;
+
+    @Constraints.Required
+    private YesNo prothrombinBloodTest = YesNo.NO;
+
+    private String prothrombinBloodTestResult = StringUtils.EMPTY;
+
+    @Constraints.Required
+    private YesNo antiphospholipidBloodTest = YesNo.NO;
+
+    private String antiphospholipidBloodTestResult = StringUtils.EMPTY;
+
+    private String bpOnAdmission = StringUtils.EMPTY;
+
+    private String temperatureOnAdmission = StringUtils.EMPTY;
+
+    private YesNo carotidEndarterectomyDone = YesNo.NO;
+
+    private YesNo thrombolysedDone = YesNo.NO;
+
+    private YesNo ctaDone = YesNo.NO;
+
+    private YesNo mraDone = YesNo.NO;
+
+    private YesNo angiogramDone = YesNo.NO;
 
     @Constraints.Required
     public Status status = Status.ACTIVE;
@@ -348,6 +349,22 @@ public class DataCollectionForm3 extends Model {
         return aspirinPlusClopidogrelDosage;
     }
 
+    public String getAspirinPlusClopidogrelDosage1() {
+        if(StringUtils.isEmpty(aspirinPlusClopidogrelDosage)) {
+            return StringUtils.EMPTY;
+        } else {
+            return aspirinPlusClopidogrelDosage.split("\\+").length <= 0 ? StringUtils.EMPTY : aspirinPlusClopidogrelDosage.split("\\+")[0];
+        }
+    }
+
+    public String getAspirinPlusClopidogrelDosage2() {
+        if(StringUtils.isEmpty(aspirinPlusClopidogrelDosage)) {
+            return StringUtils.EMPTY;
+        } else {
+            return aspirinPlusClopidogrelDosage.split("\\+").length <= 0 ? StringUtils.EMPTY : aspirinPlusClopidogrelDosage.split("\\+")[1];
+        }
+    }
+
     public void setAspirinPlusClopidogrelDosage(String aspirinPlusClopidogrelDosage) {
         this.aspirinPlusClopidogrelDosage = aspirinPlusClopidogrelDosage;
     }
@@ -378,6 +395,22 @@ public class DataCollectionForm3 extends Model {
 
     public String getAspirinPlusDipyridamoleDosage() {
         return aspirinPlusDipyridamoleDosage;
+    }
+
+    public String getAspirinPlusDipyridamoleDosage1() {
+        if(StringUtils.isEmpty(aspirinPlusDipyridamoleDosage)) {
+            return StringUtils.EMPTY;
+        } else {
+            return aspirinPlusDipyridamoleDosage.split("\\+").length <= 0 ? StringUtils.EMPTY : aspirinPlusDipyridamoleDosage.split("\\+")[0];
+        }
+    }
+
+    public String getAspirinPlusDipyridamoleDosage2() {
+        if(StringUtils.isEmpty(aspirinPlusDipyridamoleDosage)) {
+            return StringUtils.EMPTY;
+        } else {
+            return aspirinPlusDipyridamoleDosage.split("\\+").length <= 0 ? StringUtils.EMPTY : aspirinPlusDipyridamoleDosage.split("\\+")[1];
+        }
     }
 
     public void setAspirinPlusDipyridamoleDosage(String aspirinPlusDipyridamoleDosage) {
@@ -698,6 +731,22 @@ public class DataCollectionForm3 extends Model {
 
     public String getBpOnAdmission() {
         return bpOnAdmission;
+    }
+
+    public String getBpOnAdmission1() {
+        if(StringUtils.isEmpty(bpOnAdmission)) {
+            return StringUtils.EMPTY;
+        } else {
+            return bpOnAdmission.split("/").length <= 0 ? StringUtils.EMPTY : bpOnAdmission.split("/")[0];
+        }
+    }
+
+    public String getBpOnAdmission2() {
+        if(StringUtils.isEmpty(bpOnAdmission)) {
+            return StringUtils.EMPTY;
+        } else {
+            return bpOnAdmission.split("/").length <= 0 ? StringUtils.EMPTY : bpOnAdmission.split("/")[1];
+        }
     }
 
     public void setBpOnAdmission(String bpOnAdmission) {

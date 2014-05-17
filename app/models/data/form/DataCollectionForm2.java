@@ -28,52 +28,64 @@ public class DataCollectionForm2 extends Model {
     private Integer patientIdNumber;
 
     @Constraints.Required
-    private YesNo ischaemicStroke = YesNo.DONT_KNOW;
+    private YesNo ischaemicStroke = YesNo.NO;
 
     @Constraints.Required
-    private YesNo hoemorrhagicStroke = YesNo.DONT_KNOW;
+    private YesNo taci = YesNo.NO;
 
     @Constraints.Required
-    private YesNo venousSinusThrombosis = YesNo.DONT_KNOW;
+    private YesNo paci = YesNo.NO;
 
     @Constraints.Required
-    private YesNo tia = YesNo.DONT_KNOW;
+    private YesNo laci = YesNo.NO;
 
     @Constraints.Required
-    private YesNo avm = YesNo.DONT_KNOW;
+    private YesNo poci = YesNo.NO;
 
     @Constraints.Required
-    private YesNo aneurysm = YesNo.DONT_KNOW;
+    private YesNo hoemorrhagicStroke = YesNo.NO;
 
     @Constraints.Required
-    private YesNo subaranchoid = YesNo.DONT_KNOW;
+    private YesNo venousSinusThrombosis = YesNo.NO;
 
     @Constraints.Required
-    private YesNo hypertension = YesNo.DONT_KNOW;
+    private YesNo tia = YesNo.NO;
 
     @Constraints.Required
-    private YesNo diabetesMellitus = YesNo.DONT_KNOW;
+    private YesNo avm = YesNo.NO;
 
     @Constraints.Required
-    private YesNo ihdAngina = YesNo.DONT_KNOW;
+    private YesNo aneurysm = YesNo.NO;
 
     @Constraints.Required
-    private YesNo hypercholesterolemia = YesNo.DONT_KNOW;
+    private YesNo subaranchoid = YesNo.NO;
 
     @Constraints.Required
-    private YesNo atrialFibrillation = YesNo.DONT_KNOW;
+    private YesNo hypertension = YesNo.NO;
 
     @Constraints.Required
-    private YesNo pvd = YesNo.DONT_KNOW;
+    private YesNo diabetesMellitus = YesNo.NO;
 
     @Constraints.Required
-    private YesNo mi = YesNo.DONT_KNOW;
+    private YesNo ihdAngina = YesNo.NO;
 
     @Constraints.Required
-    private YesNo migraineWithAura = YesNo.DONT_KNOW;
+    private YesNo hypercholesterolemia = YesNo.NO;
 
     @Constraints.Required
-    private YesNo migraineWithoutAura = YesNo.DONT_KNOW;
+    private YesNo atrialFibrillation = YesNo.NO;
+
+    @Constraints.Required
+    private YesNo pvd = YesNo.NO;
+
+    @Constraints.Required
+    private YesNo mi = YesNo.NO;
+
+    @Constraints.Required
+    private YesNo migraineWithAura = YesNo.NO;
+
+    @Constraints.Required
+    private YesNo migraineWithoutAura = YesNo.NO;
 
     private Integer ischaemicStrokeYear;
 
@@ -82,51 +94,51 @@ public class DataCollectionForm2 extends Model {
     private Integer tiaYear;
 
     @Constraints.Required
-    private YesNo strokeAssociatedWithDissection = YesNo.DONT_KNOW;
+    private YesNo strokeAssociatedWithDissection = YesNo.NO;
 
     @Constraints.Required
-    private YesNo strokeAssociatedWithPfo = YesNo.DONT_KNOW;
+    private YesNo strokeAssociatedWithPfo = YesNo.NO;
 
     @Constraints.Required
-    private YesNo strokeAssociatedWithMi = YesNo.DONT_KNOW;
+    private YesNo strokeAssociatedWithMi = YesNo.NO;
 
     @Constraints.Required
-    private YesNo familyStroke = YesNo.DONT_KNOW;
+    private YesNo familyStroke = YesNo.NO;
 
     @Constraints.Required
-    private YesNo familyIhdAngina = YesNo.DONT_KNOW;
+    private YesNo familyIhdAngina = YesNo.NO;
 
     @Constraints.Required
-    private YesNo familyDiabetesMellitus = YesNo.DONT_KNOW;
+    private YesNo familyDiabetesMellitus = YesNo.NO;
 
     @Constraints.Required
-    private YesNo familyMi = YesNo.DONT_KNOW;
+    private YesNo familyMi = YesNo.NO;
 
     @Constraints.Required
-    private YesNo familyPvd = YesNo.DONT_KNOW;
+    private YesNo familyPvd = YesNo.NO;
 
     @Constraints.Required
-    private YesNo familyHypertension = YesNo.DONT_KNOW;
+    private YesNo familyHypertension = YesNo.NO;
 
     @Constraints.Required
-    private YesNo familyNoneOfTheAbove = YesNo.DONT_KNOW;
+    private YesNo familyNoneOfTheAbove = YesNo.NO;
 
     @Constraints.Required
-    private YesNo currentSmoker = YesNo.DONT_KNOW;
+    private YesNo currentSmoker = YesNo.NO;
 
     private Integer cigarettePerDay = 0;
 
     @Constraints.Required
-    private YesNo exSmoker = YesNo.DONT_KNOW;
+    private YesNo exSmoker = YesNo.NO;
 
     @Constraints.Required
-    private YesNo never = YesNo.DONT_KNOW;
+    private YesNo never = YesNo.NO;
 
     @Constraints.Required
-    private Double hip;
+    private Double hip = 0.0;
 
     @Constraints.Required
-    private Double waist;
+    private Double waist = 0.0;
 
     @Constraints.Required
     public Status status = Status.ACTIVE;
@@ -514,5 +526,37 @@ public class DataCollectionForm2 extends Model {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public YesNo getTaci() {
+        return taci;
+    }
+
+    public void setTaci(YesNo taci) {
+        this.taci = taci;
+    }
+
+    public YesNo getPaci() {
+        return paci;
+    }
+
+    public void setPaci(YesNo paci) {
+        this.paci = paci;
+    }
+
+    public YesNo getLaci() {
+        return laci;
+    }
+
+    public void setLaci(YesNo laci) {
+        this.laci = laci;
+    }
+
+    public YesNo getPoci() {
+        return poci;
+    }
+
+    public void setPoci(YesNo poci) {
+        this.poci = poci;
     }
 }

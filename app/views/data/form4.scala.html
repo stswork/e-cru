@@ -1,4 +1,4 @@
-@(message: String, u: models.response.user.User, pid: Integer)
+@(message: String, u: models.response.user.User, pid: Integer, d: models.data.form.DataCollectionForm4)
 
 @import tags._
 @main("User") {
@@ -12,7 +12,7 @@
 
 </header>
 <div class="form" style="width:100%;background: #f1f1f1;border-radius: 10px;">
-<form id="userForm" method="POST" style="padding-top: 2%;" action="@controllers.data.routes.DataController.handleSaveForm4()" data-uri="@controllers.data.routes.DataController.form5()">
+<form id="userForm" method="POST" style="padding-top: 2%;" action="@controllers.data.routes.DataController.handleSaveForm4()" data-uri="@controllers.data.routes.DataController.form5(0)">
 <div class="box message" ><!--style="display:none;padding-top: 2%;padding-left: 1%;padding-bottom: 2%;color: red;"-->
     <div class="content-m">
 
@@ -20,22 +20,36 @@
 </div>
 <table cellspacing="5" cellpadding="5" style="clear: both;float: left;"/>
 <tr>
+    @if(d != null && d.getId() != null) {
+    <td><input type="hidden" id="id" name="id" value="@d.getId()"/></td>
+    } else {
     <td><input type="hidden" id="id" name="id" value=""/></td>
+    }
 </tr>
 <tr>
     <td colspan="2">Data Collection Form (DCF)</td>
 
     <td>Patient’s ID Number</td>
+    @if(d != null && d.getPatientIdNumber() != null) {
+    <td><input type="text" id="patientIdNumber" name="patientIdNumber" value="@d.getPatientIdNumber().toString()"/></td>
+    } else {
     <td><input type="text" id="patientIdNumber" name="patientIdNumber" value="@pid"/></td>
+    }
 </tr>
 <tr>
     <td>
         Intracranial stenosis:
     </td>
     <td colspan="3">
-        Yes <input type="radio" name="intracranialStenosis" value="YES" required="required"/>
-        <input type="text" id="intracranialStenosisPercent" name="intracranialStenosisPercent" /> %
+        @if(d != null && d.getIntracranialStenosis() != null && d.getIntracranialStenosis().name().toUpperCase() == "YES") {
+        Yes <input type="radio" name="intracranialStenosis" value="YES" required="required" checked="checked"/>
+        <input type="text" id="intracranialStenosisPercent" name="intracranialStenosisPercent" value="@d.getIntracranialStenosisPercent()"/> %
         No <input type="radio" name="intracranialStenosis" id="intracranialStenosisNo" value="NO" required="required"/>
+        } else {
+        Yes <input type="radio" name="intracranialStenosis" value="YES" required="required"/>
+        <input type="text" id="intracranialStenosisPercent" name="intracranialStenosisPercent" value="@d.getIntracranialStenosisPercent()"/> %
+        No <input type="radio" name="intracranialStenosis" id="intracranialStenosisNo" value="NO" required="required" checked="checked"/>
+        }
     </td>
 </tr>
 <tr>
@@ -45,24 +59,38 @@
                 <td colspan="2"><h2>Extracranial Vessel Imaging:</h2></td>
             </tr>
             <tr>
-                <td>Dopplers  </td>
+                <td>Dopplers</td>
+                @if(d != null && d.getExtracranialDopplersImagingDone() != null && d.getExtracranialDopplersImagingDone().name().toUpperCase() == "YES") {
+                <td>Done<input type="radio" name="extracranialDopplersImagingDone" id="extracranialDopplersImagingDone" value="YES" required="required" checked="checked"/>
+                Not Done <input type="radio" name="extracranialDopplersImagingDone" id="extracranialDopplersImagingNotDone" value="NO" required="required"/></td>
+                } else {
                 <td>Done<input type="radio" name="extracranialDopplersImagingDone" id="extracranialDopplersImagingDone" value="YES" required="required"/>
-                Not Done <input type="radio" name="extracranialDopplersImagingDone" id="extracranialDopplersImagingNotDone" value="NO" required="required"/>
-                </td>
+                Not Done <input type="radio" name="extracranialDopplersImagingDone" id="extracranialDopplersImagingNotDone" value="NO" required="required" checked="checked"/></td>
+                }
             </tr>
             <tr>
-                <td>
-                   MRA
-                </td>
-                <td>Done<input type="radio" name="extracranialMraImagingDone" id="extracranialMraImagingDone" value="YES" required="required"/>
+                <td>MRA</td>
+                @if(d != null && d.getExtracranialMraImagingDone() != null && d.getExtracranialMraImagingDone().name().toUpperCase() == "YES") {
+                <td>Done<input type="radio" name="extracranialMraImagingDone" id="extracranialMraImagingDone" value="YES" required="required" checked="checked"/>
                     Not Done <input type="radio" name="extracranialMraImagingDone" id="extracranialMraImagingNotDone" value="NO" required="required"/>
                 </td>
+                } else {
+                <td>Done<input type="radio" name="extracranialMraImagingDone" id="extracranialMraImagingDone" value="YES" required="required"/>
+                    Not Done <input type="radio" name="extracranialMraImagingDone" id="extracranialMraImagingNotDone" value="NO" required="required" checked="checked"/>
+                </td>
+                }
             </tr>
             <tr>
                 <td>CTA</td>
-                <td>Done<input type="radio" name="extracranialCtaImagingDone" id="extracranialCtaImagingDone" value="YES" required="required"/>
+                @if(d != null && d.getExtracranialMraImagingDone() != null && d.getExtracranialMraImagingDone().name().toUpperCase() == "YES") {
+                <td>Done<input type="radio" name="extracranialCtaImagingDone" id="extracranialCtaImagingDone" value="YES" required="required" checked="checked"/>
                     Not Done <input type="radio" name="extracranialCtaImagingDone" id="extracranialCtaImagingNotDone" value="NO" required="required"/>
                 </td>
+                } else {
+                <td>Done<input type="radio" name="extracranialCtaImagingDone" id="extracranialCtaImagingDone" value="YES" required="required"/>
+                    Not Done <input type="radio" name="extracranialCtaImagingDone" id="extracranialCtaImagingNotDone" value="NO" required="required" checked="checked"/>
+                </td>
+                }
             </tr>
         </table>
     </td>
@@ -70,79 +98,115 @@
         <table>
             <tr>
                 <td>CT</td>
-                <td>Done<input type="radio" name="brainCtImagingDone" id="brainCtImagingDone" value="YES" required="required"/>
+                @if(d != null && d.getExtracranialMraImagingDone() != null && d.getExtracranialMraImagingDone().name().toUpperCase() == "YES") {
+                <td>Done<input type="radio" name="brainCtImagingDone" id="brainCtImagingDone" value="YES" required="required" checked="checked"/>
                     Not Done <input type="radio" name="brainCtImagingDone" id="brainCtImagingNotDone" value="NO" required="required"/>
                 </td>
+                } else {
+                <td>Done<input type="radio" name="brainCtImagingDone" id="brainCtImagingDone" value="YES" required="required"/>
+                    Not Done <input type="radio" name="brainCtImagingDone" id="brainCtImagingNotDone" value="NO" required="required" checked="checked"/>
+                </td>
+                }
             </tr>
             <tr>
                 <td>MRI</td>
-                <td>Done<input type="radio" name="brainMriImagingDone" id="brainMriImagingDone" value="YES" required="required"/>
+                @if(d != null && d.getExtracranialMraImagingDone() != null && d.getExtracranialMraImagingDone().name().toUpperCase() == "YES") {
+                <td>Done<input type="radio" name="brainMriImagingDone" id="brainMriImagingDone" value="YES" required="required" checked="checked"/>
                     Not Done <input type="radio" name="brainMriImagingDone" id="brainMriImagingNotDone" value="NO" required="required"/>
                 </td>
+                } else {
+                <td>Done<input type="radio" name="brainMriImagingDone" id="brainMriImagingDone" value="YES" required="required"/>
+                    Not Done <input type="radio" name="brainMriImagingDone" id="brainMriImagingNotDone" value="NO" required="required" checked="checked"/>
+                </td>
+                }
             </tr>
             <tr>
                 <td colspan="2"><h2>Lesion location</h2></td>
             </tr>
             <tr>
                 <td>
+                    @if(d != null && d.getLesionAnterior() != null && d.getLesionAnterior().name().toUpperCase() == "YES") {
+                    <input type="checkbox" name="anterior" id="anterior" value="anterior" checked="checked"/>Anterior
+                    } else {
                     <input type="checkbox" name="anterior" id="anterior" value="anterior" />Anterior
+                    }
+                    @if(d != null && d.getLesionRight() != null && d.getLesionRight().name().toUpperCase() == "YES") {
+                    <input type="checkbox" name="right" id="right" value="" checked="checked"/>Right
+                    } else {
                     <input type="checkbox" name="right" id="right" value="" />Right
+                    }
                 </td>
                 <td>
+                    @if(d != null && d.getLesionLeft() != null && d.getLesionLeft().name().toUpperCase() == "YES") {
+                    <input type="checkbox" name="left" id="left" value="" checked="checked"/>Left
+                    } else {
                     <input type="checkbox" name="left" id="left" value="" />Left
+                    }
+                    @if(d != null && d.getLesionBilateral() != null && d.getLesionBilateral().name().toUpperCase() == "YES") {
+                    <input type="checkbox" name="bilateral" id="bilateral" value="" checked="checked"/> Bilateral
+                    } else {
                     <input type="checkbox" name="bilateral" id="bilateral" value="" /> Bilateral
+                    }
                 </td>
             </tr>
             <tr>
                 <td>
+                    @if(d != null && d.getLesionPosterior() != null && d.getLesionPosterior().name().toUpperCase() == "YES") {
+                    <input type="checkbox" name="posterior" id="posterior" value="" checked="checked"/>Posterior
+                    } else {
                     <input type="checkbox" name="posterior" id="posterior" value="" />Posterior
+                    }
+                    @if(d != null && d.getLesionAnterioposterior() != null && d.getLesionAnterioposterior().name().toUpperCase() == "YES") {
+                    <input type="checkbox" name="anterioposterior" id="anterioposterior" value="" checked="checked"/>Anterioposterior
+                    } else {
                     <input type="checkbox" name="anterioposterior" id="anterioposterior" value="" />Anterioposterior
+                    }
                 </td>
                 <td></td>
             </tr>
-        </table>
-    </td>
-</tr>
- <tr>
-     <td colspan="2">
-         <table>
+         </table>
+     </td>
+ </tr>
+<tr>
+    <td colspan="2">
+        <table>
              <tr>
                  <td>
-                     RICA  stenosis</td><td><input type="text" name="ricaStenosisPercent" id="ricaStenosisPercent"> %
+                     RICA  stenosis</td><td><input type="text" name="ricaStenosisPercent" id="ricaStenosisPercent" value="@d.getRicaStenosisPercent()"/> %
                  </td>
              </tr>
              <tr>
                  <td>
-                     LICA  stenosis</td><td> <input type="text" name="licaStenosisPercent" id="licaStenosisPercent"> %
-                 </td>
-             </tr>
-
-             <tr>
-                 <td>
-                     RCCA  stenosis</td><td> <input type="text" name="rccaStenosisPercent" id="rccaStenosisPercent"> %
+                     LICA  stenosis</td><td> <input type="text" name="licaStenosisPercent" id="licaStenosisPercent" value="@d.getLicaStenosisPercent()"/> %
                  </td>
              </tr>
 
              <tr>
                  <td>
-                     LCCA  stenosis </td><td><input type="text" name="lccaStenosisPercent" id="lccaStenosisPercent"> %
+                     RCCA  stenosis</td><td> <input type="text" name="rccaStenosisPercent" id="rccaStenosisPercent" value="@d.getRccaStenosisPercent()"/> %
                  </td>
              </tr>
 
              <tr>
                  <td>
-                     R vertebral stenosis</td><td> <input type="text" name="rVertebralStenosisPercent" id="rVertebralStenosisPercent"> %
+                     LCCA  stenosis </td><td><input type="text" name="lccaStenosisPercent" id="lccaStenosisPercent" value="@d.getLccaStenosisPercent()"/> %
                  </td>
              </tr>
 
              <tr>
                  <td>
-                     L vertebral stenosis </td><td><input type="text" name="lVertebralStenosisPercent" id="lVertebralStenosisPercent"> %
+                     R vertebral stenosis</td><td> <input type="text" name="rVertebralStenosisPercent" id="rVertebralStenosisPercent" value="@d.getrVertebralStenosisPercent()"/> %
+                 </td>
+             </tr>
+
+             <tr>
+                 <td>
+                     L vertebral stenosis </td><td><input type="text" name="lVertebralStenosisPercent" id="lVertebralStenosisPercent" value="@d.getlVertebralStenosisPercent()"/> %
                  </td>
              </tr>
              <tr>
                  <td>
-                     Basilar stenosis </td><td><input type="text" name="basilarStenosisPercent" id="basilarStenosisPercent"> %
+                     Basilar stenosis </td><td><input type="text" name="basilarStenosisPercent" id="basilarStenosisPercent" value="@d.getBasilarStenosisPercent()"/> %
                  </td>
              </tr>
          </table>
@@ -156,27 +220,51 @@
              </tr>
              <tr>
                  <td>(1) LVD (large artery atherosclerosis)</td>
+                 @if(d != null && d.getLvd() != null && d.getLvd().name().toUpperCase() == "YES") {
+                 <td><input type="checkbox" name="lvd" id="lvd" value="lvd" checked="checked"/></td>
+                 } else {
                  <td><input type="checkbox" name="lvd" id="lvd" value="lvd" /></td>
+                 }
              </tr>
              <tr>
                  <td>(2) SVD (small vessel occlusion)</td>
+                 @if(d != null && d.getSvd() != null && d.getSvd().name().toUpperCase() == "YES") {
+                 <td><input type="checkbox" name="svd" id="svd" value="svd" checked="checked"/></td>
+                 } else {
                  <td><input type="checkbox" name="svd" id="svd" value="svd" /></td>
+                 }
              </tr>
              <tr>
                  <td>(3) Cardioembolism</td>
+                 @if(d != null && d.getCardioembolism() != null && d.getCardioembolism().name().toUpperCase() == "YES") {
+                 <td><input type="checkbox" name="cardioembolism" id="cardioembolism" value="cardioembolism" checked="checked"/></td>
+                 } else {
                  <td><input type="checkbox" name="cardioembolism" id="cardioembolism" value="cardioembolism" /></td>
+                 }
              </tr>
              <tr>
                  <td>(4) Combined (2 or more causes identified)</td>
+                 @if(d != null && d.getCombined() != null && d.getCombined().name().toUpperCase() == "YES") {
+                 <td><input type="checkbox" name="combined" id="combined" value="combined" checked="checked"/></td>
+                 } else {
                  <td><input type="checkbox" name="combined" id="combined" value="combined" /></td>
+                 }
              </tr>
              <tr>
                  <td>((5) Stroke of other determined etiology</td>
+                 @if(d != null && d.getStrokeOfDeterminedEtiology() != null && d.getStrokeOfDeterminedEtiology().name().toUpperCase() == "YES") {
+                 <td><input type="checkbox" name="strokeOfDeterminedEtiology" id="strokeOfDeterminedEtiology" value="strokeOfDeterminedEtiology" checked="checked"/></td>
+                 } else {
                  <td><input type="checkbox" name="strokeOfDeterminedEtiology" id="strokeOfDeterminedEtiology" value="strokeOfDeterminedEtiology" /></td>
+                 }
              </tr>
              <tr>
                  <td>(6) Negative evaluation (no cause found) </td>
+                 @if(d != null && d.getNegativeEvaluation() != null && d.getNegativeEvaluation().name().toUpperCase() == "YES") {
+                 <td><input type="checkbox" name="negativeEvaluation" id="negativeEvaluation" value="negativeEvaluation" checked="checked"/></td>
+                 } else {
                  <td><input type="checkbox" name="negativeEvaluation" id="negativeEvaluation" value="negativeEvaluation" /></td>
+                 }
              </tr>
 
          </table>
@@ -185,13 +273,23 @@
  <tr>
      <td>ECG</td>
      <td>
-         Done<input type="radio" name="ecgDone" id="ecgDone" value="YES" required="required"/>
+         @if(d != null && d.getEcgDone() != null && d.getEcgDone().name().toUpperCase() == "YES") {
+         Done<input type="radio" name="ecgDone" id="ecgDone" value="YES" required="required" checked="checked"/>
          Not Done<input type="radio" name="ecgDone" id="ecgNotDone" value="NO" required="required"/>
+         } else {
+         Done<input type="radio" name="ecgDone" id="ecgDone" value="YES" required="required"/>
+         Not Done<input type="radio" name="ecgDone" id="ecgNotDone" value="NO" required="required" checked="checked"/>
+         }
      </td>
      <td>ECHO</td>
      <td>
-         Done<input type="radio" name="echoDone" id="echoDone" value="YES" required="required"/>
+         @if(d != null && d.getEchoDone() != null && d.getEchoDone().name().toUpperCase() == "YES") {
+         Done<input type="radio" name="echoDone" id="echoDone" value="YES" required="required" checked="checked"/>
          Not Done<input type="radio" name="echoDone" id="echoNotDone" value="NO" required="required"/>
+         } else {
+         Done<input type="radio" name="echoDone" id="echoDone" value="YES" required="required"/>
+         Not Done<input type="radio" name="echoDone" id="echoNotDone" value="NO" required="required" checked="checked"/>
+         }
      </td>
  </tr>
     <tr>
@@ -199,31 +297,59 @@
             <table>
                 <tr>
                     <td>Result:   Normal</td>
+                    @if(d != null && d.getEcgNormal() != null && d.getEcgNormal().name().toUpperCase() == "YES") {
+                    <td><input type="checkbox" name="ecgNormal" id="ecgNormal" value="" checked="checked"/></td>
+                    } else {
                     <td><input type="checkbox" name="ecgNormal" id="ecgNormal" value="" /></td>
+                    }
                 </tr>
                 <tr>
                     <td>LVH</td>
+                    @if(d != null && d.getEcgLvh() != null && d.getEcgLvh().name().toUpperCase() == "YES") {
+                    <td><input type="checkbox" name="ecgLvh" id="ecgLvh" value="" checked="checked"/></td>
+                    } else {
                     <td><input type="checkbox" name="ecgLvh" id="ecgLvh" value="" /></td>
+                    }
                 </tr>
                 <tr>
                     <td>AF</td>
+                    @if(d != null && d.getEcgAf() != null && d.getEcgAf().name().toUpperCase() == "YES") {
+                    <td><input type="checkbox" name="ecgAf" id="ecgAf" value="ecgAf" checked="checked"/></td>
+                    } else {
                     <td><input type="checkbox" name="ecgAf" id="ecgAf" value="ecgAf" /></td>
+                    }
                 </tr>
                 <tr>
                     <td>Ventricular ectopics</td>
+                    @if(d != null && d.getEcgVentricularEctopics() != null && d.getEcgVentricularEctopics().name().toUpperCase() == "YES") {
+                    <td><input type="checkbox" name="ecgVentricularEctopics" id="ecgVentricularEctopics" value="ecgVentricularEctopics" checked="checked"/></td>
+                    } else {
                     <td><input type="checkbox" name="ecgVentricularEctopics" id="ecgVentricularEctopics" value="ecgVentricularEctopics" /></td>
+                    }
                 </tr>
                 <tr>
                     <td>Atrial ectopics</td>
+                    @if(d != null && d.getEcgArtialEctopics() != null && d.getEcgArtialEctopics().name().toUpperCase() == "YES") {
+                    <td><input type="checkbox" name="ecgArtialEctopics" id="ecgArtialEctopics" value="ecgArtialEctopics" checked="checked"/></td>
+                    } else {
                     <td><input type="checkbox" name="ecgArtialEctopics" id="ecgArtialEctopics" value="ecgArtialEctopics" /></td>
+                    }
                 </tr>
                 <tr>
                     <td>None of above</td>
+                    @if(d != null && d.getEcgNoneOfAbove() != null && d.getEcgNoneOfAbove().name().toUpperCase() == "YES") {
+                    <td><input type="checkbox" name="ecgNoneOfAbove" id="ecgNoneOfAbove" value="ecgNoneOfAbove" checked="checked"/></td>
+                    } else {
                     <td><input type="checkbox" name="ecgNoneOfAbove" id="ecgNoneOfAbove" value="ecgNoneOfAbove" /></td>
+                    }
                 </tr>
                 <tr>
                     <td>Don’t know</td>
+                    @if(d != null && d.getEcgDontKnow() != null && d.getEcgDontKnow().name().toUpperCase() == "YES") {
+                    <td><input type="checkbox" name="ecgDontKnow" id="ecgDontKnow" value="ecgDontKnow" checked="checked"/></td>
+                    } else {
                     <td><input type="checkbox" name="ecgDontKnow" id="ecgDontKnow" value="ecgDontKnow" /></td>
+                    }
                 </tr>
             </table>
         </td>
@@ -231,27 +357,51 @@
             <table>
                 <tr>
                     <td>Result:   Normal</td>
+                    @if(d != null && d.getEchoNormal() != null && d.getEchoNormal().name().toUpperCase() == "YES") {
+                    <td><input type="checkbox" name="echoNormal" id="echoNormal" value="echoNormal" checked="checked"/></td>
+                    } else {
                     <td><input type="checkbox" name="echoNormal" id="echoNormal" value="echoNormal" /></td>
+                    }
                 </tr>
                 <tr>
                     <td>LVH</td>
+                    @if(d != null && d.getEchoLvh() != null && d.getEchoLvh().name().toUpperCase() == "YES") {
+                    <td><input type="checkbox" name="echoLvh" id="echoLvh" value="echoLvh" checked="checked"/></td>
+                    } else {
                     <td><input type="checkbox" name="echoLvh" id="echoLvh" value="echoLvh" /></td>
+                    }
                 </tr>
                 <tr>
                     <td>PFO</td>
+                    @if(d != null && d.getEchoPfo() != null && d.getEchoPfo().name().toUpperCase() == "YES") {
+                    <td><input type="checkbox" name="echoPfo" id="echoPfo" value="echoPfo" checked="checked"/></td>
+                    } else {
                     <td><input type="checkbox" name="echoPfo" id="echoPfo" value="echoPfo" /></td>
+                    }
                 </tr>
                 <tr>
                     <td>Thrombus</td>
+                    @if(d != null && d.getEchoThrombus() != null && d.getEchoThrombus().name().toUpperCase() == "YES") {
+                    <td><input type="checkbox" name="echoThrombus" id="echoThrombus" value="echoThrombus" checked="checked"/></td>
+                    } else {
                     <td><input type="checkbox" name="echoThrombus" id="echoThrombus" value="echoThrombus" /></td>
+                    }
                 </tr>
                 <tr>
                     <td>None of above</td>
+                    @if(d != null && d.getEchoNoneOfAbove() != null && d.getEchoNoneOfAbove().name().toUpperCase() == "YES") {
+                    <td><input type="checkbox" name="echoNoneOfAbove" id="echoNoneOfAbove" value="echoNoneOfAbove" checked="checked"/></td>
+                    } else {
                     <td><input type="checkbox" name="echoNoneOfAbove" id="echoNoneOfAbove" value="echoNoneOfAbove" /></td>
+                    }
                 </tr>
                 <tr>
                     <td>Don’t know</td>
+                    @if(d != null && d.getEchoDontKnow() != null && d.getEchoDontKnow().name().toUpperCase() == "YES") {
+                    <td><input type="checkbox" name="echoDontKnow" id="echoDontKnow" value="echoDontKnow" checked="checked"/></td>
+                    } else {
                     <td><input type="checkbox" name="echoDontKnow" id="echoDontKnow" value="echoDontKnow" /></td>
+                    }
                 </tr>
 
             </table>
@@ -265,9 +415,9 @@
         <table>
             <tr>
                 <td>On admission </td>
-                <td><input type="text" name="nihssOnAdmission" id="nihssOnAdmission"/></td>
+                <td><input type="text" name="nihssOnAdmission" id="nihssOnAdmission" value="@d.getNihssOnAdmission()"/></td>
                 <td>On discharge </td>
-                <td><input type="text" name="nihssOnDischarge" id="nihssOnDischarge"></td>
+                <td><input type="text" name="nihssOnDischarge" id="nihssOnDischarge" value="@d.getNihssOnDischarge()"/></td>
             </tr>
         </table>
     </td>
@@ -280,9 +430,9 @@
         <table>
             <tr>
                 <td>On admission </td>
-                <td><input type="text" name="barthelOnAdmission" id="barthelOnAdmission"/></td>
+                <td><input type="text" name="barthelOnAdmission" id="barthelOnAdmission" value="@d.getBarthelOnAdmission()"/></td>
                 <td>On discharge </td>
-                <td><input type="text" name="barthelOnDischarge" id="barthelOnDischarge"></td>
+                <td><input type="text" name="barthelOnDischarge" id="barthelOnDischarge" value="@d.getBarthelOnDischarge()"></td>
             </tr>
         </table>
     </td>
@@ -295,19 +445,39 @@
         <table>
             <tr>
                 <td>Home</td>
+                @if(d != null && d.getHome() != null && d.getHome().name().toUpperCase() == "YES") {
+                <td><input type="checkbox" name="home" id="home" value="home" checked="checked"/></td>
+                } else {
                 <td><input type="checkbox" name="home" id="home" value="home"/></td>
+                }
                 <td>Nursing Home </td>
+                @if(d != null && d.getNursingHome() != null && d.getNursingHome().name().toUpperCase() == "YES") {
+                <td><input type="checkbox" name="nursingHome" id="nursingHome" value="nursingHome" checked="checked"/></td>
+                } else {
                 <td><input type="checkbox" name="nursingHome" id="nursingHome" value="nursingHome" /></td>
+                }
             </tr>
             <tr>
                 <td>Rehabilitation</td>
+                @if(d != null && d.getRehabilitation() != null && d.getRehabilitation().name().toUpperCase() == "YES") {
+                <td><input type="checkbox" name="rehabilitation" id="rehabilitation" value="rehabilitation" checked="checked"/></td>
+                } else {
                 <td><input type="checkbox" name="rehabilitation" id="rehabilitation" value="rehabilitation" /></td>
+                }
                 <td>RIP </td>
+                @if(d != null && d.getRip() != null && d.getRip().name().toUpperCase() == "YES") {
+                <td><input type="checkbox" name="rip" id="rip" value="rip" checked="checked"/></td>
+                } else {
                 <td><input type="checkbox" name="rip" id="rip" value="rip" /></td>
+                }
             </tr>
             <tr>
                 <td>Local DGH</td>
+                @if(d != null && d.getLocalDgh() != null && d.getLocalDgh().name().toUpperCase() == "YES") {
+                <td><input type="checkbox" name="localDgh" id="localDgh" value="localDgh" checked="checked"/></td>
+                } else {
                 <td><input type="checkbox" name="localDgh" id="localDgh" value="localDgh" /></td>
+                }
                 <td></td>
                 <td></td>
             </tr>

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import models.Status;
 import models.YesNo;
 import models.user.User;
+import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import play.data.format.Formats;
 import play.data.validation.Constraints;
@@ -30,7 +31,7 @@ public class DataCollectionForm4 extends Model {
     @Constraints.Required
     private YesNo intracranialStenosis = YesNo.NO;
 
-    private String intracranialStenosisPercent;
+    private String intracranialStenosisPercent = StringUtils.EMPTY;
 
     @Constraints.Required
     private YesNo extracranialDopplersImagingDone = YesNo.NO;
@@ -65,19 +66,19 @@ public class DataCollectionForm4 extends Model {
     @Constraints.Required
     private YesNo lesionAnterioposterior = YesNo.NO;
 
-    private Double ricaStenosisPercent;
+    private Double ricaStenosisPercent = 0.0;
 
-    private Double licaStenosisPercent;
+    private Double licaStenosisPercent = 0.0;
 
-    private Double rccaStenosisPercent;
+    private Double rccaStenosisPercent = 0.0;
 
-    private Double lccaStenosisPercent;
+    private Double lccaStenosisPercent = 0.0;
 
-    private Double rVertebralStenosisPercent;
+    private Double rVertebralStenosisPercent = 0.0;
 
-    private Double lVertebralStenosisPercent;
+    private Double lVertebralStenosisPercent = 0.0;
 
-    private Double basilarStenosisPercent;
+    private Double basilarStenosisPercent = 0.0;
 
     @Constraints.Required
     private YesNo lvd = YesNo.NO;
@@ -142,13 +143,13 @@ public class DataCollectionForm4 extends Model {
     @Constraints.Required
     private YesNo ecgDontKnow = YesNo.NO;
 
-    private String nihssOnAdmission;
+    private String nihssOnAdmission = StringUtils.EMPTY;
 
-    private String nihssOnDischarge;
+    private String nihssOnDischarge = StringUtils.EMPTY;
 
-    private String barthelOnAdmission;
+    private String barthelOnAdmission = StringUtils.EMPTY;
 
-    private String barthelOnDischarge;
+    private String barthelOnDischarge = StringUtils.EMPTY;
 
     @Constraints.Required
     private YesNo home = YesNo.NO;

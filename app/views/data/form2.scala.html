@@ -1,4 +1,4 @@
-@(message: String, u: models.response.user.User, pid: Integer)
+@(message: String, u: models.response.user.User, pid: Integer, d: models.data.form.DataCollectionForm2)
 
 @import tags._
 @main("User") {
@@ -12,7 +12,7 @@
 
         </header>
         <div class="form" style="width:100%;background: #f1f1f1;border-radius: 10px;">
-            <form id="form2" method="POST" style="padding-top: 2%;" action="@controllers.data.routes.DataController.handleSaveForm2()" data-uri="@controllers.data.routes.DataController.form3()">
+            <form id="form2" method="POST" style="padding-top: 2%;" action="@controllers.data.routes.DataController.handleSaveForm2()" data-uri="@controllers.data.routes.DataController.form3(0)">
                 <div class="box message">
                     <div class="content-m">
 
@@ -20,13 +20,21 @@
                 </div>
                 <table cellspacing="5" cellpadding="5" style="clear: both;float: left;"/>
                 <tr>
+                    @if(d != null && d.getId() != null) {
+                    <td><input type="hidden" id="id" name="id" value="@d.getId()"/></td>
+                    } else {
                     <td><input type="hidden" id="id" name="id" value=""/></td>
+                    }
                 </tr>
                 <tr>
                     <td colspan="2">Data Collection Form (DCF)</td>
 
                     <td>Patient’s ID Number</td>
+                    @if(d != null && d.getPatientIdNumber() != null) {
+                    <td><input type="text" id="patientIdNumber" name="patientIdNumber" value="@d.getPatientIdNumber().toString()"/></td>
+                    } else {
                     <td><input type="text" id="patientIdNumber" name="patientIdNumber" value="@pid"/></td>
+                    }
                 </tr>
                 <tr>
                     <td colspan="2">
@@ -43,17 +51,38 @@
                                 <td>
                                     Ischaemic Stroke
                                     <select name="ischaemicStroke" id="ischaemicStroke">
+                                        @if(d != null && d.getIschaemicStroke() != null && d.getIschaemicStroke().name().toUpperCase() == "NO") {
                                         <option value="Yes">Yes</option>
+                                        <option value="No" selected="selected">No</option>
+                                        } else {
+                                        <option value="Yes" selected="selected">Yes</option>
                                         <option value="No">No</option>
+                                        }
                                     </select>
                                 </td>
                                 <td>
+                                    @if(d != null && d.getTaci() != null && d.getTaci().name().toUpperCase() == "YES") {
+                                    <input type="checkbox" name="taci" id="taci" value="taci" checked="checked"/>Taci
+                                    } else {
                                     <input type="checkbox" name="taci" id="taci" value="taci"/>Taci
+                                    }
+                                    @if(d != null && d.getPaci() != null && d.getPaci().name().toUpperCase() == "YES") {
+                                    <input type="checkbox" name="paci" id="paci" value="paci" checked="checked"/>Paci
+                                    } else {
                                     <input type="checkbox" name="paci" id="paci" value="paci"/>Paci
+                                    }
                                 </td>
                                 <td>
+                                    @if(d != null && d.getLaci() != null && d.getLaci().name().toUpperCase() == "YES") {
+                                    <input type="checkbox" name="laci" id="laci" value="laci" checked="checked"/>Laci
+                                    } else {
                                     <input type="checkbox" name="laci" id="laci" value="laci"/>Laci
+                                    }
+                                    @if(d != null && d.getPoci() != null && d.getPoci().name().toUpperCase() == "YES") {
+                                    <input type="checkbox" name="poci" id="poci" value="poci" checked="checked"/>Poci
+                                    } else {
                                     <input type="checkbox" name="poci" id="poci" value="poci"/>Poci
+                                    }
                                 </td>
                             </tr>
                             <tr>
@@ -62,8 +91,13 @@
                                 </td>
                                 <td>
                                     <select name="hoemorrhagicStroke" id="hoemorrhagicStroke">
+                                        @if(d != null && d.getHoemorrhagicStroke() != null && d.getHoemorrhagicStroke().name().toUpperCase() == "NO") {
                                         <option value="Yes">Yes</option>
+                                        <option value="No" selected="selected">No</option>
+                                        } else {
+                                        <option value="Yes" selected="selected">Yes</option>
                                         <option value="No">No</option>
+                                        }
                                     </select>
 
                                 </td>
@@ -76,10 +110,14 @@
                                 </td>
                                 <td>
                                     <select name="venousSinusThrombosis" id="venousSinusThrombosis">
+                                        @if(d != null && d.getVenousSinusThrombosis() != null && d.getVenousSinusThrombosis().name().toUpperCase() == "NO") {
                                         <option value="Yes">Yes</option>
+                                        <option value="No" selected="selected">No</option>
+                                        } else {
+                                        <option value="Yes" selected="selected">Yes</option>
                                         <option value="No">No</option>
+                                        }
                                     </select>
-
                                 </td>
                                 <td>
                                 </td>
@@ -90,10 +128,14 @@
                                 </td>
                                 <td>
                                     <select name="tia" id="tia">
+                                        @if(d != null && d.getTia() != null && d.getTia().name().toUpperCase() == "NO") {
                                         <option value="Yes">Yes</option>
+                                        <option value="No" selected="selected">No</option>
+                                        } else {
+                                        <option value="Yes" selected="selected">Yes</option>
                                         <option value="No">No</option>
+                                        }
                                     </select>
-
                                 </td>
                                 <td>
                                 </td>
@@ -104,10 +146,14 @@
                                 </td>
                                 <td>
                                     <select name="avm" id="avm">
+                                        @if(d != null && d.getAvm() != null && d.getAvm().name().toUpperCase() == "NO") {
                                         <option value="Yes">Yes</option>
+                                        <option value="No" selected="selected">No</option>
+                                        } else {
+                                        <option value="Yes" selected="selected">Yes</option>
                                         <option value="No">No</option>
+                                        }
                                     </select>
-
                                 </td>
                                 <td>
                                 </td>
@@ -118,8 +164,13 @@
                                 </td>
                                 <td>
                                     <select name="aneurysm" id="aneurysm">
+                                        @if(d != null && d.getAneurysm() != null && d.getAneurysm().name().toUpperCase() == "NO") {
                                         <option value="Yes">Yes</option>
+                                        <option value="No" selected="selected">No</option>
+                                        } else {
+                                        <option value="Yes" selected="selected">Yes</option>
                                         <option value="No">No</option>
+                                        }
                                     </select>
 
                                 </td>
@@ -132,8 +183,13 @@
                                 </td>
                                 <td>
                                     <select name="subaranchoid" id="subaranchoid">
+                                        @if(d != null && d.getSubaranchoid() != null && d.getSubaranchoid().name().toUpperCase() == "NO") {
                                         <option value="Yes">Yes</option>
+                                        <option value="No" selected="selected">No</option>
+                                        } else {
+                                        <option value="Yes" selected="selected">Yes</option>
                                         <option value="No">No</option>
+                                        }
                                     </select>
 
                                 </td>
@@ -149,84 +205,318 @@
                 </tr>
                 <tr>
                     <td>Hypertension</td>
+                    @if(d != null && d.getHypertension() != null && d.getHypertension().name().toUpperCase() == "YES") {
+                    <td colspan="2">
+                        <input type="radio" name="hypertension" value="Yes" required="required" checked="checked"/>Yes
+                        <input type="radio" name="hypertension" value="No" required="required"/>No
+                        <input type="radio" name="hypertension" value="Dont_Know" required="required"/>Don't Know
+                    </td>
+                    <td><input type="checkbox" name="hypertension" value="hypertension" required="required"/>New</td>
+                    }
+                    @if(d != null && d.getHypertension() != null && d.getHypertension().name().toUpperCase() == "NO") {
+                    <td colspan="2">
+                        <input type="radio" name="hypertension" value="Yes" required="required"/>Yes
+                        <input type="radio" name="hypertension" value="No" required="required" checked="checked"/>No
+                        <input type="radio" name="hypertension" value="Dont_Know" required="required"/>Don't Know
+                    </td>
+                    <td><input type="checkbox" name="hypertension" value="hypertension" required="required"/>New</td>
+                    }
+                    @if(d != null && d.getHypertension() != null && d.getHypertension().name().toUpperCase() == "DONT_KNOW") {
+                    <td colspan="2">
+                        <input type="radio" name="hypertension" value="Yes" required="required"/>Yes
+                        <input type="radio" name="hypertension" value="No" required="required"/>No
+                        <input type="radio" name="hypertension" value="Dont_Know" required="required" checked="checked"/>Don't Know
+                    </td>
+                    <td><input type="checkbox" name="hypertension" value="hypertension" required="required"/>New</td>
+                    }
+                    @if(d != null && d.getHypertension() != null && d.getHypertension().name().toUpperCase() == "NEW") {
                     <td colspan="2">
                         <input type="radio" name="hypertension" value="Yes" required="required"/>Yes
                         <input type="radio" name="hypertension" value="No" required="required"/>No
                         <input type="radio" name="hypertension" value="Dont_Know" required="required"/>Don't Know
                     </td>
-                    <td><input type="checkbox" name="hypertension" value="hypertension" required="required"/>New</td>
+                    <td><input type="checkbox" name="hypertension" value="hypertension" required="required" checked="checked"/>New</td>
+                    }
                 </tr>
                 <tr>
                     <td>Diabetes Mellitus</td>
+                    @if(d != null && d.getDiabetesMellitus() != null && d.getDiabetesMellitus().name().toUpperCase() == "YES") {
+                    <td colspan="2">
+                        <input type="radio" name="diabetesMellitus" value="Yes" required="required" checked="checked"/>Yes
+                        <input type="radio" name="diabetesMellitus" value="No" required="required"/>No
+                        <input type="radio" name="diabetesMellitus" value="Dont_Know" required="required"/>Don't Know
+                    </td>
+                    <td><input type="checkbox" name="diabetesMellitus" value="diabetesMellitus" required="required"/>New</td>
+                    }
+                    @if(d != null && d.getDiabetesMellitus() != null && d.getDiabetesMellitus().name().toUpperCase() == "NO") {
+                    <td colspan="2">
+                        <input type="radio" name="diabetesMellitus" value="Yes" required="required"/>Yes
+                        <input type="radio" name="diabetesMellitus" value="No" required="required" checked="checked"/>No
+                        <input type="radio" name="diabetesMellitus" value="Dont_Know" required="required"/>Don't Know
+                    </td>
+                    <td><input type="checkbox" name="diabetesMellitus" value="diabetesMellitus" required="required"/>New</td>
+                    }
+                    @if(d != null && d.getDiabetesMellitus() != null && d.getDiabetesMellitus().name().toUpperCase() == "DONT_KNOW") {
+                    <td colspan="2">
+                        <input type="radio" name="diabetesMellitus" value="Yes" required="required"/>Yes
+                        <input type="radio" name="diabetesMellitus" value="No" required="required"/>No
+                        <input type="radio" name="diabetesMellitus" value="Dont_Know" required="required" checked="checked"/>Don't Know
+                    </td>
+                    <td><input type="checkbox" name="diabetesMellitus" value="diabetesMellitus" required="required"/>New</td>
+                    }
+                    @if(d != null && d.getDiabetesMellitus() != null && d.getDiabetesMellitus().name().toUpperCase() == "NEW") {
                     <td colspan="2">
                         <input type="radio" name="diabetesMellitus" value="Yes" required="required"/>Yes
                         <input type="radio" name="diabetesMellitus" value="No" required="required"/>No
                         <input type="radio" name="diabetesMellitus" value="Dont_Know" required="required"/>Don't Know
                     </td>
-                    <td><input type="checkbox" name="hypertension" value="hypertension" required="required"/>New</td>
+                    <td><input type="checkbox" name="diabetesMellitus" value="diabetesMellitus" required="required" checked="checked"/>New</td>
+                    }
                 </tr>
                 <tr>
                     <td>IHD/Angina</td>
+                    @if(d != null && d.getIhdAngina() != null && d.getIhdAngina().name().toUpperCase() == "YES") {
                     <td colspan="2">
-                        <input type="radio" name="ihdAngina" value="Yes" required="required" required="required"/>Yes
-                        <input type="radio" name="ihdAngina" value="No" required="required" required="required"/>No
-                        <input type="radio" name="ihdAngina" value="DontKnow" required="required" required="required"/>Don't Know
+                        <input type="radio" name="ihdAngina" value="Yes" required="required" checked="checked"/>Yes
+                        <input type="radio" name="ihdAngina" value="No" required="required"/>No
+                        <input type="radio" name="ihdAngina" value="Dont_Know" required="required"/>Don't Know
                     </td>
-                    <td><input type="checkbox" name="ihd" value="ihd" required="required"/>New</td>
+                    <td><input type="checkbox" name="ihdAngina" value="ihdAngina" required="required"/>New</td>
+                    }
+                    @if(d != null && d.getIhdAngina() != null && d.getIhdAngina().name().toUpperCase() == "NO") {
+                    <td colspan="2">
+                        <input type="radio" name="ihdAngina" value="Yes" required="required"/>Yes
+                        <input type="radio" name="ihdAngina" value="No" required="required" checked="checked"/>No
+                        <input type="radio" name="ihdAngina" value="Dont_Know" required="required"/>Don't Know
+                    </td>
+                    <td><input type="checkbox" name="ihdAngina" value="ihdAngina" required="required"/>New</td>
+                    }
+                    @if(d != null && d.getIhdAngina() != null && d.getIhdAngina().name().toUpperCase() == "DONT_KNOW") {
+                    <td colspan="2">
+                        <input type="radio" name="ihdAngina" value="Yes" required="required"/>Yes
+                        <input type="radio" name="ihdAngina" value="No" required="required"/>No
+                        <input type="radio" name="ihdAngina" value="Dont_Know" required="required" checked="checked"/>Don't Know
+                    </td>
+                    <td><input type="checkbox" name="ihdAngina" value="ihdAngina" required="required"/>New</td>
+                    }
+                    @if(d != null && d.getIhdAngina() != null && d.getIhdAngina().name().toUpperCase() == "NEW") {
+                    <td colspan="2">
+                        <input type="radio" name="ihdAngina" value="Yes" required="required"/>Yes
+                        <input type="radio" name="ihdAngina" value="No" required="required"/>No
+                        <input type="radio" name="ihdAngina" value="Dont_Know" required="required"/>Don't Know
+                    </td>
+                    <td><input type="checkbox" name="ihdAngina" value="ihdAngina" required="required" checked="checked"/>New</td>
+                    }
                 </tr>
                 <tr>
                     <td>Hypercholesterolemia</td>
+                    @if(d != null && d.getHypercholesterolemia() != null && d.getHypercholesterolemia().name().toUpperCase() == "YES") {
+                    <td colspan="2">
+                        <input type="radio" name="hypercholesterolemia" value="Yes" required="required" checked="checked"/>Yes
+                        <input type="radio" name="hypercholesterolemia" value="No" required="required"/>No
+                        <input type="radio" name="hypercholesterolemia" value="Dont_Know" required="required"/>Don't Know
+                    </td>
+                    <td><input type="checkbox" name="hypercholesterolemia" value="hypercholesterolemia" required="required"/>New</td>
+                    }
+                    @if(d != null && d.getHypercholesterolemia() != null && d.getHypercholesterolemia().name().toUpperCase() == "NO") {
+                    <td colspan="2">
+                        <input type="radio" name="hypercholesterolemia" value="Yes" required="required"/>Yes
+                        <input type="radio" name="hypercholesterolemia" value="No" required="required" checked="checked"/>No
+                        <input type="radio" name="hypercholesterolemia" value="Dont_Know" required="required"/>Don't Know
+                    </td>
+                    <td><input type="checkbox" name="hypercholesterolemia" value="hypercholesterolemia" required="required"/>New</td>
+                    }
+                    @if(d != null && d.getHypercholesterolemia() != null && d.getHypercholesterolemia().name().toUpperCase() == "DONT_KNOW") {
+                    <td colspan="2">
+                        <input type="radio" name="hypercholesterolemia" value="Yes" required="required"/>Yes
+                        <input type="radio" name="hypercholesterolemia" value="No" required="required"/>No
+                        <input type="radio" name="hypercholesterolemia" value="Dont_Know" required="required" checked="checked"/>Don't Know
+                    </td>
+                    <td><input type="checkbox" name="hypercholesterolemia" value="hypercholesterolemia" required="required"/>New</td>
+                    }
+                    @if(d != null && d.getHypercholesterolemia() != null && d.getHypercholesterolemia().name().toUpperCase() == "NEW") {
                     <td colspan="2">
                         <input type="radio" name="hypercholesterolemia" value="Yes" required="required"/>Yes
                         <input type="radio" name="hypercholesterolemia" value="No" required="required"/>No
                         <input type="radio" name="hypercholesterolemia" value="Dont_Know" required="required"/>Don't Know
                     </td>
-                    <td><input type="checkbox" name="hypercholesterolemia" value="hypercholesterolemia" required="required"/>New</td>
+                    <td><input type="checkbox" name="hypercholesterolemia" value="hypercholesterolemia" required="required" checked="checked"/>New</td>
+                    }
                 </tr>
                 <tr>
                     <td>Atrial Fibrillation</td>
+                    @if(d != null && d.getAtrialFibrillation() != null && d.getAtrialFibrillation().name().toUpperCase() == "YES") {
+                    <td colspan="2">
+                        <input type="radio" name="atrialFibrillation" value="Yes" required="required" checked="checked"/>Yes
+                        <input type="radio" name="atrialFibrillation" value="No" required="required"/>No
+                        <input type="radio" name="atrialFibrillation" value="Dont_Know" required="required"/>Don't Know
+                    </td>
+                    <td><input type="checkbox" name="atrialFibrillation" value="atrialFibrillation" required="required"/>New</td>
+                    }
+                    @if(d != null && d.getAtrialFibrillation() != null && d.getAtrialFibrillation().name().toUpperCase() == "NO") {
+                    <td colspan="2">
+                        <input type="radio" name="atrialFibrillation" value="Yes" required="required"/>Yes
+                        <input type="radio" name="atrialFibrillation" value="No" required="required" checked="checked"/>No
+                        <input type="radio" name="atrialFibrillation" value="Dont_Know" required="required"/>Don't Know
+                    </td>
+                    <td><input type="checkbox" name="atrialFibrillation" value="atrialFibrillation" required="required"/>New</td>
+                    }
+                    @if(d != null && d.getAtrialFibrillation() != null && d.getAtrialFibrillation().name().toUpperCase() == "DONT_KNOW") {
+                    <td colspan="2">
+                        <input type="radio" name="atrialFibrillation" value="Yes" required="required"/>Yes
+                        <input type="radio" name="atrialFibrillation" value="No" required="required"/>No
+                        <input type="radio" name="atrialFibrillation" value="Dont_Know" required="required" checked="checked"/>Don't Know
+                    </td>
+                    <td><input type="checkbox" name="atrialFibrillation" value="atrialFibrillation" required="required"/>New</td>
+                    }
+                    @if(d != null && d.getAtrialFibrillation() != null && d.getAtrialFibrillation().name().toUpperCase() == "NEW") {
                     <td colspan="2">
                         <input type="radio" name="atrialFibrillation" value="Yes" required="required"/>Yes
                         <input type="radio" name="atrialFibrillation" value="No" required="required"/>No
                         <input type="radio" name="atrialFibrillation" value="Dont_Know" required="required"/>Don't Know
                     </td>
-                    <td><input type="checkbox" name="atrialFibrillation" value="atrialFibrillation" required="required"/>New</td>
+                    <td><input type="checkbox" name="atrialFibrillation" value="atrialFibrillation" required="required" checked="checked"/>New</td>
+                    }
                 </tr>
                 <tr>
                     <td>PVD</td>
+                    @if(d != null && d.getPvd() != null && d.getPvd().name().toUpperCase() == "YES") {
+                    <td colspan="2">
+                        <input type="radio" name="pvd" value="Yes" required="required" checked="checked"/>Yes
+                        <input type="radio" name="pvd" value="No" required="required"/>No
+                        <input type="radio" name="pvd" value="Dont_Know" required="required"/>Don't Know
+                    </td>
+                    <td><input type="checkbox" name="pvd" value="pvd" required="required"/>New</td>
+                    }
+                    @if(d != null && d.getPvd() != null && d.getPvd().name().toUpperCase() == "NO") {
+                    <td colspan="2">
+                        <input type="radio" name="pvd" value="Yes" required="required"/>Yes
+                        <input type="radio" name="pvd" value="No" required="required" checked="checked"/>No
+                        <input type="radio" name="pvd" value="Dont_Know" required="required"/>Don't Know
+                    </td>
+                    <td><input type="checkbox" name="pvd" value="pvd" required="required"/>New</td>
+                    }
+                    @if(d != null && d.getPvd() != null && d.getPvd().name().toUpperCase() == "DONT_KNOW") {
+                    <td colspan="2">
+                        <input type="radio" name="pvd" value="Yes" required="required"/>Yes
+                        <input type="radio" name="pvd" value="No" required="required"/>No
+                        <input type="radio" name="pvd" value="Dont_Know" required="required" checked="checked"/>Don't Know
+                    </td>
+                    <td><input type="checkbox" name="pvd" value="pvd" required="required"/>New</td>
+                    }
+                    @if(d != null && d.getPvd() != null && d.getPvd().name().toUpperCase() == "NEW") {
                     <td colspan="2">
                         <input type="radio" name="pvd" value="Yes" required="required"/>Yes
                         <input type="radio" name="pvd" value="No" required="required"/>No
                         <input type="radio" name="pvd" value="Dont_Know" required="required"/>Don't Know
                     </td>
-                    <td><input type="checkbox" name="pvd" value="pvd" required="required"/>New</td>
+                    <td><input type="checkbox" name="pvd" value="pvd" required="required" checked="checked"/>New</td>
+                    }
                 </tr>
                 <tr>
                     <td>MI</td>
+                    @if(d != null && d.getMi() != null && d.getMi().name().toUpperCase() == "YES") {
+                    <td colspan="2">
+                        <input type="radio" name="mi" value="Yes" required="required" checked="checked"/>Yes
+                        <input type="radio" name="mi" value="No" required="required"/>No
+                        <input type="radio" name="mi" value="Dont_Know" required="required"/>Don't Know
+                    </td>
+                    <td><input type="checkbox" name="mi" value="mi" required="required"/>New</td>
+                    }
+                    @if(d != null && d.getMi() != null && d.getMi().name().toUpperCase() == "NO") {
+                    <td colspan="2">
+                        <input type="radio" name="mi" value="Yes" required="required"/>Yes
+                        <input type="radio" name="mi" value="No" required="required" checked="checked"/>No
+                        <input type="radio" name="mi" value="Dont_Know" required="required"/>Don't Know
+                    </td>
+                    <td><input type="checkbox" name="mi" value="mi" required="required"/>New</td>
+                    }
+                    @if(d != null && d.getMi() != null && d.getMi().name().toUpperCase() == "DONT_KNOW") {
+                    <td colspan="2">
+                        <input type="radio" name="mi" value="Yes" required="required"/>Yes
+                        <input type="radio" name="mi" value="No" required="required"/>No
+                        <input type="radio" name="mi" value="Dont_Know" required="required" checked="checked"/>Don't Know
+                    </td>
+                    <td><input type="checkbox" name="mi" value="mi" required="required"/>New</td>
+                    }
+                    @if(d != null && d.getMi() != null && d.getMi().name().toUpperCase() == "NEW") {
                     <td colspan="2">
                         <input type="radio" name="mi" value="Yes" required="required"/>Yes
                         <input type="radio" name="mi" value="No" required="required"/>No
                         <input type="radio" name="mi" value="Dont_Know" required="required"/>Don't Know
                     </td>
-                    <td><input type="checkbox" name="mi" value="mi" required="required"/>New</td>
+                    <td><input type="checkbox" name="mi" value="mi" required="required" checked="checked"/>New</td>
+                    }
                 </tr>
                 <tr>
                     <td>Migraine with aura</td>
+                    @if(d != null && d.getMigraineWithAura() != null && d.getMigraineWithAura().name().toUpperCase() == "YES") {
+                    <td colspan="2">
+                        <input type="radio" name="migraineWithAura" value="Yes" required="required" checked="checked"/>Yes
+                        <input type="radio" name="migraineWithAura" value="No" required="required"/>No
+                        <input type="radio" name="migraineWithAura" value="Dont_Know" required="required"/>Don't Know
+                    </td>
+                    <td><input type="checkbox" name="migraineWithAura" value="migraineWithAura" required="required"/>New</td>
+                    }
+                    @if(d != null && d.getMigraineWithAura() != null && d.getMigraineWithAura().name().toUpperCase() == "NO") {
+                    <td colspan="2">
+                        <input type="radio" name="migraineWithAura" value="Yes" required="required"/>Yes
+                        <input type="radio" name="migraineWithAura" value="No" required="required" checked="checked"/>No
+                        <input type="radio" name="migraineWithAura" value="Dont_Know" required="required"/>Don't Know
+                    </td>
+                    <td><input type="checkbox" name="migraineWithAura" value="migraineWithAura" required="required"/>New</td>
+                    }
+                    @if(d != null && d.getMigraineWithAura() != null && d.getMigraineWithAura().name().toUpperCase() == "DONT_KNOW") {
+                    <td colspan="2">
+                        <input type="radio" name="migraineWithAura" value="Yes" required="required"/>Yes
+                        <input type="radio" name="migraineWithAura" value="No" required="required"/>No
+                        <input type="radio" name="migraineWithAura" value="Dont_Know" required="required" checked="checked"/>Don't Know
+                    </td>
+                    <td><input type="checkbox" name="migraineWithAura" value="migraineWithAura" required="required"/>New</td>
+                    }
+                    @if(d != null && d.getMigraineWithAura() != null && d.getMigraineWithAura().name().toUpperCase() == "NEW") {
                     <td colspan="2">
                         <input type="radio" name="migraineWithAura" value="Yes" required="required"/>Yes
                         <input type="radio" name="migraineWithAura" value="No" required="required"/>No
                         <input type="radio" name="migraineWithAura" value="Dont_Know" required="required"/>Don't Know
                     </td>
-                    <td><input type="checkbox" name="MigraineWithAura" value="MigraineWithAura" required="required"/>New</td>
+                    <td><input type="checkbox" name="migraineWithAura" value="migraineWithAura" required="required" checked="checked"/>New</td>
+                    }
                 </tr>
                 <tr>
                     <td>Migraine without aura</td>
+                    @if(d != null && d.getMigraineWithoutAura() != null && d.getMigraineWithoutAura().name().toUpperCase() == "YES") {
                     <td colspan="2">
-                        <input type="radio" name="migraineWithoutAura" value="Yes" required="required"/>Yes
-                        <input type="radio" name="migraineWithoutAura" value="No" required="required"/>No
-                        <input type="radio" name="migraineWithoutAura" value="Dont_Know" required="required"/>Don't Know
+                        <input type="radio" name="miigraineWithoutAura" value="Yes" required="required" checked="checked"/>Yes
+                        <input type="radio" name="miigraineWithoutAura" value="No" required="required"/>No
+                        <input type="radio" name="miigraineWithoutAura" value="Dont_Know" required="required"/>Don't Know
                     </td>
-                    <td><input type="checkbox" name="MigraineWithoutAura" value="MigraineWithoutAura" required="required"/>New</td>
+                    <td><input type="checkbox" name="migraineWithoutAura" value="miigraineWithoutAura" required="required"/>New</td>
+                    }
+                    @if(d != null && d.getMigraineWithoutAura() != null && d.getMigraineWithoutAura().name().toUpperCase() == "NO") {
+                    <td colspan="2">
+                        <input type="radio" name="miigraineWithoutAura" value="Yes" required="required"/>Yes
+                        <input type="radio" name="miigraineWithoutAura" value="No" required="required" checked="checked"/>No
+                        <input type="radio" name="miigraineWithoutAura" value="Dont_Know" required="required"/>Don't Know
+                    </td>
+                    <td><input type="checkbox" name="miigraineWithoutAura" value="miigraineWithoutAura" required="required"/>New</td>
+                    }
+                    @if(d != null && d.getMigraineWithoutAura() != null && d.getMigraineWithoutAura().name().toUpperCase() == "DONT_KNOW") {
+                    <td colspan="2">
+                        <input type="radio" name="miigraineWithoutAura" value="Yes" required="required"/>Yes
+                        <input type="radio" name="miigraineWithoutAura" value="No" required="required"/>No
+                        <input type="radio" name="miigraineWithoutAura" value="Dont_Know" required="required" checked="checked"/>Don't Know
+                    </td>
+                    <td><input type="checkbox" name="miigraineWithoutAura" value="miigraineWithoutAura" required="required"/>New</td>
+                    }
+                    @if(d != null && d.getMigraineWithoutAura() != null && d.getMigraineWithoutAura().name().toUpperCase() == "NEW") {
+                    <td colspan="2">
+                        <input type="radio" name="miigraineWithoutAura" value="Yes" required="required"/>Yes
+                        <input type="radio" name="miigraineWithoutAura" value="No" required="required"/>No
+                        <input type="radio" name="miigraineWithoutAura" value="Dont_Know" required="required"/>Don't Know
+                    </td>
+                    <td><input type="checkbox" name="miigraineWithoutAura" value="miigraineWithoutAura" required="required" checked="checked"/>New</td>
+                    }
                 </tr>
 
                 <tr>
@@ -237,8 +527,13 @@
                         Ischaemic Stroke
                     </td>
                     <td >
-                        <input type="radio" name="ischaemicStroke" value="Yes" required="required"/>Yes
+                        @if(d != null && d.getIschaemicStroke() != null && d.getIschaemicStroke().name().toUpperCase() == "YES") {
+                        <input type="radio" name="ischaemicStroke" value="Yes" required="required" checked="checked"/>Yes
                         <input type="radio" name="ischaemicStroke" value="No" required="required"/>No
+                        } else {
+                        <input type="radio" name="ischaemicStroke" value="Yes" required="required"/>Yes
+                        <input type="radio" name="ischaemicStroke" value="No" required="required" checked="checked"/>No
+                        }
                     </td>
                     <td rowspan="3">When <input type="text" name="patientPreviousStroke" id="patientPreviousStroke" style="width: 80px;"/>(year)</td>
                 </tr>
@@ -247,8 +542,13 @@
                          Hoemorrhagic Stroke
                      </td>
                      <td >
-                         <input type="radio" name="hoemorrhagicStroke" value="Yes" required="required"/>Yes
+                         @if(d != null && d.getHoemorrhagicStroke() != null && d.getHoemorrhagicStroke().name().toUpperCase() == "YES") {
+                         <input type="radio" name="hoemorrhagicStroke" value="Yes" required="required" checked="checked"/>Yes
                          <input type="radio" name="hoemorrhagicStroke" value="No" required="required"/>No
+                         } else {
+                         <input type="radio" name="hoemorrhagicStroke" value="Yes" required="required"/>Yes
+                         <input type="radio" name="hoemorrhagicStroke" value="No" required="required" checked="checked"/>No
+                         }
                      </td>
                  </tr>
                 <tr>
@@ -256,24 +556,44 @@
                         TIA
                     </td>
                     <td >
-                        <input type="radio" name="tia" value="Yes" required="required"/>Yes
+                        @if(d != null && d.getTia() != null && d.getTia().name().toUpperCase() == "YES") {
+                        <input type="radio" name="tia" value="Yes" required="required" checked="checked"/>Yes
                         <input type="radio" name="tia" value="No" required="required"/>No
+                        } else {
+                        <input type="radio" name="tia" value="Yes" required="required"/>Yes
+                        <input type="radio" name="tia" value="No" required="required" checked="checked"/>No
+                        }
                     </td>
                 </tr>
 
                 <tr>
                     <td>Stroke associated with</td>
                     <td>Dissection
-                        <input type="radio" name="strokeAssociatedWithDissection" value="Yes" required="required"/>Yes
+                        @if(d != null && d.getStrokeAssociatedWithDissection() != null && d.getStrokeAssociatedWithDissection().name().toUpperCase() == "YES") {
+                        <input type="radio" name="strokeAssociatedWithDissection" value="Yes" required="required" checked="checked"/>Yes
                         <input type="radio" name="strokeAssociatedWithDissection" value="No" required="required"/>No
+                        } else {
+                        <input type="radio" name="strokeAssociatedWithDissection" value="Yes" required="required"/>Yes
+                        <input type="radio" name="strokeAssociatedWithDissection" value="No" required="required" checked="checked"/>No
+                        }
                     </td>
                     <td>PFO
-                        <input type="radio" name="strokeAssociatedWithPfo" value="Yes" required="required"/>Yes
+                        @if(d != null && d.getStrokeAssociatedWithPfo() != null && d.getStrokeAssociatedWithPfo().name().toUpperCase() == "YES") {
+                        <input type="radio" name="strokeAssociatedWithPfo" value="Yes" required="required" checked="checked"/>Yes
                         <input type="radio" name="strokeAssociatedWithPfo" value="No" required="required"/>No
+                        } else {
+                        <input type="radio" name="strokeAssociatedWithPfo" value="Yes" required="required"/>Yes
+                        <input type="radio" name="strokeAssociatedWithPfo" value="No" required="required" checked="checked"/>No
+                        }
                     </td>
                     <td> MI
-                        <input type="radio" name="strokeAssociatedWithMi" value="Yes" required="required"/>Yes
+                        @if(d != null && d.getStrokeAssociatedWithMi() != null && d.getStrokeAssociatedWithMi().name().toUpperCase() == "YES") {
+                        <input type="radio" name="strokeAssociatedWithMi" value="Yes" required="required" checked="checked"/>Yes
                         <input type="radio" name="strokeAssociatedWithMi" value="No" required="required"/>No
+                        } else {
+                        <input type="radio" name="strokeAssociatedWithMi" value="Yes" required="required"/>Yes
+                        <input type="radio" name="strokeAssociatedWithMi" value="No" required="required" checked="checked"/>No
+                        }
                     </td>
                 </tr>
                 <tr>
@@ -282,78 +602,201 @@
                         History:
                     </td>
                     <td>Stroke</td>
+                    @if(d != null && d.getFamilyStroke() != null && d.getFamilyStroke().name().toUpperCase() == "YES") {
                     <td colspan="2">
-                        <input type="radio" name="familyStroke" value="Yes" required="required"/>Yes
+                        <input type="radio" name="familyStroke" value="Yes" required="required" checked="checked"/>Yes
                         <input type="radio" name="familyStroke" value="No" required="required"/>No
                         <input type="radio" name="familyStroke" value="Dont_Know" required="required"/>Don't Know
                     </td>
+                    }
+                    @if(d != null && d.getFamilyStroke() != null && d.getFamilyStroke().name().toUpperCase() == "NO") {
+                    <td colspan="2">
+                        <input type="radio" name="familyStroke" value="Yes" required="required"/>Yes
+                        <input type="radio" name="familyStroke" value="No" required="required" checked="checked"/>No
+                        <input type="radio" name="familyStroke" value="Dont_Know" required="required"/>Don't Know
+                    </td>
+                    }
+                    @if(d != null && d.getFamilyStroke() != null && d.getFamilyStroke().name().toUpperCase() == "DONT_KNOW") {
+                    <td colspan="2">
+                        <input type="radio" name="familyStroke" value="Yes" required="required"/>Yes
+                        <input type="radio" name="familyStroke" value="No" required="required"/>No
+                        <input type="radio" name="familyStroke" value="Dont_Know" required="required" checked="checked"/>Don't Know
+                    </td>
+                    }
                 </tr>
                 <tr>
                     <td>IHD/Angina  </td>
+                    @if(d != null && d.getFamilyIhdAngina() != null && d.getFamilyIhdAngina().name().toUpperCase() == "YES") {
                     <td colspan="2">
-                        <input type="radio" name="familyIhdAngina" value="Yes" required="required"/>Yes
+                        <input type="radio" name="familyIhdAngina" value="Yes" required="required" checked="checked"/>Yes
                         <input type="radio" name="familyIhdAngina" value="No" required="required"/>No
                         <input type="radio" name="familyIhdAngina" value="Dont_Know" required="required"/>Don't Know
                     </td>
+                    }
+                    @if(d != null && d.getFamilyIhdAngina() != null && d.getFamilyIhdAngina().name().toUpperCase() == "NO") {
+                    <td colspan="2">
+                        <input type="radio" name="familyIhdAngina" value="Yes" required="required"/>Yes
+                        <input type="radio" name="familyIhdAngina" value="No" required="required" checked="checked"/>No
+                        <input type="radio" name="familyIhdAngina" value="Dont_Know" required="required"/>Don't Know
+                    </td>
+                    }
+                    @if(d != null && d.getFamilyIhdAngina() != null && d.getFamilyIhdAngina().name().toUpperCase() == "DONT_KNOW") {
+                    <td colspan="2">
+                        <input type="radio" name="familyIhdAngina" value="Yes" required="required"/>Yes
+                        <input type="radio" name="familyIhdAngina" value="No" required="required"/>No
+                        <input type="radio" name="familyIhdAngina" value="Dont_Know" required="required" checked="checked"/>Don't Know
+                    </td>
+                    }
                 </tr>
                 <tr>
                     <td>Diabetes Mellitus </td>
+                    @if(d != null && d.getFamilyDiabetesMellitus() != null && d.getFamilyDiabetesMellitus().name().toUpperCase() == "YES") {
                     <td colspan="2">
-                        <input type="radio" name="familyDiabetesMellitus" value="Yes" required="required"/>Yes
+                        <input type="radio" name="familyDiabetesMellitus" value="Yes" required="required" checked="checked"/>Yes
                         <input type="radio" name="familyDiabetesMellitus" value="No" required="required"/>No
                         <input type="radio" name="familyDiabetesMellitus" value="Dont_Know" required="required"/>Don't Know
                     </td>
+                    }
+                    @if(d != null && d.getFamilyDiabetesMellitus() != null && d.getFamilyDiabetesMellitus().name().toUpperCase() == "NO") {
+                    <td colspan="2">
+                        <input type="radio" name="familyDiabetesMellitus" value="Yes" required="required"/>Yes
+                        <input type="radio" name="familyDiabetesMellitus" value="No" required="required" checked="checked"/>No
+                        <input type="radio" name="familyDiabetesMellitus" value="Dont_Know" required="required"/>Don't Know
+                    </td>
+                    }
+                    @if(d != null && d.getFamilyDiabetesMellitus() != null && d.getFamilyDiabetesMellitus().name().toUpperCase() == "DONT_KNOW") {
+                    <td colspan="2">
+                        <input type="radio" name="familyDiabetesMellitus" value="Yes" required="required"/>Yes
+                        <input type="radio" name="familyDiabetesMellitus" value="No" required="required"/>No
+                        <input type="radio" name="familyDiabetesMellitus" value="Dont_Know" required="required" checked="checked"/>Don't Know
+                    </td>
+                    }
                 </tr>
                 <tr>
                     <td>MI</td>
+                    @if(d != null && d.getFamilyMi() != null && d.getFamilyMi().name().toUpperCase() == "YES") {
                     <td colspan="2">
-                        <input type="radio" name="familyMi" value="Yes" required="required"/>Yes
+                        <input type="radio" name="familyMi" value="Yes" required="required" checked="checked"/>Yes
                         <input type="radio" name="familyMi" value="No" required="required"/>No
                         <input type="radio" name="familyMi" value="Dont_Know" required="required"/>Don't Know
                     </td>
+                    }
+                    @if(d != null && d.getFamilyMi() != null && d.getFamilyMi().name().toUpperCase() == "NO") {
+                    <td colspan="2">
+                        <input type="radio" name="familyMi" value="Yes" required="required"/>Yes
+                        <input type="radio" name="familyMi" value="No" required="required" checked="checked"/>No
+                        <input type="radio" name="familyMi" value="Dont_Know" required="required"/>Don't Know
+                    </td>
+                    }
+                    @if(d != null && d.getFamilyMi() != null && d.getFamilyMi().name().toUpperCase() == "DONT_KNOW") {
+                    <td colspan="2">
+                        <input type="radio" name="familyMi" value="Yes" required="required"/>Yes
+                        <input type="radio" name="familyMi" value="No" required="required"/>No
+                        <input type="radio" name="familyMi" value="Dont_Know" required="required" checked="checked"/>Don't Know
+                    </td>
+                    }
                 </tr>
                 <tr>
                     <td>PVD</td>
+                    @if(d != null && d.getFamilyPvd() != null && d.getFamilyPvd().name().toUpperCase() == "YES") {
                     <td colspan="2">
-                        <input type="radio" name="familyPvd" value="Yes" required="required"/>Yes
+                        <input type="radio" name="familyPvd" value="Yes" required="required" checked="checked"/>Yes
                         <input type="radio" name="familyPvd" value="No" required="required"/>No
                         <input type="radio" name="familyPvd" value="Dont_Know" required="required"/>Don't Know
                     </td>
+                    }
+                    @if(d != null && d.getFamilyPvd() != null && d.getFamilyPvd().name().toUpperCase() == "NO") {
+                    <td colspan="2">
+                        <input type="radio" name="familyPvd" value="Yes" required="required"/>Yes
+                        <input type="radio" name="familyPvd" value="No" required="required" checked="checked"/>No
+                        <input type="radio" name="familyPvd" value="Dont_Know" required="required"/>Don't Know
+                    </td>
+                    }
+                    @if(d != null && d.getFamilyPvd() != null && d.getFamilyPvd().name().toUpperCase() == "DONT_KNOW") {
+                    <td colspan="2">
+                        <input type="radio" name="familyPvd" value="Yes" required="required"/>Yes
+                        <input type="radio" name="familyPvd" value="No" required="required"/>No
+                        <input type="radio" name="familyPvd" value="Dont_Know" required="required" checked="checked"/>Don't Know
+                    </td>
+                    }
                 </tr>
                 <tr>
                     <td>Hypertension</td>
+                    @if(d != null && d.getFamilyHypertension() != null && d.getFamilyHypertension().name().toUpperCase() == "YES") {
                     <td colspan="2">
-                        <input type="radio" name="familyHypertension" value="Yes" required="required"/>Yes
+                        <input type="radio" name="familyHypertension" value="Yes" required="required" checked="checked"/>Yes
                         <input type="radio" name="familyHypertension" value="No" required="required"/>No
                         <input type="radio" name="familyHypertension" value="Dont_Know" required="required"/>Don't Know
                     </td>
+                    }
+                    @if(d != null && d.getFamilyHypertension() != null && d.getFamilyHypertension().name().toUpperCase() == "NO") {
+                    <td colspan="2">
+                        <input type="radio" name="familyHypertension" value="Yes" required="required"/>Yes
+                        <input type="radio" name="familyHypertension" value="No" required="required" checked="checked"/>No
+                        <input type="radio" name="familyHypertension" value="Dont_Know" required="required"/>Don't Know
+                    </td>
+                    }
+                    @if(d != null && d.getFamilyHypertension() != null && d.getFamilyHypertension().name().toUpperCase() == "DONT_KNOW") {
+                    <td colspan="2">
+                        <input type="radio" name="familyHypertension" value="Yes" required="required"/>Yes
+                        <input type="radio" name="familyHypertension" value="No" required="required"/>No
+                        <input type="radio" name="familyHypertension" value="Dont_Know" required="required" checked="checked"/>Don't Know
+                    </td>
+                    }
                 </tr>
                 <tr>
                     <td>None of above</td>
+                    @if(d != null && d.getFamilyNoneOfTheAbove() != null && d.getFamilyNoneOfTheAbove().name().toUpperCase() == "YES") {
                     <td colspan="2">
-                        <input type="radio" name="familyNoneOfTheAbove" value="Yes" required="required"/>Yes
+                        <input type="radio" name="familyNoneOfTheAbove" value="Yes" required="required" checked="checked"/>Yes
                         <input type="radio" name="familyNoneOfTheAbove" value="No" required="required"/>No
                         <input type="radio" name="familyNoneOfTheAbove" value="Dont_Know" required="required"/>Don't Know
                     </td>
+                    }
+                    @if(d != null && d.getFamilyNoneOfTheAbove() != null && d.getFamilyNoneOfTheAbove().name().toUpperCase() == "NO") {
+                    <td colspan="2">
+                        <input type="radio" name="familyNoneOfTheAbove" value="Yes" required="required"/>Yes
+                        <input type="radio" name="familyNoneOfTheAbove" value="No" required="required" checked="checked"/>No
+                        <input type="radio" name="familyNoneOfTheAbove" value="Dont_Know" required="required"/>Don't Know
+                    </td>
+                    }
+                    @if(d != null && d.getFamilyNoneOfTheAbove() != null && d.getFamilyNoneOfTheAbove().name().toUpperCase() == "DONT_KNOW") {
+                    <td colspan="2">
+                        <input type="radio" name="familyNoneOfTheAbove" value="Yes" required="required"/>Yes
+                        <input type="radio" name="familyNoneOfTheAbove" value="No" required="required"/>No
+                        <input type="radio" name="familyNoneOfTheAbove" value="Dont_Know" required="required" checked="checked"/>Don't Know
+                    </td>
+                    }
                 </tr>
 
                 <tr>
                     <td rowspan="2">Cigarettes</td>
+                    @if(d != null && d.getCurrentSmoker() != null && d.getCurrentSmoker().name().toUpperCase() == "YES") {
+                    <td>Current Smoker <input type="checkbox" name="currentSmoker" id="currentSmoker" value="currentSmoker" checked="checked"/></td>
+                    } else {
                     <td>Current Smoker <input type="checkbox" name="currentSmoker" id="currentSmoker" value="currentSmoker"/></td>
-                    <td>Cig/day <input type="text" name="cigarettePerDay" id="cigarettePerDay" style="width: 80px;" value="0"/></td>
-                    <td>Hip:<input type="text" name="hip" id="hip" style="width: 80px;" value="0"/>cm</td>
+                    }
+                    <td>Cig/day <input type="text" name="cigarettePerDay" id="cigarettePerDay" style="width: 80px;" value="@d.getCigarettePerDay()"/></td>
+                    <td>Hip:<input type="text" name="hip" id="hip" style="width: 80px;" value="@d.getHip()"/>cm</td>
                 </tr>
                 <tr>
+                    @if(d != null && d.getExSmoker() != null && d.getExSmoker().name().toUpperCase() == "YES") {
+                    <td>Ex-smoker <input type="checkbox" name="exSmoker" id="exSmoker" value="exSmoker" checked="checked"/></td>
+                    } else {
                     <td>Ex-smoker <input type="checkbox" name="exSmoker" id="exSmoker" value="exSmoker"/></td>
+                    }
+                    @if(d != null && d.getNever() != null && d.getNever().name().toUpperCase() == "YES") {
+                    <td>Never <input type="checkbox" name="never" id="never" value="never" checked="checked"/></td>
+                    } else {
                     <td>Never <input type="checkbox" name="never" id="never" value="never"/></td>
-                    <td>Waist:<input type="text" name="waist" id="waist" style="width: 80px;" value="0"/>cm</td>
+                    }
+                    <td>Waist:<input type="text" name="waist" id="waist" style="width: 80px;" value="@d.getWaist()"/>cm</td>
                 </tr>
                 <tr>
                     <td colspan="4"><button id="save" name="save">Next</button></a></td>
                 </tr>
                 </table>
             </form>
-
         </div>
     </div>
     <!-- <div class="hr grid_12 clearfix">&nbsp;</div>-->

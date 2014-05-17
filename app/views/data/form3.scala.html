@@ -1,4 +1,4 @@
-@(message: String, u: models.response.user.User, pid: Integer)
+@(message: String, u: models.response.user.User, pid: Integer, d: models.data.form.DataCollectionForm3)
 
 @import tags._
 @main("User") {
@@ -14,7 +14,7 @@
 <div class="form" style="width:100%;background: #f1f1f1;border-radius: 10px;">
 <form id="form3" method="POST" style="padding-top: 2%;"
       action="@controllers.data.routes.DataController.handleSaveForm3()"
-      data-uri="@controllers.data.routes.DataController.form4()">
+      data-uri="@controllers.data.routes.DataController.form4(0)">
 <div class="box message"><!--style="display:none;padding-top: 2%;padding-left: 1%;padding-bottom: 2%;color: red;"-->
     <div class="content-m">
 
@@ -22,13 +22,21 @@
 </div>
 <table cellspacing="5" cellpadding="5" style="clear: both;float: left;"/>
 <tr>
+    @if(d != null && d.getId() != null) {
+    <td><input type="hidden" id="id" name="id" value="@d.getId()"/></td>
+    } else {
     <td><input type="hidden" id="id" name="id" value=""/></td>
+    }
 </tr>
 <tr>
     <td colspan="2">Data Collection Form (DCF)</td>
 
     <td>Patient’s ID Number</td>
+    @if(d != null && d.getPatientIdNumber() != null) {
+    <td><input type="text" id="patientIdNumber" name="patientIdNumber" value="@d.getPatientIdNumber().toString()"/></td>
+    } else {
     <td><input type="text" id="patientIdNumber" name="patientIdNumber" value="@pid"/></td>
+    }
 </tr>
 
 <tr>
@@ -36,19 +44,19 @@
         Alcohol
     </td>
     <td rowspan="3" colspan="1">
-        Drink <input type="text" id="alcoholUnitsPerWeek" name="alcoholUnitsPerWeek" class="small-textbox" value="0"/> &nbsp;
+        Drink <input type="text" id="alcoholUnitsPerWeek" name="alcoholUnitsPerWeek" class="small-textbox" value="@d.getAlcoholUnitsPerWeek()"/> &nbsp;
         unit(s) per week
     </td>
     <td>Height:</td>
-    <td><input type="text" name="height" id="height" class="small-textbox" value="0"/> &nbsp; cm</td>
+    <td><input type="text" name="height" id="height" class="small-textbox" value="@d.getHeight()"/> &nbsp; cm</td>
 </tr>
 <tr>
     <td>Weight:</td>
-    <td><input type="text" name="weight" id="weight" class="small-textbox" value="0"/> &nbsp; kg</td>
+    <td><input type="text" name="weight" id="weight" class="small-textbox" value="@d.getWeight()"/> &nbsp; kg</td>
 </tr>
 <tr>
     <td>BMI:</td>
-    <td><input type="text" name="bmi" id="bmi" class="small-textbox" value="0"/></td>
+    <td><input type="text" name="bmi" id="bmi" class="small-textbox" value="@d.getBmi()"/></td>
 </tr>
 <tr>
     <td>Medicine on
@@ -58,64 +66,96 @@
         <table>
             <tr>
                 <td>Aspirin</td>
+                @if(d != null && d.getAspirin() != null && d.getAspirin().name().toUpperCase() == "YES") {
+                <td><input type="checkbox" name="aspirin" id="aspirin" value="aspirin" checked="checked"/></td>
+                } else {
                 <td><input type="checkbox" name="aspirin" id="aspirin" value="aspirin"/></td>
-                <td>Dose <input type="text" name="aspirinDosage" id="aspirinDosage" class="small-textbox"/> mg/day</td>
+                }
+                <td>Dose <input type="text" name="aspirinDosage" id="aspirinDosage" class="small-textbox" value="@d.getAspirinDosage()"/> mg/day</td>
             </tr>
             <tr>
                 <td>Clopidogrel</td>
+                @if(d != null && d.getClopidogrel() != null && d.getClopidogrel().name().toUpperCase() == "YES") {
+                <td><input type="checkbox" name="clopidogrel" id="clopidogrel" value="clopidogrel" checked="checked"/></td>
+                } else {
                 <td><input type="checkbox" name="clopidogrel" id="clopidogrel" value="clopidogrel"/></td>
-                <td>Dose <input type="text" name="clopidogrelDosage" id="clopidogrelDosage" class="small-textbox"/>
+                }
+                <td>Dose <input type="text" name="clopidogrelDosage" id="clopidogrelDosage" class="small-textbox" value="@d.getClopidogrelDosage"/>
                     mg/day
                 </td>
             </tr>
             <tr>
                 <td>Aspirin + Clopidogrel</td>
-                <td><input type="checkbox" name="aspirinPlusClopidogrel" id="aspirinPlusClopidogrel"
-                           value="aspirinPlusClopidogrel"/></td>
+                @if(d != null && d.getAspirinPlusClopidogrel() != null && d.getAspirinPlusClopidogrel().name().toUpperCase() == "YES") {
+                <td><input type="checkbox" name="aspirinPlusClopidogrel" id="aspirinPlusClopidogrel" value="aspirinPlusClopidogrel" checked="checked"/></td>
+                } else {
+                <td><input type="checkbox" name="aspirinPlusClopidogrel" id="aspirinPlusClopidogrel" value="aspirinPlusClopidogrel"/></td>
+                }
                 <td>Dose <input type="text" name="aspirinPlusClopidogrelDosage1" id="aspirinPlusClopidogrelDosage1"
-                                class="small-textbox"/> +<input type="text" name="aspirinPlusClopidogrelDosage2"
-                                                                id="aspirinPlusClopidogrelDosage2" class="small-textbox"/>
+                                class="small-textbox" value="@d.getAspirinPlusClopidogrelDosage1()"/> +<input type="text" name="aspirinPlusClopidogrelDosage2"
+                                                                id="aspirinPlusClopidogrelDosage2" class="small-textbox" value="@d.getAspirinPlusClopidogrelDosage2()"/>
                     mg/day
                 </td>
             </tr>
             <tr>
                 <td>Dipyridamole</td>
+                @if(d != null && d.getDipyridamole() != null && d.getDipyridamole().name().toUpperCase() == "YES") {
+                <td><input type="checkbox" name="dipyridamole" id="dipyridamole" value="dipyridamole" checked="checked"/></td>
+                } else {
                 <td><input type="checkbox" name="dipyridamole" id="dipyridamole" value="dipyridamole"/></td>
-                <td>Dose <input type="text" name="dipyridamoleDosage" id="dipyridamoleDosage" class="small-textbox"/>
+                }
+                <td>Dose <input type="text" name="dipyridamoleDosage" id="dipyridamoleDosage" class="small-textbox" value="@d.getDipyridamoleDosage()"/>
                     mg/day
                 </td>
             </tr>
             <tr>
                 <td>Aspirin + Dipyridamole</td>
-                <td><input type="checkbox" name="aspirinPlusDipyridamole" id="aspirinPlusDipyridamole"
-                           value="aspirinPlusDipyridamole"/></td>
+                @if(d != null && d.getDipyridamole() != null && d.getDipyridamole().name().toUpperCase() == "YES") {
+                <td><input type="checkbox" name="aspirinPlusDipyridamole" id="aspirinPlusDipyridamole" value="aspirinPlusDipyridamole" checked="checked"/></td>
+                } else {
+                <td><input type="checkbox" name="aspirinPlusDipyridamole" id="aspirinPlusDipyridamole" value="aspirinPlusDipyridamole"/></td>
+                }
                 <td>Dose <input type="text" name="aspirinPlusDipyridamoleDosage1" id="aspirinPlusDipyridamoleDosage1"
-                                class="small-textbox"/> + <input type="text" name="aspirinPlusDipyridamoleDosage2"
-                                                                 id="aspirinPlusDipyridamoleDosage2" class="small-textbox"/>
+                                class="small-textbox" value="@d.getAspirinPlusDipyridamoleDosage1()"/> + <input type="text" name="aspirinPlusDipyridamoleDosage2"
+                                                                 id="aspirinPlusDipyridamoleDosage2" class="small-textbox" value="@d.getAspirinPlusDipyridamoleDosage2()"/>
                     mg/day
                 </td>
             </tr>
             <tr>
                 <td>Warfarin</td>
+                @if(d != null && d.getWarfarin() != null && d.getWarfarin().name().toUpperCase() == "YES") {
+                <td><input type="checkbox" name="warfarin" id="warfarin" value="warfarin" checked="checked"/></td>
+                } else {
                 <td><input type="checkbox" name="warfarin" id="warfarin" value="warfarin"/></td>
-                <td>Dose <input type="text" name="warfarinInr" id="warfarinInr" class="small-textbox"/> mg/day</td>
+                }
+                <td>Dose <input type="text" name="warfarinInr" id="warfarinInr" class="small-textbox" value="@d.getWarfarinInr()"/> mg/day</td>
             </tr>
             <tr>
                 <td>Statin</td>
+                @if(d != null && d.getStatin() != null && d.getStatin().name().toUpperCase() == "YES") {
+                <td><input type="checkbox" name="statin" id="statin" value="statin" checked="checked"/></td>
+                } else {
                 <td><input type="checkbox" name="statin" id="statin" value="statin"/></td>
-                <td>Dose <input type="text" name="statinDosage" id="statinDosage" class="small-textbox"/> mg/day</td>
+                }
+                <td>Dose <input type="text" name="statinDosage" id="statinDosage" class="small-textbox" value="@d.getStatinDosage()"/> mg/day</td>
             </tr>
             <tr>
                 <td>Antihypertensive</td>
+                @if(d != null && d.getAntihypertensive() != null && d.getAntihypertensive().name().toUpperCase() == "YES") {
+                <td><input type="checkbox" name="antihypertensive" id="antihypertensive" value="antihypertensive" checked="checked"/></td>
+                } else {
                 <td><input type="checkbox" name="antihypertensive" id="antihypertensive" value="antihypertensive"/></td>
-                <td>Dose <input type="text" name="antihypertensiveDosage" id="antihypertensiveDosage"
-                                class="small-textbox"/> mg/day
+                }
+                <td>Dose <input type="text" name="antihypertensiveDosage" id="antihypertensiveDosage" class="small-textbox" value="@d.getAntihypertensiveDosage()"/> mg/day
                 </td>
             </tr>
             <tr>
                 <td>None of above</td>
-                <td><input type="checkbox" name="medicineNoneOfTheAbove" id="medicineNoneOfTheAbove"
-                           class="small-textbox"/></td>
+                @if(d != null && d.getMedicineNoneOfTheAbove() != null && d.getMedicineNoneOfTheAbove().name().toUpperCase() == "YES") {
+                <td><input type="checkbox" name="medicineNoneOfTheAbove" id="medicineNoneOfTheAbove" class="small-textbox" checked="checked"/></td>
+                } else {
+                <td><input type="checkbox" name="medicineNoneOfTheAbove" id="medicineNoneOfTheAbove" class="small-textbox"/></td>
+                }
                 <td></td>
             </tr>
         </table>
@@ -131,169 +171,228 @@
         <table>
             <tr>
                 <td>Glucose:</td>
-                <td>Yes <input type="checkbox" name="glucoseBloodTest" id="glucoseBloodTest" value="glucoseBloodTest"/>/
-                </td>
-                <td>Result<input type="text" name="glucoseBloodTestResult" id="glucoseBloodTestResult"/></td>
+                @if(d != null && d.getGlucoseBloodTest() != null && d.getGlucoseBloodTest().name().toUpperCase() == "YES") {
+                <td>Yes <input type="checkbox" name="glucoseBloodTest" id="glucoseBloodTest" value="glucoseBloodTest" checked="checked"/>/</td>
+                <td>Result<input type="text" name="glucoseBloodTestResult" id="glucoseBloodTestResult" value="@d.getGlucoseBloodTestResult()"/></td>
                 <td>Not done <input type="checkbox" name="glucoseBloodTestNotDone" id="glucoseBloodTestNotDone"/></td>
+                } else {
+                <td>Yes <input type="checkbox" name="glucoseBloodTest" id="glucoseBloodTest" value="glucoseBloodTest"/>/</td>
+                <td>Result<input type="text" name="glucoseBloodTestResult" id="glucoseBloodTestResult" value="@d.getGlucoseBloodTestResult()"/></td>
+                <td>Not done <input type="checkbox" name="glucoseBloodTestNotDone" id="glucoseBloodTestNotDone" checked="checked"/></td>
+                }
             </tr>
             <tr>
                 <td>Total Cholesterol:</td>
-                <td>Yes <input type="checkbox" name="totalCholesterolBloodTest" id="totalCholesterolBloodTest"
-                               value="totalCholesterolBloodTest"/>/
-                </td>
-                <td>Result<input type="text" name="totalCholesterolBloodTestResult"
-                                 id="totalCholesterolBloodTestResult"/></td>
+                @if(d != null && d.getGlucoseBloodTest() != null && d.getGlucoseBloodTest().name().toUpperCase() == "YES") {
+                <td>Yes <input type="checkbox" name="totalCholesterolBloodTest" id="totalCholesterolBloodTest" value="totalCholesterolBloodTest" checked="checked"/>/</td>
+                <td>Result<input type="text" name="totalCholesterolBloodTestResult" id="totalCholesterolBloodTestResult" value="@d.getTotalCholesterolBloodTestResult()"/></td>
                 <td>Not done <input type="checkbox" name="totalCholesterolNotDone" id="totalCholesterolNotDone"/></td>
+                } else {
+                <td>Yes <input type="checkbox" name="totalCholesterolBloodTest" id="totalCholesterolBloodTest" value="totalCholesterolBloodTest"/>/</td>
+                <td>Result<input type="text" name="totalCholesterolBloodTestResult" id="totalCholesterolBloodTestResult" value="@d.getTotalCholesterolBloodTestResult()"/></td>
+                <td>Not done <input type="checkbox" name="totalCholesterolNotDone" id="totalCholesterolNotDone" checked="checked"/></td>
+                }
             </tr>
             <tr>
                 <td>HDL-Cholesterol:</td>
-                <td>Yes <input type="checkbox" name="hdlCholesterolBloodTest" id="hdlCholesterolBloodTest"
-                               value="hdlCholesterolBloodTest"/>/
-                </td>
-                <td>Result<input type="text" name="hdlCholesterolBloodTestResult" id="hdlCholesterolBloodTestResult"/>
-                </td>
+                @if(d != null && d.getGlucoseBloodTest() != null && d.getGlucoseBloodTest().name().toUpperCase() == "YES") {
+                <td>Yes <input type="checkbox" name="hdlCholesterolBloodTest" id="hdlCholesterolBloodTest" value="hdlCholesterolBloodTest" checked="checked"/>/</td>
+                <td>Result<input type="text" name="hdlCholesterolBloodTestResult" id="hdlCholesterolBloodTestResult" value="@d.getHdlCholesterolBloodTestResult()"/></td>
                 <td>Not done <input type="checkbox" name="hdlCholesterolNotDone" id="hdlCholesterolNotDone"/></td>
+                } else {
+                <td>Yes <input type="checkbox" name="hdlCholesterolBloodTest" id="hdlCholesterolBloodTest" value="hdlCholesterolBloodTest"/>/</td>
+                <td>Result<input type="text" name="hdlCholesterolBloodTestResult" id="hdlCholesterolBloodTestResult" value="@d.getHdlCholesterolBloodTestResult()"/></td>
+                <td>Not done <input type="checkbox" name="hdlCholesterolNotDone" id="hdlCholesterolNotDone" checked="checked"/></td>
+                }
             </tr>
             <tr>
                 <td>LDL-Cholesterol:</td>
-                <td>Yes <input type="checkbox" name="ldlCholesterolBloodTestResult" id="ldlCholesterolBloodTest" value="ldlCholesterol"/>/</td>
-                <td>Result<input type="text" name="ldlCholesterolBloodTestResult" id="ldlCholesterolBloodTestResult"/></td>
+                @if(d != null && d.getGlucoseBloodTest() != null && d.getGlucoseBloodTest().name().toUpperCase() == "YES") {
+                <td>Yes <input type="checkbox" name="ldlCholesterolBloodTestResult" id="ldlCholesterolBloodTest" value="ldlCholesterol" checked="checked"/>/</td>
+                <td>Result<input type="text" name="ldlCholesterolBloodTestResult" id="ldlCholesterolBloodTestResult" value="@d.getLdlCholesterolBloodTestResult()"/></td>
                 <td>Not done <input type="checkbox" name="ldlCholesterolBloodTestResultNotDone" id="ldlCholesterolBloodTestResultNotDone"/></td>
-
+                } else {
+                <td>Yes <input type="checkbox" name="ldlCholesterolBloodTestResult" id="ldlCholesterolBloodTest" value="ldlCholesterol"/>/</td>
+                <td>Result<input type="text" name="ldlCholesterolBloodTestResult" id="ldlCholesterolBloodTestResult" value="@d.getLdlCholesterolBloodTestResult()"/></td>
+                <td>Not done <input type="checkbox" name="ldlCholesterolBloodTestResultNotDone" id="ldlCholesterolBloodTestResultNotDone" checked="checked"/></td>
+                }
             </tr>
             <tr>
                 <td>Triglyceride:</td>
-                <td>Yes <input type="checkbox" name="triglycerideBloodTest" id="triglycerideBloodTest"
-                               value="triglycerideBloodTest"/>/
-                </td>
-                <td>Result<input type="text" name="triglycerideBloodTestResult" id="triglycerideBloodTestResult"/></td>
+                @if(d != null && d.getGlucoseBloodTest() != null && d.getGlucoseBloodTest().name().toUpperCase() == "YES") {
+                <td>Yes <input type="checkbox" name="triglycerideBloodTest" id="triglycerideBloodTest" value="triglycerideBloodTest" checked="checked"/>/</td>
+                <td>Result<input type="text" name="triglycerideBloodTestResult" id="triglycerideBloodTestResult" value="@d.getTriglycerideBloodTestResult()"/></td>
                 <td>Not done <input type="checkbox" name="triglycerideNotDone" id="triglycerideNotDone"/></td>
-
+                } else {
+                <td>Yes <input type="checkbox" name="triglycerideBloodTest" id="triglycerideBloodTest" value="triglycerideBloodTest"/>/</td>
+                <td>Result<input type="text" name="triglycerideBloodTestResult" id="triglycerideBloodTestResult" value="@d.getTriglycerideBloodTestResult()"/></td>
+                <td>Not done <input type="checkbox" name="triglycerideNotDone" id="triglycerideNotDone" checked="checked"/></td>
+                }
             </tr>
             <tr>
                 <td>ESR:</td>
-                <td>Yes <input type="checkbox" name="esrBloodTest" id="esrBloodTest" value="esrBloodTest"/>/</td>
-                <td>Result<input type="text" name="esrBloodTestResult" id="esrBloodTestResult"/></td>
+                @if(d != null && d.getGlucoseBloodTest() != null && d.getGlucoseBloodTest().name().toUpperCase() == "YES") {
+                <td>Yes <input type="checkbox" name="esrBloodTest" id="esrBloodTest" value="esrBloodTest" checked="checked"/>/</td>
+                <td>Result<input type="text" name="esrBloodTestResult" id="esrBloodTestResult" value="@d.getEsrBloodTestResult()"/></td>
                 <td>Not done <input type="checkbox" name="esrNotDone" id="esrNotDone"/></td>
-
+                } else {
+                <td>Yes <input type="checkbox" name="esrBloodTest" id="esrBloodTest" value="esrBloodTest"/>/</td>
+                <td>Result<input type="text" name="esrBloodTestResult" id="esrBloodTestResult" value="@d.getEsrBloodTestResult()"/></td>
+                <td>Not done <input type="checkbox" name="esrNotDone" id="esrNotDone" checked="checked"/></td>
+                }
             </tr>
             <tr>
                 <td>CRP:</td>
-                <td>Yes <input type="checkbox" name="crpBloodTest" id="crpBloodTest" value="crpBloodTest"/>/</td>
-                <td>Result<input type="text" name="crpBloodTestResult" id="crpBloodTestResult"/></td>
+                @if(d != null && d.getGlucoseBloodTest() != null && d.getGlucoseBloodTest().name().toUpperCase() == "YES") {
+                <td>Yes <input type="checkbox" name="crpBloodTest" id="crpBloodTest" value="crpBloodTest" checked="checked"/>/</td>
+                <td>Result<input type="text" name="crpBloodTestResult" id="crpBloodTestResult" value="@d.getCrpBloodTestResult()"/></td>
                 <td>Not done <input type="checkbox" name="crpNotDone" id="crpNotDone"/></td>
-
+                } else {
+                <td>Yes <input type="checkbox" name="crpBloodTest" id="crpBloodTest" value="crpBloodTest"/>/</td>
+                <td>Result<input type="text" name="crpBloodTestResult" id="crpBloodTestResult" value="@d.getCrpBloodTestResult()"/></td>
+                <td>Not done <input type="checkbox" name="crpNotDone" id="crpNotDone" checked="checked"/></td>
+                }
             </tr>
             <tr>
                 <td>Troponin:</td>
-                <td>Yes <input type="checkbox" name="troponimBloodTest" id="troponimBloodTest"
-                               value="troponimBloodTest"/>/
-                </td>
-                <td>Result<input type="text" name="troponimBloodTestResult" id="troponimBloodTestResult"/></td>
+                @if(d != null && d.getGlucoseBloodTest() != null && d.getGlucoseBloodTest().name().toUpperCase() == "YES") {
+                <td>Yes <input type="checkbox" name="troponimBloodTest" id="troponimBloodTest" value="troponimBloodTest" checked="checked"/>/</td>
+                <td>Result<input type="text" name="troponimBloodTestResult" id="troponimBloodTestResult" value="@d.getTroponimBloodTestResult()"/></td>
                 <td>Not done <input type="checkbox" name="troponinNotDone" id="troponinNotDone"/></td>
-
+                } else {
+                <td>Yes <input type="checkbox" name="troponimBloodTest" id="troponimBloodTest" value="troponimBloodTest"/>/</td>
+                <td>Result<input type="text" name="troponimBloodTestResult" id="troponimBloodTestResult" value="@d.getTroponimBloodTestResult()"/></td>
+                <td>Not done <input type="checkbox" name="troponinNotDone" id="troponinNotDone" checked="checked"/></td>
+                }
             </tr>
             <tr>
                 <td>Protein C:</td>
-                <td>Yes <input type="checkbox" name="proteinCBloodTest" id="proteinCBloodTest"
-                               value="proteinCBloodTest"/>/
-                </td>
-                <td>Result<input type="text" name="proteinCBloodTestResult" id="proteinCBloodTestResult"/></td>
+                @if(d != null && d.getGlucoseBloodTest() != null && d.getGlucoseBloodTest().name().toUpperCase() == "YES") {
+                <td>Yes <input type="checkbox" name="proteinCBloodTest" id="proteinCBloodTest" value="proteinCBloodTest" checked="checked"/>/</td>
+                <td>Result<input type="text" name="proteinCBloodTestResult" id="proteinCBloodTestResult" value="@d.getProteinCBloodTestResult()"/></td>
                 <td>Not done <input type="checkbox" name="proteinCNotDone" id="proteinCNotDone"/></td>
-
+                } else {
+                <td>Yes <input type="checkbox" name="proteinCBloodTest" id="proteinCBloodTest" value="proteinCBloodTest"/>/</td>
+                <td>Result<input type="text" name="proteinCBloodTestResult" id="proteinCBloodTestResult" value="@d.getProteinCBloodTestResult()"/></td>
+                <td>Not done <input type="checkbox" name="proteinCNotDone" id="proteinCNotDone" checked="checked"/></td>
+                }
             </tr>
             <tr>
                 <td>Protein S:</td>
-                <td>Yes <input type="checkbox" name="proteinSBloodTest" id="proteinSBloodTest"
-                               value="proteinSBloodTest"/>/
-                </td>
-                <td>Result<input type="text" name="proteinSBloodTestResult" id="proteinSBloodTestResult"/></td>
+                @if(d != null && d.getGlucoseBloodTest() != null && d.getGlucoseBloodTest().name().toUpperCase() == "YES") {
+                <td>Yes <input type="checkbox" name="proteinSBloodTest" id="proteinSBloodTest" value="proteinSBloodTest" checked="checked"/>/</td>
+                <td>Result<input type="text" name="proteinSBloodTestResult" id="proteinSBloodTestResult" value="@d.getProteinSBloodTestResult()"/></td>
                 <td>Not done <input type="checkbox" name="proteinSNotDone" id="proteinSNotDone"/></td>
-
+                } else {
+                <td>Yes <input type="checkbox" name="proteinSBloodTest" id="proteinSBloodTest" value="proteinSBloodTest"/>/</td>
+                <td>Result<input type="text" name="proteinSBloodTestResult" id="proteinSBloodTestResult" value="@d.getProteinSBloodTestResult()"/></td>
+                <td>Not done <input type="checkbox" name="proteinSNotDone" id="proteinSNotDone" checked="checked"/></td>
+                }
             </tr>
             <tr>
                 <td>Fibrinogen:</td>
-                <td>Yes <input type="checkbox" name="fibrinogenBloodTest" id="fibrinogenBloodTest"
-                               value="fibrinogenBloodTest"/>/
-                </td>
-                <td>Result<input type="text" name="fibrinogenBloodTestResult" id="fibrinogenBloodTestResult"/></td>
+                @if(d != null && d.getGlucoseBloodTest() != null && d.getGlucoseBloodTest().name().toUpperCase() == "YES") {
+                <td>Yes <input type="checkbox" name="fibrinogenBloodTest" id="fibrinogenBloodTest" value="fibrinogenBloodTest" checked="checked"/>/</td>
+                <td>Result<input type="text" name="fibrinogenBloodTestResult" id="fibrinogenBloodTestResult" value="@d.getFibrinogenBloodTestResult()"/></td>
                 <td>Not done <input type="checkbox" name="fibrinogenNotDone" id="fibrinogenNotDone"/></td>
-
+                } else {
+                <td>Yes <input type="checkbox" name="fibrinogenBloodTest" id="fibrinogenBloodTest" value="fibrinogenBloodTest"/>/</td>
+                <td>Result<input type="text" name="fibrinogenBloodTestResult" id="fibrinogenBloodTestResult" value="@d.getFibrinogenBloodTestResult()"/></td>
+                <td>Not done <input type="checkbox" name="fibrinogenNotDone" id="fibrinogenNotDone" checked="checked"/></td>
+                }
             </tr>
             <tr>
                 <td>Antithrombin 11:</td>
-                <td>Yes <input type="checkbox" name="antithrombin11BloodTest" id="antithrombin11BloodTest"
-                               value="antithrombin11BloodTest"/>/
-                </td>
-                <td>Result<input type="text" name="antithrombin11BloodTestResult" id="antithrombin11BloodTestResult"/>
-                </td>
+                @if(d != null && d.getGlucoseBloodTest() != null && d.getGlucoseBloodTest().name().toUpperCase() == "YES") {
+                <td>Yes <input type="checkbox" name="antithrombin11BloodTest" id="antithrombin11BloodTest" value="antithrombin11BloodTest" checked="checked"/>/</td>
+                <td>Result<input type="text" name="antithrombin11BloodTestResult" id="antithrombin11BloodTestResult" value="@d.getAntithrombin11BloodTestResult()"/></td>
                 <td>Not done <input type="checkbox" name="antithrombin11NotDone" id="antithrombin11NotDone"/></td>
-
+                } else {
+                <td>Yes <input type="checkbox" name="antithrombin11BloodTest" id="antithrombin11BloodTest" value="antithrombin11BloodTest"/>/</td>
+                <td>Result<input type="text" name="antithrombin11BloodTestResult" id="antithrombin11BloodTestResult" value="@d.getAntithrombin11BloodTestResult()"/></td>
+                <td>Not done <input type="checkbox" name="antithrombin11NotDone" id="antithrombin11NotDone" checked="checked"/></td>
+                }
             </tr>
             <tr>
                 <td>Factor V:</td>
-                <td>Yes <input type="checkbox" name="factorVBloodTest" id="factorVBloodTest" value="factorVBloodTest"/>/
-                </td>
-                <td>Result<input type="text" name="factorVBloodTestResult" id="factorVBloodTestResult"/></td>
+                @if(d != null && d.getGlucoseBloodTest() != null && d.getGlucoseBloodTest().name().toUpperCase() == "YES") {
+                <td>Yes <input type="checkbox" name="factorVBloodTest" id="factorVBloodTest" value="factorVBloodTest" checked="checked"/>/ </td>
+                <td>Result<input type="text" name="factorVBloodTestResult" id="factorVBloodTestResult" value="@d.getFactorVBloodTestResult()"/></td>
                 <td>Not done <input type="checkbox" name="factorVNotDone" id="factorVNotDone"/></td>
-
+                } else {
+                <td>Yes <input type="checkbox" name="factorVBloodTest" id="factorVBloodTest" value="factorVBloodTest"/>/ </td>
+                <td>Result<input type="text" name="factorVBloodTestResult" id="factorVBloodTestResult" value="@d.getFactorVBloodTestResult()"/></td>
+                <td>Not done <input type="checkbox" name="factorVNotDone" id="factorVNotDone" checked="checked"/></td>
+                }
             </tr>
             <tr>
                 <td>Homocysteine:</td>
-                <td>Yes <input type="checkbox" name="homocysteineBloodTest" id="homocysteineBloodTest"
-                               value="homocysteineBloodTest"/>/
-                </td>
-                <td>Result<input type="text" name="homocysteineBloodTestResult" id="homocysteineBloodTestResult"/></td>
+                @if(d != null && d.getGlucoseBloodTest() != null && d.getGlucoseBloodTest().name().toUpperCase() == "YES") {
+                <td>Yes <input type="checkbox" name="homocysteineBloodTest" id="homocysteineBloodTest" value="homocysteineBloodTest" checked="checked"/>/</td>
+                <td>Result<input type="text" name="homocysteineBloodTestResult" id="homocysteineBloodTestResult" value="@d.getHomocysteineBloodTestResult()"/></td>
                 <td>Not done <input type="checkbox" name="homocysteineNotDone" id="homocysteineNotDone"/></td>
-
+                } else {
+                <td>Yes <input type="checkbox" name="homocysteineBloodTest" id="homocysteineBloodTest" value="homocysteineBloodTest"/>/</td>
+                <td>Result<input type="text" name="homocysteineBloodTestResult" id="homocysteineBloodTestResult" value="@d.getHomocysteineBloodTestResult()"/></td>
+                <td>Not done <input type="checkbox" name="homocysteineNotDone" id="homocysteineNotDone" checked="checked"/></td>
+                }
             </tr>
             <tr>
                 <td>Prothrombin:</td>
-                <td>Yes <input type="checkbox" name="prothrombinBloodTest" id="prothrombinBloodTest"
-                               value="prothrombinBloodTest"/>/
-                </td>
-                <td>Result<input type="text" name="prothrombinBloodTestResult" id="prothrombinBloodTestResult"/></td>
+                @if(d != null && d.getGlucoseBloodTest() != null && d.getGlucoseBloodTest().name().toUpperCase() == "YES") {
+                <td>Yes <input type="checkbox" name="prothrombinBloodTest" id="prothrombinBloodTest" value="prothrombinBloodTest" checked="checked"/>/</td>
+                <td>Result<input type="text" name="prothrombinBloodTestResult" id="prothrombinBloodTestResult" value="@d.getProthrombinBloodTestResult()"/></td>
                 <td>Not done <input type="checkbox" name="prothrombinNotDone" id="prothrombinNotDone"/></td>
-
+                } else {
+                <td>Yes <input type="checkbox" name="prothrombinBloodTest" id="prothrombinBloodTest" value="prothrombinBloodTest"/>/</td>
+                <td>Result<input type="text" name="prothrombinBloodTestResult" id="prothrombinBloodTestResult" value="@d.getProthrombinBloodTestResult()"/></td>
+                <td>Not done <input type="checkbox" name="prothrombinNotDone" id="prothrombinNotDone" checked="checked"/></td>
+                }
             </tr>
             <tr>
                 <td>Antiphospholipid:</td>
-                <td>Yes <input type="checkbox" name="antiphospholipidBloodTest" id="antiphospholipidBloodTest"
-                               value="antiphospholipidBloodTest"/>/
-                </td>
-                <td>Result<input type="text" name="antiphospholipidBloodTestResult"
-                                 id="antiphospholipidBloodTestResult"/></td>
+                @if(d != null && d.getGlucoseBloodTest() != null && d.getGlucoseBloodTest().name().toUpperCase() == "YES") {
+                <td>Yes <input type="checkbox" name="antiphospholipidBloodTest" id="antiphospholipidBloodTest" value="antiphospholipidBloodTest" checked="checked"/>/</td>
+                <td>Result<input type="text" name="antiphospholipidBloodTestResult" id="antiphospholipidBloodTestResult" value="@d.getAntiphospholipidBloodTestResult()"/></td>
                 <td>Not done <input type="checkbox" name="antiphospholipidNotDone" id="antiphospholipidNotDone"/></td>
-
+                } else {
+                <td>Yes <input type="checkbox" name="antiphospholipidBloodTest" id="antiphospholipidBloodTest" value="antiphospholipidBloodTest"/>/</td>
+                <td>Result<input type="text" name="antiphospholipidBloodTestResult" id="antiphospholipidBloodTestResult" value="@d.getAntiphospholipidBloodTestResult()"/></td>
+                <td>Not done <input type="checkbox" name="antiphospholipidNotDone" id="antiphospholipidNotDone" checked="checked"/></td>
+                }
             </tr>
-
-
         </table>
     </td>
 </tr>
 <tr>
-    <td colspan="2">BP on admission <input type="text" name="bpOnAdmission1" id="bpOnAdmission1" value="0"/>/<input type="text"
-                                                                                                          id="bpOnAdmission2"
-                                                                                                          name="bpOnAdmission2" value="0"/>mmHg
-    </td>
-    <td colspan="2">Temperature on admission <input type="text" name="temperatureOnAdmission"
-                                                    id="temperatureOnAdmission" value="0"/> &#248; C
-    </td>
+    <td colspan="2">BP on admission <input type="text" name="bpOnAdmission1" id="bpOnAdmission1" value="@d.getBpOnAdmission1()"/>/
+        <input type="text" id="bpOnAdmission2" name="bpOnAdmission2" value="@d.getBpOnAdmission2()"/>mmHg</td>
+    <td colspan="2">Temperature on admission <input type="text" name="temperatureOnAdmission" id="temperatureOnAdmission" value="@d.getTemperatureOnAdmission()"/> &#186; C</td>
 </tr>
 <tr>
     <td>
         Carotid endarterectomy
     </td>
     <td>
-        Done <input type="radio" name="carotidEndarterectomyDone" id="carotidEndarterectomyDone" value="YES" required="required"/> /
+        @if(d != null && d.getCarotidEndarterectomyDone() != null && d.getCarotidEndarterectomyDone().name().toUpperCase() == "YES") {
+        Done <input type="radio" name="carotidEndarterectomyDone" id="carotidEndarterectomyDone" value="YES" required="required" checked="checked"/> /
         Not Done <input type="radio" name="carotidEndarterectomyDone" id="carotidEndarterectomyNotDone" value="NO" required="required"/>
+        } else {
+        Done <input type="radio" name="carotidEndarterectomyDone" id="carotidEndarterectomyDone" value="YES" required="required"/> /
+        Not Done <input type="radio" name="carotidEndarterectomyDone" id="carotidEndarterectomyNotDone" value="NO" required="required" checked="checked"/>
+        }
     </td>
     <td>
         Thrombolysed
     </td>
     <td>
-        Done <input type="radio" name="thrombolysedDone" id="thrombolysedDone" value="YES" required="required"/> /
+        @if(d != null && d.getThrombolysedDone() != null && d.getThrombolysedDone().name().toUpperCase() == "YES") {
+        Done <input type="radio" name="thrombolysedDone" id="thrombolysedDone" value="YES" required="required" checked="checked"/> /
         Not Done <input type="radio" name="thrombolysedDone" id="thrombolysedNotDone" value="NO" required="required"/>
+        } else {
+        Done <input type="radio" name="thrombolysedDone" id="thrombolysedDone" value="YES" required="required"/> /
+        Not Done <input type="radio" name="thrombolysedDone" id="thrombolysedNotDone" value="NO" required="required" checked="checked"/>
+        }
     </td>
 </tr>
 <tr>
@@ -304,14 +403,23 @@
             <tr>
                 <td>CTA</td>
                 <td>
-                    Done <input type="radio" name="ctaDone" id="ctaDone" value="YES" required="required"/> /
+                    @if(d != null && d.getCtaDone() != null && d.getCtaDone().name().toUpperCase() == "YES") {
+                    Done <input type="radio" name="ctaDone" id="ctaDone" value="YES" required="required" checked="checked"/> /
                     Not Done <input type="radio" name="ctaDone" id="ctaNotDone" value="NO" required="required"/>
-
+                    } else {
+                    Done <input type="radio" name="ctaDone" id="ctaDone" value="YES" required="required"/> /
+                    Not Done <input type="radio" name="ctaDone" id="ctaNotDone" value="NO" required="required" checked="checked"/>
+                    }
                 </td>
                 <td>MRA</td>
                 <td>
-                    Done <input type="radio" name="mraDone" id="mraDone" value="YES" required="required"/> /
+                    @if(d != null && d.getMraDone() != null && d.getMraDone().name().toUpperCase() == "YES") {
+                    Done <input type="radio" name="mraDone" id="mraDone" value="YES" required="required" checked="checked"/> /
                     Not Done <input type="radio" name="mraDone" id="mraNotDone" value="NO" required="required"/>
+                    } else {
+                    Done <input type="radio" name="mraDone" id="mraDone" value="YES" required="required"/> /
+                    Not Done <input type="radio" name="mraDone" id="mraNotDone" value="NO" required="required" checked="checked"/>
+                    }
                 </td>
             </tr>
             <tr>
@@ -319,8 +427,13 @@
                     Angiogram
                 </td>
                 <td>
-                    Done <input type="radio" name="angiogramDone" id="angiogramDone" value="YES" required="required"/> /
+                    @if(d != null && d.getAngiogramDone() != null && d.getAngiogramDone().name().toUpperCase() == "YES") {
+                    Done <input type="radio" name="angiogramDone" id="angiogramDone" value="YES" required="required" checked="checked"/> /
                     Not Done <input type="radio" name="angiogramDone" id="angiogramNotDone" value="NO" required="required"/>
+                    } else {
+                    Done <input type="radio" name="angiogramDone" id="angiogramDone" value="YES" required="required"/> /
+                    Not Done <input type="radio" name="angiogramDone" id="angiogramNotDone" value="NO" required="required" checked="checked"/>
+                    }
                 </td>
                 <td></td>
                 <td></td>
