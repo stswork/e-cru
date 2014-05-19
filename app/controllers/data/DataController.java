@@ -4,7 +4,6 @@ import actions.Authenticated;
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.Expr;
 import com.avaje.ebean.Query;
-import models.Status;
 import models.YesNo;
 import models.data.form.*;
 import models.response.ResponseMessage;
@@ -38,7 +37,7 @@ public class DataController extends Controller {
     @With(Authenticated.class)
     public static Result form1(Long id){
         models.response.user.User u = (models.response.user.User) ctx().args.get("user");
-        session("pid", StringUtils.EMPTY);
+        session().remove("pid");
         DataCollectionForm1 d = null;
         d = (id > 0) ? Ebean.find(DataCollectionForm1.class).fetch("economicStatuses").fetch("createdBy").fetch("modifiedBy").where(
                 Expr.eq("id", id)
@@ -230,10 +229,18 @@ public class DataController extends Controller {
         }
         Integer patientIdNumber = Integer.valueOf(StringUtils.isEmpty(map.get("patientIdNumber")[0]) ? "0" : map.get("patientIdNumber")[0]);
         YesNo ischaemicStroke = YesNo.valueOf(!map.containsKey("ischaemicStroke") ? NO : map.get("ischaemicStroke")[0].toUpperCase());
-        YesNo taci = YesNo.valueOf(!map.containsKey("taci") ? NO : map.get("taci")[0].toUpperCase());
-        YesNo paci = YesNo.valueOf(!map.containsKey("paci") ? NO : map.get("paci")[0].toUpperCase());
-        YesNo laci = YesNo.valueOf(!map.containsKey("laci") ? NO : map.get("laci")[0].toUpperCase());
-        YesNo poci = YesNo.valueOf(!map.containsKey("poci") ? NO : map.get("poci")[0].toUpperCase());
+        String taci = !map.containsKey("taci") ? StringUtils.EMPTY : map.get("taci")[0];
+        String paci = !map.containsKey("paci") ? StringUtils.EMPTY : map.get("paci")[0];
+        String laci = !map.containsKey("laci") ? StringUtils.EMPTY : map.get("laci")[0];
+        String poci = !map.containsKey("poci") ? StringUtils.EMPTY : map.get("poci")[0];
+        if(!StringUtils.isEmpty(taci))
+            dcf2.setTaci(YesNo.YES);
+        if(!StringUtils.isEmpty(paci))
+            dcf2.setTaci(YesNo.YES);
+        if(!StringUtils.isEmpty(laci))
+            dcf2.setTaci(YesNo.YES);
+        if(!StringUtils.isEmpty(poci))
+            dcf2.setTaci(YesNo.YES);
         YesNo hoemorrhagicStroke = YesNo.valueOf(!map.containsKey("hoemorrhagicStroke") ? NO : map.get("hoemorrhagicStroke")[0].toUpperCase());
         YesNo venousSinusThrombosis = YesNo.valueOf(!map.containsKey("venousSinusThrombosis") ? NO : map.get("venousSinusThrombosis")[0].toUpperCase());
         YesNo tia = YesNo.valueOf(!map.containsKey("tia") ? NO : map.get("tia")[0].toUpperCase());
@@ -262,21 +269,23 @@ public class DataController extends Controller {
         YesNo familyPvd = YesNo.valueOf(!map.containsKey("familyPvd") ? NO : map.get("familyPvd")[0].toUpperCase());
         YesNo familyHypertension = YesNo.valueOf(!map.containsKey("familyHypertension") ? NO : map.get("familyHypertension")[0].toUpperCase());
         YesNo familyNoneOfTheAbove = YesNo.valueOf(!map.containsKey("familyNoneOfTheAbove") ? NO : map.get("familyNoneOfTheAbove")[0].toUpperCase());
-        YesNo currentSmoker = YesNo.valueOf(!map.containsKey("currentSmoker") ? NO : map.get("currentSmoker")[0]);
-        dcf2.setCurrentSmoker(currentSmoker);
+        String currentSmoker = !map.containsKey("currentSmoker") ? StringUtils.EMPTY : map.get("currentSmoker")[0];
+        if(!StringUtils.isEmpty(currentSmoker))
+            dcf2.setCurrentSmoker(YesNo.YES);
         Integer cigarettePerDay = Integer.valueOf(map.containsKey("cigarettePerDay") ? "0" : map.get("cigarettePerDay")[0]);
-        YesNo exSmoker = YesNo.valueOf(!map.containsKey("exSmoker") ? NO : map.get("exSmoker")[0]);
-        dcf2.setExSmoker(exSmoker);
+        String exSmoker = !map.containsKey("exSmoker") ? NO : map.get("exSmoker")[0];
+        if(!StringUtils.isEmpty(exSmoker))
+            dcf2.setExSmoker(YesNo.NEW);
         YesNo never = YesNo.valueOf(!map.containsKey("never") ? NO : map.get("never")[0]);
         dcf2.setNever(never);
         Double hip = Double.valueOf(!map.containsKey("cigarettePerDay") ? "0" : map.get("cigarettePerDay")[0]);
         Double waist = Double.valueOf(!map.containsKey("cigarettePerDay") ? "0" : map.get("cigarettePerDay")[0]);
         dcf2.setPatientIdNumber(patientIdNumber);
         dcf2.setIschaemicStroke(ischaemicStroke);
-        dcf2.setTaci(taci);
+        /*dcf2.setTaci(taci);
         dcf2.setPaci(paci);
         dcf2.setLaci(laci);
-        dcf2.setPoci(poci);
+        dcf2.setPoci(poci);*/
         dcf2.setHoemorrhagicStroke(hoemorrhagicStroke);
         dcf2.setVenousSinusThrombosis(venousSinusThrombosis);
         dcf2.setTia(tia);
@@ -837,6 +846,7 @@ public class DataController extends Controller {
 
     @With(Authenticated.class)
     public static Result patientList() {
+        session().remove("pid");
         models.response.user.User u = (models.response.user.User) ctx().args.get("user");
         List<DataCollectionForm1> list = null;
         List<Patient> pl = new ArrayList<Patient>();
