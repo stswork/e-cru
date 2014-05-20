@@ -342,11 +342,11 @@ public class DataController extends Controller {
             if(dcf3 == null)
                 return badRequest(Json.toJson(new ResponseMessage(400, "Invalid parameters passed!", ResponseMessageType.BAD_REQUEST)));
         }
-        Integer patientIdNumber = Integer.valueOf(map.containsKey("patientIdNumber") ? StringUtils.EMPTY : map.get("patientIdNumber")[0]);
-        Integer alcoholUnitsPerWeek = Integer.valueOf(map.containsKey("alcoholUnitsPerWeek") ? StringUtils.EMPTY : map.get("alcoholUnitsPerWeek")[0]);
-        Double height = Double.valueOf(map.containsKey("height") ? StringUtils.EMPTY : map.get("height")[0]);
-        Double weight = Double.valueOf(map.containsKey("weight") ? StringUtils.EMPTY : map.get("weight")[0]);
-        Double bmi = Double.valueOf(map.containsKey("bmi") ? StringUtils.EMPTY : map.get("bmi")[0]);
+        Integer patientIdNumber = Integer.valueOf(StringUtils.isEmpty(map.get("patientIdNumber")[0]) ? "0" : map.get("patientIdNumber")[0]);
+        Integer alcoholUnitsPerWeek = Integer.valueOf(StringUtils.isEmpty(map.get("alcoholUnitsPerWeek") [0]) ? "0" : map.get("alcoholUnitsPerWeek")[0]);
+        Double height = Double.valueOf(StringUtils.isEmpty(map.get("height")[0]) ? "0" : map.get("height")[0]);
+        Double weight = Double.valueOf(StringUtils.isEmpty(map.get("weight")[0]) ? "0" : map.get("weight")[0]);
+        Double bmi = Double.valueOf(StringUtils.isEmpty(map.get("bmi")[0]) ? "0" : map.get("bmi")[0]);
         String aspirin = !map.containsKey("aspirin") ? StringUtils.EMPTY : map.get("aspirin")[0];
         String clopidogrel = !map.containsKey("clopidogrel") ? StringUtils.EMPTY : map.get("clopidogrel")[0];
         String aspirinPlusClopidogrel = !map.containsKey("aspirinPlusClopidogrel") ? StringUtils.EMPTY : map.get("aspirinPlusClopidogrel")[0];
@@ -523,7 +523,7 @@ public class DataController extends Controller {
             dcf3.save();
         }
         session("pid", patientIdNumber.toString());
-        return ok(Json.toJson(new ResponseMessage(200, "Form two saved successfully", ResponseMessageType.SUCCESSFUL)));
+        return ok(Json.toJson(new ResponseMessage(200, "Form three saved successfully", ResponseMessageType.SUCCESSFUL)));
     }
 
     @With(Authenticated.class)
@@ -535,7 +535,7 @@ public class DataController extends Controller {
         if(map.size() <= 0)
             return badRequest(Json.toJson(new ResponseMessage(400, "Invalid parameters passed!", ResponseMessageType.BAD_REQUEST)));
         Long id = Long.valueOf(StringUtils.isEmpty(map.get("id")[0]) ? "0" : map.get("id")[0]);
-        Integer patientIdNumber = Integer.valueOf(StringUtils.isEmpty(map.get("patientIdNumber")[0]) ? StringUtils.EMPTY : map.get("patientIdNumber")[0]);
+        Integer patientIdNumber = Integer.valueOf(StringUtils.isEmpty(map.get("patientIdNumber")[0]) ? "0" : map.get("patientIdNumber")[0]);
         YesNo intracranialStenosis = YesNo.valueOf(StringUtils.isEmpty(map.get("intracranialStenosis")[0]) ? StringUtils.EMPTY : map.get("intracranialStenosis")[0]);
         String intracranialStenosisPercent = StringUtils.isEmpty(map.get("intracranialStenosisPercent")[0]) ? StringUtils.EMPTY : map.get("intracranialStenosisPercent")[0];
         YesNo extracranialDopplersImagingDone = YesNo.valueOf(StringUtils.isEmpty(map.get("extracranialDopplersImagingDone")[0]) ? StringUtils.EMPTY : map.get("extracranialDopplersImagingDone")[0]);
@@ -730,18 +730,19 @@ public class DataController extends Controller {
         String spouseNativeLanguage = StringUtils.isEmpty(map.get("spouseNativeLanguage")[0]) ? StringUtils.EMPTY : map.get("spouseNativeLanguage")[0];
         String bpToday1 = StringUtils.isEmpty(map.get("bpToday1")[0]) ? StringUtils.EMPTY : map.get("bpToday1")[0];
         String bpToday2 = StringUtils.isEmpty(map.get("bpToday2")[0]) ? StringUtils.EMPTY : map.get("bpToday2")[0];
-        YesNo spouseHypertension = YesNo.valueOf(StringUtils.isEmpty(map.get("spouseHypertension")[0]) ? StringUtils.EMPTY : map.get("spouseHypertension")[0]);
-        YesNo spouseDiabetesMellitus = YesNo.valueOf(StringUtils.isEmpty(map.get("spouseDiabetesMellitus")[0]) ? StringUtils.EMPTY : map.get("spouseDiabetesMellitus")[0]);
-        YesNo spouseIhdAngina = YesNo.valueOf(StringUtils.isEmpty(map.get("spouseIhdAngina")[0]) ? StringUtils.EMPTY : map.get("spouseIhdAngina")[0]);
-        YesNo spouseHypercholesterolemia = YesNo.valueOf(StringUtils.isEmpty(map.get("spouseHypercholesterolemia")[0]) ? StringUtils.EMPTY : map.get("spouseHypercholesterolemia")[0]);
-        YesNo spouseAtrialFibrillation = YesNo.valueOf(StringUtils.isEmpty(map.get("spouseAtrialFibrillation")[0]) ? StringUtils.EMPTY : map.get("spouseAtrialFibrillation")[0]);
-        YesNo spousePvd = YesNo.valueOf(StringUtils.isEmpty(map.get("spousePvd")[0]) ? StringUtils.EMPTY : map.get("spousePvd")[0]);
-        YesNo spouseMi = YesNo.valueOf(StringUtils.isEmpty(map.get("spouseMi")[0]) ? StringUtils.EMPTY : map.get("spouseMi")[0]);
-        YesNo spouseMigraineWithAura = YesNo.valueOf(StringUtils.isEmpty(map.get("spouseMigraineWithAura")[0]) ? StringUtils.EMPTY : map.get("spouseMigraineWithAura")[0]);
-        YesNo spouseMigraineWithoutAura = YesNo.valueOf(StringUtils.isEmpty(map.get("spouseMigraineWithoutAura")[0]) ? StringUtils.EMPTY : map.get("spouseMigraineWithoutAura")[0]);
-        YesNo ischaemicStroke = YesNo.valueOf(StringUtils.isEmpty(map.get("ischaemicStroke")[0]) ? StringUtils.EMPTY : map.get("ischaemicStroke")[0]);
-        YesNo hoemorrhagicStroke = YesNo.valueOf(StringUtils.isEmpty(map.get("hoemorrhagicStroke")[0]) ? StringUtils.EMPTY : map.get("hoemorrhagicStroke")[0]);
-        YesNo tia = YesNo.valueOf(StringUtils.isEmpty(map.get("tia")[0]) ? StringUtils.EMPTY : map.get("tia")[0]);
+
+        YesNo spouseHypertension = !map.containsKey("spouseHypertension") ? YesNo.NO : YesNo.YES;
+        YesNo spouseDiabetesMellitus = !map.containsKey("spouseDiabetesMellitus") ? YesNo.NO : YesNo.YES;
+        YesNo spouseIhdAngina = !map.containsKey("spouseIhdAngina") ? YesNo.NO : YesNo.YES;
+        YesNo spouseHypercholesterolemia = !map.containsKey("spouseHypercholesterolemia") ? YesNo.NO : YesNo.YES;
+        YesNo spouseAtrialFibrillation = !map.containsKey("spouseAtrialFibrillation") ? YesNo.NO : YesNo.YES;
+        YesNo spousePvd = !map.containsKey("spousePvd") ? YesNo.NO : YesNo.YES;
+        YesNo spouseMi = !map.containsKey("spouseMi") ? YesNo.NO : YesNo.YES;
+        YesNo spouseMigraineWithAura = !map.containsKey("spouseMigraineWithAura") ? YesNo.NO : YesNo.YES;
+        YesNo spouseMigraineWithoutAura = !map.containsKey("spouseMigraineWithoutAura") ? YesNo.NO : YesNo.YES;
+        YesNo ischaemicStroke = !map.containsKey("ischaemicStroke") ? YesNo.NO : YesNo.YES;
+        YesNo hoemorrhagicStroke = !map.containsKey("hoemorrhagicStroke")? YesNo.NO : YesNo.YES;
+        YesNo tia = !map.containsKey("tia") ? YesNo.NO : YesNo.YES;
         dcf5.setPatientIdNumber(patientIdNumber);
         dcf5.setSpouseName(spouseName);
         dcf5.setSpouseAddress(spouseAddress);
