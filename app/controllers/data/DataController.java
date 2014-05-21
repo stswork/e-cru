@@ -284,10 +284,6 @@ public class DataController extends Controller {
         Double waist = Double.valueOf(!map.containsKey("cigarettePerDay") ? "0" : map.get("cigarettePerDay")[0]);
         dcf2.setPatientIdNumber(patientIdNumber);
         dcf2.setIschaemicStroke(ischaemicStroke);
-        /*dcf2.setTaci(taci);
-        dcf2.setPaci(paci);
-        dcf2.setLaci(laci);
-        dcf2.setPoci(poci);*/
         dcf2.setHoemorrhagicStroke(hoemorrhagicStroke);
         dcf2.setVenousSinusThrombosis(venousSinusThrombosis);
         dcf2.setTia(tia);
@@ -328,6 +324,7 @@ public class DataController extends Controller {
         }
         session("pid", patientIdNumber.toString());
         return ok(Json.toJson(new ResponseMessage(200, "Form two saved successfully", ResponseMessageType.SUCCESSFUL)));
+
     }
 
     @With(Authenticated.class)
@@ -345,7 +342,7 @@ public class DataController extends Controller {
                 return badRequest(Json.toJson(new ResponseMessage(400, "Invalid parameters passed!", ResponseMessageType.BAD_REQUEST)));
         }
         Integer patientIdNumber = Integer.valueOf(StringUtils.isEmpty(map.get("patientIdNumber")[0]) ? "0" : map.get("patientIdNumber")[0]);
-        Integer alcoholUnitsPerWeek = Integer.valueOf(StringUtils.isEmpty(map.get("alcoholUnitsPerWeek") [0]) ? "0" : map.get("alcoholUnitsPerWeek")[0]);
+        Integer alcoholUnitsPerWeek = Integer.valueOf(StringUtils.isEmpty(map.get("alcoholUnitsPerWeek")[0]) ? "0" : map.get("alcoholUnitsPerWeek")[0]);
         Double height = Double.valueOf(StringUtils.isEmpty(map.get("height")[0]) ? "0" : map.get("height")[0]);
         Double weight = Double.valueOf(StringUtils.isEmpty(map.get("weight")[0]) ? "0" : map.get("weight")[0]);
         Double bmi = Double.valueOf(StringUtils.isEmpty(map.get("bmi")[0]) ? "0" : map.get("bmi")[0]);
