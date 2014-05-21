@@ -276,8 +276,10 @@ public class DataController extends Controller {
         String exSmoker = !map.containsKey("exSmoker") ? NO : map.get("exSmoker")[0];
         if(!StringUtils.isEmpty(exSmoker))
             dcf2.setExSmoker(YesNo.NEW);
-        YesNo never = YesNo.valueOf(!map.containsKey("never") ? NO : map.get("never")[0]);
-        dcf2.setNever(never);
+        String never = !map.containsKey("never") ? NO : map.get("never")[0];
+        if(!StringUtils.isEmpty(never)) {
+            dcf2.setNever(YesNo.YES);
+        }
         Double hip = Double.valueOf(!map.containsKey("cigarettePerDay") ? "0" : map.get("cigarettePerDay")[0]);
         Double waist = Double.valueOf(!map.containsKey("cigarettePerDay") ? "0" : map.get("cigarettePerDay")[0]);
         dcf2.setPatientIdNumber(patientIdNumber);
