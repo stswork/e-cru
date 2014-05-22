@@ -4,6 +4,7 @@ import actions.Authenticated;
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.Expr;
 import com.avaje.ebean.Query;
+import models.Status;
 import models.YesNo;
 import models.data.form.*;
 import models.response.ResponseMessage;
@@ -342,7 +343,8 @@ public class DataController extends Controller {
                 return badRequest(Json.toJson(new ResponseMessage(400, "Invalid parameters passed!", ResponseMessageType.BAD_REQUEST)));
         }
         Integer patientIdNumber = Integer.valueOf(StringUtils.isEmpty(map.get("patientIdNumber")[0]) ? "0" : map.get("patientIdNumber")[0]);
-        Integer alcoholUnitsPerWeek = Integer.valueOf(StringUtils.isEmpty(map.get("alcoholUnitsPerWeek")[0]) ? "0" : map.get("alcoholUnitsPerWeek")[0]);
+        Integer alcoholUnitsPerWeek = Integer.valueOf
+                (StringUtils.isEmpty(map.get("alcoholUnitsPerWeek")[0]) ? "0" : map.get("alcoholUnitsPerWeek")[0]);
         Double height = Double.valueOf(StringUtils.isEmpty(map.get("height")[0]) ? "0" : map.get("height")[0]);
         Double weight = Double.valueOf(StringUtils.isEmpty(map.get("weight")[0]) ? "0" : map.get("weight")[0]);
         Double bmi = Double.valueOf(StringUtils.isEmpty(map.get("bmi")[0]) ? "0" : map.get("bmi")[0]);
@@ -850,7 +852,9 @@ public class DataController extends Controller {
         models.response.user.User u = (models.response.user.User) ctx().args.get("user");
         List<DataCollectionForm1> list = null;
         List<Patient> pl = new ArrayList<Patient>();
-        Query<DataCollectionForm1> query = Ebean.find(DataCollectionForm1.class);
+        Query<DataCollectionForm1> query = Ebean.find(DataCollectionForm1.class).where(
+                Expr.ne("status", models.Status.DISABLED)
+        );
         String sortBy = "created";
         String order = "desc";
         list = query.orderBy(sortBy + " " + order).findList();
