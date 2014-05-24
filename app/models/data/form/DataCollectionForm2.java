@@ -87,11 +87,11 @@ public class DataCollectionForm2 extends Model {
     @Constraints.Required
     private YesNo migraineWithoutAura = YesNo.NO;
 
-    private Integer ischaemicStrokeYear;
+    private Integer ischaemicStrokeYear = 0;
 
-    private Integer hoemorrhagicStrokeYear;
+    private Integer hoemorrhagicStrokeYear = 0;
 
-    private Integer tiaYear;
+    private Integer tiaYear = 0;
 
     @Constraints.Required
     private YesNo strokeAssociatedWithDissection = YesNo.NO;

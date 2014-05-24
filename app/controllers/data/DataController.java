@@ -4,7 +4,6 @@ import actions.Authenticated;
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.Expr;
 import com.avaje.ebean.Query;
-import models.Status;
 import models.YesNo;
 import models.data.form.*;
 import models.response.ResponseMessage;
@@ -43,6 +42,8 @@ public class DataController extends Controller {
         d = (id > 0) ? Ebean.find(DataCollectionForm1.class).fetch("economicStatuses").fetch("createdBy").fetch("modifiedBy").where(
                 Expr.eq("id", id)
         ).setMaxRows(1).findUnique() : new DataCollectionForm1();
+        if(d == null)
+            d = new DataCollectionForm1();
         return ok(views.html.data.form1.render("Form1", u, d));
     }
 
@@ -56,6 +57,8 @@ public class DataController extends Controller {
         d = (id > 0) ? Ebean.find(DataCollectionForm2.class).fetch("createdBy").fetch("modifiedBy").where(
                 Expr.eq("id", id)
         ).setMaxRows(1).findUnique() : new DataCollectionForm2();
+        if(d == null)
+            d = new DataCollectionForm2();
         return ok(views.html.data.form2.render("Form2", u, pid, d));
     }
 
@@ -69,6 +72,8 @@ public class DataController extends Controller {
         d = (id > 0) ? Ebean.find(DataCollectionForm3.class).fetch("createdBy").fetch("modifiedBy").where(
                 Expr.eq("id", id)
         ).setMaxRows(1).findUnique() : new DataCollectionForm3();
+        if(d == null)
+            d = new DataCollectionForm3();
         return ok(views.html.data.form3.render("Form3", u, pid, d));
     }
 
@@ -82,6 +87,8 @@ public class DataController extends Controller {
         d = (id > 0) ? Ebean.find(DataCollectionForm4.class).fetch("createdBy").fetch("modifiedBy").where(
                 Expr.eq("id", id)
         ).setMaxRows(1).findUnique() : new DataCollectionForm4();
+        if(d == null)
+            d = new DataCollectionForm4();
         return ok(views.html.data.form4.render("Form4", u, pid, d));
     }
 
@@ -96,6 +103,8 @@ public class DataController extends Controller {
         d = (id > 0) ? Ebean.find(DataCollectionForm5.class).fetch("createdBy").fetch("modifiedBy").where(
                 Expr.eq("id", id)
         ).setMaxRows(1).findUnique() : new DataCollectionForm5();
+        if(d == null)
+            d = new DataCollectionForm5();
         return ok(views.html.data.form5.render("Form5", u, pid, d));
     }
 
@@ -109,6 +118,8 @@ public class DataController extends Controller {
         d = (id > 0) ? Ebean.find(DataCollectionForm6.class).fetch("economicStatuses").fetch("createdBy").fetch("modifiedBy").where(
                 Expr.eq("id", id)
         ).setMaxRows(1).findUnique() : new DataCollectionForm6();
+        if(d == null)
+            d = new DataCollectionForm6();
         return ok(views.html.data.form6.render("Form6", u, pid, d));
     }
 
@@ -237,11 +248,11 @@ public class DataController extends Controller {
         if(!StringUtils.isEmpty(taci))
             dcf2.setTaci(YesNo.YES);
         if(!StringUtils.isEmpty(paci))
-            dcf2.setTaci(YesNo.YES);
+            dcf2.setPaci(YesNo.YES);
         if(!StringUtils.isEmpty(laci))
-            dcf2.setTaci(YesNo.YES);
+            dcf2.setLaci(YesNo.YES);
         if(!StringUtils.isEmpty(poci))
-            dcf2.setTaci(YesNo.YES);
+            dcf2.setPoci(YesNo.YES);
         YesNo hoemorrhagicStroke = YesNo.valueOf(!map.containsKey("hoemorrhagicStroke") ? NO : map.get("hoemorrhagicStroke")[0].toUpperCase());
         YesNo venousSinusThrombosis = YesNo.valueOf(!map.containsKey("venousSinusThrombosis") ? NO : map.get("venousSinusThrombosis")[0].toUpperCase());
         YesNo tia = YesNo.valueOf(!map.containsKey("tia") ? NO : map.get("tia")[0].toUpperCase());
