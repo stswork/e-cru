@@ -35,7 +35,7 @@ create table comment (
 
 create table data_collection_form1 (
   id                        bigint not null,
-  patient_id_number         integer,
+  patient_id_number         bigint,
   trial_site                varchar(255),
   recruited_date            timestamp,
   patient_name              varchar(255),
@@ -65,7 +65,7 @@ create table data_collection_form1 (
 
 create table data_collection_form2 (
   id                        bigint not null,
-  patient_id_number         integer,
+  patient_id_number         bigint,
   ischaemic_stroke          integer,
   taci                      integer,
   paci                      integer,
@@ -148,7 +148,7 @@ create table data_collection_form2 (
 
 create table data_collection_form3 (
   id                        bigint not null,
-  patient_id_number         integer,
+  patient_id_number         bigint,
   alcohol_units_per_week    integer,
   height                    float,
   weight                    float,
@@ -250,7 +250,7 @@ create table data_collection_form3 (
 
 create table data_collection_form4 (
   id                        bigint not null,
-  patient_id_number         integer,
+  patient_id_number         bigint,
   intracranial_stenosis     integer,
   intracranial_stenosis_percent varchar(255),
   extracranial_dopplers_imaging_done integer,
@@ -349,7 +349,7 @@ create table data_collection_form4 (
 
 create table data_collection_form5 (
   id                        bigint not null,
-  patient_id_number         integer,
+  patient_id_number         bigint,
   aspirin                   integer,
   aspirin_dosage            varchar(255),
   clopidogrel               integer,
@@ -420,7 +420,7 @@ create table data_collection_form5 (
 
 create table data_collection_form6 (
   id                        bigint not null,
-  patient_id_number         integer,
+  patient_id_number         bigint,
   hip                       float,
   waist                     float,
   height                    float,

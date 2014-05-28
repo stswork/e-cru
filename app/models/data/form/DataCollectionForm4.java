@@ -26,7 +26,7 @@ public class DataCollectionForm4 extends Model {
     private Long id;
 
     @Constraints.Required
-    private Integer patientIdNumber;
+    private Long patientIdNumber;
 
     @Constraints.Required
     private YesNo intracranialStenosis = YesNo.NO;
@@ -181,7 +181,7 @@ public class DataCollectionForm4 extends Model {
     public DataCollectionForm4() {
     }
 
-    public DataCollectionForm4(Integer patientIdNumber, YesNo intracranialStenosis, String intracranialStenosisPercent, YesNo extracranialDopplersImagingDone, YesNo extracranialMraImagingDone, YesNo extracranialCtaImagingDone, YesNo brainCtImagingDone, YesNo brainMriImagingDone, YesNo lesionAnterior, YesNo lesionRight, YesNo lesionLeft, YesNo lesionBilateral, YesNo lesionPosterior, YesNo lesionAnterioposterior, Double ricaStenosisPercent, Double licaStenosisPercent, Double rccaStenosisPercent, Double lccaStenosisPercent, Double rVertebralStenosisPercent, Double lVertebralStenosisPercent, Double basilarStenosisPercent, YesNo lvd, YesNo svd, YesNo cardioembolism, YesNo combined, YesNo strokeOfDeterminedEtiology, YesNo negativeEvaluation, YesNo ecgDone, YesNo echoDone, YesNo ecgNormal, YesNo ecgLvh, YesNo ecgAf, YesNo ecgVentricularEctopics, YesNo ecgArtialEctopics, YesNo ecgNoneOfAbove, YesNo echoNormal, YesNo echoLvh, YesNo echoPfo, YesNo echoThrombus, YesNo echoNoneOfAbove, YesNo echoDontKnow, YesNo ecgDontKnow, String nihssOnAdmission, String nihssOnDischarge, String barthelOnAdmission, String barthelOnDischarge, YesNo home, YesNo nursingHome, YesNo rehabilitation, YesNo rip, YesNo localDgh) {
+    public DataCollectionForm4(Long patientIdNumber, YesNo intracranialStenosis, String intracranialStenosisPercent, YesNo extracranialDopplersImagingDone, YesNo extracranialMraImagingDone, YesNo extracranialCtaImagingDone, YesNo brainCtImagingDone, YesNo brainMriImagingDone, YesNo lesionAnterior, YesNo lesionRight, YesNo lesionLeft, YesNo lesionBilateral, YesNo lesionPosterior, YesNo lesionAnterioposterior, Double ricaStenosisPercent, Double licaStenosisPercent, Double rccaStenosisPercent, Double lccaStenosisPercent, Double rVertebralStenosisPercent, Double lVertebralStenosisPercent, Double basilarStenosisPercent, YesNo lvd, YesNo svd, YesNo cardioembolism, YesNo combined, YesNo strokeOfDeterminedEtiology, YesNo negativeEvaluation, YesNo ecgDone, YesNo echoDone, YesNo ecgNormal, YesNo ecgLvh, YesNo ecgAf, YesNo ecgVentricularEctopics, YesNo ecgArtialEctopics, YesNo ecgNoneOfAbove, YesNo echoNormal, YesNo echoLvh, YesNo echoPfo, YesNo echoThrombus, YesNo echoNoneOfAbove, YesNo echoDontKnow, YesNo ecgDontKnow, String nihssOnAdmission, String nihssOnDischarge, String barthelOnAdmission, String barthelOnDischarge, YesNo home, YesNo nursingHome, YesNo rehabilitation, YesNo rip, YesNo localDgh) {
         this.patientIdNumber = patientIdNumber;
         this.intracranialStenosis = intracranialStenosis;
         this.intracranialStenosisPercent = intracranialStenosisPercent;
@@ -243,11 +243,11 @@ public class DataCollectionForm4 extends Model {
         this.id = id;
     }
 
-    public Integer getPatientIdNumber() {
+    public Long getPatientIdNumber() {
         return patientIdNumber;
     }
 
-    public void setPatientIdNumber(Integer patientIdNumber) {
+    public void setPatientIdNumber(Long patientIdNumber) {
         this.patientIdNumber = patientIdNumber;
     }
 

@@ -1,4 +1,4 @@
-@(message: String, u: models.response.user.User, pid: Integer, d: models.data.form.DataCollectionForm2)
+@(message: String, u: models.response.user.User, pid: Long, d: models.data.form.DataCollectionForm2)
 
 @import tags._
 @main("User") {
@@ -33,8 +33,13 @@
                 </tr>
                 <tr>
                     <td colspan="2">Data Collection Form (DCF)</td>
+                    @if(d != null && d.getPatientIdNumber() != null) {
                     <td>Patient’s ID Number</td>
                     <td><input type="text" id="patientIdNumber" name="patientIdNumber" value="@d.getPatientIdNumber()"/></td>
+                    } else {
+                    <td>Patient’s ID Number</td>
+                    <td><input type="text" id="patientIdNumber" name="patientIdNumber" value="@pid"/></td>
+                    }
                 </tr>
                 <tr>
                     <td colspan="2">

@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Patient {
 
     public Long id;
-    public Integer patientId;
+    public Long patientId;
     public String patientName;
     public String trialSite;
     public String dateOfBirth;
@@ -19,7 +19,7 @@ public class Patient {
     public Patient() {
     }
 
-    public Patient(Long id, Integer patientId, String patientName, String trialSite, String dateOfBirth, String gender, String createdOn) {
+    public Patient(Long id, Long patientId, String patientName, String trialSite, String dateOfBirth, String gender, String createdOn) {
         this.id = id;
         this.patientId = patientId;
         this.patientName = patientName;
@@ -29,11 +29,11 @@ public class Patient {
         this.createdOn = createdOn;
     }
 
-    public Integer getPatientId() {
+    public Long getPatientId() {
         return patientId;
     }
 
-    public void setPatientId(Integer patientId) {
+    public void setPatientId(Long patientId) {
         this.patientId = patientId;
     }
 
