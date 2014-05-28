@@ -337,7 +337,7 @@ public class DataController extends Controller {
             dcf2.setCreatedBy(user);
             dcf2.save();
         }
-        session("pid", dcf2.getId().toString());
+        session("pid", patientIdNumber.toString());
         return ok(Json.toJson(new ResponseMessage(200, "Form two saved successfully", ResponseMessageType.SUCCESSFUL)));
 
     }
@@ -537,7 +537,7 @@ public class DataController extends Controller {
             dcf3.setCreatedBy(user);
             dcf3.save();
         }
-        session("pid", dcf3.getId().toString());
+        session("pid", patientIdNumber.toString());
         return ok(Json.toJson(new ResponseMessage(200, "Form three saved successfully", ResponseMessageType.SUCCESSFUL)));
     }
 
@@ -659,7 +659,7 @@ public class DataController extends Controller {
             dcf4.setCreatedBy(user);
             dcf4.save();
         }
-        session("pid", dcf4.getId().toString());
+        session("pid", patientIdNumber.toString());
         return ok(Json.toJson(new ResponseMessage(200, "Form four saved successfully", ResponseMessageType.SUCCESSFUL)));
     }
 
@@ -791,7 +791,7 @@ public class DataController extends Controller {
             dcf5.setCreatedBy(user);
             dcf5.save();
         }
-        session("pid", dcf5.getId().toString());
+        session("pid", patientIdNumber.toString());
         return ok(Json.toJson(new ResponseMessage(200, "Form five saved successfully", ResponseMessageType.SUCCESSFUL)));
     }
 
@@ -857,6 +857,7 @@ public class DataController extends Controller {
                 }
             }
         }
+        session().remove("pid");
         return ok(Json.toJson(new ResponseMessage(200, "Form six saved successfully", ResponseMessageType.SUCCESSFUL)));
     }
 
