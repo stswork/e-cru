@@ -550,6 +550,11 @@ public class DataController extends Controller {
         if(map.size() <= 0)
             return badRequest(Json.toJson(new ResponseMessage(400, "Invalid parameters passed!", ResponseMessageType.BAD_REQUEST)));
         Long id = Long.valueOf(StringUtils.isEmpty(map.get("id")[0]) ? "0" : map.get("id")[0]);
+        if(id > 0) {
+            dcf4 = DataCollectionForm4.find.byId(id);
+            if(dcf4 == null)
+                return badRequest(Json.toJson(new ResponseMessage(400, "Invalid parameters passed!", ResponseMessageType.BAD_REQUEST)));
+        }
         Long patientIdNumber = Long.valueOf(StringUtils.isEmpty(map.get("patientIdNumber")[0]) ? "0" : map.get("patientIdNumber")[0]);
         YesNo intracranialStenosis = YesNo.valueOf(StringUtils.isEmpty(map.get("intracranialStenosis")[0]) ? StringUtils.EMPTY : map.get("intracranialStenosis")[0]);
         String intracranialStenosisPercent = StringUtils.isEmpty(map.get("intracranialStenosisPercent")[0]) ? StringUtils.EMPTY : map.get("intracranialStenosisPercent")[0];
