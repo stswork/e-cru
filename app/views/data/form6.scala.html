@@ -25,9 +25,9 @@
 
     <td>Patient’s ID Number</td>
     @if(d != null && d.getPatientIdNumber() != null) {
-    <td><input type="text" id="patientIdNumber" name="patientIdNumber" value="@d.getPatientIdNumber().toString()"/></td>
+    <td><input type="text" id="patientIdNumber" name="patientIdNumber" value="@d.getPatientIdNumber().toString()" readonly/></td>
     } else {
-    <td><input type="text" id="patientIdNumber" name="patientIdNumber" value="@pid"/></td>
+    <td><input type="text" id="patientIdNumber" name="patientIdNumber" value="@pid" readonly/></td>
     }
 </tr>
     <tr>
@@ -140,7 +140,7 @@
                 </tr>
                 <tr>
                     <td>When:</td>
-                    <td><input type="text" name="bloodSampleDate" id="bloodSampleDate" value="@d.getBloodSampleDateString()"/></td>
+                    <td><input type="text" name="bloodSampleDate" id="bloodSampleDate" value="@d.getBloodSampleDateString()" placeholder="01/01/1990"/></td>
                 </tr>
             </table>
         </td>
@@ -167,7 +167,7 @@
 </script>
 <style>
 .form input[type="text"]{
-    width:80px;
+    width:100px;
 }
 </style>
 }

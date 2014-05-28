@@ -36,9 +36,9 @@
 
     <td>Patient’s ID Number</td>
     @if(d != null && d.getPatientIdNumber() != null) {
-    <td><input type="text" id="patientIdNumber" name="patientIdNumber" value="@d.getPatientIdNumber().toString()"/></td>
+    <td><input type="text" id="patientIdNumber" name="patientIdNumber" value="@d.getPatientIdNumber().toString()" readonly/></td>
     } else {
-    <td><input type="text" id="patientIdNumber" name="patientIdNumber" value="@pid"/></td>
+    <td><input type="text" id="patientIdNumber" name="patientIdNumber" value="@pid" readonly/></td>
     }
 </tr>
 
