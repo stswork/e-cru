@@ -25,7 +25,7 @@ public class DataCollectionForm2 extends Model {
     private Long id;
 
     @Constraints.Required
-    private Integer patientIdNumber;
+    private Long patientIdNumber;
 
     @Constraints.Required
     private YesNo ischaemicStroke = YesNo.NO;
@@ -155,7 +155,7 @@ public class DataCollectionForm2 extends Model {
     public DataCollectionForm2() {
     }
 
-    public DataCollectionForm2(Integer patientIdNumber, YesNo ischaemicStroke, YesNo hoemorrhagicStroke, YesNo venousSinusThrombosis, YesNo tia, YesNo avm, YesNo aneurysm, YesNo subaranchoid, YesNo hypertension, YesNo diabetesMellitus, YesNo ihdAngina, YesNo hypercholesterolemia, YesNo atrialFibrillation, YesNo pvd, YesNo mi, YesNo migraineWithAura, YesNo migraineWithoutAura, Integer ischaemicStrokeYear, Integer hoemorrhagicStrokeYear, Integer tiaYear, YesNo strokeAssociatedWithDissection, YesNo strokeAssociatedWithPfo, YesNo strokeAssociatedWithMi, YesNo familyStroke, YesNo familyIhdAngina, YesNo familyDiabetesMellitus, YesNo familyMi, YesNo familyPvd, YesNo familyHypertension, YesNo familyNoneOfTheAbove,/* YesNo currentSmoker,*/ Integer cigarettePerDay, /*YesNo exSmoker, YesNo never,*/ Double hip, Double waist
+    public DataCollectionForm2(Long patientIdNumber, YesNo ischaemicStroke, YesNo hoemorrhagicStroke, YesNo venousSinusThrombosis, YesNo tia, YesNo avm, YesNo aneurysm, YesNo subaranchoid, YesNo hypertension, YesNo diabetesMellitus, YesNo ihdAngina, YesNo hypercholesterolemia, YesNo atrialFibrillation, YesNo pvd, YesNo mi, YesNo migraineWithAura, YesNo migraineWithoutAura, Integer ischaemicStrokeYear, Integer hoemorrhagicStrokeYear, Integer tiaYear, YesNo strokeAssociatedWithDissection, YesNo strokeAssociatedWithPfo, YesNo strokeAssociatedWithMi, YesNo familyStroke, YesNo familyIhdAngina, YesNo familyDiabetesMellitus, YesNo familyMi, YesNo familyPvd, YesNo familyHypertension, YesNo familyNoneOfTheAbove,/* YesNo currentSmoker,*/ Integer cigarettePerDay, /*YesNo exSmoker, YesNo never,*/ Double hip, Double waist
             /*, Integer alcoholUnitsPerWeek, Double height, Double weight, Double bmi, String aspirinDosage, String clopidogrelDosage, String aspirinPlusClopidogrelDosage, String dipyridamoleDosage, String aspirinPlusDipyridamoleDosage, String warfarinInr, String statinDosage, String statinName, YesNo antihypertensive, YesNo medicineNoneOfTheAbove, String bpOnAdmission, String temperatureOnAdmission, YesNo carotidEndarterectomyDone, YesNo thrombolysedDone, YesNo ctaDone, YesNo mraDone, YesNo angiogramDone*/
     ) {
         this.patientIdNumber = patientIdNumber;
@@ -204,11 +204,11 @@ public class DataCollectionForm2 extends Model {
         this.id = id;
     }
 
-    public Integer getPatientIdNumber() {
+    public Long getPatientIdNumber() {
         return patientIdNumber;
     }
 
-    public void setPatientIdNumber(Integer patientIdNumber) {
+    public void setPatientIdNumber(Long patientIdNumber) {
         this.patientIdNumber = patientIdNumber;
     }
 

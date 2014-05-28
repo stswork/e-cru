@@ -26,7 +26,7 @@ public class DataCollectionForm3 extends Model {
     private Long id;
 
     @Constraints.Required
-    private Integer patientIdNumber;
+    private Long patientIdNumber;
 
     @Constraints.Required
     private Integer alcoholUnitsPerWeek;
@@ -193,7 +193,7 @@ public class DataCollectionForm3 extends Model {
     public DataCollectionForm3() {
     }
 
-    public DataCollectionForm3(Integer patientIdNumber, Integer alcoholUnitsPerWeek, Double height, Double weight, Double bmi, YesNo aspirin, String aspirinDosage, YesNo clopidogrel, String clopidogrelDosage, YesNo aspirinPlusClopidogrel, String aspirinPlusClopidogrelDosage, YesNo dipyridamole, String dipyridamoleDosage, YesNo aspirinPlusDipyridamole, String aspirinPlusDipyridamoleDosage, YesNo warfarin, String warfarinInr, YesNo statin, String statinDosage, String statinName, YesNo antihypertensive, YesNo medicineNoneOfTheAbove, YesNo glucoseBloodTest, String glucoseBloodTestResult, YesNo totalCholesterolBloodTest, String totalCholesterolBloodTestResult, YesNo hdlCholesterolBloodTest, String hdlCholesterolBloodTestResult, YesNo ldlCholesterolBloodTest, String ldlCholesterolBloodTestResult, YesNo triglycerideBloodTest, String triglycerideBloodTestResult, YesNo esrBloodTest, String esrBloodTestResult, YesNo crpBloodTest, String crpBloodTestResult, YesNo troponimBloodTest, String troponimBloodTestResult, YesNo proteinCBloodTest, String proteinCBloodTestResult, YesNo proteinSBloodTest, String proteinSBloodTestResult, YesNo fibrinogenBloodTest, String fibrinogenBloodTestResult, YesNo antithrombin11BloodTest, String antithrombin11BloodTestResult, YesNo factorVBloodTest, String factorVBloodTestResult, YesNo homocysteineBloodTest, String homocysteineBloodTestResult, YesNo prothrombinBloodTest, String prothrombinBloodTestResult, YesNo antiphospholipidBloodTest, String antiphospholipidBloodTestResult, String bpOnAdmission, String temperatureOnAdmission, YesNo carotidEndarterectomyDone, YesNo thrombolysedDone, YesNo ctaDone, YesNo mraDone, YesNo angiogramDone) {
+    public DataCollectionForm3(Long patientIdNumber, Integer alcoholUnitsPerWeek, Double height, Double weight, Double bmi, YesNo aspirin, String aspirinDosage, YesNo clopidogrel, String clopidogrelDosage, YesNo aspirinPlusClopidogrel, String aspirinPlusClopidogrelDosage, YesNo dipyridamole, String dipyridamoleDosage, YesNo aspirinPlusDipyridamole, String aspirinPlusDipyridamoleDosage, YesNo warfarin, String warfarinInr, YesNo statin, String statinDosage, String statinName, YesNo antihypertensive, YesNo medicineNoneOfTheAbove, YesNo glucoseBloodTest, String glucoseBloodTestResult, YesNo totalCholesterolBloodTest, String totalCholesterolBloodTestResult, YesNo hdlCholesterolBloodTest, String hdlCholesterolBloodTestResult, YesNo ldlCholesterolBloodTest, String ldlCholesterolBloodTestResult, YesNo triglycerideBloodTest, String triglycerideBloodTestResult, YesNo esrBloodTest, String esrBloodTestResult, YesNo crpBloodTest, String crpBloodTestResult, YesNo troponimBloodTest, String troponimBloodTestResult, YesNo proteinCBloodTest, String proteinCBloodTestResult, YesNo proteinSBloodTest, String proteinSBloodTestResult, YesNo fibrinogenBloodTest, String fibrinogenBloodTestResult, YesNo antithrombin11BloodTest, String antithrombin11BloodTestResult, YesNo factorVBloodTest, String factorVBloodTestResult, YesNo homocysteineBloodTest, String homocysteineBloodTestResult, YesNo prothrombinBloodTest, String prothrombinBloodTestResult, YesNo antiphospholipidBloodTest, String antiphospholipidBloodTestResult, String bpOnAdmission, String temperatureOnAdmission, YesNo carotidEndarterectomyDone, YesNo thrombolysedDone, YesNo ctaDone, YesNo mraDone, YesNo angiogramDone) {
         this.patientIdNumber = patientIdNumber;
         this.alcoholUnitsPerWeek = alcoholUnitsPerWeek;
         this.height = height;
@@ -265,11 +265,11 @@ public class DataCollectionForm3 extends Model {
         this.id = id;
     }
 
-    public Integer getPatientIdNumber() {
+    public Long getPatientIdNumber() {
         return patientIdNumber;
     }
 
-    public void setPatientIdNumber(Integer patientIdNumber) {
+    public void setPatientIdNumber(Long patientIdNumber) {
         this.patientIdNumber = patientIdNumber;
     }
 

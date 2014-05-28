@@ -32,8 +32,10 @@
                     </tr>
                     <tr>
                         <td colspan="2">Data Collection Form (DCF)</td>
+                        @if(d != null && d.getPatientIdNumber() != null) {
                         <td>Patient’s ID Number</td>
-                        <td><input type="text" id="patientIdNumber" name="patientIdNumber" value="@d.getPatientIdNumber()" required="required" readonly/></td>
+                        <td><input type="text" id="patientIdNumber" name="patientIdNumber" value="@d.getPatientIdNumber()" required="required"/></td>
+                        }
                     </tr>
                     <tr>
                         <td colspan="2">
@@ -44,7 +46,7 @@
                           <td>Trial Site:</td>
                           <td><input type="text" name="trialSite" id="trialSite" value="@d.getTrialSite()" ></td>
                           <td>Date recruited</td>
-                          <td><input type="text" name="recruitedDate" id="recruitedDate" value="@d.getRecruitedDateString()" placeholder="01/01/1990"/></td>
+                          <td><input type="text" name="recruitedDate" id="recruitedDate" value="@d.getRecruitedDateString()"/></td>
                       </tr>
                      <tr>
                         <td colspan="4">
@@ -56,7 +58,7 @@
                          <td><input type="text" name="patientName" id="patientName" value="@d.getPatientName()" ></td>
                          <td>Date Of Birth:</td>
                          <td>
-                             <input type="text" name="patientDob" id="patientDob" value="@d.getDateOfBirthString()" placeholder="01/01/1990"/>
+                             <input type="text" name="patientDob" id="patientDob" value="@d.getDateOfBirthString()"/>
                          </td>
                      </tr>
                     <tr>
@@ -78,7 +80,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2"><b>Contact details for follow-up call:</b></td>
+                        <td colspan="2">Contact details for follow-up call:</td>
                          <td>Landline</td>
                          <td><input type="text" id="landlinePhoneNumber" name="landlinePhoneNumber" value="@d.getLandlinePhoneNumber()"/></td>
                     </tr>
@@ -189,7 +191,7 @@
                                 <tr>
                                     <td>When:</td>
                                     <td style="width: 299px;">
-                                        <input type="text" name="bloodSampleDate" id="bloodSampleDate" value="@d.getBloodSampleDateString()" placeholder="01/01/1990"/>
+                                        <input type="text" name="bloodSampleDate" id="bloodSampleDate" value="@d.getBloodSampleDateString()"/>
                                     </td>
                                 </tr>
                             </table>
@@ -198,7 +200,7 @@
                     <tr>
                         <td>Date of stroke/ event</td>
                         <td>
-                            <input type="text" name="strokeDate" id="strokeDate" value="@d.getDateOfStrokeString()" placeholder="01/01/1990"/>
+                            <input type="text" name="strokeDate" id="strokeDate" value="@d.getDateOfStrokeString()"/>
                         </td>
 
                     </tr>

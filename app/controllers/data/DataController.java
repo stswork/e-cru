@@ -52,7 +52,7 @@ public class DataController extends Controller {
         models.response.user.User u = (models.response.user.User) ctx().args.get("user");
         if(StringUtils.isEmpty(session("pid")))
             return redirect(controllers.data.routes.DataController.form1(0));
-        Integer pid = Integer.valueOf(session("pid"));
+        Long pid = Long.valueOf(session("pid"));
         DataCollectionForm2 d = null;
         d = (id > 0) ? Ebean.find(DataCollectionForm2.class).fetch("createdBy").fetch("modifiedBy").where(
                 Expr.eq("id", id)
@@ -67,7 +67,7 @@ public class DataController extends Controller {
         models.response.user.User u = (models.response.user.User) ctx().args.get("user");
         if(StringUtils.isEmpty(session("pid")))
             return redirect(controllers.data.routes.DataController.form1(0));
-        Integer pid = Integer.valueOf(session("pid"));
+        Long pid = Long.valueOf(session("pid"));
         DataCollectionForm3 d = null;
         d = (id > 0) ? Ebean.find(DataCollectionForm3.class).fetch("createdBy").fetch("modifiedBy").where(
                 Expr.eq("id", id)
@@ -82,7 +82,7 @@ public class DataController extends Controller {
         models.response.user.User u = (models.response.user.User) ctx().args.get("user");
         if(StringUtils.isEmpty(session("pid")))
             return redirect(controllers.data.routes.DataController.form1(0));
-        Integer pid = Integer.valueOf(session("pid"));
+        Long pid = Long.valueOf(session("pid"));
         DataCollectionForm4 d = null;
         d = (id > 0) ? Ebean.find(DataCollectionForm4.class).fetch("createdBy").fetch("modifiedBy").where(
                 Expr.eq("id", id)
@@ -97,7 +97,7 @@ public class DataController extends Controller {
         models.response.user.User u = (models.response.user.User) ctx().args.get("user");
         if(StringUtils.isEmpty(session("pid")))
             return redirect(controllers.data.routes.DataController.form1(0));
-        Integer pid = Integer.valueOf(session("pid"));
+        Long pid = Long.valueOf(session("pid"));
         DataCollectionForm5 d = null;
         d = (id > 0) ? Ebean.find(DataCollectionForm5.class).fetch("createdBy").fetch("modifiedBy").where(
                 Expr.eq("id", id)
@@ -112,7 +112,7 @@ public class DataController extends Controller {
         models.response.user.User u = (models.response.user.User) ctx().args.get("user");
         if(StringUtils.isEmpty(session("pid")))
             return redirect(controllers.data.routes.DataController.form1(0));
-        Integer pid = Integer.valueOf(session("pid"));
+        Long pid = Long.valueOf(session("pid"));
         DataCollectionForm6 d = null;
         d = (id > 0) ? Ebean.find(DataCollectionForm6.class).fetch("economicStatuses").fetch("createdBy").fetch("modifiedBy").where(
                 Expr.eq("id", id)
@@ -136,7 +136,7 @@ public class DataController extends Controller {
             if(dcf1 == null)
                 return badRequest(Json.toJson(new ResponseMessage(400, "Invalid parameters passed!", ResponseMessageType.BAD_REQUEST)));
         }
-        Integer patientIdNumber = Integer.valueOf(StringUtils.isEmpty(map.get("patientIdNumber")[0]) ? StringUtils.EMPTY : map.get("patientIdNumber")[0]);
+        //Integer patientIdNumber = Integer.valueOf(StringUtils.isEmpty(map.get("patientIdNumber")[0]) ? StringUtils.EMPTY : map.get("patientIdNumber")[0]);
         String trialSite = StringUtils.isEmpty(map.get("trialSite")[0]) ? StringUtils.EMPTY : map.get("trialSite")[0];
         String dateRecruited = StringUtils.isEmpty(map.get("recruitedDate")[0]) ? StringUtils.EMPTY : map.get("recruitedDate")[0];
         DateTime recruitedDate = null;
@@ -179,7 +179,7 @@ public class DataController extends Controller {
         } catch (Exception e) {
             Logger.info("INVALID DATE STRING FOR BLOOD SAMPLE DATE");
         }
-        dcf1.setPatientIdNumber(patientIdNumber);
+        //dcf1.setPatientIdNumber(patientIdNumber);
         dcf1.setTrialSite(trialSite);
         dcf1.setRecruitedDate(recruitedDate == null ? null : new Timestamp(recruitedDate.getMillis()));
         dcf1.setPatientName(patientName);
@@ -204,6 +204,8 @@ public class DataController extends Controller {
                 EconomicStatus es = new EconomicStatus(s, dcf1, null);
                 es.save();
             }
+            dcf1.setPatientIdNumber(dcf1.getId());
+            dcf1.update();
         } else if (id > 0) {
             dcf1.setModifiedBy(user);
             dcf1.update();
@@ -220,7 +222,7 @@ public class DataController extends Controller {
                 }
             }
         }
-        session("pid", patientIdNumber.toString());
+        session("pid", dcf1.getId().toString());
         return ok(Json.toJson(new ResponseMessage(200, "Form one saved successfully", ResponseMessageType.SUCCESSFUL)));
     }
 
@@ -238,7 +240,7 @@ public class DataController extends Controller {
             if(dcf2 == null)
                 return badRequest(Json.toJson(new ResponseMessage(400, "Invalid parameters passed!", ResponseMessageType.BAD_REQUEST)));
         }
-        Integer patientIdNumber = Integer.valueOf(StringUtils.isEmpty(map.get("patientIdNumber")[0]) ? "0" : map.get("patientIdNumber")[0]);
+        Long patientIdNumber = Long.valueOf(StringUtils.isEmpty(map.get("patientIdNumber")[0]) ? "0" : map.get("patientIdNumber")[0]);
         YesNo ischaemicStroke = YesNo.valueOf(!map.containsKey("ischaemicStroke") ? NO : map.get("ischaemicStroke")[0].toUpperCase());
         String taci = !map.containsKey("taci") ? StringUtils.EMPTY : map.get("taci")[0];
         String paci = !map.containsKey("paci") ? StringUtils.EMPTY : map.get("paci")[0];
@@ -329,11 +331,13 @@ public class DataController extends Controller {
         if(id > 0) {
             dcf2.setModifiedBy(user);
             dcf2.update();
+            dcf2.setPatientIdNumber(dcf2.getId());
+            dcf2.update();
         } else {
             dcf2.setCreatedBy(user);
             dcf2.save();
         }
-        session("pid", patientIdNumber.toString());
+        session("pid", dcf2.getId().toString());
         return ok(Json.toJson(new ResponseMessage(200, "Form two saved successfully", ResponseMessageType.SUCCESSFUL)));
 
     }
@@ -352,7 +356,7 @@ public class DataController extends Controller {
             if(dcf3 == null)
                 return badRequest(Json.toJson(new ResponseMessage(400, "Invalid parameters passed!", ResponseMessageType.BAD_REQUEST)));
         }
-        Integer patientIdNumber = Integer.valueOf(StringUtils.isEmpty(map.get("patientIdNumber")[0]) ? "0" : map.get("patientIdNumber")[0]);
+        Long patientIdNumber = Long.valueOf(StringUtils.isEmpty(map.get("patientIdNumber")[0]) ? "0" : map.get("patientIdNumber")[0]);
         Integer alcoholUnitsPerWeek = Integer.valueOf
                 (StringUtils.isEmpty(map.get("alcoholUnitsPerWeek")[0]) ? "0" : map.get("alcoholUnitsPerWeek")[0]);
         Double height = Double.valueOf(StringUtils.isEmpty(map.get("height")[0]) ? "0" : map.get("height")[0]);
@@ -533,7 +537,7 @@ public class DataController extends Controller {
             dcf3.setCreatedBy(user);
             dcf3.save();
         }
-        session("pid", patientIdNumber.toString());
+        session("pid", dcf3.getId().toString());
         return ok(Json.toJson(new ResponseMessage(200, "Form three saved successfully", ResponseMessageType.SUCCESSFUL)));
     }
 
@@ -546,7 +550,7 @@ public class DataController extends Controller {
         if(map.size() <= 0)
             return badRequest(Json.toJson(new ResponseMessage(400, "Invalid parameters passed!", ResponseMessageType.BAD_REQUEST)));
         Long id = Long.valueOf(StringUtils.isEmpty(map.get("id")[0]) ? "0" : map.get("id")[0]);
-        Integer patientIdNumber = Integer.valueOf(StringUtils.isEmpty(map.get("patientIdNumber")[0]) ? "0" : map.get("patientIdNumber")[0]);
+        Long patientIdNumber = Long.valueOf(StringUtils.isEmpty(map.get("patientIdNumber")[0]) ? "0" : map.get("patientIdNumber")[0]);
         YesNo intracranialStenosis = YesNo.valueOf(StringUtils.isEmpty(map.get("intracranialStenosis")[0]) ? StringUtils.EMPTY : map.get("intracranialStenosis")[0]);
         String intracranialStenosisPercent = StringUtils.isEmpty(map.get("intracranialStenosisPercent")[0]) ? StringUtils.EMPTY : map.get("intracranialStenosisPercent")[0];
         YesNo extracranialDopplersImagingDone = YesNo.valueOf(StringUtils.isEmpty(map.get("extracranialDopplersImagingDone")[0]) ? StringUtils.EMPTY : map.get("extracranialDopplersImagingDone")[0]);
@@ -655,7 +659,7 @@ public class DataController extends Controller {
             dcf4.setCreatedBy(user);
             dcf4.save();
         }
-        session("pid", patientIdNumber.toString());
+        session("pid", dcf4.getId().toString());
         return ok(Json.toJson(new ResponseMessage(200, "Form four saved successfully", ResponseMessageType.SUCCESSFUL)));
     }
 
@@ -668,7 +672,7 @@ public class DataController extends Controller {
         if(map.size() <= 0)
             return badRequest(Json.toJson(new ResponseMessage(400, "Invalid parameters passed!", ResponseMessageType.BAD_REQUEST)));
         Long id = Long.valueOf(StringUtils.isEmpty(map.get("id")[0]) ? "0" : map.get("id")[0]);
-        Integer patientIdNumber = Integer.valueOf(StringUtils.isEmpty(map.get("patientIdNumber")[0]) ? StringUtils.EMPTY : map.get("patientIdNumber")[0]);
+        Long patientIdNumber = Long.valueOf(StringUtils.isEmpty(map.get("patientIdNumber")[0]) ? StringUtils.EMPTY : map.get("patientIdNumber")[0]);
         String aspirin = !map.containsKey("aspirin") ? StringUtils.EMPTY : map.get("aspirin")[0];
         String clopidogrel = !map.containsKey("clopidogrel") ? StringUtils.EMPTY : map.get("clopidogrel")[0];
         String aspirinPlusClopidogrel = !map.containsKey("aspirinPlusClopidogrel") ? StringUtils.EMPTY : map.get("aspirinPlusClopidogrel")[0];
@@ -787,7 +791,7 @@ public class DataController extends Controller {
             dcf5.setCreatedBy(user);
             dcf5.save();
         }
-        session("pid", patientIdNumber.toString());
+        session("pid", dcf5.getId().toString());
         return ok(Json.toJson(new ResponseMessage(200, "Form five saved successfully", ResponseMessageType.SUCCESSFUL)));
     }
 
@@ -805,7 +809,7 @@ public class DataController extends Controller {
             if(dcf6 == null)
                 return badRequest(Json.toJson(new ResponseMessage(400, "Invalid parameters passed!", ResponseMessageType.BAD_REQUEST)));
         }
-        Integer patientIdNumber = Integer.valueOf(StringUtils.isEmpty(map.get("patientIdNumber")[0]) ? StringUtils.EMPTY : map.get("patientIdNumber")[0]);
+        Long patientIdNumber = Long.valueOf(StringUtils.isEmpty(map.get("patientIdNumber")[0]) ? StringUtils.EMPTY : map.get("patientIdNumber")[0]);
         Double hip = Double.valueOf(StringUtils.isEmpty(map.get("hip")[0]) ? "0" : map.get("hip")[0]);
         Double height = Double.valueOf(StringUtils.isEmpty(map.get("height")[0]) ? "0" : map.get("height")[0]);
         Double waist = Double.valueOf(StringUtils.isEmpty(map.get("waist")[0]) ? "0" : map.get("waist")[0]);
@@ -821,7 +825,6 @@ public class DataController extends Controller {
             Logger.info("INVALID DATE STRING FOR BLOOD SAMPLE DATE");
         }
         String bloodSampleNumber = StringUtils.isEmpty(map.get("bloodSampleNumber")[0]) ? StringUtils.EMPTY : map.get("bloodSampleNumber")[0];
-
         dcf6.setPatientIdNumber(patientIdNumber);
         dcf6.setHip(hip);
         dcf6.setWaist(waist);
@@ -854,7 +857,7 @@ public class DataController extends Controller {
                 }
             }
         }
-        return ok(Json.toJson(new ResponseMessage(200, "Form three saved successfully", ResponseMessageType.SUCCESSFUL)));
+        return ok(Json.toJson(new ResponseMessage(200, "Form six saved successfully", ResponseMessageType.SUCCESSFUL)));
     }
 
     @With(Authenticated.class)
@@ -897,7 +900,7 @@ public class DataController extends Controller {
         ).setMaxRows(1).findUnique();
         if(d1 == null)
             return notFound(Json.toJson(new ResponseMessage(404, "No record found!", ResponseMessageType.NOT_FOUND)));
-        Integer pid = d1.getPatientIdNumber();
+        Long pid = d1.getPatientIdNumber();
         DataCollectionForm2 d2 = Ebean.find(DataCollectionForm2.class).where(Expr.and(Expr.eq("patientIdNumber", pid),Expr.eq("status", models.Status.ACTIVE))).setMaxRows(1).findUnique();
         DataCollectionForm3 d3 = Ebean.find(DataCollectionForm3.class).where(Expr.and(Expr.eq("patientIdNumber", pid),Expr.eq("status", models.Status.ACTIVE))).setMaxRows(1).findUnique();
         DataCollectionForm4 d4 = Ebean.find(DataCollectionForm4.class).where(Expr.and(Expr.eq("patientIdNumber", pid),Expr.eq("status", models.Status.ACTIVE))).setMaxRows(1).findUnique();

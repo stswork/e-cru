@@ -30,7 +30,7 @@ public class DataCollectionForm6 extends Model {
     private Long id;
 
     @Constraints.Required
-    private Integer patientIdNumber;
+    private Long patientIdNumber;
 
     @OneToMany
     private List<EconomicStatus> economicStatuses = new ArrayList<EconomicStatus>();
@@ -67,7 +67,7 @@ public class DataCollectionForm6 extends Model {
     public DataCollectionForm6() {
     }
 
-    public DataCollectionForm6(Integer patientIdNumber, Double hip, Double waist, Double height, Double weight, Double bmi, YesNo bloodSampleTaken, Timestamp bloodSampleDate, String bloodSampleNumber) {
+    public DataCollectionForm6(Long patientIdNumber, Double hip, Double waist, Double height, Double weight, Double bmi, YesNo bloodSampleTaken, Timestamp bloodSampleDate, String bloodSampleNumber) {
         this.patientIdNumber = patientIdNumber;
         this.hip = hip;
         this.waist = waist;
@@ -87,11 +87,11 @@ public class DataCollectionForm6 extends Model {
         this.id = id;
     }
 
-    public Integer getPatientIdNumber() {
+    public Long getPatientIdNumber() {
         return patientIdNumber;
     }
 
-    public void setPatientIdNumber(Integer patientIdNumber) {
+    public void setPatientIdNumber(Long patientIdNumber) {
         this.patientIdNumber = patientIdNumber;
     }
 

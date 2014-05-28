@@ -30,7 +30,7 @@ public class DataCollectionForm1 extends Model {
     private Long id;
 
     @Constraints.Required
-    private Integer patientIdNumber;
+    private Long patientIdNumber;
 
     @Constraints.Required
     private String trialSite = StringUtils.EMPTY;
@@ -95,7 +95,7 @@ public class DataCollectionForm1 extends Model {
     public DataCollectionForm1() {
     }
 
-    public DataCollectionForm1(Integer patientIdNumber, String trialSite, Timestamp recruitedDate, String patientName, Timestamp dateOfBirth, String patientAddress, Gender gender, String landlinePhoneNumber, String cellPhoneNumber, String friendRelativePhoneNumber, String placeOfBirth, String ethnicity, String nativeLanguage, String religion, YesNo bloodSampleTaken, Timestamp bloodSampleDate, String bloodSampleNumber, Timestamp dateOfStroke) {
+    public DataCollectionForm1(Long patientIdNumber, String trialSite, Timestamp recruitedDate, String patientName, Timestamp dateOfBirth, String patientAddress, Gender gender, String landlinePhoneNumber, String cellPhoneNumber, String friendRelativePhoneNumber, String placeOfBirth, String ethnicity, String nativeLanguage, String religion, YesNo bloodSampleTaken, Timestamp bloodSampleDate, String bloodSampleNumber, Timestamp dateOfStroke) {
         this.patientIdNumber = patientIdNumber;
         this.trialSite = trialSite;
         this.recruitedDate = recruitedDate;
@@ -124,11 +124,11 @@ public class DataCollectionForm1 extends Model {
         this.id = id;
     }
 
-    public Integer getPatientIdNumber() {
+    public Long getPatientIdNumber() {
         return patientIdNumber;
     }
 
-    public void setPatientIdNumber(Integer patientIdNumber) {
+    public void setPatientIdNumber(Long patientIdNumber) {
         this.patientIdNumber = patientIdNumber;
     }
 
