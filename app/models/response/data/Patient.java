@@ -13,7 +13,7 @@ public class Patient {
     public String patientName;
     public String trialSite;
     public String dateOfBirth;
-    public String Gender;
+    public String gender;
     public String createdOn;
 
     public Patient() {
@@ -25,7 +25,7 @@ public class Patient {
         this.patientName = patientName;
         this.trialSite = trialSite;
         this.dateOfBirth = dateOfBirth;
-        Gender = gender;
+        this.gender = gender;
         this.createdOn = createdOn;
     }
 
@@ -54,11 +54,11 @@ public class Patient {
     }
 
     public String getGender() {
-        return Gender;
+        return gender;
     }
 
     public void setGender(String gender) {
-        Gender = gender;
+        this.gender = gender;
     }
 
     public String getCreatedOn() {

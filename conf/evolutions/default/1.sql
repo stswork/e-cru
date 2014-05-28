@@ -3,14 +3,6 @@
 
 # --- !Ups
 
-create table album (
-  id                        bigint not null,
-  created                   timestamp,
-  created_by_id             bigint,
-  modified_by_id            bigint,
-  constraint pk_album primary key (id))
-;
-
 create table barthel_index_form (
   id                        bigint not null,
   protocol_number           varchar(255),
@@ -20,17 +12,6 @@ create table barthel_index_form (
   center_number             integer,
   created                   timestamp,
   constraint pk_barthel_index_form primary key (id))
-;
-
-create table comment (
-  id                        bigint not null,
-  message                   varchar(255),
-  album_id                  bigint,
-  commented_by_id           bigint,
-  created_by_id             bigint,
-  modified_by_id            bigint,
-  created                   timestamp,
-  constraint pk_comment primary key (id))
 ;
 
 create table data_collection_form1 (
@@ -447,25 +428,6 @@ create table economic_status (
   constraint pk_economic_status primary key (id))
 ;
 
-create table image (
-  id                        bigint not null,
-  image_url                 varchar(255),
-  album_id                  bigint,
-  created                   timestamp,
-  created_by_id             bigint,
-  modified_by_id            bigint,
-  constraint pk_image primary key (id))
-;
-
-create table login (
-  id                        bigint not null,
-  image_url                 varchar(255),
-  created                   timestamp,
-  created_by_id             bigint,
-  modified_by_id            bigint,
-  constraint pk_login primary key (id))
-;
-
 create table nihstroke_scale_form (
   id                        bigint not null,
   parent_identification     varchar(255),
@@ -477,49 +439,6 @@ create table nihstroke_scale_form (
   person_administering      varchar(255),
   created                   timestamp,
   constraint pk_nihstroke_scale_form primary key (id))
-;
-
-create table option (
-  id                        bigint not null,
-  name                      varchar(255),
-  value                     varchar(255),
-  question_id               bigint,
-  created                   timestamp,
-  constraint pk_option primary key (id))
-;
-
-create table patient (
-  id                        bigint not null,
-  full_name                 varchar(255),
-  email                     varchar(255),
-  age                       integer,
-  gender                    integer,
-  created                   timestamp,
-  created_by_id             bigint,
-  modified_by_id            bigint,
-  constraint ck_patient_gender check (gender in (0,1,2)),
-  constraint pk_patient primary key (id))
-;
-
-create table question (
-  id                        bigint not null,
-  name                      varchar(255),
-  value                     varchar(255),
-  created                   timestamp,
-  constraint pk_question primary key (id))
-;
-
-create table review (
-  id                        bigint not null,
-  reviewed                  boolean,
-  album_id                  bigint,
-  assigned_to_id            bigint,
-  created                   timestamp,
-  created_by_id             bigint,
-  modified_by_id            bigint,
-  status                    integer,
-  constraint ck_review_status check (status in (0,1,2)),
-  constraint pk_review primary key (id))
 ;
 
 create table o_user (
@@ -538,11 +457,7 @@ create table o_user (
   constraint pk_o_user primary key (id))
 ;
 
-create sequence album_seq;
-
 create sequence barthel_index_form_seq;
-
-create sequence comment_seq;
 
 create sequence data_collection_form1_seq;
 
@@ -558,100 +473,48 @@ create sequence data_collection_form6_seq;
 
 create sequence economic_status_seq;
 
-create sequence image_seq;
-
-create sequence login_seq;
-
 create sequence nihstroke_scale_form_seq;
-
-create sequence option_seq;
-
-create sequence patient_seq;
-
-create sequence question_seq;
-
-create sequence review_seq;
 
 create sequence o_user_seq;
 
-alter table album add constraint fk_album_createdBy_1 foreign key (created_by_id) references o_user (id);
-create index ix_album_createdBy_1 on album (created_by_id);
-alter table album add constraint fk_album_modifiedBy_2 foreign key (modified_by_id) references o_user (id);
-create index ix_album_modifiedBy_2 on album (modified_by_id);
-alter table comment add constraint fk_comment_album_3 foreign key (album_id) references album (id);
-create index ix_comment_album_3 on comment (album_id);
-alter table comment add constraint fk_comment_commentedBy_4 foreign key (commented_by_id) references o_user (id);
-create index ix_comment_commentedBy_4 on comment (commented_by_id);
-alter table comment add constraint fk_comment_createdBy_5 foreign key (created_by_id) references o_user (id);
-create index ix_comment_createdBy_5 on comment (created_by_id);
-alter table comment add constraint fk_comment_modifiedBy_6 foreign key (modified_by_id) references o_user (id);
-create index ix_comment_modifiedBy_6 on comment (modified_by_id);
-alter table data_collection_form1 add constraint fk_data_collection_form1_creat_7 foreign key (created_by_id) references o_user (id);
-create index ix_data_collection_form1_creat_7 on data_collection_form1 (created_by_id);
-alter table data_collection_form1 add constraint fk_data_collection_form1_modif_8 foreign key (modified_by_id) references o_user (id);
-create index ix_data_collection_form1_modif_8 on data_collection_form1 (modified_by_id);
-alter table data_collection_form2 add constraint fk_data_collection_form2_creat_9 foreign key (created_by_id) references o_user (id);
-create index ix_data_collection_form2_creat_9 on data_collection_form2 (created_by_id);
-alter table data_collection_form2 add constraint fk_data_collection_form2_modi_10 foreign key (modified_by_id) references o_user (id);
-create index ix_data_collection_form2_modi_10 on data_collection_form2 (modified_by_id);
-alter table data_collection_form3 add constraint fk_data_collection_form3_crea_11 foreign key (created_by_id) references o_user (id);
-create index ix_data_collection_form3_crea_11 on data_collection_form3 (created_by_id);
-alter table data_collection_form3 add constraint fk_data_collection_form3_modi_12 foreign key (modified_by_id) references o_user (id);
-create index ix_data_collection_form3_modi_12 on data_collection_form3 (modified_by_id);
-alter table data_collection_form4 add constraint fk_data_collection_form4_crea_13 foreign key (created_by_id) references o_user (id);
-create index ix_data_collection_form4_crea_13 on data_collection_form4 (created_by_id);
-alter table data_collection_form4 add constraint fk_data_collection_form4_modi_14 foreign key (modified_by_id) references o_user (id);
-create index ix_data_collection_form4_modi_14 on data_collection_form4 (modified_by_id);
-alter table data_collection_form5 add constraint fk_data_collection_form5_crea_15 foreign key (created_by_id) references o_user (id);
-create index ix_data_collection_form5_crea_15 on data_collection_form5 (created_by_id);
-alter table data_collection_form5 add constraint fk_data_collection_form5_modi_16 foreign key (modified_by_id) references o_user (id);
-create index ix_data_collection_form5_modi_16 on data_collection_form5 (modified_by_id);
-alter table data_collection_form6 add constraint fk_data_collection_form6_crea_17 foreign key (created_by_id) references o_user (id);
-create index ix_data_collection_form6_crea_17 on data_collection_form6 (created_by_id);
-alter table data_collection_form6 add constraint fk_data_collection_form6_modi_18 foreign key (modified_by_id) references o_user (id);
-create index ix_data_collection_form6_modi_18 on data_collection_form6 (modified_by_id);
-alter table economic_status add constraint fk_economic_status_dataCollec_19 foreign key (data_collection_form1_id) references data_collection_form1 (id);
-create index ix_economic_status_dataCollec_19 on economic_status (data_collection_form1_id);
-alter table economic_status add constraint fk_economic_status_dataCollec_20 foreign key (data_collection_form6_id) references data_collection_form6 (id);
-create index ix_economic_status_dataCollec_20 on economic_status (data_collection_form6_id);
-alter table image add constraint fk_image_album_21 foreign key (album_id) references album (id);
-create index ix_image_album_21 on image (album_id);
-alter table image add constraint fk_image_createdBy_22 foreign key (created_by_id) references o_user (id);
-create index ix_image_createdBy_22 on image (created_by_id);
-alter table image add constraint fk_image_modifiedBy_23 foreign key (modified_by_id) references o_user (id);
-create index ix_image_modifiedBy_23 on image (modified_by_id);
-alter table login add constraint fk_login_createdBy_24 foreign key (created_by_id) references o_user (id);
-create index ix_login_createdBy_24 on login (created_by_id);
-alter table login add constraint fk_login_modifiedBy_25 foreign key (modified_by_id) references o_user (id);
-create index ix_login_modifiedBy_25 on login (modified_by_id);
-alter table option add constraint fk_option_question_26 foreign key (question_id) references question (id);
-create index ix_option_question_26 on option (question_id);
-alter table patient add constraint fk_patient_createdBy_27 foreign key (created_by_id) references o_user (id);
-create index ix_patient_createdBy_27 on patient (created_by_id);
-alter table patient add constraint fk_patient_modifiedBy_28 foreign key (modified_by_id) references o_user (id);
-create index ix_patient_modifiedBy_28 on patient (modified_by_id);
-alter table review add constraint fk_review_album_29 foreign key (album_id) references album (id);
-create index ix_review_album_29 on review (album_id);
-alter table review add constraint fk_review_assignedTo_30 foreign key (assigned_to_id) references o_user (id);
-create index ix_review_assignedTo_30 on review (assigned_to_id);
-alter table review add constraint fk_review_createdBy_31 foreign key (created_by_id) references o_user (id);
-create index ix_review_createdBy_31 on review (created_by_id);
-alter table review add constraint fk_review_modifiedBy_32 foreign key (modified_by_id) references o_user (id);
-create index ix_review_modifiedBy_32 on review (modified_by_id);
-alter table o_user add constraint fk_o_user_createdBy_33 foreign key (created_by_id) references o_user (id);
-create index ix_o_user_createdBy_33 on o_user (created_by_id);
-alter table o_user add constraint fk_o_user_modifiedBy_34 foreign key (modified_by_id) references o_user (id);
-create index ix_o_user_modifiedBy_34 on o_user (modified_by_id);
+alter table data_collection_form1 add constraint fk_data_collection_form1_creat_1 foreign key (created_by_id) references o_user (id);
+create index ix_data_collection_form1_creat_1 on data_collection_form1 (created_by_id);
+alter table data_collection_form1 add constraint fk_data_collection_form1_modif_2 foreign key (modified_by_id) references o_user (id);
+create index ix_data_collection_form1_modif_2 on data_collection_form1 (modified_by_id);
+alter table data_collection_form2 add constraint fk_data_collection_form2_creat_3 foreign key (created_by_id) references o_user (id);
+create index ix_data_collection_form2_creat_3 on data_collection_form2 (created_by_id);
+alter table data_collection_form2 add constraint fk_data_collection_form2_modif_4 foreign key (modified_by_id) references o_user (id);
+create index ix_data_collection_form2_modif_4 on data_collection_form2 (modified_by_id);
+alter table data_collection_form3 add constraint fk_data_collection_form3_creat_5 foreign key (created_by_id) references o_user (id);
+create index ix_data_collection_form3_creat_5 on data_collection_form3 (created_by_id);
+alter table data_collection_form3 add constraint fk_data_collection_form3_modif_6 foreign key (modified_by_id) references o_user (id);
+create index ix_data_collection_form3_modif_6 on data_collection_form3 (modified_by_id);
+alter table data_collection_form4 add constraint fk_data_collection_form4_creat_7 foreign key (created_by_id) references o_user (id);
+create index ix_data_collection_form4_creat_7 on data_collection_form4 (created_by_id);
+alter table data_collection_form4 add constraint fk_data_collection_form4_modif_8 foreign key (modified_by_id) references o_user (id);
+create index ix_data_collection_form4_modif_8 on data_collection_form4 (modified_by_id);
+alter table data_collection_form5 add constraint fk_data_collection_form5_creat_9 foreign key (created_by_id) references o_user (id);
+create index ix_data_collection_form5_creat_9 on data_collection_form5 (created_by_id);
+alter table data_collection_form5 add constraint fk_data_collection_form5_modi_10 foreign key (modified_by_id) references o_user (id);
+create index ix_data_collection_form5_modi_10 on data_collection_form5 (modified_by_id);
+alter table data_collection_form6 add constraint fk_data_collection_form6_crea_11 foreign key (created_by_id) references o_user (id);
+create index ix_data_collection_form6_crea_11 on data_collection_form6 (created_by_id);
+alter table data_collection_form6 add constraint fk_data_collection_form6_modi_12 foreign key (modified_by_id) references o_user (id);
+create index ix_data_collection_form6_modi_12 on data_collection_form6 (modified_by_id);
+alter table economic_status add constraint fk_economic_status_dataCollec_13 foreign key (data_collection_form1_id) references data_collection_form1 (id);
+create index ix_economic_status_dataCollec_13 on economic_status (data_collection_form1_id);
+alter table economic_status add constraint fk_economic_status_dataCollec_14 foreign key (data_collection_form6_id) references data_collection_form6 (id);
+create index ix_economic_status_dataCollec_14 on economic_status (data_collection_form6_id);
+alter table o_user add constraint fk_o_user_createdBy_15 foreign key (created_by_id) references o_user (id);
+create index ix_o_user_createdBy_15 on o_user (created_by_id);
+alter table o_user add constraint fk_o_user_modifiedBy_16 foreign key (modified_by_id) references o_user (id);
+create index ix_o_user_modifiedBy_16 on o_user (modified_by_id);
 
 
 
 # --- !Downs
 
-drop table if exists album cascade;
-
 drop table if exists barthel_index_form cascade;
-
-drop table if exists comment cascade;
 
 drop table if exists data_collection_form1 cascade;
 
@@ -667,27 +530,11 @@ drop table if exists data_collection_form6 cascade;
 
 drop table if exists economic_status cascade;
 
-drop table if exists image cascade;
-
-drop table if exists login cascade;
-
 drop table if exists nihstroke_scale_form cascade;
-
-drop table if exists option cascade;
-
-drop table if exists patient cascade;
-
-drop table if exists question cascade;
-
-drop table if exists review cascade;
 
 drop table if exists o_user cascade;
 
-drop sequence if exists album_seq;
-
 drop sequence if exists barthel_index_form_seq;
-
-drop sequence if exists comment_seq;
 
 drop sequence if exists data_collection_form1_seq;
 
@@ -703,19 +550,7 @@ drop sequence if exists data_collection_form6_seq;
 
 drop sequence if exists economic_status_seq;
 
-drop sequence if exists image_seq;
-
-drop sequence if exists login_seq;
-
 drop sequence if exists nihstroke_scale_form_seq;
-
-drop sequence if exists option_seq;
-
-drop sequence if exists patient_seq;
-
-drop sequence if exists question_seq;
-
-drop sequence if exists review_seq;
 
 drop sequence if exists o_user_seq;
 

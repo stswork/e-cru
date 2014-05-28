@@ -22,8 +22,6 @@ public class Global extends GlobalSettings {
             if(User.find.findRowCount() == 0) {
                 Map<String, List<Object>> initialUsers = (Map<String, List<Object>>) Yaml.load("fixtures/users/initial-data.yml");
                 Ebean.save(initialUsers.get("users"));
-
-
             }
         }
     }

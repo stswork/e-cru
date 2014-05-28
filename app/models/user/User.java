@@ -2,7 +2,6 @@ package models.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import models.Status;
-import models.review.Review;
 import play.data.validation.Constraints;
 import play.db.ebean.Model;
 
@@ -34,9 +33,6 @@ public class User extends Model {
 
     @Constraints.Required
     private UserType userType = UserType.DOCTOR;
-
-    @OneToMany(mappedBy = "assignedTo")
-    private List<Review> reviewList = new ArrayList<Review>();
 
     @Constraints.Required
     private String location;
@@ -124,14 +120,6 @@ public class User extends Model {
 
     public void setUserType(UserType userType) {
         this.userType = userType;
-    }
-
-    public List<Review> getReviewList() {
-        return reviewList;
-    }
-
-    public void setReviewList(List<Review> reviewList) {
-        this.reviewList = reviewList;
     }
 
     public User getCreatedBy() {
