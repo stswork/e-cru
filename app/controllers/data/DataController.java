@@ -179,7 +179,6 @@ public class DataController extends Controller {
         } catch (Exception e) {
             Logger.info("INVALID DATE STRING FOR BLOOD SAMPLE DATE");
         }
-        //dcf1.setPatientIdNumber(patientIdNumber);
         dcf1.setTrialSite(trialSite);
         dcf1.setRecruitedDate(recruitedDate == null ? null : new Timestamp(recruitedDate.getMillis()));
         dcf1.setPatientName(patientName);
