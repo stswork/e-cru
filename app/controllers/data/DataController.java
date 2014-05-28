@@ -94,7 +94,6 @@ public class DataController extends Controller {
 
     @With(Authenticated.class)
     public static Result form5(Long id){
-        session("pid", "2");
         models.response.user.User u = (models.response.user.User) ctx().args.get("user");
         if(StringUtils.isEmpty(session("pid")))
             return redirect(controllers.data.routes.DataController.form1(0));
