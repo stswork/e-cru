@@ -14,12 +14,9 @@
 </header>
 <div class="form" style="width:100%;background: #f1f1f1;border-radius: 10px;">
 @if(d != null && d.getId() != null) {
-<form id="form3" method="POST" style="padding-top: 2%;"
-      action="@controllers.data.routes.DataController.handleSaveForm3()" data-uri="/data/form4/@d.getId()">
+<form id="form3" method="POST" style="padding-top: 2%;" action="@controllers.data.routes.DataController.handleSaveForm3()" data-uri="/data/form4/@d.getId()">
 } else {
-<form id="form3" method="POST" style="padding-top: 2%;"
-      action="@controllers.data.routes.DataController.handleSaveForm3()"
-      data-uri="@controllers.data.routes.DataController.form4(0)">
+<form id="form3" method="POST" style="padding-top: 2%;" action="@controllers.data.routes.DataController.handleSaveForm3()" data-uri="@controllers.data.routes.DataController.form4(0)">
 }
 <div class="box message">
     <div class="content-m">
@@ -622,7 +619,7 @@
 @footer()
 </div>
 } {
-<script type="text/javascript" src="@routes.Assets.at(" javascripts/form/events.js")"></script>
+<script type="text/javascript" src="@routes.Assets.at("javascripts/form/events.js")"></script>
 <script>
     $(function() {
 
