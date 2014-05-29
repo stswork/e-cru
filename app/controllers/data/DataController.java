@@ -284,7 +284,7 @@ public class DataController extends Controller {
         String currentSmoker = !map.containsKey("currentSmoker") ? StringUtils.EMPTY : map.get("currentSmoker")[0];
         if(!StringUtils.isEmpty(currentSmoker))
             dcf2.setCurrentSmoker(YesNo.YES);
-        Integer cigarettePerDay = Integer.valueOf(map.containsKey("cigarettePerDay") ? "0" : map.get("cigarettePerDay")[0]);
+        Integer cigarettePerDay = Integer.valueOf(map.containsKey("cigarettePerDay") ? map.get("cigarettePerDay")[0] : "0" );
         String exSmoker = !map.containsKey("exSmoker") ? StringUtils.EMPTY : map.get("exSmoker")[0];
         if(!StringUtils.isEmpty(exSmoker))
             dcf2.setExSmoker(YesNo.YES);
@@ -398,7 +398,9 @@ public class DataController extends Controller {
             dcf3.setAspirinPlusDipyridamoleDosage(aspirinPlusDipyridamoleDosage1 + "+" + aspirinPlusDipyridamoleDosage2);
         }
         if(!StringUtils.isEmpty(antihypertensive)){
+            String antihypertensiveDosage = StringUtils.isEmpty(map.get("antihypertensiveDosage")[0]) ? StringUtils.EMPTY : map.get("antihypertensiveDosage")[0];
             dcf3.setAntihypertensive(YesNo.YES);
+            dcf3.setAntihypertensiveDosage(antihypertensiveDosage);
         }
         if(!StringUtils.isEmpty(warfarin)){
             String warfarinInr = StringUtils.isEmpty(map.get("warfarinInr")[0]) ? StringUtils.EMPTY : map.get("warfarinInr")[0];

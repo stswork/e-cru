@@ -261,8 +261,8 @@
                 <td>LDL-Cholesterol:</td>
                 @if(d != null && d.getGlucoseBloodTest() != null && d.getGlucoseBloodTest().name().toUpperCase() ==
                 "YES") {
-                <td>Yes <input type="checkbox" name="ldlCholesterolBloodTestResult" id="ldlCholesterolBloodTest"
-                               value="ldlCholesterol" checked="checked"/>/
+                <td>Yes <input type="checkbox" name="ldlCholesterolBloodTest" id="ldlCholesterolBloodTest"
+                               value="ldlCholesterolBloodTest" checked="checked"/>/
                 </td>
                 <td>Result<input type="text" name="ldlCholesterolBloodTestResult" id="ldlCholesterolBloodTestResult"
                                  value="@d.getLdlCholesterolBloodTestResult()"/></td>
