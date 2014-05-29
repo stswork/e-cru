@@ -13,7 +13,7 @@
         </header>
         <div class="form" style="width:100%;background: #f1f1f1;border-radius: 10px;">
             @if(d != null && d.getId() != null) {
-                <form id="form1" method="POST" style="padding-top: 2%;" action="@controllers.data.routes.DataController.handleSaveForm1()" data-uri="/data/form2/@d.getId()">
+                <form id="form1" method="POST" style="padding-top: 2%;" action="@controllers.data.routes.DataController.handleSaveForm1()" data-uri="/data/form2/@d.getPatientIdNumber()">
             } else {
                 <form id="form1" method="POST" style="padding-top: 2%;" action="@controllers.data.routes.DataController.handleSaveForm1()" data-uri="@controllers.data.routes.DataController.form2(0)">
             }

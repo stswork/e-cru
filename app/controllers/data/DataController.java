@@ -55,7 +55,7 @@ public class DataController extends Controller {
         Long pid = Long.valueOf(session("pid"));
         DataCollectionForm2 d = null;
         d = (id > 0) ? Ebean.find(DataCollectionForm2.class).fetch("createdBy").fetch("modifiedBy").where(
-                Expr.eq("id", id)
+                Expr.eq("patientIdNumber", id)
         ).setMaxRows(1).findUnique() : new DataCollectionForm2();
         if(d == null)
             d = new DataCollectionForm2();
@@ -70,7 +70,7 @@ public class DataController extends Controller {
         Long pid = Long.valueOf(session("pid"));
         DataCollectionForm3 d = null;
         d = (id > 0) ? Ebean.find(DataCollectionForm3.class).fetch("createdBy").fetch("modifiedBy").where(
-                Expr.eq("id", id)
+                Expr.eq("patientIdNumber", id)
         ).setMaxRows(1).findUnique() : new DataCollectionForm3();
         if(d == null)
             d = new DataCollectionForm3();
@@ -85,7 +85,7 @@ public class DataController extends Controller {
         Long pid = Long.valueOf(session("pid"));
         DataCollectionForm4 d = null;
         d = (id > 0) ? Ebean.find(DataCollectionForm4.class).fetch("createdBy").fetch("modifiedBy").where(
-                Expr.eq("id", id)
+                Expr.eq("patientIdNumber", id)
         ).setMaxRows(1).findUnique() : new DataCollectionForm4();
         if(d == null)
             d = new DataCollectionForm4();
@@ -100,7 +100,7 @@ public class DataController extends Controller {
         Long pid = Long.valueOf(session("pid"));
         DataCollectionForm5 d = null;
         d = (id > 0) ? Ebean.find(DataCollectionForm5.class).fetch("createdBy").fetch("modifiedBy").where(
-                Expr.eq("id", id)
+                Expr.eq("patientIdNumber", id)
         ).setMaxRows(1).findUnique() : new DataCollectionForm5();
         if(d == null)
             d = new DataCollectionForm5();
@@ -115,7 +115,7 @@ public class DataController extends Controller {
         Long pid = Long.valueOf(session("pid"));
         DataCollectionForm6 d = null;
         d = (id > 0) ? Ebean.find(DataCollectionForm6.class).fetch("economicStatuses").fetch("createdBy").fetch("modifiedBy").where(
-                Expr.eq("id", id)
+                Expr.eq("patientIdNumber", id)
         ).setMaxRows(1).findUnique() : new DataCollectionForm6();
         if(d == null)
             d = new DataCollectionForm6();

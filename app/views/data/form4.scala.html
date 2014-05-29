@@ -14,7 +14,7 @@
 </header>
 <div class="form" style="width:100%;background: #f1f1f1;border-radius: 10px;">
 @if(d != null && d.getId() != null) {
-<form id="userForm" method="POST" style="padding-top: 2%;" action="@controllers.data.routes.DataController.handleSaveForm4()" data-uri="/data/form5/@d.getId()">
+<form id="userForm" method="POST" style="padding-top: 2%;" action="@controllers.data.routes.DataController.handleSaveForm4()" data-uri="/data/form5/@d.getPatientIdNumber()">
 } else {
 <form id="userForm" method="POST" style="padding-top: 2%;" action="@controllers.data.routes.DataController.handleSaveForm4()" data-uri="@controllers.data.routes.DataController.form5(0)">
 }
