@@ -268,9 +268,9 @@ public class DataController extends Controller {
         YesNo mi = YesNo.valueOf(!map.containsKey("mi") ? NO : map.get("mi")[0].toUpperCase());
         YesNo migraineWithAura = YesNo.valueOf(!map.containsKey("migraineWithAura") ? NO : map.get("migraineWithAura")[0].toUpperCase());
         YesNo migraineWithoutAura = YesNo.valueOf(!map.containsKey("migraineWithoutAura") ? NO : map.get("migraineWithoutAura")[0].toUpperCase());
-        Integer ischaemicStrokeYear = 0/*Integer.valueOf(map.get("ischaemicStrokeYear") ? StringUtils.EMPTY : map.get("ischaemicStrokeYear")[0])*/;
-        Integer hoemorrhagicStrokeYear = 0/*Integer.valueOf(map.get("hoemorrhagicStrokeYear") ? StringUtils.EMPTY : map.get("hoemorrhagicStrokeYear")[0])*/;
-        Integer tiaYear = 0/*Integer.valueOf(map.get("tiaYear") ? StringUtils.EMPTY : map.get("tiaYear")[0])*/;
+        Integer ischaemicStrokeYear = Integer.valueOf(map.get("ischaemicStrokeYear").length <= 0 ? "0" : map.get("ischaemicStrokeYear")[0]);
+        /*Integer hoemorrhagicStrokeYear = Integer.valueOf(map.get("hoemorrhagicStrokeYear") ? StringUtils.EMPTY : map.get("hoemorrhagicStrokeYear")[0])*/;
+        /*Integer tiaYear = Integer.valueOf(map.get("tiaYear") ? StringUtils.EMPTY : map.get("tiaYear")[0])*/;
         YesNo strokeAssociatedWithDissection = YesNo.valueOf(!map.containsKey("strokeAssociatedWithDissection") ? NO : map.get("strokeAssociatedWithDissection")[0].toUpperCase());
         YesNo strokeAssociatedWithPfo = YesNo.valueOf(!map.containsKey("strokeAssociatedWithPfo") ? NO : map.get("strokeAssociatedWithPfo")[0].toUpperCase());
         YesNo strokeAssociatedWithMi = YesNo.valueOf(!map.containsKey("strokeAssociatedWithMi") ? NO : map.get("strokeAssociatedWithMi")[0].toUpperCase());
@@ -292,8 +292,8 @@ public class DataController extends Controller {
         if(!StringUtils.isEmpty(never)) {
             dcf2.setNever(YesNo.YES);
         }
-        Double hip = Double.valueOf(!map.containsKey("cigarettePerDay") ? "0" : map.get("cigarettePerDay")[0]);
-        Double waist = Double.valueOf(!map.containsKey("cigarettePerDay") ? "0" : map.get("cigarettePerDay")[0]);
+        Double hip = Double.valueOf(!map.containsKey("hip") ? "0" : map.get("hip")[0]);
+        Double waist = Double.valueOf(!map.containsKey("waist") ? "0" : map.get("waist")[0]);
         dcf2.setPatientIdNumber(patientIdNumber);
         dcf2.setIschaemicStroke(ischaemicStroke);
         dcf2.setHoemorrhagicStroke(hoemorrhagicStroke);
@@ -312,8 +312,8 @@ public class DataController extends Controller {
         dcf2.setMigraineWithAura(migraineWithAura);
         dcf2.setMigraineWithoutAura(migraineWithoutAura);
         dcf2.setIschaemicStrokeYear(ischaemicStrokeYear);
-        dcf2.setHoemorrhagicStrokeYear(hoemorrhagicStrokeYear);
-        dcf2.setTiaYear(tiaYear);
+        /*dcf2.setHoemorrhagicStrokeYear(hoemorrhagicStrokeYear);
+        dcf2.setTiaYear(tiaYear);*/
         dcf2.setStrokeAssociatedWithDissection(strokeAssociatedWithDissection);
         dcf2.setStrokeAssociatedWithPfo(strokeAssociatedWithPfo);
         dcf2.setStrokeAssociatedWithMi(strokeAssociatedWithMi);
@@ -683,7 +683,7 @@ public class DataController extends Controller {
         String clopidogrel = !map.containsKey("clopidogrel") ? StringUtils.EMPTY : map.get("clopidogrel")[0];
         String aspirinPlusClopidogrel = !map.containsKey("aspirinPlusClopidogrel") ? StringUtils.EMPTY : map.get("aspirinPlusClopidogrel")[0];
         String dipyridamole = !map.containsKey("dipyridamole") ? StringUtils.EMPTY : map.get("dipyridamole")[0];
-        String aspirinPlusDipyridamole = !map.containsKey("aspirinPlusDipyridamole1") ? StringUtils.EMPTY : map.get("aspirinPlusDipyridamole1")[0];
+        String aspirinPlusDipyridamole = !map.containsKey("aspirinPlusDipyridamole") ? StringUtils.EMPTY : map.get("aspirinPlusDipyridamole")[0];
         String antihypertensive = !map.containsKey("antihypertensive") ? StringUtils.EMPTY : map.get("antihypertensive")[0];
         String warfarin = !map.containsKey("warfarin") ? StringUtils.EMPTY : map.get("warfarin")[0];
         String statin = !map.containsKey("statin") ? StringUtils.EMPTY : map.get("statin")[0];

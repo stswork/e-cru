@@ -75,8 +75,6 @@ public class DataCollectionForm3 extends Model {
 
     private String statinDosage = StringUtils.EMPTY;
 
-    private String statinName = StringUtils.EMPTY;
-
     @Constraints.Required
     private YesNo antihypertensive = YesNo.NO;
 
@@ -193,7 +191,7 @@ public class DataCollectionForm3 extends Model {
     public DataCollectionForm3() {
     }
 
-    public DataCollectionForm3(Long patientIdNumber, Integer alcoholUnitsPerWeek, Double height, Double weight, Double bmi, YesNo aspirin, String aspirinDosage, YesNo clopidogrel, String clopidogrelDosage, YesNo aspirinPlusClopidogrel, String aspirinPlusClopidogrelDosage, YesNo dipyridamole, String dipyridamoleDosage, YesNo aspirinPlusDipyridamole, String aspirinPlusDipyridamoleDosage, YesNo warfarin, String warfarinInr, YesNo statin, String statinDosage, String statinName, YesNo antihypertensive, YesNo medicineNoneOfTheAbove, YesNo glucoseBloodTest, String glucoseBloodTestResult, YesNo totalCholesterolBloodTest, String totalCholesterolBloodTestResult, YesNo hdlCholesterolBloodTest, String hdlCholesterolBloodTestResult, YesNo ldlCholesterolBloodTest, String ldlCholesterolBloodTestResult, YesNo triglycerideBloodTest, String triglycerideBloodTestResult, YesNo esrBloodTest, String esrBloodTestResult, YesNo crpBloodTest, String crpBloodTestResult, YesNo troponimBloodTest, String troponimBloodTestResult, YesNo proteinCBloodTest, String proteinCBloodTestResult, YesNo proteinSBloodTest, String proteinSBloodTestResult, YesNo fibrinogenBloodTest, String fibrinogenBloodTestResult, YesNo antithrombin11BloodTest, String antithrombin11BloodTestResult, YesNo factorVBloodTest, String factorVBloodTestResult, YesNo homocysteineBloodTest, String homocysteineBloodTestResult, YesNo prothrombinBloodTest, String prothrombinBloodTestResult, YesNo antiphospholipidBloodTest, String antiphospholipidBloodTestResult, String bpOnAdmission, String temperatureOnAdmission, YesNo carotidEndarterectomyDone, YesNo thrombolysedDone, YesNo ctaDone, YesNo mraDone, YesNo angiogramDone) {
+    public DataCollectionForm3(Long patientIdNumber, Integer alcoholUnitsPerWeek, Double height, Double weight, Double bmi, YesNo aspirin, String aspirinDosage, YesNo clopidogrel, String clopidogrelDosage, YesNo aspirinPlusClopidogrel, String aspirinPlusClopidogrelDosage, YesNo dipyridamole, String dipyridamoleDosage, YesNo aspirinPlusDipyridamole, String aspirinPlusDipyridamoleDosage, YesNo warfarin, String warfarinInr, YesNo statin, String statinDosage, YesNo antihypertensive, YesNo medicineNoneOfTheAbove, YesNo glucoseBloodTest, String glucoseBloodTestResult, YesNo totalCholesterolBloodTest, String totalCholesterolBloodTestResult, YesNo hdlCholesterolBloodTest, String hdlCholesterolBloodTestResult, YesNo ldlCholesterolBloodTest, String ldlCholesterolBloodTestResult, YesNo triglycerideBloodTest, String triglycerideBloodTestResult, YesNo esrBloodTest, String esrBloodTestResult, YesNo crpBloodTest, String crpBloodTestResult, YesNo troponimBloodTest, String troponimBloodTestResult, YesNo proteinCBloodTest, String proteinCBloodTestResult, YesNo proteinSBloodTest, String proteinSBloodTestResult, YesNo fibrinogenBloodTest, String fibrinogenBloodTestResult, YesNo antithrombin11BloodTest, String antithrombin11BloodTestResult, YesNo factorVBloodTest, String factorVBloodTestResult, YesNo homocysteineBloodTest, String homocysteineBloodTestResult, YesNo prothrombinBloodTest, String prothrombinBloodTestResult, YesNo antiphospholipidBloodTest, String antiphospholipidBloodTestResult, String bpOnAdmission, String temperatureOnAdmission, YesNo carotidEndarterectomyDone, YesNo thrombolysedDone, YesNo ctaDone, YesNo mraDone, YesNo angiogramDone) {
         this.patientIdNumber = patientIdNumber;
         this.alcoholUnitsPerWeek = alcoholUnitsPerWeek;
         this.height = height;
@@ -213,7 +211,6 @@ public class DataCollectionForm3 extends Model {
         this.warfarinInr = warfarinInr;
         this.statin = statin;
         this.statinDosage = statinDosage;
-        this.statinName = statinName;
         this.antihypertensive = antihypertensive;
         this.medicineNoneOfTheAbove = medicineNoneOfTheAbove;
         this.glucoseBloodTest = glucoseBloodTest;
@@ -447,14 +444,6 @@ public class DataCollectionForm3 extends Model {
 
     public void setStatinDosage(String statinDosage) {
         this.statinDosage = statinDosage;
-    }
-
-    public String getStatinName() {
-        return statinName;
-    }
-
-    public void setStatinName(String statinName) {
-        this.statinName = statinName;
     }
 
     public YesNo getAntihypertensive() {

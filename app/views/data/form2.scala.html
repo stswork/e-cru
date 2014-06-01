@@ -780,7 +780,11 @@
                     } else {
                     <td>Current Smoker <input type="checkbox" name="currentSmoker" id="currentSmoker" value="currentSmoker"/></td>
                     }
+                    @if(d != null && d.getCigarettePerDay() != null) {
                     <td>Cig/day <input type="text" name="cigarettePerDay" id="cigarettePerDay" style="width: 80px;" value="@d.getCigarettePerDay()"/></td>
+                    } else {
+                    <td>Cig/day <input type="text" name="cigarettePerDay" id="cigarettePerDay" style="width: 80px;" value=""/></td>
+                    }
                     <td>Hip:<input type="text" name="hip" id="hip" style="width: 80px;" value="@d.getHip()"/>cm</td>
                 </tr>
                 <tr>

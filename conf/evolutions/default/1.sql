@@ -148,7 +148,6 @@ create table data_collection_form3 (
   warfarin_inr              varchar(255),
   statin                    integer,
   statin_dosage             varchar(255),
-  statin_name               varchar(255),
   antihypertensive          integer,
   antihypertensive_dosage   varchar(255),
   medicine_none_of_the_above integer,
