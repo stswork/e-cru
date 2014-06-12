@@ -268,7 +268,7 @@ public class DataController extends Controller {
         YesNo mi = YesNo.valueOf(!map.containsKey("mi") ? NO : map.get("mi")[0].toUpperCase());
         YesNo migraineWithAura = YesNo.valueOf(!map.containsKey("migraineWithAura") ? NO : map.get("migraineWithAura")[0].toUpperCase());
         YesNo migraineWithoutAura = YesNo.valueOf(!map.containsKey("migraineWithoutAura") ? NO : map.get("migraineWithoutAura")[0].toUpperCase());
-        Integer ischaemicStrokeYear = Integer.valueOf(StringUtils.isEmpty(map.get("patientPreviousStroke")[0]) || map.get("patientPreviousStroke")[0].equals("") ? "0" : map.get("patientPreviousStroke")[0]);
+        Integer ischaemicStrokeYear = Integer.valueOf(map.get("patientPreviousStroke")[0].equals("") || StringUtils.isEmpty(map.get("patientPreviousStroke")[0]) ? "0" : map.get("patientPreviousStroke")[0]);
         /*Integer hoemorrhagicStrokeYear = Integer.valueOf(map.get("hoemorrhagicStrokeYear") ? StringUtils.EMPTY : map.get("hoemorrhagicStrokeYear")[0])*/;
         /*Integer tiaYear = Integer.valueOf(map.get("tiaYear") ? StringUtils.EMPTY : map.get("tiaYear")[0])*/;
         YesNo strokeAssociatedWithDissection = YesNo.valueOf(!map.containsKey("strokeAssociatedWithDissection") ? NO : map.get("strokeAssociatedWithDissection")[0].toUpperCase());
