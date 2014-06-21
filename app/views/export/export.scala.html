@@ -1,0 +1,161 @@
+@(message: String)
+@import tags._
+@import java.math.BigInteger; var i=0
+@main("Home") {
+<div id="wrapper" class="container_12 clearfix">
+    <!-- Text Logo -->
+    @header(u)
+    <div class="container">
+        <header>
+            <h1>Patient List</h1>
+        </header>
+        <div style="width:100%;background: #f1f1f1;border-radius: 4px;" class="form">
+
+            <input type="text" placeholder="Patient Name/ ID/ Trail Site" name="searchQ" id="searchQ" style="margin: 13px 0px 0px 0px;"/>
+        </div>
+        <div style="width:100%;" class="form">
+            <form id="patientListForm">
+            <table>
+                <tr>
+                    <td>From Date</td>
+                    <td><input type="text" name="fromDate" id="fromDate" placeholder="01/01/1990"/></td>
+                    <td>To Date</td>
+                    <td><input type="text" name="toDate" id="toDate" placeholder="01/01/1990"/></td>
+
+
+                </tr>
+                <tr>
+                    <td colspan="4"> <input type="submit" id="submit" name="submit" value="Export" ></td>
+                </tr>
+            </table>
+
+            </form>
+        </div>
+    </div>
+    <!-- <div class="hr grid_12 clearfix">&nbsp;</div>-->
+    <!-- Footer -->
+    @footer()
+</div>
+} {
+<link rel="stylesheet" media="screen" href='@routes.Assets.at("stylesheets/table.css")'>
+<link rel="stylesheet" media="screen" href='@routes.Assets.at("stylesheets/tablePaginator.css")'>
+<style type="text/css">
+    .ui-dialog-titlebar-close {
+    display: none;
+    }
+</style>
+<script type="text/javascript" src='@routes.Assets.at("javascripts/jquery.tablePagination.0.5.js")'></script>
+<script type="text/javascript">
+
+    $(function() {
+    $('#fromDate').datepicker();
+    $('#toDate').datepicker();
+    });
+
+    $(function() {
+    /* For zebra striping */
+    $("table tr:nth-child(odd)").addClass("odd-row");
+    /* For cell text alignment */
+    $("table td:first-child, table th:first-child").addClass("first");
+    /* For removing the last border */
+    $("table td:last-child, table th:last-child").addClass("last");
+    });
+    // document ready function
+    $(document).ready(function() {
+    $("#searchQ").bind("keyup", function() {
+    var value = $(this).val().toUpperCase();
+    $("table tr").each(function(index) {
+    if (index !== 0) {
+    $row = $(this);
+    var _pid = $row.find("td").eq(0).text().toUpperCase();
+    var _pn = $row.find("td").eq(1).text().toUpperCase();
+    var _ts = $row.find("td").eq(2).text().toUpperCase();
+    if (_pid.indexOf(value) >= 0) {
+    $row.show();
+    } else if (_pn.indexOf(value) >= 0) {
+    $row.show();
+    } else if (_ts.indexOf(value) >= 0) {
+    $row.show();
+    } else {
+    $row.hide();
+    }
+    }
+    });
+    });
+
+    var options = {
+    currPage : 1,
+    optionsForRows : [10,15,20],
+    rowsPerPage : 5,
+    ignoreRows : $('tr:first', $('#patientList')),
+    firstArrow : (new Image()).src="@routes.Assets.at("images/first.gif")",
+    prevArrow : (new Image()).src="@routes.Assets.at("images/prev.gif")",
+    lastArrow : (new Image()).src="@routes.Assets.at("images/last.gif")",
+    nextArrow : (new Image()).src="@routes.Assets.at("images/next.gif")",
+    topNav : true
+    }
+    $('#patientList').tablePagination(options);
+
+    /** disable click **/
+    $('#disable-action').live("click", function(e) {
+    e.preventDefault();
+    var _uri = $(e.currentTarget).data().href;
+    var _id = $(e.currentTarget).data().id;
+    $("#disable-dialog").dialog({
+    resizable: false,
+    dialogClass: 'no-close',
+    closeOnEscape: "true",
+    show: {
+    effect: "fade",
+    duration: 500
+    },
+    hide: {
+    effect: "fade",
+    duration: 500
+    },
+    buttons: [
+    {
+    text: "YES",
+    width: 100,
+    class: 'btn btn-warning',
+    click: function() {
+    $.ajax({
+    type: "POST",
+    url: _uri,
+    data: "id=" + _id,
+    success: function(e) {
+    $(document).ready(function() {
+    $('.ui-dialog-buttonpane').hide();
+    $("#disable-dialog p").html("Record deleted successfully!");
+    setTimeout(function () {
+    window.location='/data/list';
+    }, 2500);
+    });
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+    $('#contactform').find("div.message p").html(errorThrown);
+    $('#contactform').find("div.message").show();
+    setTimeout(function () {
+    $('#contactform').find("div.message").hide();
+    }, 5000);
+    },
+    dataType: "json"
+    });
+    }
+    },
+    {
+    text: "NO",
+    width: 100,
+    class: 'btn',
+    click: function() {
+    $( this ).dialog( "close" );
+    }
+    }
+    ]
+    });
+    console.log(e);
+    });
+    });
+</script>
+<!-- Table goes in the document BODY -->
+}
