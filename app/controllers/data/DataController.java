@@ -36,6 +36,14 @@ public class DataController extends Controller {
     private static final String URL_SEPARATOR = "/";
 
     @With(Authenticated.class)
+    public static Result formExport() {
+        models.response.user.User u = (models.response.user.User) ctx().args.get("user");
+        session().remove("pid");
+        return ok(views.html.export.export.render("Excel Export", u));
+    }
+
+
+    @With(Authenticated.class)
     public static Result form1(Long id) {
         models.response.user.User u = (models.response.user.User) ctx().args.get("user");
         models.response.data.EconomicStatus es = new models.response.data.EconomicStatus();
@@ -48,7 +56,7 @@ public class DataController extends Controller {
             d = new DataCollectionForm1();
         if (d.getEconomicStatuses() != null)
             es = economicStatus(d.getEconomicStatuses());
-        if(es.getBed()!=null ){}
+
         return ok(views.html.data.form1.render("Form1", u, d,es));
     }
 
@@ -211,6 +219,7 @@ public class DataController extends Controller {
 
     @With(Authenticated.class)
     public static Result form6(Long id) {
+        models.response.data.EconomicStatus es = new models.response.data.EconomicStatus();
         models.response.user.User u = (models.response.user.User) ctx().args.get("user");
         if (StringUtils.isEmpty(session("pid")))
             return redirect(controllers.data.routes.DataController.form1(0));
@@ -221,7 +230,9 @@ public class DataController extends Controller {
         ).setMaxRows(1).findUnique() : new DataCollectionForm6();
         if (d == null)
             d = new DataCollectionForm6();
-        return ok(views.html.data.form6.render("Form6", u, pid, d));
+        if (d.getEconomicStatuses() != null)
+            es = economicStatus(d.getEconomicStatuses());
+        return ok(views.html.data.form6.render("Form6", u, pid, d,es));
     }
 
     @With(Authenticated.class)
