@@ -14,7 +14,8 @@ libraryDependencies ++= Seq(
   //"com.jolbox" % "bonecp" % "0.8.1-SNAPSHOT",
   "org.postgresql" % "postgresql" % "9.3-1100-jdbc4",
   "org.mindrot" % "jbcrypt" % "0.3m",
-  "joda-time" % "joda-time" % "2.0"
+  "joda-time" % "joda-time" % "2.0",
+  "net.sf.opencsv" % "opencsv" % "2.3"
 )
 
 resolvers += "Sonatype OSS Snapshots Repository" at "http://oss.sonatype.org/content/groups/public"
