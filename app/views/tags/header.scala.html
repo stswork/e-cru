@@ -3,12 +3,11 @@
 <!-- Navigation Menu -->
 <div class="freshdesignweb-top">
     <ul id="navigation" class="grid_18">
-        @if(u.getUserType.equalsIgnoreCase("SUPER_USER")) {
-
+        @if(u.getUserType().equalsIgnoreCase("SUPER_USER")) {
         <li><a href="@controllers.user.routes.UserController.getUsers()"><span class="meta">New User?</span><br />
             Add</a></li>
         }
-        <li><a href="@controllers.data.routes.DataController.formExport()"><span class="meta">Excel?</span><br />
+        <li><a href="@controllers.export.routes.ExportController.export()"><span class="meta">Excel?</span><br />
             Export Data</a></li>
         <li><a href="@controllers.data.routes.DataController.form1(0)"><span class="meta">Form Data?</span><br />
             Add Form</a></li>

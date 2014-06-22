@@ -11,6 +11,7 @@ import models.response.ResponseMessage;
 import models.response.ResponseMessageType;
 import models.response.data.*;
 import models.user.User;
+import models.utils.EconomicStatusUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
@@ -36,17 +37,9 @@ public class DataController extends Controller {
     private static final String URL_SEPARATOR = "/";
 
     @With(Authenticated.class)
-    public static Result formExport() {
-        models.response.user.User u = (models.response.user.User) ctx().args.get("user");
-        session().remove("pid");
-        return ok(views.html.export.export.render("Excel Export", u));
-    }
-
-
-    @With(Authenticated.class)
     public static Result form1(Long id) {
         models.response.user.User u = (models.response.user.User) ctx().args.get("user");
-        models.response.data.EconomicStatus es = new models.response.data.EconomicStatus();
+        models.response.data.EconomicStatus es = null;
         session().remove("pid");
         DataCollectionForm1 d = null;
         d = (id > 0) ? Ebean.find(DataCollectionForm1.class).fetch("economicStatuses").fetch("createdBy").fetch("modifiedBy").where(
@@ -54,110 +47,71 @@ public class DataController extends Controller {
         ).setMaxRows(1).findUnique() : new DataCollectionForm1();
         if (d == null)
             d = new DataCollectionForm1();
-        if (d.getEconomicStatuses() != null)
-            es = economicStatus(d.getEconomicStatuses());
-
-        return ok(views.html.data.form1.render("Form1", u, d,es));
+        if (d.getEconomicStatuses() != null && d.getEconomicStatuses().size() > 0)
+            es = EconomicStatusUtil.getEconomicStatus(d.getEconomicStatuses());
+            //s = economicStatus(d.getEconomicStatuses());
+        models.EconomicStatus[] economicStatuses = models.EconomicStatus.values();
+        return ok(views.html.data.form1.render("Form1", u, d, es));
     }
 
-    public static models.response.data.EconomicStatus economicStatus(List<EconomicStatus> e) {
+    /*public static models.response.data.EconomicStatus economicStatus(List<EconomicStatus> e) {
         models.response.data.EconomicStatus es = new models.response.data.EconomicStatus();
         for (int i = 0; i < e.size(); i++) {
             if (e.get(i).getName().equalsIgnoreCase("Bed")) {
-            es.setBed(1);
-            }
-            else if (e.get(i).getName().equalsIgnoreCase("Electricity")) {
-             es.setElectricity(1);
-            }
-            else if (e.get(i).getName().equalsIgnoreCase("Table")) {
+                es.setBed(1);
+            } else if (e.get(i).getName().equalsIgnoreCase("Electricity")) {
+                es.setElectricity(1);
+            } else if (e.get(i).getName().equalsIgnoreCase("Table")) {
               es.setTable(1);
-            }
-
-
-            else if (e.get(i).getName().equalsIgnoreCase("Toilet")) {
+            } else if (e.get(i).getName().equalsIgnoreCase("Toilet")) {
                es.setToilet(1);
-            }
-            else if (e.get(i).getName().equalsIgnoreCase("Roofed house")) {
+            } else if (e.get(i).getName().equalsIgnoreCase("Roofed house")) {
                 es.setRoofedHouse(1);
-            }
-            else if (e.get(i).getName().equalsIgnoreCase("Water Filter")) {
+            } else if (e.get(i).getName().equalsIgnoreCase("Water Filter")) {
                 es.setWaterFilter(1);
-            }
-
-
-            else if (e.get(i).getName().equalsIgnoreCase("Fan")) {
+            } else if (e.get(i).getName().equalsIgnoreCase("Fan")) {
                 es.setFan(1);
-            }
-            else if (e.get(i).getName().equalsIgnoreCase("Cooler")) {
+            } else if (e.get(i).getName().equalsIgnoreCase("Cooler")) {
                 es.setCooler(1);
-            }
-            else if (e.get(i).getName().equalsIgnoreCase("Cooking Gas")) {
+            } else if (e.get(i).getName().equalsIgnoreCase("Cooking Gas")) {
                 es.setCookingGas(1);
-            }
-
-
-            else if (e.get(i).getName().equalsIgnoreCase("T.V.")) {
+            } else if (e.get(i).getName().equalsIgnoreCase("T.V.")) {
                 es.setTV(1);
-            }
-            else if (e.get(i).getName().equalsIgnoreCase("Phone")) {
+            } else if (e.get(i).getName().equalsIgnoreCase("Phone")) {
                 es.setPhone(1);
-            }
-            else if (e.get(i).getName().equalsIgnoreCase("Scooter")) {
+            } else if (e.get(i).getName().equalsIgnoreCase("Scooter")) {
                 es.setScooter(1);
-            }
-
-
-            else if (e.get(i).getName().equalsIgnoreCase("Sofa Set")) {
+            } else if (e.get(i).getName().equalsIgnoreCase("Sofa Set")) {
                 es.setSofaSet(1);
-            }
-            else if (e.get(i).getName().equalsIgnoreCase("Curtain in windows")) {
+            } else if (e.get(i).getName().equalsIgnoreCase("Curtain in windows")) {
                 es.setCurtainInWindows(1);
-            }
-            else if (e.get(i).getName().equalsIgnoreCase("Refrigerator")) {
+            } else if (e.get(i).getName().equalsIgnoreCase("Refrigerator")) {
                 es.setRefrigerator(1);
-            }
-
-
-            else if (e.get(i).getName().equalsIgnoreCase("Mixer Grinder")) {
+            } else if (e.get(i).getName().equalsIgnoreCase("Mixer Grinder")) {
                 es.setMixerGrinder(1);
-            }
-            else if (e.get(i).getName().equalsIgnoreCase("Dining Table")) {
+            } else if (e.get(i).getName().equalsIgnoreCase("Dining Table")) {
                 es.setDiningTable(1);
-            }
-            else if (e.get(i).getName().equalsIgnoreCase("Toaster")) {
+            } else if (e.get(i).getName().equalsIgnoreCase("Toaster")) {
                 es.setToaster(1);
-            }
-
-
-            else if (e.get(i).getName().equalsIgnoreCase("Aqua guard")) {
+            } else if (e.get(i).getName().equalsIgnoreCase("Aqua guard")) {
                 es.setAquaguard(1);
-            }
-            else if (e.get(i).getName().equalsIgnoreCase("Microwave oven")) {
+            } else if (e.get(i).getName().equalsIgnoreCase("Microwave oven")) {
                 es.setMicrowaveOven(1);
-            }
-            else if (e.get(i).getName().equalsIgnoreCase("Computer")) {
+            } else if (e.get(i).getName().equalsIgnoreCase("Computer")) {
                 es.setComputer(1);
-            }
-
-
-            else if (e.get(i).getName().equalsIgnoreCase("Geyser")) {
+            } else if (e.get(i).getName().equalsIgnoreCase("Geyser")) {
                 es.setGeyser(1);
-            }
-            else if (e.get(i).getName().equalsIgnoreCase("R.O. Water Purifier System")) {
+            } else if (e.get(i).getName().equalsIgnoreCase("R.O. Water Purifier System")) {
                 es.setRO(1);
-            }
-            else if (e.get(i).getName().equalsIgnoreCase("Car")) {
+            } else if (e.get(i).getName().equalsIgnoreCase("Car")) {
                 es.setCar(1);
-            }
-
-
-            else if (e.get(i).getName().equalsIgnoreCase("A.C.")) {
+            } else if (e.get(i).getName().equalsIgnoreCase("A.C.")) {
               es.setAC(1);
             }
         }
         return es;
-    }
-
+    }*/
+    @With(Authenticated.class)
     public static Result form2(Long id) {
         models.response.user.User u = (models.response.user.User) ctx().args.get("user");
         if (StringUtils.isEmpty(session("pid")))
@@ -231,8 +185,8 @@ public class DataController extends Controller {
         if (d == null)
             d = new DataCollectionForm6();
         if (d.getEconomicStatuses() != null)
-            es = economicStatus(d.getEconomicStatuses());
-        return ok(views.html.data.form6.render("Form6", u, pid, d,es));
+            es = EconomicStatusUtil.getEconomicStatus(d.getEconomicStatuses());
+        return ok(views.html.data.form6.render("Form6", u, pid, d, es));
     }
 
     @With(Authenticated.class)
@@ -324,7 +278,7 @@ public class DataController extends Controller {
             for (String s : economicStatuses) {
                 EconomicStatus status = Ebean.find(EconomicStatus.class).fetch("dataCollectionForm1").where(
                         Expr.and(
-                                Expr.eq("dataCollectionForm1", id),
+                                Expr.eq("dataCollectionForm1.id", id),
                                 Expr.ieq("name", s)
                         )
                 ).setMaxRows(1).findUnique();
@@ -968,7 +922,7 @@ public class DataController extends Controller {
             for (String s : economicStatuses) {
                 EconomicStatus status = Ebean.find(EconomicStatus.class).fetch("dataCollectionForm6").where(
                         Expr.and(
-                                Expr.eq("dataCollectionForm6", id),
+                                Expr.eq("dataCollectionForm6.id", id),
                                 Expr.ieq("name", s)
                         )
                 ).setMaxRows(1).findUnique();

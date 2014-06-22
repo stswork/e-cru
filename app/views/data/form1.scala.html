@@ -1,4 +1,4 @@
-@(message: String, u: models.response.user.User, d: models.data.form.DataCollectionForm1,es: models.response.data.EconomicStatus)
+@(message: String, u: models.response.user.User, d: models.data.form.DataCollectionForm1, es: models.response.data.EconomicStatus)
 
 @import tags._
 @main("User") {
@@ -112,150 +112,65 @@
                         <td>Economic Status</td>
                         <td colspan="3">
                             <table name="economicStatus">
-                                    <tr>
-                                        @if(es !=null && es.getBed()!=0) {
-                                        <td><input type="checkbox" name="economicStatuses[]" id="bed" value="Bed"  checked/>(1) Bed</td>
-                                        } else {
-                                        <td><input type="checkbox" name="economicStatuses[]" id="bed" value="Bed"  />(1) Bed</td>
+                                        @if(es != null && es.getCheckedEconomicStatuses().size() > 0) {
+                                            @for(e <- es.getCheckedEconomicStatuses()) {
+                                                <tr>
+                                                <td><input type="checkbox" name="economicStatuses[]" id="@e.getDisplayName()" value="@e.name()"  checked/>@e.getDisplayName</td>
+                                                </tr>
+                                            }
                                         }
-                                        @if(es !=null && es.getElectricity()!=0) {
-                                        <td><input type="checkbox" name="economicStatuses[]" id="Electricity" value="Electricity" checked />(2) Electricity</td>
-                                        } else {
-                                        <td><input type="checkbox" name="economicStatuses[]" id="Electricity" value="Electricity"  />(2) Electricity</td>
+                                        @if(es != null && es.getUncheckedEconomicStatuses().size() > 0) {
+                                            @for(e <- es.getUncheckedEconomicStatuses()) {
+                                                <tr>
+                                                <td><input type="checkbox" name="economicStatuses[]" id="@e.getDisplayName()" value="@e.name()" />@e.getDisplayName</td>
+                                                </tr>
+                                            }
                                         }
-                                        @if(es !=null && es.getTable()!=0) {
-                                        <td><input type="checkbox" name="economicStatuses[]" id="Table" value="Table" title="(3) Table" checked />(3) Table</td>
-                                        } else {
-                                        <td><input type="checkbox" name="economicStatuses[]" id="Table" value="Table" title="(3) Table" />(3) Table</td>
+                                        @if(es == null) {
+                                            <tr>
+                                                <td><input type="checkbox" name="economicStatuses[]" id="bed" value="Bed"  />(1) Bed</td>
+                                                <td><input type="checkbox" name="economicStatuses[]" id="Electricity" value="Electricity"  />(2) Electricity</td>
+                                                <td><input type="checkbox" name="economicStatuses[]" id="Table" value="Table" title="(3) Table" />(3) Table</td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" name="economicStatuses[]" id="Toilet" value="Toilet" title="(4) Toilet" />(4) Toilet</td>
+                                                <td><input type="checkbox" name="economicStatuses[]" id="Roofed house" value=" Roofed house"  />(5) Roofed house</td>
+                                                <td><input type="checkbox" name="economicStatuses[]" id="Water Filter" value="Water Filter"  />(6) Water Filter</td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" name="economicStatuses[]" id="Fan" value="Fan"  />(7)  Fan</td>
+                                                <td><input type="checkbox" name="economicStatuses[]" id="Cooler" value="Cooler"  />(8) Cooler</td>
+                                                <td><input type="checkbox" name="economicStatuses[]" id="Cooking Gas" value="Cooking Gas"  />(9) Cooking Gas</td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" name="economicStatuses[]" id="T.V." value="T.V."  />(10)  T.V.</td>
+                                                <td><input type="checkbox" name="economicStatuses[]" id="Phone" value="Phone"  />(11) Phone/Mobile</td>
+                                                <td><input type="checkbox" name="economicStatuses[]" id="Scooter" value="Scooter"  />(12) Scooter/Bike</td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" name="economicStatuses[]" id="Sofa Set" value="Sofa Set"  />(13) Sofa Set</td>
+                                                <td><input type="checkbox" name="economicStatuses[]" id="Curtain in windows" value="Curtain in windows"  />(14) Curtain in windows</td>
+                                                <td><input type="checkbox" name="economicStatuses[]" id="Refrigerator" value="Refrigerator"  />(15) Refrigerator</td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" name="economicStatuses[]" id="Mixer Grinder" value="Mixer Grinder"  />(16) Mixer Grinder</td>
+                                                <td><input type="checkbox" name="economicStatuses[]" id="Dining Table" value="Dining Table"  />(17) Dining Table</td>
+                                                <td><input type="checkbox" name="economicStatuses[]" id="Toaster" value="Toaster"  />(18) Toaster</td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" name="economicStatuses[]" id="Aqua guard" value="Aqua guard"  />(19) Aqua guard</td>
+                                                <td><input type="checkbox" name="economicStatuses[]" id="Microwave oven" value="Microwave oven"  />(20) Microwave oven</td>
+                                                <td><input type="checkbox" name="economicStatuses[]" id="Computer" value="Computer"  />(21) Computer</td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" name="economicStatuses[]" id="Geyser" value="Geyser"  />(22) Geyser</td>
+                                                <td><input type="checkbox" name="economicStatuses[]" id="R.O. Water Purifier System" value="R.O. Water Purifier System"  />(23) R.O. Water
+                                                <td><input type="checkbox" name="economicStatuses[]" id="Car" value="Car"  />(24) Car</td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" name="economicStatuses[]" id="A.C." value="A.C."  />(25) A.C.</td>
+                                            </tr>
                                         }
-                                    </tr>
-                                    <tr>
-                                        @if(es !=null && es.getToilet()!=0) {
-                                        <td><input type="checkbox" name="economicStatuses[]" id="Toilet" value="Toilet" title="(4) Toilet" checked/>(4) Toilet</td>
-                                        } else {
-                                        <td><input type="checkbox" name="economicStatuses[]" id="Toilet" value="Toilet" title="(4) Toilet" />(4) Toilet</td>
-                                        }
-                                        @if(es !=null && es.getRoofedHouse()!=0) {
-                                        <td><input type="checkbox" name="economicStatuses[]" id="Roofed house" value=" Roofed house"  checked/>(5) Roofed house</td>
-                                        } else {
-                                        <td><input type="checkbox" name="economicStatuses[]" id="Roofed house" value=" Roofed house"  />(5) Roofed house</td>
-                                        }
-                                        @if(es !=null && es.getWaterFilter()!=0) {
-                                        <td><input type="checkbox" name="economicStatuses[]" id="Water Filter" value="Water Filter"  />(6) Water Filter</td>
-                                        } else {
-                                        <td><input type="checkbox" name="economicStatuses[]" id="Water Filter" value="Water Filter"  />(6) Water Filter</td>
-                                        }
-                                    </tr>
-                                    <tr>
-                                        @if(es !=null && es.getFan()!=0) {
-                                        <td><input type="checkbox" name="economicStatuses[]" id="Fan" value="Fan"  checked/>(7)  Fan</td>
-                                        } else {
-                                        <td><input type="checkbox" name="economicStatuses[]" id="Fan" value="Fan"  />(7)  Fan</td>
-                                        }
-                                        @if(es !=null && es.getCooler()!=0) {
-                                        <td><input type="checkbox" name="economicStatuses[]" id="Cooler" value="Cooler"  checked/>(8) Cooler</td>
-                                        } else {
-                                        <td><input type="checkbox" name="economicStatuses[]" id="Cooler" value="Cooler"  />(8) Cooler</td>
-                                        }
-                                        @if(es !=null && es.getCookingGas()!=0) {
-                                        <td><input type="checkbox" name="economicStatuses[]" id="Cooking Gas" value="Cooking Gas" checked />(9) Cooking Gas</td>
-                                        } else {
-                                        <td><input type="checkbox" name="economicStatuses[]" id="Cooking Gas" value="Cooking Gas"  />(9) Cooking Gas</td>
-                                        }
-                                    </tr>
-                                    <tr>
-                                        @if(es !=null && es.getTV()!=0) {
-                                        <td><input type="checkbox" name="economicStatuses[]" id="T.V." value="T.V." checked />(10)  T.V.</td>
-                                        } else {
-                                        <td><input type="checkbox" name="economicStatuses[]" id="T.V." value="T.V."  />(10)  T.V.</td>
-                                        }
-                                        @if(es !=null && es.getPhone()!=0) {
-                                        <td><input type="checkbox" name="economicStatuses[]" id="Phone" value="Phone" checked />(11) Phone/Mobile</td>
-                                        } else {
-                                        <td><input type="checkbox" name="economicStatuses[]" id="Phone" value="Phone"  />(11) Phone/Mobile</td>
-                                        }
-                                        @if(es !=null && es.getScooter()!=0) {
-                                        <td><input type="checkbox" name="economicStatuses[]" id="Scooter" value="Scooter" checked />(12) Scooter/Bike</td>
-                                        } else {
-                                        <td><input type="checkbox" name="economicStatuses[]" id="Scooter" value="Scooter"  />(12) Scooter/Bike</td>
-                                        }
-                                    </tr>
-                                    <tr>
-                                        @if(es !=null && es.getSofaSet()!=0) {
-                                        <td><input type="checkbox" name="economicStatuses[]" id="Sofa Set" value="Sofa Set" checked />(13) Sofa Set</td>
-                                        } else {
-                                        <td><input type="checkbox" name="economicStatuses[]" id="Sofa Set" value="Sofa Set"  />(13) Sofa Set</td>
-                                        }
-                                        @if(es !=null && es.getCurtainInWindows()!=0) {
-                                        <td><input type="checkbox" name="economicStatuses[]" id="Curtain in windows" value="Curtain in windows" checked />(14) Curtain in windows</td>
-                                        } else {
-                                        <td><input type="checkbox" name="economicStatuses[]" id="Curtain in windows" value="Curtain in windows"  />(14) Curtain in windows</td>
-                                        }
-                                        @if(es !=null && es.getRefrigerator()!=0) {
-                                        <td><input type="checkbox" name="economicStatuses[]" id="Refrigerator" value="Refrigerator" checked />(15) Refrigerator</td>
-                                        } else {
-                                        <td><input type="checkbox" name="economicStatuses[]" id="Refrigerator" value="Refrigerator"  />(15) Refrigerator</td>
-                                        }
-                                    </tr>
-                                    <tr>
-                                        @if(es !=null && es.getMixerGrinder()!=0) {
-                                        <td><input type="checkbox" name="economicStatuses[]" id="Mixer Grinder" value="Mixer Grinder" checked />(16) Mixer Grinder</td>
-                                        } else {
-                                        <td><input type="checkbox" name="economicStatuses[]" id="Mixer Grinder" value="Mixer Grinder"  />(16) Mixer Grinder</td>
-                                        }
-                                        @if(es !=null && es.getDiningTable()!=0) {
-                                        <td><input type="checkbox" name="economicStatuses[]" id="Dining Table" value="Dining Table" checked />(17) Dining Table</td>
-                                        } else {
-                                        <td><input type="checkbox" name="economicStatuses[]" id="Dining Table" value="Dining Table"  />(17) Dining Table</td>
-                                        }
-                                        @if(es !=null && es.getToaster()!=0) {
-                                        <td><input type="checkbox" name="economicStatuses[]" id="Toaster" value="Toaster" checked />(18) Toaster</td>
-                                        } else {
-                                        <td><input type="checkbox" name="economicStatuses[]" id="Toaster" value="Toaster"  />(18) Toaster</td>
-                                        }
-                                    </tr>
-                                    <tr>
-                                        @if(es !=null && es.getAquaguard()!=0) {
-                                        <td><input type="checkbox" name="economicStatuses[]" id="Aqua guard" value="Aqua guard" checked />(19) Aqua guard</td>
-                                        } else {
-                                        <td><input type="checkbox" name="economicStatuses[]" id="Aqua guard" value="Aqua guard"  />(19) Aqua guard</td>
-                                        }
-                                        @if(es !=null && es.getMicrowaveOven()!=0) {
-                                        <td><input type="checkbox" name="economicStatuses[]" id="Microwave oven" value="Microwave oven" checked />(20) Microwave oven</td>
-                                        } else {
-                                        <td><input type="checkbox" name="economicStatuses[]" id="Microwave oven" value="Microwave oven"  />(20) Microwave oven</td>
-                                        }
-                                        @if(es !=null && es.getComputer()!=0) {
-                                        <td><input type="checkbox" name="economicStatuses[]" id="Computer" value="Computer" checked />(21) Computer</td>
-                                        } else {
-                                        <td><input type="checkbox" name="economicStatuses[]" id="Computer" value="Computer"  />(21) Computer</td>
-                                        }
-                                    </tr>
-                                    <tr>
-                                        @if(es !=null && es.getGeyser()!=0) {
-                                        <td><input type="checkbox" name="economicStatuses[]" id="Geyser" value="Geyser"checked  />(22) Geyser</td>
-                                        } else {
-                                        <td><input type="checkbox" name="economicStatuses[]" id="Geyser" value="Geyser"  />(22) Geyser</td>
-                                        }
-                                        @if(es !=null && es.getRO()!=0) {
-                                        <td><input type="checkbox" name="economicStatuses[]" id="R.O. Water Purifier System" value="R.O. Water Purifier System" checked />(23) R.O. Water Purifier System</td>
-                                        } else {
-                                        <td><input type="checkbox" name="economicStatuses[]" id="R.O. Water Purifier System" value="R.O. Water Purifier System"  />(23) R.O. Water Purifier System</td>
-                                        }
-                                        @if(es !=null && es.getCar()!=0) {
-                                        <td><input type="checkbox" name="economicStatuses[]" id="Car" value="Car" checked />(24) Car</td>
-                                        } else {
-                                        <td><input type="checkbox" name="economicStatuses[]" id="Car" value="Car"  />(24) Car</td>
-                                        }
-                                    </tr>
-                                    <tr>
-                                        @if(es !=null && es.getAC()!=0) {
-                                        <td><input type="checkbox" name="economicStatuses[]" id="A.C." value="A.C." checked />(25) A.C.</td>
-                                        } else {
-                                        <td><input type="checkbox" name="economicStatuses[]" id="A.C." value="A.C."  />(25) A.C.</td>
-                                        }
-                                    </tr>
-
                             </table>
                         </td>
                     </tr>

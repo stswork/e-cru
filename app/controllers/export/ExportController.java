@@ -1,5 +1,6 @@
 package controllers.export;
 
+import actions.Authenticated;
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.Expr;
 import models.Status;
@@ -11,6 +12,7 @@ import play.Logger;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.With;
 
 import java.util.List;
 
@@ -19,6 +21,14 @@ import java.util.List;
  */
 public class ExportController extends Controller {
 
+    @With(Authenticated.class)
+    public static Result export() {
+        models.response.user.User u = (models.response.user.User) ctx().args.get("user");
+        session().remove("pid");
+        return ok(views.html.export.export.render("Excel Export", u));
+    }
+
+    @With(Authenticated.class)
     public static Result exportToExcel(Long id) {
         final DataCollectionForm1 dcf1 = Ebean.find(DataCollectionForm1.class).where(Expr.and(Expr.ne("status", models.Status.DISABLED),Expr.eq("patientIdNumber", id))).findUnique();
         final DataCollectionForm2 dcf2 = Ebean.find(DataCollectionForm2.class).where(Expr.and(Expr.ne("status", models.Status.DISABLED),Expr.eq("patientIdNumber", id))).findUnique();
@@ -135,7 +145,7 @@ public class ExportController extends Controller {
         }
         // Serves this stream with 200 OK
         response().setContentType("text/csv");
-        response().setHeader("Content-Disposition", "attachment; filename=DistributionExport.csv");
+        response().setHeader("Content-Disposition", "attachment; filename=PatientData.csv");
         return ok(chunks);
     }
 }
