@@ -36,3 +36,4 @@ POST        /data/disable                 controllers.data.DataController.disabl
 # EXPORT
 
 GET         /export/excel/:id             controllers.export.ExportController.exportToExcel(id: Long)
+GET         /export                       controllers.data.DataController.formExport()

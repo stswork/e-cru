@@ -6,9 +6,10 @@ import com.avaje.ebean.Expr;
 import com.avaje.ebean.Query;
 import models.YesNo;
 import models.data.form.*;
+import models.data.form.EconomicStatus;
 import models.response.ResponseMessage;
 import models.response.ResponseMessageType;
-import models.response.data.Patient;
+import models.response.data.*;
 import models.user.User;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
@@ -35,91 +36,203 @@ public class DataController extends Controller {
     private static final String URL_SEPARATOR = "/";
 
     @With(Authenticated.class)
-    public static Result form1(Long id){
+    public static Result formExport() {
         models.response.user.User u = (models.response.user.User) ctx().args.get("user");
+        session().remove("pid");
+        return ok(views.html.export.export.render("Excel Export", u));
+    }
+
+
+    @With(Authenticated.class)
+    public static Result form1(Long id) {
+        models.response.user.User u = (models.response.user.User) ctx().args.get("user");
+        models.response.data.EconomicStatus es = new models.response.data.EconomicStatus();
         session().remove("pid");
         DataCollectionForm1 d = null;
         d = (id > 0) ? Ebean.find(DataCollectionForm1.class).fetch("economicStatuses").fetch("createdBy").fetch("modifiedBy").where(
                 Expr.eq("id", id)
         ).setMaxRows(1).findUnique() : new DataCollectionForm1();
-        if(d == null)
+        if (d == null)
             d = new DataCollectionForm1();
-        return ok(views.html.data.form1.render("Form1", u, d));
+        if (d.getEconomicStatuses() != null)
+            es = economicStatus(d.getEconomicStatuses());
+
+        return ok(views.html.data.form1.render("Form1", u, d,es));
     }
 
-    @With(Authenticated.class)
-    public static Result form2(Long id){
-         models.response.user.User u = (models.response.user.User) ctx().args.get("user");
-        if(StringUtils.isEmpty(session("pid")))
+    public static models.response.data.EconomicStatus economicStatus(List<EconomicStatus> e) {
+        models.response.data.EconomicStatus es = new models.response.data.EconomicStatus();
+        for (int i = 0; i < e.size(); i++) {
+            if (e.get(i).getName().equalsIgnoreCase("Bed")) {
+            es.setBed(1);
+            }
+            else if (e.get(i).getName().equalsIgnoreCase("Electricity")) {
+             es.setElectricity(1);
+            }
+            else if (e.get(i).getName().equalsIgnoreCase("Table")) {
+              es.setTable(1);
+            }
+
+
+            else if (e.get(i).getName().equalsIgnoreCase("Toilet")) {
+               es.setToilet(1);
+            }
+            else if (e.get(i).getName().equalsIgnoreCase("Roofed house")) {
+                es.setRoofedHouse(1);
+            }
+            else if (e.get(i).getName().equalsIgnoreCase("Water Filter")) {
+                es.setWaterFilter(1);
+            }
+
+
+            else if (e.get(i).getName().equalsIgnoreCase("Fan")) {
+                es.setFan(1);
+            }
+            else if (e.get(i).getName().equalsIgnoreCase("Cooler")) {
+                es.setCooler(1);
+            }
+            else if (e.get(i).getName().equalsIgnoreCase("Cooking Gas")) {
+                es.setCookingGas(1);
+            }
+
+
+            else if (e.get(i).getName().equalsIgnoreCase("T.V.")) {
+                es.setTV(1);
+            }
+            else if (e.get(i).getName().equalsIgnoreCase("Phone")) {
+                es.setPhone(1);
+            }
+            else if (e.get(i).getName().equalsIgnoreCase("Scooter")) {
+                es.setScooter(1);
+            }
+
+
+            else if (e.get(i).getName().equalsIgnoreCase("Sofa Set")) {
+                es.setSofaSet(1);
+            }
+            else if (e.get(i).getName().equalsIgnoreCase("Curtain in windows")) {
+                es.setCurtainInWindows(1);
+            }
+            else if (e.get(i).getName().equalsIgnoreCase("Refrigerator")) {
+                es.setRefrigerator(1);
+            }
+
+
+            else if (e.get(i).getName().equalsIgnoreCase("Mixer Grinder")) {
+                es.setMixerGrinder(1);
+            }
+            else if (e.get(i).getName().equalsIgnoreCase("Dining Table")) {
+                es.setDiningTable(1);
+            }
+            else if (e.get(i).getName().equalsIgnoreCase("Toaster")) {
+                es.setToaster(1);
+            }
+
+
+            else if (e.get(i).getName().equalsIgnoreCase("Aqua guard")) {
+                es.setAquaguard(1);
+            }
+            else if (e.get(i).getName().equalsIgnoreCase("Microwave oven")) {
+                es.setMicrowaveOven(1);
+            }
+            else if (e.get(i).getName().equalsIgnoreCase("Computer")) {
+                es.setComputer(1);
+            }
+
+
+            else if (e.get(i).getName().equalsIgnoreCase("Geyser")) {
+                es.setGeyser(1);
+            }
+            else if (e.get(i).getName().equalsIgnoreCase("R.O. Water Purifier System")) {
+                es.setRO(1);
+            }
+            else if (e.get(i).getName().equalsIgnoreCase("Car")) {
+                es.setCar(1);
+            }
+
+
+            else if (e.get(i).getName().equalsIgnoreCase("A.C.")) {
+              es.setAC(1);
+            }
+        }
+        return es;
+    }
+
+    public static Result form2(Long id) {
+        models.response.user.User u = (models.response.user.User) ctx().args.get("user");
+        if (StringUtils.isEmpty(session("pid")))
             return redirect(controllers.data.routes.DataController.form1(0));
         Long pid = Long.valueOf(session("pid"));
         DataCollectionForm2 d = null;
         d = (id > 0) ? Ebean.find(DataCollectionForm2.class).fetch("createdBy").fetch("modifiedBy").where(
                 Expr.eq("patientIdNumber", id)
         ).setMaxRows(1).findUnique() : new DataCollectionForm2();
-        if(d == null)
+        if (d == null)
             d = new DataCollectionForm2();
         return ok(views.html.data.form2.render("Form2", u, pid, d));
     }
 
     @With(Authenticated.class)
-    public static Result form3(Long id){
+    public static Result form3(Long id) {
         models.response.user.User u = (models.response.user.User) ctx().args.get("user");
-        if(StringUtils.isEmpty(session("pid")))
+        if (StringUtils.isEmpty(session("pid")))
             return redirect(controllers.data.routes.DataController.form1(0));
         Long pid = Long.valueOf(session("pid"));
         DataCollectionForm3 d = null;
         d = (id > 0) ? Ebean.find(DataCollectionForm3.class).fetch("createdBy").fetch("modifiedBy").where(
                 Expr.eq("patientIdNumber", id)
         ).setMaxRows(1).findUnique() : new DataCollectionForm3();
-        if(d == null)
+        if (d == null)
             d = new DataCollectionForm3();
         return ok(views.html.data.form3.render("Form3", u, pid, d));
     }
 
     @With(Authenticated.class)
-    public static Result form4(Long id){
+    public static Result form4(Long id) {
         models.response.user.User u = (models.response.user.User) ctx().args.get("user");
-        if(StringUtils.isEmpty(session("pid")))
+        if (StringUtils.isEmpty(session("pid")))
             return redirect(controllers.data.routes.DataController.form1(0));
         Long pid = Long.valueOf(session("pid"));
         DataCollectionForm4 d = null;
         d = (id > 0) ? Ebean.find(DataCollectionForm4.class).fetch("createdBy").fetch("modifiedBy").where(
                 Expr.eq("patientIdNumber", id)
         ).setMaxRows(1).findUnique() : new DataCollectionForm4();
-        if(d == null)
+        if (d == null)
             d = new DataCollectionForm4();
         return ok(views.html.data.form4.render("Form4", u, pid, d));
     }
 
     @With(Authenticated.class)
-    public static Result form5(Long id){
+    public static Result form5(Long id) {
         models.response.user.User u = (models.response.user.User) ctx().args.get("user");
-        if(StringUtils.isEmpty(session("pid")))
+        if (StringUtils.isEmpty(session("pid")))
             return redirect(controllers.data.routes.DataController.form1(0));
         Long pid = Long.valueOf(session("pid"));
         DataCollectionForm5 d = null;
         d = (id > 0) ? Ebean.find(DataCollectionForm5.class).fetch("createdBy").fetch("modifiedBy").where(
                 Expr.eq("patientIdNumber", id)
         ).setMaxRows(1).findUnique() : new DataCollectionForm5();
-        if(d == null)
+        if (d == null)
             d = new DataCollectionForm5();
         return ok(views.html.data.form5.render("Form5", u, pid, d));
     }
 
     @With(Authenticated.class)
-    public static Result form6(Long id){
+    public static Result form6(Long id) {
+        models.response.data.EconomicStatus es = new models.response.data.EconomicStatus();
         models.response.user.User u = (models.response.user.User) ctx().args.get("user");
-        if(StringUtils.isEmpty(session("pid")))
+        if (StringUtils.isEmpty(session("pid")))
             return redirect(controllers.data.routes.DataController.form1(0));
         Long pid = Long.valueOf(session("pid"));
         DataCollectionForm6 d = null;
         d = (id > 0) ? Ebean.find(DataCollectionForm6.class).fetch("economicStatuses").fetch("createdBy").fetch("modifiedBy").where(
                 Expr.eq("patientIdNumber", id)
         ).setMaxRows(1).findUnique() : new DataCollectionForm6();
-        if(d == null)
+        if (d == null)
             d = new DataCollectionForm6();
-        return ok(views.html.data.form6.render("Form6", u, pid, d));
+        if (d.getEconomicStatuses() != null)
+            es = economicStatus(d.getEconomicStatuses());
+        return ok(views.html.data.form6.render("Form6", u, pid, d,es));
     }
 
     @With(Authenticated.class)
@@ -128,12 +241,12 @@ public class DataController extends Controller {
         models.response.user.User u = (models.response.user.User) ctx().args.get("user");
         User user = User.find.byId(u.getId());
         Map<String, String[]> map = request().body().asFormUrlEncoded();
-        if(map.size() <= 0)
+        if (map.size() <= 0)
             return badRequest(Json.toJson(new ResponseMessage(400, "Invalid parameters passed!", ResponseMessageType.BAD_REQUEST)));
         Long id = Long.valueOf(StringUtils.isEmpty(map.get("id")[0]) ? "0" : map.get("id")[0]);
-        if(id > 0) {
+        if (id > 0) {
             dcf1 = DataCollectionForm1.find.byId(id);
-            if(dcf1 == null)
+            if (dcf1 == null)
                 return badRequest(Json.toJson(new ResponseMessage(400, "Invalid parameters passed!", ResponseMessageType.BAD_REQUEST)));
         }
         //Integer patientIdNumber = Integer.valueOf(StringUtils.isEmpty(map.get("patientIdNumber")[0]) ? StringUtils.EMPTY : map.get("patientIdNumber")[0]);
@@ -196,10 +309,10 @@ public class DataController extends Controller {
         dcf1.setBloodSampleDate(dateBloodSampleTaken == null ? null : new Timestamp(dateBloodSampleTaken.getMillis()));
         dcf1.setBloodSampleNumber(bloodSampleNumber);
         dcf1.setDateOfStroke(dateStroke == null ? null : new Timestamp(dateStroke.getMillis()));
-        if(id == 0) {
+        if (id == 0) {
             dcf1.setCreatedBy(user);
             dcf1.save();
-            for(String s: economicStatuses) {
+            for (String s : economicStatuses) {
                 EconomicStatus es = new EconomicStatus(s, dcf1, null);
                 es.save();
             }
@@ -208,14 +321,14 @@ public class DataController extends Controller {
         } else if (id > 0) {
             dcf1.setModifiedBy(user);
             dcf1.update();
-            for(String s: economicStatuses) {
+            for (String s : economicStatuses) {
                 EconomicStatus status = Ebean.find(EconomicStatus.class).fetch("dataCollectionForm1").where(
                         Expr.and(
                                 Expr.eq("dataCollectionForm1", id),
                                 Expr.ieq("name", s)
                         )
                 ).setMaxRows(1).findUnique();
-                if(status == null) {
+                if (status == null) {
                     status = new EconomicStatus(s, dcf1, null);
                     status.save();
                 }
@@ -231,12 +344,12 @@ public class DataController extends Controller {
         User user = User.find.byId(u.getId());
         DataCollectionForm2 dcf2 = new DataCollectionForm2();
         Map<String, String[]> map = request().body().asFormUrlEncoded();
-        if(map.size() <= 0)
+        if (map.size() <= 0)
             return badRequest(Json.toJson(new ResponseMessage(400, "Invalid parameters passed!", ResponseMessageType.BAD_REQUEST)));
         Long id = Long.valueOf(StringUtils.isEmpty(map.get("id")[0]) ? "0" : map.get("id")[0]);
-        if(id > 0) {
+        if (id > 0) {
             dcf2 = DataCollectionForm2.find.byId(id);
-            if(dcf2 == null)
+            if (dcf2 == null)
                 return badRequest(Json.toJson(new ResponseMessage(400, "Invalid parameters passed!", ResponseMessageType.BAD_REQUEST)));
         }
         Long patientIdNumber = Long.valueOf(StringUtils.isEmpty(map.get("patientIdNumber")[0]) ? "0" : map.get("patientIdNumber")[0]);
@@ -245,13 +358,13 @@ public class DataController extends Controller {
         String paci = !map.containsKey("paci") ? StringUtils.EMPTY : map.get("paci")[0];
         String laci = !map.containsKey("laci") ? StringUtils.EMPTY : map.get("laci")[0];
         String poci = !map.containsKey("poci") ? StringUtils.EMPTY : map.get("poci")[0];
-        if(!StringUtils.isEmpty(taci))
+        if (!StringUtils.isEmpty(taci))
             dcf2.setTaci(YesNo.YES);
-        if(!StringUtils.isEmpty(paci))
+        if (!StringUtils.isEmpty(paci))
             dcf2.setPaci(YesNo.YES);
-        if(!StringUtils.isEmpty(laci))
+        if (!StringUtils.isEmpty(laci))
             dcf2.setLaci(YesNo.YES);
-        if(!StringUtils.isEmpty(poci))
+        if (!StringUtils.isEmpty(poci))
             dcf2.setPoci(YesNo.YES);
         YesNo hoemorrhagicStroke = YesNo.valueOf(!map.containsKey("hoemorrhagicStroke") ? NO : map.get("hoemorrhagicStroke")[0].toUpperCase());
         YesNo venousSinusThrombosis = YesNo.valueOf(!map.containsKey("venousSinusThrombosis") ? NO : map.get("venousSinusThrombosis")[0].toUpperCase());
@@ -268,9 +381,11 @@ public class DataController extends Controller {
         YesNo mi = YesNo.valueOf(!map.containsKey("mi") ? NO : map.get("mi")[0].toUpperCase());
         YesNo migraineWithAura = YesNo.valueOf(!map.containsKey("migraineWithAura") ? NO : map.get("migraineWithAura")[0].toUpperCase());
         YesNo migraineWithoutAura = YesNo.valueOf(!map.containsKey("migraineWithoutAura") ? NO : map.get("migraineWithoutAura")[0].toUpperCase());
-        Integer ischaemicStrokeYear = Integer.valueOf(StringUtils.isEmpty(map.get("patientPreviousStroke")[0]) ? "0" : map.get("patientPreviousStroke")[0]);
-        /*Integer hoemorrhagicStrokeYear = Integer.valueOf(map.get("hoemorrhagicStrokeYear") ? StringUtils.EMPTY : map.get("hoemorrhagicStrokeYear")[0])*/;
-        /*Integer tiaYear = Integer.valueOf(map.get("tiaYear") ? StringUtils.EMPTY : map.get("tiaYear")[0])*/;
+        Integer ischaemicStrokeYear = Integer.valueOf(map.get("patientPreviousStroke")[0].equals("") || StringUtils.isEmpty(map.get("patientPreviousStroke")[0]) ? "0" : map.get("patientPreviousStroke")[0]);
+        /*Integer hoemorrhagicStrokeYear = Integer.valueOf(map.get("hoemorrhagicStrokeYear") ? StringUtils.EMPTY : map.get("hoemorrhagicStrokeYear")[0])*/
+        ;
+        /*Integer tiaYear = Integer.valueOf(map.get("tiaYear") ? StringUtils.EMPTY : map.get("tiaYear")[0])*/
+        ;
         YesNo strokeAssociatedWithDissection = YesNo.valueOf(!map.containsKey("strokeAssociatedWithDissection") ? NO : map.get("strokeAssociatedWithDissection")[0].toUpperCase());
         YesNo strokeAssociatedWithPfo = YesNo.valueOf(!map.containsKey("strokeAssociatedWithPfo") ? NO : map.get("strokeAssociatedWithPfo")[0].toUpperCase());
         YesNo strokeAssociatedWithMi = YesNo.valueOf(!map.containsKey("strokeAssociatedWithMi") ? NO : map.get("strokeAssociatedWithMi")[0].toUpperCase());
@@ -282,14 +397,14 @@ public class DataController extends Controller {
         YesNo familyHypertension = YesNo.valueOf(!map.containsKey("familyHypertension") ? NO : map.get("familyHypertension")[0].toUpperCase());
         YesNo familyNoneOfTheAbove = YesNo.valueOf(!map.containsKey("familyNoneOfTheAbove") ? NO : map.get("familyNoneOfTheAbove")[0].toUpperCase());
         String currentSmoker = !map.containsKey("currentSmoker") ? StringUtils.EMPTY : map.get("currentSmoker")[0];
-        if(!StringUtils.isEmpty(currentSmoker))
+        if (!StringUtils.isEmpty(currentSmoker))
             dcf2.setCurrentSmoker(YesNo.YES);
-        Integer cigarettePerDay = Integer.valueOf(map.containsKey("cigarettePerDay") ? map.get("cigarettePerDay")[0] : "0" );
+        Integer cigarettePerDay = Integer.valueOf(map.containsKey("cigarettePerDay") ? map.get("cigarettePerDay")[0] : "0");
         String exSmoker = !map.containsKey("exSmoker") ? StringUtils.EMPTY : map.get("exSmoker")[0];
-        if(!StringUtils.isEmpty(exSmoker))
+        if (!StringUtils.isEmpty(exSmoker))
             dcf2.setExSmoker(YesNo.YES);
         String never = !map.containsKey("never") ? StringUtils.EMPTY : map.get("never")[0];
-        if(!StringUtils.isEmpty(never)) {
+        if (!StringUtils.isEmpty(never)) {
             dcf2.setNever(YesNo.YES);
         }
         Double hip = Double.valueOf(!map.containsKey("hip") ? "0" : map.get("hip")[0]);
@@ -327,7 +442,7 @@ public class DataController extends Controller {
         dcf2.setCigarettePerDay(cigarettePerDay);
         dcf2.setHip(hip);
         dcf2.setWaist(waist);
-        if(id > 0) {
+        if (id > 0) {
             dcf2.setModifiedBy(user);
             dcf2.update();
             dcf2.setPatientIdNumber(dcf2.getId());
@@ -347,12 +462,12 @@ public class DataController extends Controller {
         User user = User.find.byId(u.getId());
         DataCollectionForm3 dcf3 = new DataCollectionForm3();
         Map<String, String[]> map = request().body().asFormUrlEncoded();
-        if(map.size() <= 0)
+        if (map.size() <= 0)
             return badRequest(Json.toJson(new ResponseMessage(400, "Invalid parameters passed!", ResponseMessageType.BAD_REQUEST)));
         Long id = Long.valueOf(StringUtils.isEmpty(map.get("id")[0]) ? "0" : map.get("id")[0]);
-        if(id > 0) {
+        if (id > 0) {
             dcf3 = DataCollectionForm3.find.byId(id);
-            if(dcf3 == null)
+            if (dcf3 == null)
                 return badRequest(Json.toJson(new ResponseMessage(400, "Invalid parameters passed!", ResponseMessageType.BAD_REQUEST)));
         }
         Long patientIdNumber = Long.valueOf(StringUtils.isEmpty(map.get("patientIdNumber")[0]) ? "0" : map.get("patientIdNumber")[0]);
@@ -370,49 +485,49 @@ public class DataController extends Controller {
         String statin = !map.containsKey("statin") ? StringUtils.EMPTY : map.get("statin")[0];
         String antihypertensive = !map.containsKey("antihypertensive") ? StringUtils.EMPTY : map.get("antihypertensive")[0];
         String medicineNoneOfTheAbove = !map.containsKey("medicineNoneOfTheAbove") ? StringUtils.EMPTY : map.get("medicineNoneOfTheAbove")[0];
-        if(!StringUtils.isEmpty(aspirin)){
+        if (!StringUtils.isEmpty(aspirin)) {
             String aspirinDosage = StringUtils.isEmpty(map.get("aspirinDosage")[0]) ? StringUtils.EMPTY : map.get("aspirinDosage")[0];
             dcf3.setAspirin(YesNo.YES);
             dcf3.setAspirinDosage(aspirinDosage);
         }
-        if(!StringUtils.isEmpty(clopidogrel)){
+        if (!StringUtils.isEmpty(clopidogrel)) {
             String clopidogrelDosage = StringUtils.isEmpty(map.get("clopidogrelDosage")[0]) ? StringUtils.EMPTY : map.get("clopidogrelDosage")[0];
             dcf3.setClopidogrel(YesNo.YES);
             dcf3.setClopidogrelDosage(clopidogrelDosage);
         }
-        if(!StringUtils.isEmpty(aspirinPlusClopidogrel)){
+        if (!StringUtils.isEmpty(aspirinPlusClopidogrel)) {
             String aspirinPlusClopidogrelDosage1 = StringUtils.isEmpty(map.get("aspirinPlusClopidogrelDosage1")[0]) ? StringUtils.EMPTY : map.get("aspirinPlusClopidogrelDosage1")[0];
             String aspirinPlusClopidogrelDosage2 = StringUtils.isEmpty(map.get("aspirinPlusClopidogrelDosage2")[0]) ? StringUtils.EMPTY : map.get("aspirinPlusClopidogrelDosage2")[0];
             dcf3.setAspirinPlusClopidogrel(YesNo.YES);
             dcf3.setAspirinPlusClopidogrelDosage(aspirinPlusClopidogrelDosage1 + "+" + aspirinPlusClopidogrelDosage2);
         }
-        if(!StringUtils.isEmpty(dipyridamole)){
+        if (!StringUtils.isEmpty(dipyridamole)) {
             String dipyridamoleDosage = StringUtils.isEmpty(map.get("dipyridamoleDosage")[0]) ? StringUtils.EMPTY : map.get("dipyridamoleDosage")[0];
             dcf3.setDipyridamole(YesNo.YES);
             dcf3.setDipyridamoleDosage(dipyridamoleDosage);
         }
-        if(!StringUtils.isEmpty(aspirinPlusDipyridamole)){
+        if (!StringUtils.isEmpty(aspirinPlusDipyridamole)) {
             String aspirinPlusDipyridamoleDosage1 = StringUtils.isEmpty(map.get("aspirinPlusDipyridamoleDosage1")[0]) ? StringUtils.EMPTY : map.get("aspirinPlusDipyridamoleDosage1")[0];
             String aspirinPlusDipyridamoleDosage2 = StringUtils.isEmpty(map.get("aspirinPlusDipyridamoleDosage2")[0]) ? StringUtils.EMPTY : map.get("aspirinPlusDipyridamoleDosage2")[0];
             dcf3.setAspirinPlusDipyridamole(YesNo.YES);
             dcf3.setAspirinPlusDipyridamoleDosage(aspirinPlusDipyridamoleDosage1 + "+" + aspirinPlusDipyridamoleDosage2);
         }
-        if(!StringUtils.isEmpty(antihypertensive)){
+        if (!StringUtils.isEmpty(antihypertensive)) {
             String antihypertensiveDosage = StringUtils.isEmpty(map.get("antihypertensiveDosage")[0]) ? StringUtils.EMPTY : map.get("antihypertensiveDosage")[0];
             dcf3.setAntihypertensive(YesNo.YES);
             dcf3.setAntihypertensiveDosage(antihypertensiveDosage);
         }
-        if(!StringUtils.isEmpty(warfarin)){
+        if (!StringUtils.isEmpty(warfarin)) {
             String warfarinInr = StringUtils.isEmpty(map.get("warfarinInr")[0]) ? StringUtils.EMPTY : map.get("warfarinInr")[0];
             dcf3.setWarfarinInr(warfarinInr);
             dcf3.setWarfarin(YesNo.YES);
         }
-        if(!StringUtils.isEmpty(statin)){
+        if (!StringUtils.isEmpty(statin)) {
             String statinDosage = StringUtils.isEmpty(map.get("statinDosage")[0]) ? StringUtils.EMPTY : map.get("statinDosage")[0];
             dcf3.setStatin(YesNo.YES);
             dcf3.setStatinDosage(statinDosage);
         }
-        if(!StringUtils.isEmpty(medicineNoneOfTheAbove)){
+        if (!StringUtils.isEmpty(medicineNoneOfTheAbove)) {
             dcf3.setMedicineNoneOfTheAbove(YesNo.YES);
         }
         String glucoseBloodTest = !map.containsKey("glucoseBloodTest") ? StringUtils.EMPTY : map.get("glucoseBloodTest")[0];
@@ -431,82 +546,82 @@ public class DataController extends Controller {
         String homocysteineBloodTest = !map.containsKey("homocysteineBloodTest") ? StringUtils.EMPTY : map.get("homocysteineBloodTest")[0];
         String prothrombinBloodTest = !map.containsKey("prothrombinBloodTest") ? StringUtils.EMPTY : map.get("prothrombinBloodTest")[0];
         String antiphospholipidBloodTest = !map.containsKey("antiphospholipidBloodTest") ? StringUtils.EMPTY : map.get("antiphospholipidBloodTest")[0];
-        if(!StringUtils.isEmpty(glucoseBloodTest)) {
+        if (!StringUtils.isEmpty(glucoseBloodTest)) {
             String glucoseBloodTestResult = StringUtils.isEmpty(map.get("glucoseBloodTestResult")[0]) ? StringUtils.EMPTY : map.get("glucoseBloodTestResult")[0];
             dcf3.setGlucoseBloodTest(YesNo.YES);
             dcf3.setGlucoseBloodTestResult(glucoseBloodTestResult);
         }
-        if(!StringUtils.isEmpty(totalCholesterolBloodTest)) {
+        if (!StringUtils.isEmpty(totalCholesterolBloodTest)) {
             String totalCholesterolBloodTestResult = StringUtils.isEmpty(map.get("totalCholesterolBloodTestResult")[0]) ? StringUtils.EMPTY : map.get("totalCholesterolBloodTestResult")[0];
             dcf3.setTotalCholesterolBloodTest(YesNo.YES);
             dcf3.setTotalCholesterolBloodTestResult(totalCholesterolBloodTestResult);
         }
-        if(!StringUtils.isEmpty(hdlCholesterolBloodTest)) {
+        if (!StringUtils.isEmpty(hdlCholesterolBloodTest)) {
             String hdlCholesterolBloodTestResult = StringUtils.isEmpty(map.get("hdlCholesterolBloodTestResult")[0]) ? StringUtils.EMPTY : map.get("hdlCholesterolBloodTestResult")[0];
             dcf3.setHdlCholesterolBloodTest(YesNo.YES);
             dcf3.setHdlCholesterolBloodTestResult(hdlCholesterolBloodTestResult);
         }
-        if(!StringUtils.isEmpty(ldlCholesterolBloodTest)) {
+        if (!StringUtils.isEmpty(ldlCholesterolBloodTest)) {
             String ldlCholesterolBloodTestResult = StringUtils.isEmpty(map.get("ldlCholesterolBloodTestResult")[0]) ? StringUtils.EMPTY : map.get("ldlCholesterolBloodTestResult")[0];
             dcf3.setLdlCholesterolBloodTest(YesNo.YES);
             dcf3.setLdlCholesterolBloodTestResult(ldlCholesterolBloodTestResult);
         }
-        if(!StringUtils.isEmpty(triglycerideBloodTest)) {
+        if (!StringUtils.isEmpty(triglycerideBloodTest)) {
             String triglycerideBloodTestResult = StringUtils.isEmpty(map.get("triglycerideBloodTestResult")[0]) ? StringUtils.EMPTY : map.get("triglycerideBloodTestResult")[0];
             dcf3.setTriglycerideBloodTest(YesNo.YES);
             dcf3.setTriglycerideBloodTestResult(triglycerideBloodTestResult);
         }
-        if(!StringUtils.isEmpty(esrBloodTest)) {
+        if (!StringUtils.isEmpty(esrBloodTest)) {
             String esrBloodTestResult = StringUtils.isEmpty(map.get("esrBloodTestResult")[0]) ? StringUtils.EMPTY : map.get("esrBloodTestResult")[0];
             dcf3.setEsrBloodTest(YesNo.YES);
             dcf3.setEsrBloodTestResult(esrBloodTestResult);
         }
-        if(!StringUtils.isEmpty(crpBloodTest)) {
+        if (!StringUtils.isEmpty(crpBloodTest)) {
             String crpBloodTestResult = StringUtils.isEmpty(map.get("crpBloodTestResult")[0]) ? StringUtils.EMPTY : map.get("crpBloodTestResult")[0];
             dcf3.setCrpBloodTest(YesNo.YES);
             dcf3.setCrpBloodTestResult(crpBloodTestResult);
         }
-        if(!StringUtils.isEmpty(troponimBloodTest)) {
+        if (!StringUtils.isEmpty(troponimBloodTest)) {
             String troponimBloodTestResult = StringUtils.isEmpty(map.get("troponimBloodTestResult")[0]) ? StringUtils.EMPTY : map.get("troponimBloodTestResult")[0];
             dcf3.setTroponimBloodTest(YesNo.YES);
             dcf3.setTroponimBloodTestResult(troponimBloodTestResult);
         }
-        if(!StringUtils.isEmpty(proteinCBloodTest)) {
+        if (!StringUtils.isEmpty(proteinCBloodTest)) {
             String proteinCBloodTestResult = StringUtils.isEmpty(map.get("proteinCBloodTestResult")[0]) ? StringUtils.EMPTY : map.get("proteinCBloodTestResult")[0];
             dcf3.setProteinCBloodTest(YesNo.YES);
             dcf3.setProteinCBloodTestResult(proteinCBloodTestResult);
         }
-        if(!StringUtils.isEmpty(proteinSBloodTest)) {
+        if (!StringUtils.isEmpty(proteinSBloodTest)) {
             String proteinSBloodTestResult = StringUtils.isEmpty(map.get("proteinSBloodTestResult")[0]) ? StringUtils.EMPTY : map.get("proteinSBloodTestResult")[0];
             dcf3.setProteinSBloodTest(YesNo.YES);
             dcf3.setProteinSBloodTestResult(proteinSBloodTestResult);
         }
-        if(!StringUtils.isEmpty(fibrinogenBloodTest)) {
+        if (!StringUtils.isEmpty(fibrinogenBloodTest)) {
             String fibrinogenBloodTestResult = StringUtils.isEmpty(map.get("fibrinogenBloodTestResult")[0]) ? StringUtils.EMPTY : map.get("fibrinogenBloodTestResult")[0];
             dcf3.setFibrinogenBloodTest(YesNo.YES);
             dcf3.setFibrinogenBloodTestResult(fibrinogenBloodTestResult);
         }
-        if(!StringUtils.isEmpty(antithrombin11BloodTest)) {
+        if (!StringUtils.isEmpty(antithrombin11BloodTest)) {
             String antithrombin11BloodTestResult = StringUtils.isEmpty(map.get("antithrombin11BloodTestResult")[0]) ? StringUtils.EMPTY : map.get("antithrombin11BloodTestResult")[0];
             dcf3.setAntithrombin11BloodTest(YesNo.YES);
             dcf3.setAntithrombin11BloodTestResult(antithrombin11BloodTestResult);
         }
-        if(!StringUtils.isEmpty(factorVBloodTest)) {
+        if (!StringUtils.isEmpty(factorVBloodTest)) {
             String factorVBloodTestResult = StringUtils.isEmpty(map.get("factorVBloodTestResult")[0]) ? StringUtils.EMPTY : map.get("factorVBloodTestResult")[0];
             dcf3.setFactorVBloodTest(YesNo.YES);
             dcf3.setFactorVBloodTestResult(factorVBloodTestResult);
         }
-        if(!StringUtils.isEmpty(homocysteineBloodTest)) {
+        if (!StringUtils.isEmpty(homocysteineBloodTest)) {
             String homocysteineBloodTestResult = StringUtils.isEmpty(map.get("homocysteineBloodTestResult")[0]) ? StringUtils.EMPTY : map.get("homocysteineBloodTestResult")[0];
             dcf3.setHomocysteineBloodTest(YesNo.YES);
             dcf3.setHomocysteineBloodTestResult(homocysteineBloodTestResult);
         }
-        if(!StringUtils.isEmpty(prothrombinBloodTest)) {
+        if (!StringUtils.isEmpty(prothrombinBloodTest)) {
             String prothrombinBloodTestResult = StringUtils.isEmpty(map.get("prothrombinBloodTestResult")[0]) ? StringUtils.EMPTY : map.get("prothrombinBloodTestResult")[0];
             dcf3.setProthrombinBloodTest(YesNo.YES);
             dcf3.setProthrombinBloodTestResult(prothrombinBloodTestResult);
         }
-        if(!StringUtils.isEmpty(antiphospholipidBloodTest)) {
+        if (!StringUtils.isEmpty(antiphospholipidBloodTest)) {
             String antiphospholipidBloodTestResult = StringUtils.isEmpty(map.get("antiphospholipidBloodTestResult")[0]) ? StringUtils.EMPTY : map.get("antiphospholipidBloodTestResult")[0];
             dcf3.setAntiphospholipidBloodTest(YesNo.YES);
             dcf3.setAntiphospholipidBloodTestResult(antiphospholipidBloodTestResult);
@@ -531,7 +646,7 @@ public class DataController extends Controller {
         dcf3.setCtaDone(ctaDone);
         dcf3.setMraDone(mraDone);
         dcf3.setAngiogramDone(angiogramDone);
-        if(id > 0) {
+        if (id > 0) {
             dcf3.setModifiedBy(user);
             dcf3.update();
         } else {
@@ -548,12 +663,12 @@ public class DataController extends Controller {
         User user = User.find.byId(u.getId());
         DataCollectionForm4 dcf4 = new DataCollectionForm4();
         Map<String, String[]> map = request().body().asFormUrlEncoded();
-        if(map.size() <= 0)
+        if (map.size() <= 0)
             return badRequest(Json.toJson(new ResponseMessage(400, "Invalid parameters passed!", ResponseMessageType.BAD_REQUEST)));
         Long id = Long.valueOf(StringUtils.isEmpty(map.get("id")[0]) ? "0" : map.get("id")[0]);
-        if(id > 0) {
+        if (id > 0) {
             dcf4 = DataCollectionForm4.find.byId(id);
-            if(dcf4 == null)
+            if (dcf4 == null)
                 return badRequest(Json.toJson(new ResponseMessage(400, "Invalid parameters passed!", ResponseMessageType.BAD_REQUEST)));
         }
         Long patientIdNumber = Long.valueOf(StringUtils.isEmpty(map.get("patientIdNumber")[0]) ? "0" : map.get("patientIdNumber")[0]);
@@ -658,7 +773,7 @@ public class DataController extends Controller {
         dcf4.setRehabilitation(rehabilitation);
         dcf4.setRip(rip);
         dcf4.setLocalDgh(localDgh);
-        if(id > 0) {
+        if (id > 0) {
             dcf4.setModifiedBy(user);
             dcf4.update();
         } else {
@@ -675,7 +790,7 @@ public class DataController extends Controller {
         User user = User.find.byId(u.getId());
         DataCollectionForm5 dcf5 = new DataCollectionForm5();
         Map<String, String[]> map = request().body().asFormUrlEncoded();
-        if(map.size() <= 0)
+        if (map.size() <= 0)
             return badRequest(Json.toJson(new ResponseMessage(400, "Invalid parameters passed!", ResponseMessageType.BAD_REQUEST)));
         Long id = Long.valueOf(StringUtils.isEmpty(map.get("id")[0]) ? "0" : map.get("id")[0]);
         Long patientIdNumber = Long.valueOf(StringUtils.isEmpty(map.get("patientIdNumber")[0]) ? StringUtils.EMPTY : map.get("patientIdNumber")[0]);
@@ -687,45 +802,45 @@ public class DataController extends Controller {
         String antihypertensive = !map.containsKey("antihypertensive") ? StringUtils.EMPTY : map.get("antihypertensive")[0];
         String warfarin = !map.containsKey("warfarin") ? StringUtils.EMPTY : map.get("warfarin")[0];
         String statin = !map.containsKey("statin") ? StringUtils.EMPTY : map.get("statin")[0];
-        if(id > 0) {
+        if (id > 0) {
             dcf5 = DataCollectionForm5.find.byId(id);
-            if(dcf5 == null)
+            if (dcf5 == null)
                 return badRequest(Json.toJson(new ResponseMessage(400, "Invalid parameters passed!", ResponseMessageType.BAD_REQUEST)));
         }
-        if(!StringUtils.isEmpty(aspirin)){
+        if (!StringUtils.isEmpty(aspirin)) {
             String aspirinDosage = StringUtils.isEmpty(map.get("aspirinDosage")[0]) ? StringUtils.EMPTY : map.get("aspirinDosage")[0];
             dcf5.setAspirin(YesNo.YES);
             dcf5.setAspirinDosage(aspirinDosage);
         }
-        if(!StringUtils.isEmpty(clopidogrel)){
+        if (!StringUtils.isEmpty(clopidogrel)) {
             String clopidogrelDosage = StringUtils.isEmpty(map.get("clopidogrelDosage")[0]) ? StringUtils.EMPTY : map.get("clopidogrelDosage")[0];
             dcf5.setClopidogrel(YesNo.YES);
             dcf5.setClopidogrelDosage(clopidogrelDosage);
         }
-        if(!StringUtils.isEmpty(aspirinPlusClopidogrel)){
+        if (!StringUtils.isEmpty(aspirinPlusClopidogrel)) {
             String aspirinPlusClopidogrelDosage1 = StringUtils.isEmpty(map.get("aspirinPlusClopidogrelDosage1")[0]) ? StringUtils.EMPTY : map.get("aspirinPlusClopidogrelDosage1")[0];
             String aspirinPlusClopidogrelDosage2 = StringUtils.isEmpty(map.get("aspirinPlusClopidogrelDosage2")[0]) ? StringUtils.EMPTY : map.get("aspirinPlusClopidogrelDosage2")[0];
             dcf5.setAspirinPlusClopidogrel(YesNo.YES);
             dcf5.setAspirinPlusClopidogrelDosage(aspirinPlusClopidogrelDosage1 + "+" + aspirinPlusClopidogrelDosage2);
         }
-        if(!StringUtils.isEmpty(dipyridamole)){
+        if (!StringUtils.isEmpty(dipyridamole)) {
             String dipyridamoleDosage = StringUtils.isEmpty(map.get("dipyridamoleDosage")[0]) ? StringUtils.EMPTY : map.get("dipyridamoleDosage")[0];
             dcf5.setDipyridamole(YesNo.YES);
             dcf5.setDipyridamoleDosage(dipyridamoleDosage);
         }
-        if(!StringUtils.isEmpty(aspirinPlusDipyridamole)){
+        if (!StringUtils.isEmpty(aspirinPlusDipyridamole)) {
             String aspirinPlusDipyridamoleDosage1 = StringUtils.isEmpty(map.get("aspirinPlusDipyridamoleDosage1")[0]) ? StringUtils.EMPTY : map.get("aspirinPlusDipyridamoleDosage1")[0];
             String aspirinPlusDipyridamoleDosage2 = StringUtils.isEmpty(map.get("aspirinPlusDipyridamoleDosage2")[0]) ? StringUtils.EMPTY : map.get("aspirinPlusDipyridamoleDosage2")[0];
             dcf5.setAspirinPlusDipyridamole(YesNo.YES);
             dcf5.setAspirinPlusDipyridamoleDosage(aspirinPlusDipyridamoleDosage1 + "+" + aspirinPlusDipyridamoleDosage2);
         }
-        if(!StringUtils.isEmpty(antihypertensive)){
+        if (!StringUtils.isEmpty(antihypertensive)) {
             dcf5.setAntihypertensive(YesNo.YES);
         }
-        if(!StringUtils.isEmpty(warfarin)){
+        if (!StringUtils.isEmpty(warfarin)) {
             dcf5.setWarfarin(YesNo.YES);
         }
-        if(!StringUtils.isEmpty(statin)){
+        if (!StringUtils.isEmpty(statin)) {
             String statinDosage = StringUtils.isEmpty(map.get("statinDosage")[0]) ? StringUtils.EMPTY : map.get("statinDosage")[0];
             String statinName = StringUtils.isEmpty(map.get("statinName")[0]) ? StringUtils.EMPTY : map.get("statinName")[0];
             dcf5.setStatin(YesNo.YES);
@@ -790,7 +905,7 @@ public class DataController extends Controller {
         dcf5.setSpouseHoemorrhagicStroke(hoemorrhagicStroke);
         dcf5.setSpouseTia(tia);
         dcf5.setBpToday(bpToday1 + "/" + bpToday2);
-        if(id > 0) {
+        if (id > 0) {
             dcf5.setModifiedBy(user);
             dcf5.update();
         } else {
@@ -807,12 +922,12 @@ public class DataController extends Controller {
         User user = User.find.byId(u.getId());
         DataCollectionForm6 dcf6 = new DataCollectionForm6();
         Map<String, String[]> map = request().body().asFormUrlEncoded();
-        if(map.size() <= 0)
+        if (map.size() <= 0)
             return badRequest(Json.toJson(new ResponseMessage(400, "Invalid parameters passed!", ResponseMessageType.BAD_REQUEST)));
         Long id = Long.valueOf(StringUtils.isEmpty(map.get("id")[0]) ? "0" : map.get("id")[0]);
-        if(id > 0) {
+        if (id > 0) {
             dcf6 = DataCollectionForm6.find.byId(id);
-            if(dcf6 == null)
+            if (dcf6 == null)
                 return badRequest(Json.toJson(new ResponseMessage(400, "Invalid parameters passed!", ResponseMessageType.BAD_REQUEST)));
         }
         Long patientIdNumber = Long.valueOf(StringUtils.isEmpty(map.get("patientIdNumber")[0]) ? StringUtils.EMPTY : map.get("patientIdNumber")[0]);
@@ -840,24 +955,24 @@ public class DataController extends Controller {
         dcf6.setBloodSampleTaken(bloodSampleTaken);
         dcf6.setBloodSampleDate(dateBloodSampleTaken == null ? null : new Timestamp(dateBloodSampleTaken.getMillis()));
         dcf6.setBloodSampleNumber(bloodSampleNumber);
-        if(id == 0) {
+        if (id == 0) {
             dcf6.setCreatedBy(user);
             dcf6.save();
-            for(String s: economicStatuses) {
+            for (String s : economicStatuses) {
                 EconomicStatus es = new EconomicStatus(s, null, dcf6);
                 es.save();
             }
         } else if (id > 0) {
             dcf6.setModifiedBy(user);
             dcf6.update();
-            for(String s: economicStatuses) {
+            for (String s : economicStatuses) {
                 EconomicStatus status = Ebean.find(EconomicStatus.class).fetch("dataCollectionForm6").where(
                         Expr.and(
                                 Expr.eq("dataCollectionForm6", id),
                                 Expr.ieq("name", s)
                         )
                 ).setMaxRows(1).findUnique();
-                if(status == null) {
+                if (status == null) {
                     status = new EconomicStatus(s, null, dcf6);
                     status.save();
                 }
@@ -879,9 +994,9 @@ public class DataController extends Controller {
         String sortBy = "created";
         String order = "desc";
         list = query.orderBy(sortBy + " " + order).findList();
-        if(list == null || list.size() <= 0)
+        if (list == null || list.size() <= 0)
             list = new ArrayList<DataCollectionForm1>();
-        for(DataCollectionForm1 d: list) {
+        for (DataCollectionForm1 d : list) {
             Patient p = new Patient(d.getId(), d.getPatientIdNumber(), d.getPatientName(), d.getTrialSite(),
                     d.getDateOfBirth() == null ? "NO INPUT" : DATE_TIME_FORMATTER.print(d.getDateOfBirth().getTime()),
                     d.getGender().name(),
@@ -896,7 +1011,7 @@ public class DataController extends Controller {
         Long id = 0L;
         try {
             id = Long.parseLong(request().body().asFormUrlEncoded().get("id")[0]);
-        } catch(Exception e) {
+        } catch (Exception e) {
             return badRequest(Json.toJson(new ResponseMessage(400, "Invalid parameters passed!", ResponseMessageType.NOT_FOUND)));
         }
         DataCollectionForm1 d1 = Ebean.find(DataCollectionForm1.class).where(
@@ -905,33 +1020,33 @@ public class DataController extends Controller {
                         Expr.eq("status", models.Status.ACTIVE)
                 )
         ).setMaxRows(1).findUnique();
-        if(d1 == null)
+        if (d1 == null)
             return notFound(Json.toJson(new ResponseMessage(404, "No record found!", ResponseMessageType.NOT_FOUND)));
         Long pid = d1.getPatientIdNumber();
-        DataCollectionForm2 d2 = Ebean.find(DataCollectionForm2.class).where(Expr.and(Expr.eq("patientIdNumber", pid),Expr.eq("status", models.Status.ACTIVE))).setMaxRows(1).findUnique();
-        DataCollectionForm3 d3 = Ebean.find(DataCollectionForm3.class).where(Expr.and(Expr.eq("patientIdNumber", pid),Expr.eq("status", models.Status.ACTIVE))).setMaxRows(1).findUnique();
-        DataCollectionForm4 d4 = Ebean.find(DataCollectionForm4.class).where(Expr.and(Expr.eq("patientIdNumber", pid),Expr.eq("status", models.Status.ACTIVE))).setMaxRows(1).findUnique();
-        DataCollectionForm5 d5 = Ebean.find(DataCollectionForm5.class).where(Expr.and(Expr.eq("patientIdNumber", pid),Expr.eq("status", models.Status.ACTIVE))).setMaxRows(1).findUnique();
-        DataCollectionForm6 d6 = Ebean.find(DataCollectionForm6.class).where(Expr.and(Expr.eq("patientIdNumber", pid),Expr.eq("status", models.Status.ACTIVE))).setMaxRows(1).findUnique();
+        DataCollectionForm2 d2 = Ebean.find(DataCollectionForm2.class).where(Expr.and(Expr.eq("patientIdNumber", pid), Expr.eq("status", models.Status.ACTIVE))).setMaxRows(1).findUnique();
+        DataCollectionForm3 d3 = Ebean.find(DataCollectionForm3.class).where(Expr.and(Expr.eq("patientIdNumber", pid), Expr.eq("status", models.Status.ACTIVE))).setMaxRows(1).findUnique();
+        DataCollectionForm4 d4 = Ebean.find(DataCollectionForm4.class).where(Expr.and(Expr.eq("patientIdNumber", pid), Expr.eq("status", models.Status.ACTIVE))).setMaxRows(1).findUnique();
+        DataCollectionForm5 d5 = Ebean.find(DataCollectionForm5.class).where(Expr.and(Expr.eq("patientIdNumber", pid), Expr.eq("status", models.Status.ACTIVE))).setMaxRows(1).findUnique();
+        DataCollectionForm6 d6 = Ebean.find(DataCollectionForm6.class).where(Expr.and(Expr.eq("patientIdNumber", pid), Expr.eq("status", models.Status.ACTIVE))).setMaxRows(1).findUnique();
         d1.setStatus(models.Status.DISABLED);
         d1.update();
-        if(d2 != null) {
+        if (d2 != null) {
             d2.setStatus(models.Status.DISABLED);
             d2.update();
         }
-        if(d3 != null) {
+        if (d3 != null) {
             d3.setStatus(models.Status.DISABLED);
             d3.update();
         }
-        if(d4 != null) {
+        if (d4 != null) {
             d4.setStatus(models.Status.DISABLED);
             d4.update();
         }
-        if(d5 != null) {
+        if (d5 != null) {
             d5.setStatus(models.Status.DISABLED);
             d5.update();
         }
-        if(d6 != null) {
+        if (d6 != null) {
             d6.setStatus(models.Status.DISABLED);
             d6.update();
         }
