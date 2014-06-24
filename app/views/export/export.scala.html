@@ -10,25 +10,21 @@
             <h1>Patient List</h1>
         </header>
         <div style="width:100%;background: #f1f1f1;border-radius: 4px;" class="form">
-
             <input type="text" placeholder="Patient Name/ ID/ Trail Site" name="searchQ" id="searchQ" style="margin: 13px 0px 0px 0px;"/>
         </div>
         <div style="width:100%;" class="form">
-            <form id="patientListForm">
+            <form id="patientListForm" method="post" action="@controllers.export.routes.ExportController.exportMultiplePatientData()" data-uri="@controllers.export.routes.ExportController.export()">
             <table>
                 <tr>
                     <td>From Date</td>
                     <td><input type="text" name="fromDate" id="fromDate" placeholder="01/01/1990"/></td>
                     <td>To Date</td>
                     <td><input type="text" name="toDate" id="toDate" placeholder="01/01/1990"/></td>
-
-
                 </tr>
                 <tr>
-                    <td colspan="4"> <button id="save" name="save" >Export</button></td>
+                    <td colspan="4"><button type="submit" id="save" name="save" >Export</button></td>
                 </tr>
             </table>
-
             </form>
         </div>
     </div>
@@ -44,6 +40,7 @@
     display: none;
     }
 </style>
+<script type="text/javascript" src="@routes.Assets.at("javascripts/form/events.js")"></script>
 <script type="text/javascript" src='@routes.Assets.at("javascripts/jquery.tablePagination.0.5.js")'></script>
 <script type="text/javascript">
 
