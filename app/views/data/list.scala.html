@@ -47,7 +47,7 @@
                             <td>@p.getCreatedOn()</td>
                             <td><a href="/data/form1/@p.getId()"><img src="@routes.Assets.at("images/edit.png")" style="width: 30px;" alt="Edit" title="Edit"></a></td>
                             <td><a class="disable" id="disable-action" data-href="@controllers.data.routes.DataController.disable()" data-id="@p.getId()"><img src="@routes.Assets.at("images/delete.png")" style="width: 30px;cursor: pointer;" alt="Delete" title="Delete"></a></td>
-                            <td><a class="export" id="export-action" href="/export/excel/@p.getId()" data-id="@p.getId()"><img src="@routes.Assets.at("images/export.png")" style="width: 30px;cursor: pointer;" alt="Delete" title="Export to excel"></a></td>
+                            <td><a class="export" id="export-action" href="/export/single/@p.getId()" data-id="@p.getId()"><img src="@routes.Assets.at("images/export.png")" style="width: 30px;cursor: pointer;" alt="Delete" title="Export to excel"></a></td>
                         </tr>
                     }
                 </table>
