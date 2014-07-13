@@ -32,35 +32,35 @@ public class DataCollectionForm5 extends Model {
     private Long patientIdNumber;
 
     @Constraints.Required
-    private YesNo aspirin;
+    private YesNo aspirin = YesNo.NO;
 
     private String aspirinDosage = StringUtils.EMPTY;
 
     @Constraints.Required
-    private YesNo clopidogrel;
+    private YesNo clopidogrel = YesNo.NO;
 
     private String clopidogrelDosage = StringUtils.EMPTY;
 
     @Constraints.Required
-    private YesNo aspirinPlusClopidogrel;
+    private YesNo aspirinPlusClopidogrel = YesNo.NO;
 
     private String aspirinPlusClopidogrelDosage = StringUtils.EMPTY;
 
     @Constraints.Required
-    private YesNo dipyridamole;
+    private YesNo dipyridamole = YesNo.NO;
 
     private String dipyridamoleDosage = StringUtils.EMPTY;
 
     @Constraints.Required
-    private YesNo aspirinPlusDipyridamole;
+    private YesNo aspirinPlusDipyridamole = YesNo.NO;
 
     private String aspirinPlusDipyridamoleDosage = StringUtils.EMPTY;
 
     @Constraints.Required
-    private YesNo warfarin;
+    private YesNo warfarin = YesNo.NO;
 
     @Constraints.Required
-    private YesNo statin;
+    private YesNo statin = YesNo.NO;
 
     private String statinDosage = StringUtils.EMPTY;
 

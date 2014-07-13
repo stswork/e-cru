@@ -1,5 +1,8 @@
 package models.response.data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * User: user
@@ -9,31 +12,33 @@ package models.response.data;
  */
 public class EconomicStatus {
 
-    public int Bed=0;
-    public int Electricity=0;
-    public int Table=0;
-    public int Toilet=0;
-    public int  RoofedHouse=0;
-    public int  WaterFilter=0;
-    public int  Fan=0;
-    public int Cooler=0;
-    public int CookingGas=0;
-    public int TV=0;
-    public int Phone=0;
-    public int Scooter=0;
-    public int SofaSet=0;
-    public int CurtainInWindows=0;
-    public int Refrigerator=0;
-    public int MixerGrinder=0;
-    public int DiningTable=0;
-    public int Toaster=0;
-    public int Aquaguard=0;
-    public int MicrowaveOven=0;
-    public int Computer=0;
-    public int Geyser=0;
-    public int RO=0;
-    public int Car=0;
-    public int AC=0;
+    List<models.EconomicStatus> checkedEconomicStatuses = new ArrayList<models.EconomicStatus>();
+    List<models.EconomicStatus> uncheckedEconomicStatuses = new ArrayList<models.EconomicStatus>();
+    public int Bed = 0;
+    public int Electricity = 0;
+    public int Table = 0;
+    public int Toilet = 0;
+    public int  RoofedHouse = 0;
+    public int  WaterFilter = 0;
+    public int  Fan = 0;
+    public int Cooler = 0;
+    public int CookingGas = 0;
+    public int TV = 0;
+    public int Phone = 0;
+    public int Scooter = 0;
+    public int SofaSet = 0;
+    public int CurtainInWindows = 0;
+    public int Refrigerator = 0;
+    public int MixerGrinder = 0;
+    public int DiningTable = 0;
+    public int Toaster = 0;
+    public int Aquaguard = 0;
+    public int MicrowaveOven = 0;
+    public int Computer = 0;
+    public int Geyser = 0;
+    public int RO = 0;
+    public int Car = 0;
+    public int AC = 0;
 
     public EconomicStatus() {
     }
@@ -236,5 +241,21 @@ public class EconomicStatus {
 
     public void setAC(int AC) {
         this.AC = AC;
+    }
+
+    public List<models.EconomicStatus> getCheckedEconomicStatuses() {
+        return checkedEconomicStatuses;
+    }
+
+    public void setCheckedEconomicStatuses(List<models.EconomicStatus> checkedEconomicStatuses) {
+        this.checkedEconomicStatuses = checkedEconomicStatuses;
+    }
+
+    public List<models.EconomicStatus> getUncheckedEconomicStatuses() {
+        return uncheckedEconomicStatuses;
+    }
+
+    public void setUncheckedEconomicStatuses(List<models.EconomicStatus> uncheckedEconomicStatuses) {
+        this.uncheckedEconomicStatuses = uncheckedEconomicStatuses;
     }
 }

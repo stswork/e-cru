@@ -29,7 +29,7 @@ public class DataCollectionForm3 extends Model {
     private Long patientIdNumber;
 
     @Constraints.Required
-    private Integer alcoholUnitsPerWeek;
+    private Integer alcoholUnitsPerWeek = 0;
 
     @Constraints.Required
     private Double height = 0.0;

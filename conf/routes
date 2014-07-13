@@ -35,5 +35,6 @@ POST        /data/disable                 controllers.data.DataController.disabl
 
 # EXPORT
 
-GET         /export/excel/:id             controllers.export.ExportController.exportToExcel(id: Long)
-GET         /export                       controllers.data.DataController.formExport()
+GET         /export/single/:id            controllers.export.ExportController.exportSinglePatientData(id: Long)
+GET         /export                       controllers.export.ExportController.export()
+POST        /export/multiple              controllers.export.ExportController.exportMultiplePatientData()
