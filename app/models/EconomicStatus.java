@@ -22,11 +22,11 @@ public enum EconomicStatus {
     MIXER_GRINDER("Mixer Grinder"),
     DINING_TABLE("Dining Table"),
     TOASTER("Toaster"),
-    AQUAGAURD("Aquaguard"),
+    AQUAGUARD("Aquaguard"),
     MICROWAVE_OVEN("Microwave Oven"),
     COMPUTER("Computer"),
     GEYSER("Geyser"),
-    RO("RO"),
+    RO_WATER_PURIFIER_SYSTEM("RO"),
     CAR("Car"),
     AC("AC");
 

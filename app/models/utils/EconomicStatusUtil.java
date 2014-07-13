@@ -90,9 +90,9 @@ public class EconomicStatusUtil {
                     checkedEconomicStatuses.add(models.EconomicStatus.TOASTER);
                     es.setToaster(models.EconomicStatus.TOASTER.ordinal());
                     break;
-                case AQUAGAURD:
-                    checkedEconomicStatuses.add(models.EconomicStatus.AQUAGAURD);
-                    es.setAquaguard(models.EconomicStatus.AQUAGAURD.ordinal());
+                case AQUAGUARD:
+                    checkedEconomicStatuses.add(models.EconomicStatus.AQUAGUARD);
+                    es.setAquaguard(models.EconomicStatus.AQUAGUARD.ordinal());
                     break;
                 case MICROWAVE_OVEN:
                     checkedEconomicStatuses.add(models.EconomicStatus.MICROWAVE_OVEN);
@@ -106,9 +106,9 @@ public class EconomicStatusUtil {
                     checkedEconomicStatuses.add(models.EconomicStatus.GEYSER);
                     es.setGeyser(models.EconomicStatus.GEYSER.ordinal());
                     break;
-                case RO:
-                    checkedEconomicStatuses.add(models.EconomicStatus.RO);
-                    es.setRO(models.EconomicStatus.RO.ordinal());
+                case RO_WATER_PURIFIER_SYSTEM:
+                    checkedEconomicStatuses.add(models.EconomicStatus.RO_WATER_PURIFIER_SYSTEM);
+                    es.setRO(models.EconomicStatus.RO_WATER_PURIFIER_SYSTEM.ordinal());
                     break;
                 case CAR:
                     checkedEconomicStatuses.add(models.EconomicStatus.CAR);

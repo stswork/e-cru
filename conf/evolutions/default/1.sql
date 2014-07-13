@@ -440,6 +440,13 @@ create table nihstroke_scale_form (
   constraint pk_nihstroke_scale_form primary key (id))
 ;
 
+create table s3file (
+  id                        varchar(40) not null,
+  bucket                    varchar(255),
+  name                      varchar(255),
+  constraint pk_s3file primary key (id))
+;
+
 create table o_user (
   id                        bigint not null,
   user_name                 varchar(255),
@@ -530,6 +537,8 @@ drop table if exists data_collection_form6 cascade;
 drop table if exists economic_status cascade;
 
 drop table if exists nihstroke_scale_form cascade;
+
+drop table if exists s3file cascade;
 
 drop table if exists o_user cascade;
 
