@@ -405,6 +405,11 @@ public class DataController extends Controller {
             dcf2.setCreatedBy(user);
             dcf2.save();
         }
+        DataCollectionForm1 dcf1 = DataCollectionForm1.find.byId(patientIdNumber);
+        if(dcf1 != null) {
+            dcf1.setDataCollectionForm2(dcf2);
+            dcf1.update();
+        }
         session("pid", patientIdNumber.toString());
         return ok(Json.toJson(new ResponseMessage(200, "Form two saved successfully", ResponseMessageType.SUCCESSFUL)));
 
@@ -607,6 +612,11 @@ public class DataController extends Controller {
             dcf3.setCreatedBy(user);
             dcf3.save();
         }
+        DataCollectionForm1 dcf1 = DataCollectionForm1.find.byId(patientIdNumber);
+        if(dcf1 != null) {
+            dcf1.setDataCollectionForm3(dcf3);
+            dcf1.update();
+        }
         session("pid", patientIdNumber.toString());
         return ok(Json.toJson(new ResponseMessage(200, "Form three saved successfully", ResponseMessageType.SUCCESSFUL)));
     }
@@ -733,6 +743,11 @@ public class DataController extends Controller {
         } else {
             dcf4.setCreatedBy(user);
             dcf4.save();
+        }
+        DataCollectionForm1 dcf1 = DataCollectionForm1.find.byId(patientIdNumber);
+        if(dcf1 != null) {
+            dcf1.setDataCollectionForm4(dcf4);
+            dcf1.update();
         }
         session("pid", patientIdNumber.toString());
         return ok(Json.toJson(new ResponseMessage(200, "Form four saved successfully", ResponseMessageType.SUCCESSFUL)));
@@ -866,6 +881,11 @@ public class DataController extends Controller {
             dcf5.setCreatedBy(user);
             dcf5.save();
         }
+        DataCollectionForm1 dcf1 = DataCollectionForm1.find.byId(patientIdNumber);
+        if(dcf1 != null) {
+            dcf1.setDataCollectionForm5(dcf5);
+            dcf1.update();
+        }
         session("pid", patientIdNumber.toString());
         return ok(Json.toJson(new ResponseMessage(200, "Form five saved successfully", ResponseMessageType.SUCCESSFUL)));
     }
@@ -931,6 +951,11 @@ public class DataController extends Controller {
                     status.save();
                 }
             }
+        }
+        DataCollectionForm1 dcf1 = DataCollectionForm1.find.byId(patientIdNumber);
+        if(dcf1 != null) {
+            dcf1.setDataCollectionForm6(dcf6);
+            dcf1.update();
         }
         session().remove("pid");
         return ok(Json.toJson(new ResponseMessage(200, "Form six saved successfully", ResponseMessageType.SUCCESSFUL)));

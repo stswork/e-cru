@@ -37,6 +37,11 @@ create table data_collection_form1 (
   status                    integer,
   created_by_id             bigint,
   modified_by_id            bigint,
+  data_collection_form2_id  bigint,
+  data_collection_form3_id  bigint,
+  data_collection_form4_id  bigint,
+  data_collection_form5_id  bigint,
+  data_collection_form6_id  bigint,
   created                   timestamp,
   constraint ck_data_collection_form1_gender check (gender in (0,1,2)),
   constraint ck_data_collection_form1_blood_sample_taken check (blood_sample_taken in (0,1,2,3)),
@@ -487,34 +492,44 @@ alter table data_collection_form1 add constraint fk_data_collection_form1_creat_
 create index ix_data_collection_form1_creat_1 on data_collection_form1 (created_by_id);
 alter table data_collection_form1 add constraint fk_data_collection_form1_modif_2 foreign key (modified_by_id) references o_user (id);
 create index ix_data_collection_form1_modif_2 on data_collection_form1 (modified_by_id);
-alter table data_collection_form2 add constraint fk_data_collection_form2_creat_3 foreign key (created_by_id) references o_user (id);
-create index ix_data_collection_form2_creat_3 on data_collection_form2 (created_by_id);
-alter table data_collection_form2 add constraint fk_data_collection_form2_modif_4 foreign key (modified_by_id) references o_user (id);
-create index ix_data_collection_form2_modif_4 on data_collection_form2 (modified_by_id);
-alter table data_collection_form3 add constraint fk_data_collection_form3_creat_5 foreign key (created_by_id) references o_user (id);
-create index ix_data_collection_form3_creat_5 on data_collection_form3 (created_by_id);
-alter table data_collection_form3 add constraint fk_data_collection_form3_modif_6 foreign key (modified_by_id) references o_user (id);
-create index ix_data_collection_form3_modif_6 on data_collection_form3 (modified_by_id);
-alter table data_collection_form4 add constraint fk_data_collection_form4_creat_7 foreign key (created_by_id) references o_user (id);
-create index ix_data_collection_form4_creat_7 on data_collection_form4 (created_by_id);
-alter table data_collection_form4 add constraint fk_data_collection_form4_modif_8 foreign key (modified_by_id) references o_user (id);
-create index ix_data_collection_form4_modif_8 on data_collection_form4 (modified_by_id);
-alter table data_collection_form5 add constraint fk_data_collection_form5_creat_9 foreign key (created_by_id) references o_user (id);
-create index ix_data_collection_form5_creat_9 on data_collection_form5 (created_by_id);
-alter table data_collection_form5 add constraint fk_data_collection_form5_modi_10 foreign key (modified_by_id) references o_user (id);
-create index ix_data_collection_form5_modi_10 on data_collection_form5 (modified_by_id);
-alter table data_collection_form6 add constraint fk_data_collection_form6_crea_11 foreign key (created_by_id) references o_user (id);
-create index ix_data_collection_form6_crea_11 on data_collection_form6 (created_by_id);
-alter table data_collection_form6 add constraint fk_data_collection_form6_modi_12 foreign key (modified_by_id) references o_user (id);
-create index ix_data_collection_form6_modi_12 on data_collection_form6 (modified_by_id);
-alter table economic_status add constraint fk_economic_status_dataCollec_13 foreign key (data_collection_form1_id) references data_collection_form1 (id);
-create index ix_economic_status_dataCollec_13 on economic_status (data_collection_form1_id);
-alter table economic_status add constraint fk_economic_status_dataCollec_14 foreign key (data_collection_form6_id) references data_collection_form6 (id);
-create index ix_economic_status_dataCollec_14 on economic_status (data_collection_form6_id);
-alter table o_user add constraint fk_o_user_createdBy_15 foreign key (created_by_id) references o_user (id);
-create index ix_o_user_createdBy_15 on o_user (created_by_id);
-alter table o_user add constraint fk_o_user_modifiedBy_16 foreign key (modified_by_id) references o_user (id);
-create index ix_o_user_modifiedBy_16 on o_user (modified_by_id);
+alter table data_collection_form1 add constraint fk_data_collection_form1_dataC_3 foreign key (data_collection_form2_id) references data_collection_form2 (id);
+create index ix_data_collection_form1_dataC_3 on data_collection_form1 (data_collection_form2_id);
+alter table data_collection_form1 add constraint fk_data_collection_form1_dataC_4 foreign key (data_collection_form3_id) references data_collection_form3 (id);
+create index ix_data_collection_form1_dataC_4 on data_collection_form1 (data_collection_form3_id);
+alter table data_collection_form1 add constraint fk_data_collection_form1_dataC_5 foreign key (data_collection_form4_id) references data_collection_form4 (id);
+create index ix_data_collection_form1_dataC_5 on data_collection_form1 (data_collection_form4_id);
+alter table data_collection_form1 add constraint fk_data_collection_form1_dataC_6 foreign key (data_collection_form5_id) references data_collection_form5 (id);
+create index ix_data_collection_form1_dataC_6 on data_collection_form1 (data_collection_form5_id);
+alter table data_collection_form1 add constraint fk_data_collection_form1_dataC_7 foreign key (data_collection_form6_id) references data_collection_form6 (id);
+create index ix_data_collection_form1_dataC_7 on data_collection_form1 (data_collection_form6_id);
+alter table data_collection_form2 add constraint fk_data_collection_form2_creat_8 foreign key (created_by_id) references o_user (id);
+create index ix_data_collection_form2_creat_8 on data_collection_form2 (created_by_id);
+alter table data_collection_form2 add constraint fk_data_collection_form2_modif_9 foreign key (modified_by_id) references o_user (id);
+create index ix_data_collection_form2_modif_9 on data_collection_form2 (modified_by_id);
+alter table data_collection_form3 add constraint fk_data_collection_form3_crea_10 foreign key (created_by_id) references o_user (id);
+create index ix_data_collection_form3_crea_10 on data_collection_form3 (created_by_id);
+alter table data_collection_form3 add constraint fk_data_collection_form3_modi_11 foreign key (modified_by_id) references o_user (id);
+create index ix_data_collection_form3_modi_11 on data_collection_form3 (modified_by_id);
+alter table data_collection_form4 add constraint fk_data_collection_form4_crea_12 foreign key (created_by_id) references o_user (id);
+create index ix_data_collection_form4_crea_12 on data_collection_form4 (created_by_id);
+alter table data_collection_form4 add constraint fk_data_collection_form4_modi_13 foreign key (modified_by_id) references o_user (id);
+create index ix_data_collection_form4_modi_13 on data_collection_form4 (modified_by_id);
+alter table data_collection_form5 add constraint fk_data_collection_form5_crea_14 foreign key (created_by_id) references o_user (id);
+create index ix_data_collection_form5_crea_14 on data_collection_form5 (created_by_id);
+alter table data_collection_form5 add constraint fk_data_collection_form5_modi_15 foreign key (modified_by_id) references o_user (id);
+create index ix_data_collection_form5_modi_15 on data_collection_form5 (modified_by_id);
+alter table data_collection_form6 add constraint fk_data_collection_form6_crea_16 foreign key (created_by_id) references o_user (id);
+create index ix_data_collection_form6_crea_16 on data_collection_form6 (created_by_id);
+alter table data_collection_form6 add constraint fk_data_collection_form6_modi_17 foreign key (modified_by_id) references o_user (id);
+create index ix_data_collection_form6_modi_17 on data_collection_form6 (modified_by_id);
+alter table economic_status add constraint fk_economic_status_dataCollec_18 foreign key (data_collection_form1_id) references data_collection_form1 (id);
+create index ix_economic_status_dataCollec_18 on economic_status (data_collection_form1_id);
+alter table economic_status add constraint fk_economic_status_dataCollec_19 foreign key (data_collection_form6_id) references data_collection_form6 (id);
+create index ix_economic_status_dataCollec_19 on economic_status (data_collection_form6_id);
+alter table o_user add constraint fk_o_user_createdBy_20 foreign key (created_by_id) references o_user (id);
+create index ix_o_user_createdBy_20 on o_user (created_by_id);
+alter table o_user add constraint fk_o_user_modifiedBy_21 foreign key (modified_by_id) references o_user (id);
+create index ix_o_user_modifiedBy_21 on o_user (modified_by_id);
 
 
 

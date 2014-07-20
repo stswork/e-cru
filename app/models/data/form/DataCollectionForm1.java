@@ -89,6 +89,21 @@ public class DataCollectionForm1 extends Model {
     @OneToOne
     private User modifiedBy;
 
+    @OneToOne
+    private DataCollectionForm2 dataCollectionForm2;
+
+    @OneToOne
+    private DataCollectionForm3 dataCollectionForm3;
+
+    @OneToOne
+    private DataCollectionForm4 dataCollectionForm4;
+
+    @OneToOne
+    private DataCollectionForm5 dataCollectionForm5;
+
+    @OneToOne
+    private DataCollectionForm6 dataCollectionForm6;
+
     @Formats.DateTime(pattern = "MM/dd/yy")
     private Timestamp created = new Timestamp(DateTime.now().toDate().getTime());
 
@@ -330,5 +345,45 @@ public class DataCollectionForm1 extends Model {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public DataCollectionForm2 getDataCollectionForm2() {
+        return dataCollectionForm2;
+    }
+
+    public void setDataCollectionForm2(DataCollectionForm2 dataCollectionForm2) {
+        this.dataCollectionForm2 = dataCollectionForm2;
+    }
+
+    public DataCollectionForm3 getDataCollectionForm3() {
+        return dataCollectionForm3;
+    }
+
+    public void setDataCollectionForm3(DataCollectionForm3 dataCollectionForm3) {
+        this.dataCollectionForm3 = dataCollectionForm3;
+    }
+
+    public DataCollectionForm4 getDataCollectionForm4() {
+        return dataCollectionForm4;
+    }
+
+    public void setDataCollectionForm4(DataCollectionForm4 dataCollectionForm4) {
+        this.dataCollectionForm4 = dataCollectionForm4;
+    }
+
+    public DataCollectionForm5 getDataCollectionForm5() {
+        return dataCollectionForm5;
+    }
+
+    public void setDataCollectionForm5(DataCollectionForm5 dataCollectionForm5) {
+        this.dataCollectionForm5 = dataCollectionForm5;
+    }
+
+    public DataCollectionForm6 getDataCollectionForm6() {
+        return dataCollectionForm6;
+    }
+
+    public void setDataCollectionForm6(DataCollectionForm6 dataCollectionForm6) {
+        this.dataCollectionForm6 = dataCollectionForm6;
     }
 }
