@@ -9,30 +9,31 @@ import java.util.Date;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ExportRequest {
-    public Date startDate;
-    public Date endDate;
+
+    public String startDate;
+    public String endDate;
 
     public ExportRequest() {
     }
 
-    public ExportRequest(Date startDate, Date endDate) {
+    public ExportRequest(String startDate, String endDate) {
         this.startDate = startDate;
         this.endDate = endDate;
     }
 
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 }
