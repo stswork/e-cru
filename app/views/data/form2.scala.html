@@ -801,7 +801,12 @@
                     <td>Waist:<input type="text" name="waist" id="waist" style="width: 80px;" value="@d.getWaist()"/>cm</td>
                 </tr>
                 <tr>
-                    <td colspan="4" style="text-align: center;"><button id="save" name="save" class="save">Next</button></td>
+                    <td colspan="2" style="text-align: center;">
+                        <button id="previous" name="previous" onclick="location.href='/data/form1/@d.getId()'" class="save">Previous</button>
+                    </td>
+                    <td colspan="2" style="text-align: center;">
+                        <button id="save" type="submit" name="save" class="save">Next</button>
+                    </td>
                 </tr>
                 </table>
             </form>
