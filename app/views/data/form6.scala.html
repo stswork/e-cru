@@ -19,7 +19,7 @@
 
     </div>
 </div>
-<table cellspacing="5" cellpadding="5" style="clear: both;float: left;"/>
+<table cellspacing="5" cellpadding="5" style="clear: both;float: left;width: 100%;"/>
 <tr>
     @if(d != null && d.getId() != null) {
     <td><input type="hidden" id="id" name="id" value="@d.getId()"/></td>
@@ -44,7 +44,10 @@
                 @if(es != null && es.getCheckedEconomicStatuses().size() > 0) {
                     @for(e <- es.getCheckedEconomicStatuses()) {
                         <tr>
+
                             <td><input type="checkbox" name="economicStatuses[]" id="@e.getDisplayName()" value="@e.name()"  checked/>@e.getDisplayName</td>
+
+
                         </tr>
                     }
                 }
