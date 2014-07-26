@@ -26,7 +26,7 @@ public enum EconomicStatus {
     MICROWAVE_OVEN("Microwave Oven"),
     COMPUTER("Computer"),
     GEYSER("Geyser"),
-    RO_WATER_PURIFIER_SYSTEM("RO"),
+    RO_WATER_PURIFIER_SYSTEM("RO Water Purifier System"),
     CAR("Car"),
     AC("AC");
 
