@@ -1,9 +1,13 @@
 package actors;
 
+import actors.mail.MailSenderActor;
+import akka.actor.ActorRef;
+import akka.actor.Props;
 import akka.actor.UntypedActor;
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.Expr;
 import com.google.common.io.Files;
+import models.actor.mail.Mail;
 import models.amazon.s3.S3File;
 import models.data.form.DataCollectionForm1;
 import models.data.form.EconomicStatus;
@@ -15,6 +19,7 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import play.Logger;
+import play.libs.Akka;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -30,14 +35,15 @@ public class ExportActor extends UntypedActor {
     @Override
     public void onReceive(Object message) throws Exception {
 
-        ExportRequest rr = null;
-        File f = new File("ExportExcel.csv");
-        if(f.exists())
-            f.delete();
+        ExportRequest er = null;
+        File f = new File("ExportExcel" + String.valueOf(DateTime.now().getMillis()) + ".csv");
+        if(f.exists()) {
+            boolean deleted = f.delete();
+        }
         if(message instanceof ExportRequest)
-            rr = (ExportRequest) message;
-        DateTime fd = DateTime.parse(rr.getStartDate(), fmt).withTimeAtStartOfDay();
-        DateTime td = DateTime.parse(rr.getEndDate(), fmt).plusDays(1).withTimeAtStartOfDay();
+            er = (ExportRequest) message;
+        DateTime fd = DateTime.parse(er.getStartDate(), fmt).withTimeAtStartOfDay();
+        DateTime td = DateTime.parse(er.getEndDate(), fmt).plusDays(1).withTimeAtStartOfDay();
         final List<DataCollectionForm1> dcfList = Ebean.find(DataCollectionForm1.class)
                 .fetch("dataCollectionForm2")
                 .fetch("dataCollectionForm3")
@@ -292,11 +298,18 @@ public class ExportActor extends UntypedActor {
                     dcf6EcSb.setLength(0);
                 }
                 writer.close();
+                S3File s3File = new S3File();
                 if(f != null){
-                    S3File s3File = new S3File();
                     s3File.name = "ExportExcel.csv";
                     s3File.file = f;
                     s3File.save();
+                }
+                try {
+                    Mail mail = new Mail(er.getRecipient(), s3File.getUrl().toString());
+                    ActorRef mailActor = Akka.system().actorOf(Props.create(MailSenderActor.class));
+                    mailActor.tell(mail ,mailActor);
+                } catch (Exception e) {
+                    Logger.error(e.getMessage(), e);
                 }
             }
         } catch (Exception e) {

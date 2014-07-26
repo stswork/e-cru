@@ -328,12 +328,14 @@ public class ExportController extends Controller {
     @With(Authenticated.class)
     @BodyParser.Of(BodyParser.Json.class)
     public static Result exportMultiplePatientData() {
+        models.response.user.User u = (models.response.user.User) ctx().args.get("user");
         ExportRequest er = null;
         JsonNode body = request().body().asJson();
         if (body != null)
             er = Json.fromJson(body, ExportRequest.class);
         if(er == null)
             return badRequest(Json.toJson(new ResponseMessage(400, "Invalid parameters passed!", ResponseMessageType.BAD_REQUEST)));
+        er.setRecipient(u.getUserName());
         ActorRef ea = Akka.system().actorOf(new Props(ExportActor.class));
         async(Akka.asPromise(ask(ea, er, 10000)).map(
                 new F.Function<Object, Result>() {
